@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free In-Home Care Assessment | Dawson &amp; Dawson (mobile)</title>
+<!-- Page settings can be changed with URL parameters: office=open|closed, showPending=true, startStep=1|2|3|4|5, banner=service page|quiz|resume|none, previewErrors=false -->
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/04-free-assessment-mobile.css">
+</head>
+<body>
+<div id="app"></div>
+<template id="dc-template"><div class="dd" ref="{{rootRef}}" data-typing="false" style="position:relative;width:390px;height:844px;overflow:hidden;background:#FBF8F3">
+<div class="scroller" data-el="scroller" ref="{{scRef}}" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow-x:hidden;overflow-y:auto">
+<main id="top" style="padding-top:72px">
+  <div class="pad" style="padding-top:20px;display:flex;flex-direction:column;gap:14px;align-items:flex-start">
+    <p class="eyebrow">Free care assessment</p>
+    <h1 id="fa-title" class="ff" style="font-size:46px;line-height:1.03;color:#2A1856">A free visit at home, with our <span style="color:#C25BD9">owner</span>.</h1>
+    <p style="font-size:18px">Tell us a little about your family. We'll call you, then our owner comes to your loved one's home to plan care with you. Free, with no obligation.</p>
+    <p class="sm" style="display:inline-flex;align-items:center;gap:8px;color:#2A1856;font-weight:600"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>About 2 minutes · 5 short steps</p>
+    <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}"><p class="sm" style="display:flex;gap:10px;align-items:flex-start;color:#2A1856"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:2px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Our office is closed right now. Send this and we'll call you first thing Monday at 8 AM.</p></sc-if>
+    <p style="align-self:stretch;display:flex;justify-content:center;gap:10px;padding:12px 14px;border-radius:14px;background:#EEE9F8;color:#2A1856;font-weight:600;font-size:16px"><span>Free</span><span aria-hidden="true" style="color:#C25BD9">·</span><span>No obligation</span><span aria-hidden="true" style="color:#C25BD9">·</span><span>Our owner visits</span></p>
+  </div>
+  <div class="pad" style="padding-top:16px;padding-bottom:8px;display:flex;flex-direction:column;gap:14px">
+
+<sc-if value="{{bService}}" hint-placeholder-val="{{true}}">
+  <div class="banner" aria-live="polite"><p><span aria-hidden="true" class="bdot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19.5 7"></path></svg></span>We've ticked <strong>Personal Care</strong> for you. Add anything else that might help.</p><button type="button" class="link sm" onClick="{{dismiss}}" style="background:none;border:0;padding:0 4px;font:inherit;font-size:16px;font-weight:600;cursor:pointer;min-height:44px;flex:none">Dismiss</button></div>
+</sc-if>
+<sc-if value="{{bQuiz}}" hint-placeholder-val="{{false}}">
+  <div class="banner" aria-live="polite"><p><span aria-hidden="true" class="bdot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19.5 7"></path></svg></span>We've filled in your quiz answers. Check them as you go.</p><button type="button" class="link sm" onClick="{{dismiss}}" style="background:none;border:0;padding:0 4px;font:inherit;font-size:16px;font-weight:600;cursor:pointer;min-height:44px;flex:none">Dismiss</button></div>
+</sc-if>
+<sc-if value="{{bResume}}" hint-placeholder-val="{{false}}">
+  <div class="banner" aria-live="polite" style="flex-wrap:wrap"><p style="font-weight:600;color:#2A1856">Welcome back. We kept your answers.</p><div style="display:flex;gap:12px;flex-wrap:wrap"><button type="button" class="btn btn-secondary" onClick="{{pickUp}}" style="min-height:48px;padding:0 20px">Pick up where I left off</button><button type="button" class="btn btn-ghost" onClick="{{startOver}}" style="min-height:48px;padding:0 20px">Start over</button></div></div>
+</sc-if>
+
+  </div>
+  <section data-el="formsec" aria-labelledby="step-h" class="pad" style="padding-top:8px;scroll-margin-top:84px">
+<div id="form" class="fcard" aria-labelledby="step-h" style="padding:22px 18px 26px">
+  <sc-if value="{{f.sent}}" hint-placeholder-val="{{false}}">
+    <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
+      <span class="okmark" aria-hidden="true"><svg width="88" height="88" viewBox="0 0 88 88" fill="none"><circle cx="44" cy="44" r="40" fill="#EEF6DC" stroke="#94C723" stroke-width="3"></circle><path class="okpath" d="M8 46 H26 L32 38 L38 52 L44 46 L58 60 L76 30" stroke="#4A7309" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+      <h2 id="step-h" data-el="step-h" tabindex="-1" class="ff" style="font-size:40px;line-height:1.05;color:#2A1856">{{f.thanks}}</h2>
+      <p class="lead">{{f.thanksLead}}</p>
+      <sc-if value="{{f.thanksPending}}" hint-placeholder-val="{{false}}"><p class="sm muted">Most families hear from us within <span class="tbc">[Response time during office hours]</span>.</p></sc-if>
+      <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}"><p class="sm muted">If someone is hurt or in danger, call 911.</p></sc-if>
+      <div style="display:flex;flex-direction:column;gap:4px;padding-top:16px;border-top:1px solid #E7E1EE;align-self:stretch">
+        <p><strong style="color:#2A1856">Care:</strong> 24 hours a day, 7 days a week</p>
+        <p><strong style="color:#2A1856">Office:</strong> Monday–Friday, 8 AM–5 PM</p>
+      </div>
+      <a class="link" href="/">Back to the home page</a>
+    </div>
+  </sc-if>
+  <sc-if value="{{f.notSent}}" hint-placeholder-val="{{true}}">
+  <!-- progress -->
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <p class="sm" style="font-weight:600;color:#2A1856">{{f.progress}}</p>
+    <div aria-hidden="true" style="position:relative">
+      <svg viewBox="0 0 500 40" width="100%" height="28" preserveAspectRatio="none" style="display:block;overflow:visible">
+        <defs><clipPath id="pclip"><rect class="pfill" x="0" y="-10" width="500" height="60" style="transform:scaleX({{f.pfrac}})"></rect></clipPath></defs>
+        <path d="M0 20 H36 L42 14 L47 20 H52 L58 4 L64 36 L69 12 L73 20 H136 L142 14 L147 20 H152 L158 4 L164 36 L169 12 L173 20 H236 L242 14 L247 20 H252 L258 4 L264 36 L269 12 L273 20 H336 L342 14 L347 20 H352 L358 4 L364 36 L369 12 L373 20 H436 L442 14 L447 20 H452 L458 4 L464 36 L469 12 L473 20 H500" fill="none" stroke="#E7E1EE" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+        <path clip-path="url(#pclip)" d="M0 20 H36 L42 14 L47 20 H52 L58 4 L64 36 L69 12 L73 20 H136 L142 14 L147 20 H152 L158 4 L164 36 L169 12 L173 20 H236 L242 14 L247 20 H252 L258 4 L264 36 L269 12 L273 20 H336 L342 14 L347 20 H352 L358 4 L364 36 L369 12 L373 20 H436 L442 14 L447 20 H452 L458 4 L464 36 L469 12 L473 20 H500" fill="none" stroke="#2A1856" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke" style="filter:drop-shadow(0 0 4px rgba(194,91,217,0.7))"></path>
+      </svg>
+      <div style="display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:6px">
+        <sc-for list="{{f.pnames}}" as="p" hint-placeholder-count="5"><span style="font-size:13px;font-weight:{{p.w}};color:{{p.c}};letter-spacing:0.02em">{{p.n}}</span></sc-for>
+      </div>
+    </div>
+  </div>
+  <p class="sr-only" aria-live="polite">{{f.announce}}</p>
+
+  <!-- error summary -->
+  <sc-if value="{{f.hasSummary}}" hint-placeholder-val="{{false}}">
+    <div role="alert" data-el="esum" tabindex="-1" style="outline:none;margin-top:28px;background:#EEE9F8;border-left:4px solid #B42318;border-radius:12px;padding:18px 22px;display:flex;flex-direction:column;gap:8px">
+      <p style="font-weight:700;color:#2A1856">{{f.summaryTitle}}</p>
+      <ul style="padding-left:20px;display:flex;flex-direction:column;gap:4px">
+        <sc-for list="{{f.summary}}" as="e" hint-placeholder-count="1"><li><a href="{{e.href}}" onClick="{{e.go}}" style="color:#B42318;font-weight:500;text-decoration:underline;text-underline-offset:3px">{{e.msg}}</a></li></sc-for>
+      </ul>
+    </div>
+  </sc-if>
+
+  <!-- ===== STEP 1 ===== -->
+  <sc-if value="{{f.s1}}" hint-placeholder-val="{{false}}">
+    <div class="fstep" style="margin-top:28px">
+      <h2 id="step-h" data-el="step-h" tabindex="-1" class="sh">Who needs care?</h2>
+      <fieldset class="fs" aria-describedby="{{f.err.care_for.dby}}">
+        <legend class="lbl">Who is the care for? (required)</legend>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:12px">
+          <sc-for list="{{f.care}}" as="o" hint-placeholder-count="4">
+            <label class="opt" data-on="{{o.on}}" data-err="{{f.err.care_for.on}}">
+              <input type="radio" name="care_for" id="{{o.id}}" checked="{{o.on}}" onChange="{{o.pick}}">
+              <span class="oic" aria-hidden="true" style="background:{{o.bg}}">
+                <sc-if value="{{o.i0}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></sc-if>
+                <sc-if value="{{o.i1}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></sc-if>
+                <sc-if value="{{o.i2}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg></sc-if>
+                <sc-if value="{{o.i3}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M19 8v6"></path><path d="M22 11h-6"></path></svg></sc-if>
+              </span>
+              <span class="otl">{{o.label}}</span>
+              <span class="ock" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19.5 7"></path></svg></span>
+            </label>
+          </sc-for>
+        </div>
+        <sc-if value="{{f.err.care_for.on}}" hint-placeholder-val="{{false}}"><p id="care_for-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.care_for.msg}}</p></sc-if>
+      </fieldset>
+      <sc-if value="{{f.showLoved}}" hint-placeholder-val="{{true}}">
+        <div class="fld">
+          <label class="lbl" for="loved">Their first name</label>
+          <p id="loved-help" class="help">So we know who we're talking about. First name is plenty.</p>
+          <input id="loved" class="field" type="text" autocomplete="off" maxlength="40" value="{{f.a.loved}}" onChange="{{f.set.loved}}" aria-describedby="loved-help">
+        </div>
+      </sc-if>
+      <div class="fld">
+        <label class="lbl" for="town">{{f.townLabel}}</label>
+        <p id="town-help" class="help">{{f.townHelp}}</p>
+        <select id="town" class="field" value="{{f.a.town}}" onChange="{{f.set.town}}" onBlur="{{f.blur.town}}" aria-invalid="{{f.err.town.inv}}" aria-describedby="town-help {{f.err.town.dby}}" style="border:{{f.err.town.border}}">
+          <option value="">Choose a town</option>
+          <optgroup label="Near our office"><option value="near" disabled="{{yes}}">[Towns from areas.ts — to confirm]</option></optgroup>
+          <optgroup label="Extended service area"><option value="ext" disabled="{{yes}}">[Towns from areas.ts — to confirm]</option></optgroup>
+          <option value="other">Somewhere else</option>
+          <option value="not-sure">Not sure</option>
+        </select>
+        <sc-if value="{{f.err.town.on}}" hint-placeholder-val="{{false}}"><p id="town-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.town.msg}}</p></sc-if>
+      </div>
+      <sc-if value="{{f.showOther}}" hint-placeholder-val="{{false}}">
+        <div class="fld">
+          <label class="lbl" for="town_other">Which town?</label>
+          <p id="town_other-help" class="help">Type the town name. We'll check when we talk.</p>
+          <input id="town_other" class="field" type="text" autocomplete="address-level2" maxlength="60" value="{{f.a.town_other}}" onChange="{{f.set.town_other}}" aria-describedby="town_other-help">
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <!-- ===== STEP 2 ===== -->
+  <sc-if value="{{f.s2}}" hint-placeholder-val="{{true}}">
+    <div class="fstep" style="margin-top:28px">
+      <h2 id="step-h" data-el="step-h" tabindex="-1" class="sh">{{f.h2}}</h2>
+      <fieldset class="fs" aria-describedby="services-help {{f.err.services.dby}}">
+        <legend class="lbl">Choose all that might help. (required)</legend>
+        <p id="services-help" class="help" style="margin-top:-4px">You can change your mind later. Most families combine two or three.</p>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-top:6px">
+          <sc-for list="{{f.serv}}" as="o" hint-placeholder-count="6">
+            <label class="opt opt-tall" data-on="{{o.on}}" data-err="{{f.err.services.on}}">
+              <input type="checkbox" name="services" value="{{o.v}}" id="{{o.id}}" checked="{{o.on}}" onChange="{{o.pick}}">
+              <span class="oic" aria-hidden="true">
+                <sc-if value="{{o.iPC}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4 8 6"></path><path d="M17 19v2"></path><path d="M2 12h20"></path><path d="M7 19v2"></path><path d="M9 5 7.621 3.621A2.121 2.121 0 0 0 4 5v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"></path></svg></sc-if>
+                <sc-if value="{{o.iHH}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></sc-if>
+                <sc-if value="{{o.iCO}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg></sc-if>
+                <sc-if value="{{o.iRE}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"></path><path d="M14 2v2"></path><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"></path><path d="M6 2v2"></path></svg></sc-if>
+                <sc-if value="{{o.iTF}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+                <sc-if value="{{o.iHS}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></sc-if>
+                <sc-if value="{{o.iNS}}" hint-placeholder-val="{{false}}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><path d="M12 17h.01"></path></svg></sc-if>
+              </span>
+              <span style="flex:1;display:flex;flex-direction:column;gap:2px">
+                <span class="otl">{{o.title}}</span>
+                <span class="osub"><sc-if value="{{o.hasTbc}}" hint-placeholder-val="{{false}}"><span class="tbc">{{o.tbc}}</span> </sc-if>{{o.line}}</span>
+              </span>
+              <span class="ock" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19.5 7"></path></svg></span>
+            </label>
+          </sc-for>
+        </div>
+        <sc-if value="{{f.err.services.on}}" hint-placeholder-val="{{false}}"><p id="services-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.services.msg}}</p></sc-if>
+      </fieldset>
+      <p style="margin-top:4px"><a class="link" href="/find-care" data-cursor-label="Open" style="min-height:40px">Not sure? Take the 1-minute quiz</a> <span class="sm muted">Your answers here are saved.</span></p>
+      <p class="sm muted">All our care is non-medical. We work alongside home health and hospice teams.</p>
+    </div>
+  </sc-if>
+
+  <!-- ===== STEP 3 ===== -->
+  <sc-if value="{{f.s3}}" hint-placeholder-val="{{false}}">
+    <div class="fstep" style="margin-top:28px">
+      <h2 id="step-h" data-el="step-h" tabindex="-1" class="sh">When, and how much help?</h2>
+      <fieldset class="fs" aria-describedby="{{f.err.start.dby}}">
+        <legend class="lbl">When would you like care to start? (required)</legend>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:12px">
+          <sc-for list="{{f.start}}" as="o" hint-placeholder-count="4">
+            <label class="opt opt-sm" data-on="{{o.on}}" data-err="{{f.err.start.on}}"><input type="radio" name="start_timing" id="{{o.id}}" checked="{{o.on}}" onChange="{{o.pick}}"><span class="rdot" aria-hidden="true"></span><span class="otl">{{o.label}}</span></label>
+          </sc-for>
+        </div>
+        <sc-if value="{{f.err.start.on}}" hint-placeholder-val="{{false}}"><p id="start-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.start.msg}}</p></sc-if>
+      </fieldset>
+      <sc-if value="{{f.asap}}" hint-placeholder-val="{{false}}">
+        <div aria-live="polite" style="background:#EEE9F8;border-radius:14px;padding:16px 20px;display:flex;flex-direction:column;gap:4px">
+          <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}"><p><strong style="color:#2A1856">The quickest way to start is a phone call: <a href="tel:+18433793321">(843) 379-3321</a>.</strong> Or keep going — we'll call you.</p></sc-if>
+          <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}"><p><strong style="color:#2A1856">Our office is closed right now.</strong> Keep going and we'll call you first thing Monday at 8 AM.</p></sc-if>
+          <p class="sm muted">If someone is hurt or in danger, call 911.</p>
+        </div>
+      </sc-if>
+      <fieldset class="fs" aria-describedby="{{f.err.hours.dby}}">
+        <legend class="lbl">How much help do you think is needed? (required)</legend>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{f.hours}}" as="o" hint-placeholder-count="5">
+            <label class="opt opt-sm" data-on="{{o.on}}" data-err="{{f.err.hours.on}}"><input type="radio" name="hours_preset" id="{{o.id}}" checked="{{o.on}}" onChange="{{o.pick}}"><span class="rdot" aria-hidden="true"></span><span style="flex:1;display:flex;flex-direction:column"><span class="otl">{{o.label}}</span><span class="osub">{{o.help}}</span></span></label>
+          </sc-for>
+        </div>
+        <sc-if value="{{f.err.hours.on}}" hint-placeholder-val="{{false}}"><p id="hours-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.hours.msg}}</p></sc-if>
+      </fieldset>
+      <div class="fld">
+        <label class="opt opt-sm" data-on="{{f.hospOn}}" style="align-items:flex-start"><input type="checkbox" name="coming_from_hospital" id="hospital" checked="{{f.a.hospital}}" onChange="{{f.set.hospital}}"><span class="sbox" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C0F3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19.5 7"></path></svg></span><span style="font-weight:500">{{f.hospLabel}}</span></label>
+        <sc-if value="{{f.a.hospital}}" hint-placeholder-val="{{false}}"><p class="help" aria-live="polite">Thank you. If you can, call us before discharge: <a href="tel:+18433793321" style="font-weight:600">(843) 379-3321</a>.</p></sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===== STEP 4 ===== -->
+  <sc-if value="{{f.s4}}" hint-placeholder-val="{{false}}">
+    <div class="fstep" style="margin-top:28px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <h2 id="step-h" data-el="step-h" tabindex="-1" class="sh">How can we reach you?</h2>
+        <p class="sm muted">We'll call to talk things through and set up the visit.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:20px">
+        <div class="fld"><label class="lbl" for="first_name">Your first name (required)</label><input id="first_name" class="field" type="text" autocomplete="given-name" value="{{f.a.first_name}}" onChange="{{f.set.first_name}}" onBlur="{{f.blur.first_name}}" aria-invalid="{{f.err.first_name.inv}}" aria-describedby="{{f.err.first_name.dby}}" style="border:{{f.err.first_name.border}}"><sc-if value="{{f.err.first_name.on}}" hint-placeholder-val="{{false}}"><p id="first_name-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.first_name.msg}}</p></sc-if></div>
+        <div class="fld"><label class="lbl" for="last_name">Your last name</label><input id="last_name" class="field" type="text" autocomplete="family-name" value="{{f.a.last_name}}" onChange="{{f.set.last_name}}"></div>
+      </div>
+      <div class="fld"><label class="lbl" for="phone">Phone (required)</label><p id="phone-help" class="help">We'll call you on this number.</p><input id="phone" class="field" type="tel" inputmode="tel" autocomplete="tel-national" value="{{f.a.phone}}" onChange="{{f.set.phone}}" onBlur="{{f.blur.phone}}" aria-invalid="{{f.err.phone.inv}}" aria-describedby="phone-help {{f.err.phone.dby}}" style="border:{{f.err.phone.border}}"><sc-if value="{{f.err.phone.on}}" hint-placeholder-val="{{false}}"><p id="phone-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.phone.msg}}</p></sc-if></div>
+      <div class="fld"><label class="lbl" for="email">{{f.emailLabel}}</label><p id="email-help" class="help">Only if you'd like us to email you.</p><input id="email" class="field" type="email" autocomplete="email" value="{{f.a.email}}" onChange="{{f.set.email}}" onBlur="{{f.blur.email}}" aria-invalid="{{f.err.email.inv}}" aria-describedby="email-help {{f.err.email.dby}}" style="border:{{f.err.email.border}}"><sc-if value="{{f.err.email.on}}" hint-placeholder-val="{{false}}"><p id="email-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.email.msg}}</p></sc-if>
+        <sc-if value="{{f.hasSuggest}}" hint-placeholder-val="{{false}}"><p class="help" style="color:#2A1856">Did you mean <strong>{{f.suggest}}</strong>? <button type="button" class="link" onClick="{{f.useSuggest}}" style="background:none;border:0;padding:0;font:inherit;font-weight:700;min-height:0;cursor:pointer">Use this</button></p></sc-if>
+      </div>
+      <fieldset class="fs" aria-describedby="{{f.err.contact.dby}}">
+        <legend class="lbl">Best way to reach you (required)</legend>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:10px">
+          <sc-for list="{{f.contact}}" as="o" hint-placeholder-count="3"><label class="opt opt-sm" data-on="{{o.on}}" data-err="{{f.err.contact.on}}"><input type="radio" name="preferred_contact" id="{{o.id}}" checked="{{o.on}}" onChange="{{o.pick}}"><span class="rdot" aria-hidden="true"></span><span class="otl">{{o.label}}</span></label></sc-for>
+        </div>
+        <sc-if value="{{f.err.contact.on}}" hint-placeholder-val="{{false}}"><p id="contact-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.contact.msg}}</p></sc-if>
+        <sc-if value="{{f.textNote}}" hint-placeholder-val="{{false}}"><p class="help" aria-live="polite">We'll text you only if you tick the first box on the next step. Otherwise we'll call.</p></sc-if>
+      </fieldset>
+      <fieldset class="fs" aria-describedby="best-help">
+        <legend class="lbl">Best time to call</legend>
+        <p id="best-help" class="help" style="margin-top:-4px">Eastern time. Our office is open Monday–Friday, 8 AM–5 PM.</p>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:10px;margin-top:6px">
+          <sc-for list="{{f.best}}" as="o" hint-placeholder-count="4"><label class="opt opt-sm" data-on="{{o.on}}"><input type="radio" name="best_time" id="{{o.id}}" checked="{{o.on}}" onChange="{{o.pick}}"><span class="rdot" aria-hidden="true"></span><span class="otl">{{o.label}}</span></label></sc-for>
+        </div>
+      </fieldset>
+      <div class="fld">
+        <label class="lbl" for="notes">Anything else we should know?</label>
+        <p id="notes-help" class="help">Please don't include medical details — we'll talk about care needs by phone.</p>
+        <textarea id="notes" class="field" rows="4" maxlength="1000" value="{{f.a.notes}}" onChange="{{f.set.notes}}" onBlur="{{f.blur.notes}}" aria-invalid="{{f.err.notes.inv}}" aria-describedby="notes-help {{f.err.notes.dby}}" style="border:{{f.err.notes.border}};padding:14px 16px;min-height:132px;resize:vertical;line-height:1.5"></textarea>
+        <sc-if value="{{f.err.notes.on}}" hint-placeholder-val="{{false}}"><p id="notes-err" class="emsg"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{f.err.notes.msg}}</p></sc-if>
+        <sc-if value="{{f.showCount}}" hint-placeholder-val="{{false}}"><p class="help" aria-live="polite">{{f.countText}}</p></sc-if>
+        <sc-if value="{{f.dobNote}}" hint-placeholder-val="{{false}}"><p class="sm" style="background:#EEE9F8;border-radius:12px;padding:14px 16px;color:#2A1856">It looks like this might include a date of birth. You don't need to share it here — we'll ask for anything we need by phone.</p></sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ===== STEP 5 ===== -->
+  <sc-if value="{{f.s5}}" hint-placeholder-val="{{false}}">
+    <div class="fstep" style="margin-top:28px">
+      <h2 id="step-h" data-el="step-h" tabindex="-1" class="sh">Check and send.</h2>
+      <dl class="sumlist">
+        <sc-for list="{{f.rows}}" as="r" hint-placeholder-count="9">
+          <div class="sumrow"><dt>{{r.label}}</dt><dd>{{r.value}}</dd><dd style="margin:0"><button type="button" class="link sm" aria-label="{{r.aria}}" onClick="{{r.go}}" style="background:none;border:0;padding:0;font:inherit;font-size:16px;font-weight:600;cursor:pointer;min-height:44px">Change</button></dd></div>
+        </sc-for>
+      </dl>
+      <fieldset class="fs">
+        <legend class="h3" style="font-size:22px">Text messages (optional)</legend>
+        <label class="opt opt-sm" data-on="{{f.sms1On}}" style="align-items:flex-start"><input type="checkbox" id="sms1" checked="{{f.a.sms1}}" onChange="{{f.set.sms1}}"><span class="sbox" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C0F3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19.5 7"></path></svg></span><span class="sm" style="font-weight:400;color:#1E1A2B">Yes, Dawson and Dawson Home Care LLC may text me about my care inquiry and services I request (for example appointment reminders and scheduling updates). Message frequency varies. Msg &amp; data rates may apply. Reply HELP for help, STOP to opt out. See our <a href="/privacy-policy">Privacy Policy</a> and <a href="/sms-terms">SMS Terms</a>.</span></label>
+        <label class="opt opt-sm" data-on="{{f.sms2On}}" style="align-items:flex-start"><input type="checkbox" id="sms2" checked="{{f.a.sms2}}" onChange="{{f.set.sms2}}"><span class="sbox" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1C0F3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19.5 7"></path></svg></span><span class="sm" style="font-weight:400;color:#1E1A2B">Yes, I'd also like occasional texts with news and tips from Dawson and Dawson Home Care LLC. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out. Consent is not a condition of service.</span></label>
+        <sc-if value="{{pending}}" hint-placeholder-val="{{true}}"><p class="help"><span class="tbc">[Final wording + version from COPY_LEGAL.md]</span></p></sc-if>
+        <sc-if value="{{f.textReminder}}" hint-placeholder-val="{{false}}"><p class="sm" aria-live="polite" style="background:#EEE9F8;border-radius:12px;padding:14px 16px;color:#2A1856">You chose text as the best way to reach you. To get texts, tick the first box. Otherwise, we'll call.</p></sc-if>
+      </fieldset>
+    </div>
+  </sc-if>
+
+  <!-- buttons -->
+  <div style="margin-top:32px;padding-top:24px;border-top:1px solid #E7E1EE;display:flex;flex-direction:column;align-items:stretch;gap:16px">
+    <button type="button" class="btn btn-primary btn-full" aria-disabled="{{f.sending}}" onClick="{{f.next}}">
+      <sc-if value="{{f.isSending}}" hint-placeholder-val="{{false}}"><span class="spin" aria-hidden="true"></span></sc-if>{{f.nextLabel}}
+    </button>
+    <sc-if value="{{f.canBack}}" hint-placeholder-val="{{true}}"><button type="button" class="link" onClick="{{f.back}}" style="align-self:center;background:none;border:0;padding:0 8px;font:inherit;font-weight:600;cursor:pointer">← Back</button></sc-if>
+  </div>
+  <p class="sr-only" aria-live="polite">{{f.sendingLive}}</p>
+  <sc-if value="{{f.saveNote}}" hint-placeholder-val="{{true}}"><p class="help" style="margin-top:12px">Your answers are saved in this browser tab, so you can go back or take a break.</p></sc-if>
+  <sc-if value="{{f.s5}}" hint-placeholder-val="{{false}}"><p class="help" style="margin-top:12px">Free, with no obligation. We never sell or share your phone number for marketing.</p></sc-if>
+  </sc-if>
+</div>
+
+  </section>
+  <div class="pad" style="padding-top:28px">
+
+<aside aria-labelledby="next-title" class="aside">
+  <h2 id="next-title" class="ff" style="font-size:30px;line-height:1.1;color:#2A1856">What happens next</h2>
+  <ol style="list-style:none;padding:0;display:flex;flex-direction:column;gap:18px;position:relative">
+    <span aria-hidden="true" style="position:absolute;left:17px;top:20px;bottom:24px;width:2px;background:#C25BD9;opacity:0.45"></span>
+    <li class="nx"><span class="nxn" aria-hidden="true">1</span><div><p style="font-weight:700;color:#2A1856">We call you.</p>
+      <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}"><p class="sm">As soon as we can.<sc-if value="{{pending}}" hint-placeholder-val="{{true}}"> Within <span class="tbc">[Response time during office hours]</span>.</sc-if></p></sc-if>
+      <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}"><p class="sm">First thing Monday at 8 AM.</p></sc-if></div></li>
+    <li class="nx"><span class="nxn" aria-hidden="true">2</span><div><p style="font-weight:700;color:#2A1856">Our owner visits — free.</p><p class="sm">At your loved one's home. We talk about their days and the help they need.</p></div></li>
+    <li class="nx"><span class="nxn" aria-hidden="true">3</span><div><p style="font-weight:700;color:#2A1856">You decide.</p><p class="sm">No obligation, and no pressure to decide that day.</p></div></li>
+  </ol>
+  <figure style="display:flex;align-items:center;gap:16px;padding:16px;background:#FFFFFF;border-radius:20px">
+    <div role="img" aria-label="[Owner full name], owner of Dawson and Dawson Home Care." style="width:96px;height:96px;border-radius:16px;background:#EEE9F8;display:flex;align-items:center;justify-content:center;flex:none"><img src="images/logo.png" alt="" style="width:78px;height:auto;display:block"></div>
+    <figcaption style="display:flex;flex-direction:column;gap:2px"><p class="sm"><strong style="color:#2A1856">Our owner</strong> — the person who'll visit.</p><p class="sm muted">Owner portrait · 1:1</p></figcaption>
+  </figure>
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}"><p style="display:inline-flex;align-self:flex-start;align-items:center;gap:10px;min-height:40px;padding:6px 16px;border-radius:20px;background:#EEF6DC;color:#4A7309;font-size:16px;font-weight:600"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:#4A7309;flex:none"></span>Office open now · Call (843) 379-3321</p></sc-if>
+    <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}"><p style="display:inline-flex;align-self:flex-start;align-items:flex-start;gap:10px;padding:10px 16px;border-radius:16px;background:#EEE9F8;color:#2A1856;font-size:16px;font-weight:600"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg><span>Office closed · Opens Monday at 8 AM. Request a callback and we'll reach you first thing.</span></p></sc-if>
+    <p class="sm"><strong style="color:#2A1856">Care:</strong> 24 hours a day, 7 days a week</p>
+    <sc-if value="{{closedPending}}" hint-placeholder-val="{{false}}"><p class="sm muted">Already a client? Reach us after hours at <span class="tbc">[After-hours line for existing clients]</span>.</p></sc-if>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:10px;padding-top:20px;border-top:1px solid #E7E1EE">
+    <h3 class="h3" style="font-size:22px">Rather talk?</h3>
+    <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}"><a class="btn btn-secondary btn-full" href="tel:+18433793321" data-cursor-label="Call" style="align-self:flex-start"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Call (843) 379-3321</a></sc-if>
+    <sc-if value="{{closedPending}}" hint-placeholder-val="{{false}}"><p class="sm">Our office opens Monday at 8 AM. You can still call (843) 379-3321 and leave a message, or text (866) 632-9766. <span class="tbc">[Is there voicemail on the main line after hours?]</span></p></sc-if>
+    <sc-if value="{{closedFinal}}" hint-placeholder-val="{{false}}"><p class="sm">Our office opens Monday at 8 AM. Text us at (866) 632-9766, or send this form and we'll call you first thing.</p></sc-if>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:6px;padding-top:20px;border-top:1px solid #E7E1EE">
+    <h3 class="h3" style="font-size:20px">Your information</h3>
+    <p class="sm">We ask only what we need to call you back. Please don't send medical details online.</p>
+    <a class="link sm" href="/privacy-policy" style="font-size:16px;min-height:40px">Privacy Policy</a>
+  </div>
+  <a class="link sm" href="/how-it-works#free-assessment" data-cursor-label="Open" style="font-size:16px;margin-top:-8px">What happens at the free visit</a>
+</aside>
+
+  </div>
+
+<section aria-labelledby="talk-title" class="talk">
+  <div style="display:flex;flex-direction:column;gap:12px;max-width:620px">
+    <h2 id="talk-title" class="h2" style="font-size:36px">Prefer to talk it through?</h2>
+    <p class="lead">Some families would rather just call. That's fine — we'll ask the same few questions.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:18px;">
+    <div style="display:flex;gap:12px;flex-wrap:wrap;flex-direction:column">
+      <a class="btn btn-ghost btn-full" href="tel:+18433793321" data-cursor-label="Call"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Call (843) 379-3321</a>
+      <a class="btn btn-ghost btn-full" href="sms:+18666329766"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Text us (866) 632-9766</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <p><strong style="color:#2A1856">Care:</strong> 24 hours a day, 7 days a week</p>
+      <p><strong style="color:#2A1856">Office:</strong> Monday–Friday, 8 AM–5 PM</p>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- ============ FOOTER ============ -->
+<footer class="foot pad" data-surface="dark" style="background:#1C0F3D;color:#FBF8F3;padding-top:64px;padding-bottom:120px;display:flex;flex-direction:column;gap:36px">
+  <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
+    <a href="/" aria-label="Dawson &amp; Dawson Home Care — home" style="display:inline-flex"><span style="display:block;background:#FBF8F3;border-radius:16px;padding:14px 18px"><img src="images/logo.png" alt="" width="200" height="109" style="display:block;width:200px;height:auto"></span></a>
+    <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}"><p class="sm" style="display:inline-flex;align-items:center;gap:10px;font-weight:600"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:#94C723"></span>Office open now · Call (843) 379-3321</p></sc-if>
+    <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}"><p class="sm" style="display:inline-flex;align-items:flex-start;gap:10px;font-weight:600"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EEE9F8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Office closed · Opens Monday at 8 AM. Request a callback and we'll reach you first thing.</p></sc-if>
+    <p class="sm" style="color:#EEE9F8"><strong style="color:#FBF8F3">Care:</strong> 24 hours a day, 7 days a week</p>
+  </div>
+  <nav aria-labelledby="mfoot-contact" style="display:flex;flex-direction:column;gap:10px">
+    <p id="mfoot-contact" class="eyebrow">Contact us</p>
+    <a href="tel:+18433793321" style="font-weight:600">Call (843) 379-3321</a>
+    <a href="sms:+18666329766" style="font-weight:600">Text us (866) 632-9766</a>
+    <p style="color:#EEE9F8">Fax: (866) 502-3509</p>
+    <a href="mailto:info@dawsonhomecare.com">info@dawsonhomecare.com</a>
+    <p class="sm" style="color:#EEE9F8">69 Robert Smalls Parkway, Suite 3F, Beaufort, SC 29906</p>
+    <p class="sm" style="color:#EEE9F8"><strong style="color:#FBF8F3">Office:</strong> Monday–Friday, 8 AM–5 PM</p>
+  </nav>
+  <nav aria-labelledby="mfoot-care" style="display:flex;flex-direction:column;gap:10px">
+    <p id="mfoot-care" class="eyebrow">Care services</p>
+    <a href="/care/personal-care">Personal Care</a>
+    <a href="/care/home-help">Home Help</a>
+    <a href="/care/companionship">Companionship</a>
+    <a href="/care/respite-care">Respite Care</a>
+    <a href="/care/24-hour-care">24-Hour &amp; Overnight Care</a>
+    <a href="/care" style="font-weight:600">See all care services</a>
+  </nav>
+  <nav aria-label="More" style="display:flex;flex-direction:column;gap:10px">
+    <p class="eyebrow">Find the right care</p>
+    <a href="/how-it-works">See how it works</a>
+    <a href="/paying-for-care#ways-to-pay">See ways families pay for care</a>
+    <a href="/faq">See all questions</a>
+    <a href="/areas-we-serve">See all areas we serve</a>
+    <a href="/about">Read our story</a>
+    <a href="/careers">See caregiver jobs</a>
+    <a href="/for-professionals#refer">Make a referral</a>
+  </nav>
+  <div class="sm" style="padding-top:24px;border-top:1px solid #4B2E91;display:flex;flex-direction:column;gap:10px">
+    <p style="color:#EEE9F8">© {{currentYear}} Dawson and Dawson Home Care LLC</p>
+    <div style="display:flex;gap:20px;flex-wrap:wrap"><a href="/privacy-policy">Privacy Policy</a><a href="/sms-terms">SMS Terms</a><a href="https://www.instagram.com/dawsonhomecare/">Follow us on Instagram</a></div>
+  </div>
+</footer>
+</div>
+<!-- ============ HEADER (phone) ============ -->
+<header data-el="header" style="position:absolute;top:0;left:0;right:0;z-index:60;height:72px;padding:0 16px 0 20px;display:flex;align-items:center;justify-content:space-between;background:#FBF8F3;border-bottom:1px solid #E7E1EE">
+  <a href="/" aria-label="Dawson &amp; Dawson Home Care — home" style="display:inline-flex;align-items:center;min-height:48px">
+    <img data-el="header-logo" src="images/logo.png" alt="" width="116" height="63" style="display:block;width:116px;height:auto">
+  </a>
+  <div style="display:flex;align-items:center;gap:8px">
+    <a href="tel:+18433793321" aria-label="Call (843) 379-3321" style="width:48px;height:48px;border-radius:50%;background:#2A1856;color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a>
+    <button type="button" class="iconbtn" aria-label="{{menuLabel}}" aria-expanded="{{menuExpanded}}" aria-controls="m-menu" onClick="{{toggleMenu}}">
+      <sc-if value="{{menuClosed}}" hint-placeholder-val="{{true}}"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></sc-if>
+      <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+    </button>
+  </div>
+</header>
+
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+  <nav id="m-menu" aria-label="Main" style="position:absolute;left:0;right:0;top:72px;bottom:72px;z-index:55;background:#FBF8F3;padding:28px 20px;display:flex;flex-direction:column;gap:6px;overflow-y:auto">
+    <a href="/care" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">Care services</a>
+    <a href="/how-it-works" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">How it works</a>
+    <a href="/paying-for-care" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">Paying for care</a>
+    <a href="/areas-we-serve" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">Areas we serve</a>
+    <a href="/about" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">Our story</a>
+    <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
+      <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}"><p style="display:inline-flex;align-self:flex-start;align-items:center;gap:10px;min-height:40px;padding:0 16px;border-radius:999px;background:#EEF6DC;color:#4A7309;font-size:16px;font-weight:600"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:#4A7309"></span>Office open now</p></sc-if>
+      <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}"><p style="display:inline-flex;align-self:flex-start;align-items:center;gap:10px;min-height:40px;padding:0 16px;border-radius:999px;background:#EEE9F8;color:#2A1856;font-size:16px;font-weight:600"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Office closed · Opens Monday at 8 AM</p></sc-if>
+      <p class="sm muted"><strong style="color:#2A1856">Care:</strong> 24 hours a day, 7 days a week</p>
+    </div>
+  </nav>
+</sc-if>
+
+
+<nav class="mbar" data-el="mbar" data-hide="true" aria-label="Quick contact" style="position:absolute;left:0;right:0;bottom:0;z-index:58;padding:8px 10px;background:#FFFFFF;border-top:1px solid #E7E1EE;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+  <a class="mbtn" href="tel:+18433793321" aria-label="Call Dawson at (843) 379-3321" style="background:#2A1856;color:#FFFFFF"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Call</a>
+  <a class="mbtn" href="sms:+18666329766" aria-label="Text Dawson at (866) 632-9766" style="background:#FFFFFF;color:#2A1856;border-color:#2A1856"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Text</a>
+</nav>
+</div></template>
+<script src="js/lib/react.production.min.js"></script>
+<script src="js/lib/react-dom.production.min.js"></script>
+<script src="js/lib/dc-lite.js"></script>
+<script src="js/04-free-assessment-mobile.js"></script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personal Care at Home in Beaufort, SC | Dawson &amp; Dawson</title>
+<!-- Page settings can be changed with URL parameters: office=open|closed, showPending=true -->
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/03-personal-care-desktop.css">
+</head>
+<body>
+<div id="app"></div>
+<template id="dc-template"><div class="dd" id="top" ref="{{rootRef}}" style="min-height:100vh;display:flex;flex-direction:column;background:#FBF8F3">
+
+<!-- ============ HEADER ============ -->
+<header style="position:sticky;top:0;left:0;right:0;z-index:60;background:#FBF8F3;border-bottom:1px solid #E7E1EE">
+  <div class="wrap" style="display:flex;align-items:center;justify-content:space-between;gap:32px;min-height:112px">
+    <a href="/" aria-label="Dawson &amp; Dawson Home Care — home" style="display:inline-flex;align-items:center;text-decoration:none;min-height:56px">
+      <img src="images/logo.png" alt="" width="169" height="92" style="display:block;width:169px;height:auto">
+    </a>
+    <nav aria-label="Main" style="display:flex;align-items:center;gap:32px">
+      <a class="navlink" href="/care" aria-current="page">Care services</a>
+      <a class="navlink" href="/how-it-works">How it works</a>
+      <a class="navlink" href="/paying-for-care">Paying for care</a>
+      <a class="navlink" href="/areas-we-serve">Areas we serve</a>
+      <a class="navlink" href="/about">Our story</a>
+    </nav>
+    <a class="btn btn-secondary" href="tel:+18433793321" data-cursor-label="Call"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Call (843) 379-3321</a>
+  </div>
+</header>
+
+<main style="flex:none">
+
+<!-- ============ BREADCRUMB + HERO ============ -->
+<section aria-labelledby="pc-title" style="position:relative;overflow:hidden">
+  <div class="wrap">
+    <nav aria-label="Breadcrumb" class="crumbs sm" style="padding-top:16px">
+      <ol style="list-style:none;padding:0;display:flex;align-items:center;gap:10px">
+        <li><a href="/">Home</a></li>
+        <li aria-hidden="true" style="color:#5B5670">›</li>
+        <li><a href="/care">Care</a></li>
+        <li aria-hidden="true" style="color:#5B5670">›</li>
+        <li><span aria-current="page" style="color:#2A1856;font-weight:600">Personal Care</span></li>
+      </ol>
+    </nav>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) 620px;gap:48px;align-items:center;padding:24px 0 80px">
+      <div style="display:flex;flex-direction:column;gap:20px;align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <p class="eyebrow">Care services</p>
+          <p class="sm muted">Also called: help with daily living (ADLs)</p>
+        </div>
+        <h1 id="pc-title" class="ff" style="font-size:96px;line-height:1.0;color:#2A1856">Personal care, done with <span style="color:#C25BD9">dignity</span>.</h1>
+        <p class="lead" style="max-width:560px">Gentle help with bathing, dressing, the bathroom and moving around the house — so your loved one can stay home and stay themselves.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px">
+          <a class="btn btn-primary" href="{{assessHref}}"><sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">Get a Free Care Assessment</sc-if><sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">Request a Callback</sc-if></a>
+          <a class="btn btn-ghost" href="tel:+18433793321" data-cursor-label="Call"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Call (843) 379-3321</a>
+        </div>
+        <p class="sm muted">Free visit at home. No obligation.</p>
+        <p style="margin-top:12px;padding-top:20px;border-top:1px solid #E7E1EE;display:flex;align-items:center;gap:14px;color:#2A1856;font-weight:600;font-size:17px"><span>Since 2002</span><span aria-hidden="true" style="color:#C25BD9">·</span><span>Owner-run</span><span aria-hidden="true" style="color:#C25BD9">·</span><span>Care 24/7</span></p>
+      </div>
+      <figure class="hero-vid" style="position:relative;height:600px">
+        <div style="position:absolute;left:0;top:10px"><div class="collage" style="transform:scale(0.94);transform-origin:0 0"><span class="c-panel" style="left:202px;top:38px;width:343px;height:564px"></span><div class="cv" data-playing="false" style="left:413px;top:110px;z-index:1"><video data-hv="" src="videos/personal-care-1.mp4" poster="images/poster-personal-care-1.jpg" muted="{{yes}}" loop="{{yes}}" autoplay="" playsinline="" preload="metadata" aria-hidden="true"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:252px;top:183px;z-index:2"><video data-hv="" src="videos/personal-care-2.mp4" poster="images/poster-personal-care-2.jpg" muted="{{yes}}" loop="{{yes}}" autoplay="" playsinline="" preload="metadata" aria-hidden="true"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:92px;top:38px;z-index:3"><video data-hv="" src="videos/personal-care-3.mp4" poster="images/poster-personal-care-3.jpg" muted="{{yes}}" loop="{{yes}}" autoplay="" playsinline="" preload="metadata" aria-hidden="true"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div></div></div>
+        <figcaption class="sr-only">A Dawson caregiver helping an older woman button her cardigan.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 — IS THIS RIGHT FOR YOU ============ -->
+<section id="right-for-you" aria-labelledby="fit-title" style="background:#F6EAFB;padding:96px 0">
+  <div class="wrap" style="display:grid;grid-template-columns:420px minmax(0,1fr);gap:80px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:152px">
+      <p class="eyebrow">01 — Is this right for you?</p>
+      <h2 id="fit-title" class="h2" style="font-size:72px">This helps if…</h2>
+      <p class="lead">Tick any that sound familiar.</p>
+      <p style="margin-top:16px">Not sure this is the one? <a class="link" href="/find-care" data-cursor-label="Open" style="display:inline;min-height:0">Take the 1-minute quiz</a></p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:14px">
+        <legend class="sr-only">This helps if… Tick any that sound familiar.</legend>
+        <sc-for list="{{checks}}" as="c" hint-placeholder-count="5">
+          <label class="chk" data-on="{{c.on}}">
+            <input type="checkbox" id="{{c.id}}" checked="{{c.checked}}" onChange="{{c.toggle}}">
+            <span class="box" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C0F3D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5 10 17.5 19.5 7"></path></svg></span>
+            <span>{{c.label}}</span>
+          </label>
+        </sc-for>
+      </fieldset>
+      <div aria-live="polite" style="min-height:8px">
+        <sc-if value="{{hasTicks}}" hint-placeholder-val="{{false}}">
+          <div class="result" data-surface="dark" style="margin-top:12px;background:#2A1856;border-radius:20px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px">
+            <p style="color:#FFFFFF;font-weight:600;font-size:20px;max-width:520px">{{resultText}}</p>
+            <a class="btn btn-primary" href="{{needsHref}}" style="flex:none"><sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">Get a Free Care Assessment</sc-if><sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">Request a Callback</sc-if></a>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 — WHAT'S INCLUDED ============ -->
+<section aria-labelledby="inc-title" style="padding:96px 0">
+  <div class="wrap">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <p class="eyebrow">02 — What's included</p>
+      <h2 id="inc-title" class="h2">What we help with.</h2>
+    </div>
+    <ul style="list-style:none;padding:0;margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px">
+      <li class="inc"><span class="ic3d" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#2A1856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="27" width="34" height="13" rx="3" fill="#F6EAFB"></rect><rect x="10" y="15" width="28" height="12" rx="3" fill="#C25BD9"></rect><path d="M10 21h28"></path><path d="M13 33h22"></path><rect x="13" y="7" width="22" height="8" rx="3" fill="#F6EAFB"></rect></svg></span><h3 class="h3">Bathing &amp; showering</h3><p>Washing, drying and getting in and out of the tub or shower safely.</p></li>
+      <li class="inc"><span class="ic3d" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#2A1856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="8" width="11" height="32" rx="3" fill="#F6EAFB"></rect><path d="M18 13h5M18 18h5M18 23h5M18 28h5M18 33h5"></path><path d="M33 40V24"></path><rect x="27" y="8" width="14" height="10" rx="2.5" fill="#C25BD9"></rect><path d="M29 18v4h8v-4"></path></svg></span><h3 class="h3">Grooming</h3><p>Shaving, brushing teeth, hair care — ready for the day.</p></li>
+      <li class="inc"><span class="ic3d" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#2A1856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 7 8 12l-3 16 6 2 2-8v19h22V22l2 8 6-2-3-16-9-5c-1 3-3.5 5-7 5s-6-2-7-5Z" fill="#F6EAFB"></path><path d="M17 7 24 22 31 7"></path><path d="M24 22v19"></path><circle cx="27.5" cy="27" r="1.6" fill="#C25BD9" stroke="none"></circle><circle cx="27.5" cy="33" r="1.6" fill="#C25BD9" stroke="none"></circle><circle cx="27.5" cy="39" r="1.6" fill="#C25BD9" stroke="none"></circle></svg></span><h3 class="h3">Dressing</h3><p>Buttons, zippers, shoes and socks. They choose the outfit.</p></li>
+      <li class="inc"><span class="ic3d" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#2A1856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="5" width="26" height="38" rx="2" fill="#F6EAFB"></rect><path d="M6 43h36"></path><circle cx="31" cy="25" r="1.8" fill="#2A1856"></circle><circle cx="24" cy="14" r="4.5" fill="#C25BD9"></circle></svg></span><h3 class="h3">Using the bathroom</h3><p>Toileting and continence care, handled calmly and privately.</p></li>
+      <li class="inc"><span class="ic3d" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#2A1856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="21" cy="26" r="15" fill="#F6EAFB"></circle><circle cx="21" cy="26" r="9" fill="#FFFFFF"></circle><path d="M41 10v32"></path><path d="M41 10c-3 0-4.5 3-4.5 7s1.5 6 4.5 6" fill="#C25BD9"></path></svg></span><h3 class="h3">Mealtimes</h3><p>Help eating, from the first bite to the last, at their own pace.</p></li>
+      <li class="inc"><span class="ic3d" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 48 48" fill="none" stroke="#2A1856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 10h20"></path><path d="M14 10 10 40M34 10l4 30"></path><path d="M12 24h24"></path><rect x="11" y="7" width="7" height="6" rx="2" fill="#C25BD9"></rect><rect x="30" y="7" width="7" height="6" rx="2" fill="#C25BD9"></rect><circle cx="10" cy="41" r="3" fill="#F6EAFB"></circle><circle cx="38" cy="41" r="3" fill="#F6EAFB"></circle></svg></span><h3 class="h3">Moving safely</h3><p>Bed to chair, chair to wheelchair, room to room — a steady hand every step.</p></li>
+    </ul>
+    <aside aria-labelledby="not-inc" style="margin-top:32px;border:1.5px solid #5B5670;border-radius:20px;padding:28px 32px;display:grid;grid-template-columns:56px minmax(0,1fr);gap:20px;align-items:start;max-width:960px">
+      <span aria-hidden="true" style="width:56px;height:56px;border-radius:16px;background:#EEE9F8;display:flex;align-items:center;justify-content:center"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg></span>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <h3 id="not-inc" class="h3" style="font-size:24px">What Personal Care doesn't include</h3>
+        <p>All our care is non-medical. We don't give injections, change wound dressings or provide nursing. If your loved one needs that, we're happy to work alongside your home health or hospice team.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ 03 — A DAY WITH DAWSON ============ -->
+<section aria-labelledby="day-title" style="background:#FFFFFF;padding:96px 0">
+  <div class="wrap" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:96px;align-items:start">
+    <div style="position:sticky;top:152px;display:flex;flex-direction:column;gap:16px">
+      <p class="eyebrow">03 — A day with Dawson</p>
+      <h2 id="day-title" class="h2">What a day of personal care can look like.</h2>
+      <p class="lead">An example with a morning and an evening visit. Every plan is built around your loved one.</p>
+      <div class="sky" data-el="sky" aria-hidden="true" style="margin-top:24px;background:{{skyBg}}">
+        <svg viewBox="0 0 560 420" width="100%" height="360" preserveAspectRatio="xMidYMax meet" style="position:absolute;inset:0">
+          <path d="M40 360 A240 240 0 0 1 520 360" fill="none" stroke="{{skyArc}}" stroke-width="3" stroke-dasharray="4 10" stroke-linecap="round"></path>
+          <line x1="24" y1="360" x2="536" y2="360" stroke="{{skyArc}}" stroke-width="2"></line>
+          <g class="sky-body" data-el="sky-body" style="transform:translate({{skyX}}px,{{skyY}}px)">
+            <g class="sun" style="opacity:{{sunOp}}"><circle r="34" fill="#94C723"></circle><circle r="52" fill="none" stroke="#94C723" stroke-width="2" stroke-dasharray="3 9" stroke-linecap="round"></circle></g>
+            <g class="moon" style="opacity:{{moonOp}}"><circle r="34" fill="#F6EAFB"></circle><circle cx="14" cy="-10" r="30" fill="#2A1856"></circle></g>
+          </g>
+        </svg>
+        <div style="position:absolute;left:32px;top:24px;display:flex;flex-direction:column;gap:2px">
+          <p data-el="sky-time" class="ff" style="font-size:60px;line-height:1;color:{{skyInk}}">{{skyTime}}</p>
+          <p data-el="sky-title" style="font-weight:600;font-size:20px;color:{{skyInk}}">{{skyTitle}}</p>
+        </div>
+      </div>
+    </div>
+    <ol data-el="day" style="list-style:none;padding:0;position:relative;padding-top:8px">
+      <span aria-hidden="true" style="position:absolute;left:35px;top:44px;bottom:100px;width:3px;border-radius:999px;background:#EEE9F8"></span>
+      <span aria-hidden="true" data-el="day-fill" style="position:absolute;left:35px;top:44px;width:3px;height:{{dayFillH}}px;border-radius:999px;background:#C25BD9;box-shadow:0 0 12px 2px rgba(194,91,217,0.55)"></span>
+      <sc-for list="{{steps}}" as="s" hint-placeholder-count="6">
+        <li class="day-step" data-day-step="{{s.i}}" data-on="{{s.on}}" data-cur="{{s.cur}}">
+          <span class="day-dot" aria-hidden="true">
+            <sc-if value="{{s.isSun}}" hint-placeholder-val="{{true}}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></sc-if>
+            <sc-if value="{{s.isMoon}}" hint-placeholder-val="{{false}}"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></sc-if>
+          </span>
+          <div style="display:flex;flex-direction:column;gap:4px;padding-top:2px">
+            <time datetime="{{s.dt}}" style="font-weight:700;color:#8E3BA8;font-size:17px;letter-spacing:0.04em">{{s.time}}</time>
+            <h3 class="h3">{{s.title}}</h3>
+            <p>{{s.line}}</p>
+          </div>
+        </li>
+      </sc-for>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 04 — SAFE AND DIGNIFIED ============ -->
+<section aria-labelledby="safe-title" data-surface="dark" data-cursor-theme="dark" style="background:#1C0F3D;padding:104px 0 96px;position:relative;overflow:hidden">
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 1440 80" width="1440" height="80" preserveAspectRatio="none" style="position:absolute;left:0;top:40px;width:100%;height:80px"><path d="M0 40 H1000 L1014 30 L1026 40 H1038 L1058 6 L1080 74 L1098 24 L1110 40 H1440" fill="none" stroke="#C25BD9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+  <div class="wrap" style="position:relative">
+    <div style="display:flex;flex-direction:column;gap:16px;max-width:760px">
+      <p class="eyebrow">04 — Safe and dignified</p>
+      <h2 id="safe-title" class="h2" style="color:#FFFFFF">Help that never feels like a takeover.</h2>
+    </div>
+    <ol style="list-style:none;padding:0;margin-top:48px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px">
+      <li style="display:flex;flex-direction:column;gap:14px;padding-top:28px;border-top:2px solid #4B2E91">
+        <span aria-hidden="true" class="ff" style="font-size:64px;line-height:1;color:#C25BD9">01</span>
+        <h3 class="h3" style="color:#FFFFFF">Their way, at their pace</h3>
+        <p style="color:#EEE9F8">We ask before we help, and let your loved one do what they can. Doors closed, towels ready, privacy first.</p>
+      </li>
+      <li style="display:flex;flex-direction:column;gap:14px;padding-top:28px;border-top:2px solid #4B2E91">
+        <span aria-hidden="true" class="ff" style="font-size:64px;line-height:1;color:#C25BD9">02</span>
+        <h3 class="h3" style="color:#FFFFFF">Planned at home, by the owner</h3>
+        <p style="color:#EEE9F8">Our owner visits first, sees how the home is set up and builds the plan with you — down to how they like their mornings.</p>
+      </li>
+      <li style="display:flex;flex-direction:column;gap:14px;padding-top:28px;border-top:2px solid #4B2E91">
+        <span aria-hidden="true" class="ff" style="font-size:64px;line-height:1;color:#C25BD9">03</span>
+        <h3 class="h3" style="color:#FFFFFF">Experienced hands, always checked on</h3>
+        <p style="color:#EEE9F8">Our caregivers are experienced, and our team includes Certified Nursing Assistants. We follow up regularly and adjust the plan as needs change.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 05 — PAIRS WELL WITH + 06 — COST ============ -->
+<div style="padding:96px 0">
+  <div class="wrap" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:stretch">
+    <section aria-labelledby="pairs-title" style="display:flex;flex-direction:column">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <p class="eyebrow">05 — Pairs well with</p>
+        <h2 id="pairs-title" class="h2" style="font-size:48px">Pairs well with.</h2>
+      </div>
+      <ul style="list-style:none;padding:0;margin-top:32px;display:flex;flex-direction:column;gap:20px;flex:1">
+        <li style="flex:1;display:flex">
+          <a class="pair" href="/care/home-help" data-cursor-label="Open">
+            <span style="overflow:hidden;display:block"><img src="images/poster-home-help-1.jpg" alt=""></span>
+            <span style="padding:28px;display:flex;flex-direction:column;gap:8px;justify-content:center">
+              <h3 class="h3">Home Help</h3>
+              <span>Meals, laundry and medication reminders on the same visit.</span>
+              <span class="link">See Home Help →</span>
+            </span>
+          </a>
+        </li>
+        <li style="flex:1;display:flex">
+          <a class="pair" href="/care/24-hour-care" data-cursor-label="Open">
+            <span style="overflow:hidden;display:block"><img src="images/poster-24-hour-care-1.jpg" alt=""></span>
+            <span style="padding:28px;display:flex;flex-direction:column;gap:8px;justify-content:center">
+              <h3 class="h3">24-Hour &amp; Overnight Care</h3>
+              <span>When help is needed at night too.</span>
+              <span class="link">See 24-Hour &amp; Overnight Care →</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </section>
+    <section aria-labelledby="cost-title" style="background:#FFFFFF;border:1px solid #E7E1EE;border-radius:28px;padding:44px 48px;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+      <p class="eyebrow">06 — Cost</p>
+      <h2 id="cost-title" class="h2" style="font-size:48px">What does personal care cost?</h2>
+      <p>It depends on how many hours of help you need. Try our estimator — we've started it at an example schedule of 3 hours a day, 5 days a week. Change it to match yours.</p>
+      <div aria-hidden="true" style="align-self:stretch;background:#F6EAFB;border-radius:20px;padding:20px 24px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:flex-end;gap:10px;height:84px">
+          <div class="wk"><span style="height:45%"></span></div><div class="wk"><span style="height:45%"></span></div><div class="wk"><span style="height:45%"></span></div><div class="wk"><span style="height:45%"></span></div><div class="wk"><span style="height:45%"></span></div><div class="wk" style="height:100%"></div><div class="wk" style="height:100%"></div>
+        </div>
+        <div style="display:flex;gap:10px;font-weight:600;color:#2A1856;font-size:16px;text-align:center"><span style="flex:1">M</span><span style="flex:1">T</span><span style="flex:1">W</span><span style="flex:1">T</span><span style="flex:1">F</span><span style="flex:1">S</span><span style="flex:1">S</span></div>
+      </div>
+      <a class="btn btn-ghost" href="/paying-for-care?service=personal-care&amp;hours=3&amp;days=5&amp;overnight=0#estimator" style="margin-top:4px">Estimate your cost</a>
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <p class="sm muted">Your exact rate is set at your free assessment.</p>
+        <sc-if value="{{pending}}" hint-placeholder-val="{{true}}"><p class="sm muted">Visits start at <span class="tbc">[Minimum hours]</span> hours.</p></sc-if>
+      </div>
+      <a class="link sm" href="/paying-for-care#ways-to-pay" style="font-size:16px;margin-top:-8px">See ways families pay for care</a>
+    </section>
+  </div>
+</div>
+
+<!-- ============ 07 — QUESTIONS ============ -->
+<section aria-labelledby="faq-title" style="background:#FFFFFF;padding:96px 0">
+  <div class="wrap" style="display:grid;grid-template-columns:420px minmax(0,1fr);gap:80px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:16px;position:sticky;top:152px">
+      <p class="eyebrow">07 — Questions</p>
+      <h2 id="faq-title" class="h2">Questions about personal care.</h2>
+    </div>
+    <div style="border-top:1px solid #E7E1EE">
+      <sc-for list="{{faqs}}" as="f" hint-placeholder-count="5">
+        <div id="{{f.id}}" style="border-bottom:1px solid #E7E1EE">
+          <h3><button type="button" class="faq-q" aria-expanded="{{f.exp}}" aria-controls="{{f.aid}}" onClick="{{f.toggle}}">{{f.q}}<svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transform:{{f.rot}};transition:transform 360ms cubic-bezier(0.22,1,0.36,1)"><path d="m6 9 6 6 6-6"></path></svg></button></h3>
+          <sc-if value="{{f.open}}" hint-placeholder-val="{{false}}">
+            <div id="{{f.aid}}" style="padding:0 0 28px;max-width:760px"><p>{{f.a}}<sc-if value="{{f.hasTbc}}" hint-placeholder-val="{{false}}"> <span class="tbc">{{f.tbc}}</span>{{f.after}}</sc-if></p></div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEW ============ -->
+<section aria-label="What a family says" style="padding:96px 0">
+  <div class="wrap">
+    <figure style="max-width:1040px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px">
+      <svg aria-hidden="true" focusable="false" width="64" height="54" viewBox="0 0 48 40"><path d="M4 38 V24 C4 12 10 5 20 2 L22 7 C15 10 12 15 12 20 H20 V38 Z M28 38 V24 C28 12 34 5 44 2 L46 7 C39 10 36 15 36 20 H44 V38 Z" fill="#C25BD9"></path></svg>
+      <p role="img" aria-label="Rated 5 out of 5" style="display:flex;gap:6px"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></p>
+      <blockquote class="q" style="font-size:26px;line-height:1.5;color:#2A1856">"Dawson &amp; Dawson followed my husband in continuing care, and they were excellent at keeping him clean and presentable. Monique kept us up to date on any changes in medications, and she was excellent in answering our questions. Several of her caregivers were quite adept at refocusing him when he tired out. Thank you, Monique, and your crew!"</blockquote>
+      <figcaption style="display:flex;align-items:center;gap:14px">
+        <span aria-hidden="true" style="width:52px;height:52px;border-radius:50%;background:#8E3BA8;color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:20px">P</span>
+        <span style="text-align:left"><span style="display:block;font-weight:600;color:#2A1856">Penny Barrett</span><span class="sm muted">Google review</span></span>
+      </figcaption>
+      <a class="link sm" href="https://maps.app.goo.gl/HEKXeuuT747yN3y96" data-cursor-label="View" style="font-size:16px">Read our Google reviews</a>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section aria-labelledby="cta-title" data-surface="dusk" data-cursor-theme="dark" style="position:relative;overflow:hidden;background:linear-gradient(135deg, #2A1856 0%, #4B2E91 55%, #C25BD9 100%)">
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 1440 80" width="1440" height="80" preserveAspectRatio="none" style="position:absolute;left:0;bottom:80px;width:100%;height:80px"><path d="M0 40 H1000 L1014 30 L1026 40 H1038 L1058 6 L1080 74 L1098 24 L1110 40 H1440" fill="none" stroke="#FBF8F3" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+  <div class="wrap" style="position:relative;padding-top:96px;padding-bottom:152px">
+    <div style="max-width:780px;display:flex;flex-direction:column;gap:24px">
+      <h2 id="cta-title" class="dl" style="color:#FFFFFF;max-width:600px">Let's make mornings <span style="color:#F6EAFB">easier</span>.</h2>
+      <p class="lead" style="color:#FBF8F3">One call. One free visit at home. No pressure.</p>
+      <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">
+        <p style="display:flex;gap:10px;align-items:flex-start;color:#FBF8F3;max-width:480px"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EEE9F8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:4px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Our office is closed right now. Request a callback and we'll reach you first thing Monday at 8 AM.</p>
+      </sc-if>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px">
+        <a class="btn btn-primary" href="{{assessHref}}"><sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">Get a Free Care Assessment</sc-if><sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">Request a Callback</sc-if></a>
+        <a class="btn btn-cream" href="tel:+18433793321" data-cursor-label="Call"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Call (843) 379-3321</a>
+        <a class="btn btn-cream" href="sms:+18666329766"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Text us (866) 632-9766</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-top:12px;color:#FBF8F3">
+        <p><strong>Care:</strong> 24 hours a day, 7 days a week</p>
+        <p><strong>Office:</strong> Monday–Friday, 8 AM–5 PM</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot" data-surface="dark" data-cursor-theme="dark" style="flex:1 0 auto;background:#1C0F3D;color:#FBF8F3;padding:96px 0 48px">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:320px repeat(3,minmax(0,1fr));gap:64px">
+      <div style="display:flex;flex-direction:column;gap:24px;align-items:flex-start">
+        <a href="/" aria-label="Dawson &amp; Dawson Home Care — home" style="display:inline-flex">
+          <span style="display:block;background:#FBF8F3;border-radius:16px;padding:16px 20px"><img src="images/logo.png" alt="" width="240" height="131" style="display:block;width:240px;height:auto"></span>
+        </a>
+        <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">
+          <p class="sm" style="display:inline-flex;align-items:center;gap:10px;font-weight:600;color:#FBF8F3"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:#94C723"></span>Office open now · Call (843) 379-3321</p>
+        </sc-if>
+        <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">
+          <p class="sm" style="display:inline-flex;align-items:flex-start;gap:10px;font-weight:600;color:#FBF8F3"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EEE9F8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Office closed · Opens Monday at 8 AM. Request a callback and we'll reach you first thing.</p>
+        </sc-if>
+        <p class="sm" style="color:#EEE9F8"><strong style="color:#FBF8F3">Care:</strong> 24 hours a day, 7 days a week</p>
+      </div>
+      <nav aria-labelledby="foot-contact" style="display:flex;flex-direction:column;gap:12px">
+        <p id="foot-contact" class="eyebrow">Contact us</p>
+        <a href="tel:+18433793321" data-cursor-label="Call" style="font-weight:600">Call (843) 379-3321</a>
+        <a href="sms:+18666329766" style="font-weight:600">Text us (866) 632-9766</a>
+        <p style="color:#EEE9F8">Fax: (866) 502-3509</p>
+        <a href="mailto:info@dawsonhomecare.com">info@dawsonhomecare.com</a>
+        <p class="sm" style="color:#EEE9F8;margin-top:8px">69 Robert Smalls Parkway, Suite 3F, Beaufort, SC 29906</p>
+        <p class="sm" style="color:#EEE9F8"><strong style="color:#FBF8F3">Office:</strong> Monday–Friday, 8 AM–5 PM</p>
+      </nav>
+      <nav aria-labelledby="foot-care" style="display:flex;flex-direction:column;gap:12px">
+        <p id="foot-care" class="eyebrow">Care services</p>
+        <a href="/care/personal-care">Personal Care</a>
+        <a href="/care/home-help">Home Help</a>
+        <a href="/care/companionship">Companionship</a>
+        <a href="/care/respite-care">Respite Care</a>
+        <a href="/care/24-hour-care">24-Hour &amp; Overnight Care</a>
+        <a href="/care" style="font-weight:600;margin-top:8px">See all care services</a>
+      </nav>
+      <nav aria-label="More" style="display:flex;flex-direction:column;gap:12px">
+        <p class="eyebrow">Find the right care</p>
+        <a href="/how-it-works">See how it works</a>
+        <a href="/paying-for-care#ways-to-pay">See ways families pay for care</a>
+        <a href="/faq">See all questions</a>
+        <a href="/areas-we-serve">See all areas we serve</a>
+        <a href="/about">Read our story</a>
+        <a href="/careers">See caregiver jobs</a>
+        <a href="/for-professionals#refer">Make a referral</a>
+      </nav>
+    </div>
+    <div style="margin-top:80px;padding-top:32px;border-top:1px solid #4B2E91;display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap" class="sm">
+      <p style="color:#EEE9F8">© {{currentYear}} Dawson and Dawson Home Care LLC</p>
+      <div style="display:flex;gap:32px">
+        <a href="/privacy-policy">Privacy Policy</a>
+        <a href="/sms-terms">SMS Terms</a>
+        <a href="https://www.instagram.com/dawsonhomecare/">Follow us on Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="cursor-ring" aria-hidden="true" data-state="idle" data-theme="light" data-visible="false" data-pressed="false" ref="{{ringRef}}"><div class="cursor-ring__circle"><span class="cursor-ring__label"></span></div></div>
+</div></template>
+<script src="js/lib/react.production.min.js"></script>
+<script src="js/lib/react-dom.production.min.js"></script>
+<script src="js/lib/dc-lite.js"></script>
+<script src="js/03-personal-care-desktop.js"></script>
+</body>
+</html>

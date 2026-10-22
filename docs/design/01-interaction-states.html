@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dawson &amp; Dawson Home Care — Interaction states</title>
+<!-- Page settings can be changed with URL parameters: none -->
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/01-interaction-states.css">
+</head>
+<body>
+<div id="app"></div>
+<template id="dc-template"><div class="st" style="width:1440px;height:1560px;padding:80px;background:#FBF8F3;display:flex;flex-direction:column;gap:64px">
+
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <p class="eyebrow">Screen 1 · Interaction states</p>
+    <h1 class="h2" style="font-size:44px">Each interactive moment, side by side.</h1>
+  </div>
+
+  <!-- Office status -->
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <h2 class="h2">Office-status chip</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px;align-items:start">
+      <div class="cell">
+        <p class="lbl">Open · light (hero)</p>
+        <p style="display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 18px;border-radius:999px;background:#EEF6DC;color:#4A7309;font-size:16px;font-weight:600"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:#4A7309"></span>Office open now</p>
+      </div>
+      <div class="cell">
+        <p class="lbl">Closed · light (hero)</p>
+        <p style="display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 18px;border-radius:999px;background:#EEE9F8;color:#2A1856;font-size:16px;font-weight:600"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Office closed · Opens Monday at 8 AM</p>
+      </div>
+      <div class="cell">
+        <p class="lbl">Open · dark (footer)</p>
+        <div style="background:#1C0F3D;border-radius:16px;padding:20px 24px;width:100%">
+          <p style="display:inline-flex;align-items:center;gap:10px;color:#FBF8F3;font-size:16px;font-weight:600"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:#94C723"></span>Office open now · Call (843) 379-3321</p>
+        </div>
+      </div>
+      <div class="cell">
+        <p class="lbl">Closed · dark (footer)</p>
+        <div style="background:#1C0F3D;border-radius:16px;padding:20px 24px;width:100%">
+          <p style="display:inline-flex;align-items:flex-start;gap:10px;color:#FBF8F3;font-size:16px;font-weight:600"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EEE9F8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Office closed · Opens Monday at 8 AM. Request a callback and we'll reach you first thing.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cell">
+      <p class="lbl">Before the page knows the time (server render)</p>
+      <p style="display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 18px;border-radius:999px;background:#FFFFFF;border:1px solid #E7E1EE;color:#2A1856;font-size:16px;font-weight:600"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Office hours: Mon–Fri, 8 AM–5 PM</p>
+    </div>
+  </section>
+
+  <!-- Buttons -->
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <h2 class="h2">Buttons — default, hover (lift), keyboard focus (3px leaf ring)</h2>
+    <div style="display:grid;grid-template-columns:200px repeat(3,minmax(0,1fr));gap:24px 32px;align-items:center">
+      <p class="lbl"></p><p class="lbl">Default</p><p class="lbl">Hover</p><p class="lbl">Focus</p>
+      <p class="lbl">Primary</p>
+      <div><span class="btn p">Get a Free Care Assessment</span></div>
+      <div><span class="btn p hov">Get a Free Care Assessment</span></div>
+      <div><span class="btn p foc">Get a Free Care Assessment</span></div>
+      <p class="lbl">Primary · after hours</p>
+      <div><span class="btn p">Request a Callback</span></div>
+      <div><span class="btn p hov">Request a Callback</span></div>
+      <div><span class="btn p foc">Request a Callback</span></div>
+      <p class="lbl">Secondary</p>
+      <div><span class="btn s">Call (843) 379-3321</span></div>
+      <div><span class="btn s hov">Call (843) 379-3321</span></div>
+      <div><span class="btn s foc">Call (843) 379-3321</span></div>
+      <p class="lbl">Ghost</p>
+      <div><span class="btn g">See all care services</span></div>
+      <div><span class="btn g hov">See all care services</span></div>
+      <div><span class="btn g foc">See all care services</span></div>
+    </div>
+    <div style="margin-top:8px;border-radius:20px;padding:32px 40px;background:linear-gradient(135deg, #2A1856 0%, #4B2E91 55%, #C25BD9 100%);display:grid;grid-template-columns:200px repeat(3,minmax(0,1fr));gap:24px 32px;align-items:center;width:1040px">
+      <p style="font-size:16px;font-weight:600;color:#EEE9F8">Ghost · cream on Dusk</p>
+      <div><span class="btn c">Text us (866) 632-9766</span></div>
+      <div><span class="btn c hov">Text us (866) 632-9766</span></div>
+      <div><span class="btn c foc-dusk">Text us (866) 632-9766</span></div>
+    </div>
+  </section>
+
+  <!-- Cursor ring -->
+  <section style="display:flex;flex-direction:column;gap:24px">
+    <h2 class="h2">Cursor ring (desktop) — the native cursor always stays visible</h2>
+    <div style="display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:16px;align-items:end">
+      <div class="cell" style="align-items:center">
+        <div style="height:120px;display:grid;place-items:center"><div class="ring" style="width:36px;height:36px;border:1.5px solid #C25BD9"><svg aria-hidden="true" width="14" height="22" viewBox="0 0 14 22" style="position:absolute;left:18px;top:18px"><path d="M1 1 V17 L5 13 L8 20 L10.5 19 L7.5 12 H13 Z" fill="#FFFFFF" stroke="#1E1A2B" stroke-width="1.2" stroke-linejoin="round"></path></svg></div></div>
+        <p class="lbl">Idle · 36</p>
+      </div>
+      <div class="cell" style="align-items:center">
+        <div style="height:120px;display:grid;place-items:center"><div class="ring" style="width:64px;height:64px;border:1.5px solid color-mix(in srgb,#C25BD9 60%,transparent);background:color-mix(in srgb,#C25BD9 14%,transparent)"><svg aria-hidden="true" width="14" height="22" viewBox="0 0 14 22" style="position:absolute;left:32px;top:32px"><path d="M1 1 V17 L5 13 L8 20 L10.5 19 L7.5 12 H13 Z" fill="#FFFFFF" stroke="#1E1A2B" stroke-width="1.2" stroke-linejoin="round"></path></svg></div></div>
+        <p class="lbl">Clickable · 64</p>
+      </div>
+      <div class="cell" style="align-items:center">
+        <div style="height:120px;display:grid;place-items:center"><div class="ring" style="width:84px;height:84px;background:#2A1856"><span style="color:#FFFFFF;font-size:14px;font-weight:600;letter-spacing:0.02em">Call</span><svg aria-hidden="true" width="14" height="22" viewBox="0 0 14 22" style="position:absolute;left:42px;top:42px"><path d="M1 1 V17 L5 13 L8 20 L10.5 19 L7.5 12 H13 Z" fill="#FFFFFF" stroke="#1E1A2B" stroke-width="1.2" stroke-linejoin="round"></path></svg></div></div>
+        <p class="lbl">Call · 84</p>
+      </div>
+      <div class="cell" style="align-items:center">
+        <div style="height:120px;display:grid;place-items:center"><div class="ring" style="width:84px;height:84px;background:#2A1856"><span style="color:#FFFFFF;font-size:14px;font-weight:600;letter-spacing:0.02em">Open</span><svg aria-hidden="true" width="14" height="22" viewBox="0 0 14 22" style="position:absolute;left:42px;top:42px"><path d="M1 1 V17 L5 13 L8 20 L10.5 19 L7.5 12 H13 Z" fill="#FFFFFF" stroke="#1E1A2B" stroke-width="1.2" stroke-linejoin="round"></path></svg></div></div>
+        <p class="lbl">Open · 84</p>
+      </div>
+      <div class="cell" style="align-items:center">
+        <div style="height:120px;display:grid;place-items:center"><div class="ring" style="width:84px;height:84px;background:#2A1856"><span style="color:#FFFFFF;font-size:14px;font-weight:600;letter-spacing:0.02em">Play</span><svg aria-hidden="true" width="14" height="22" viewBox="0 0 14 22" style="position:absolute;left:42px;top:42px"><path d="M1 1 V17 L5 13 L8 20 L10.5 19 L7.5 12 H13 Z" fill="#FFFFFF" stroke="#1E1A2B" stroke-width="1.2" stroke-linejoin="round"></path></svg></div></div>
+        <p class="lbl">Play · 84</p>
+      </div>
+      <div class="cell" style="align-items:center">
+        <div style="height:120px;display:grid;place-items:center"><div class="ring" style="width:84px;height:84px;background:#2A1856"><span style="color:#FFFFFF;font-size:14px;font-weight:600;letter-spacing:0.02em">Drag</span><svg aria-hidden="true" width="14" height="22" viewBox="0 0 14 22" style="position:absolute;left:42px;top:42px"><path d="M1 1 V17 L5 13 L8 20 L10.5 19 L7.5 12 H13 Z" fill="#FFFFFF" stroke="#1E1A2B" stroke-width="1.2" stroke-linejoin="round"></path></svg></div></div>
+        <p class="lbl">Drag · 84</p>
+      </div>
+      <div class="cell" style="align-items:center">
+        <div style="height:120px;display:grid;place-items:center"><div class="ring" style="width:12px;height:12px;border:1.5px solid #C25BD9;opacity:0.4"></div></div>
+        <p class="lbl">Text field · 12</p>
+      </div>
+      <div class="cell" style="align-items:center">
+        <div style="height:120px;width:100%;border-radius:16px;background:#1C0F3D;display:grid;place-items:center"><div class="ring" style="width:64px;height:64px;border:1.5px solid color-mix(in srgb,#94C723 60%,transparent);background:color-mix(in srgb,#94C723 18%,transparent)"><svg aria-hidden="true" width="14" height="22" viewBox="0 0 14 22" style="position:absolute;left:32px;top:32px"><path d="M1 1 V17 L5 13 L8 20 L10.5 19 L7.5 12 H13 Z" fill="#FFFFFF" stroke="#1E1A2B" stroke-width="1.2" stroke-linejoin="round"></path></svg></div></div>
+        <p class="lbl">Dark · clickable</p>
+      </div>
+      <div class="cell" style="align-items:center">
+        <div style="height:120px;width:100%;border-radius:16px;background:#1C0F3D;display:grid;place-items:center"><div class="ring" style="width:84px;height:84px;background:#94C723"><span style="color:#1C0F3D;font-size:14px;font-weight:600;letter-spacing:0.02em">Call</span><svg aria-hidden="true" width="14" height="22" viewBox="0 0 14 22" style="position:absolute;left:42px;top:42px"><path d="M1 1 V17 L5 13 L8 20 L10.5 19 L7.5 12 H13 Z" fill="#FFFFFF" stroke="#1E1A2B" stroke-width="1.2" stroke-linejoin="round"></path></svg></div></div>
+        <p class="lbl">Dark · labelled</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other states -->
+  <section style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px">
+    <div class="cell">
+      <h2 class="h2">Owner video · coming soon</h2>
+      <div style="width:100%;border-radius:20px;background:#F6EAFB;padding:40px;display:flex;align-items:center;gap:24px">
+        <span aria-hidden="true" style="width:64px;height:64px;border-radius:50%;background:#FFFFFF;display:grid;place-items:center;flex:none"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></span>
+        <div><p style="font-weight:700;color:#2A1856">Video coming soon</p><p style="font-size:16px">A short hello from our owner is on its way.</p></div>
+      </div>
+    </div>
+    <div class="cell">
+      <h2 class="h2">Town search · match</h2>
+      <div style="width:100%;border-radius:20px;background:#EEF6DC;padding:32px 40px;display:flex;flex-direction:column;gap:4px">
+        <p style="display:flex;align-items:center;gap:10px;font-weight:700;color:#4A7309"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4A7309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>Yes — we care for families in <span style="background:#FFFFFF;color:#8E3BA8;border-radius:6px;padding:0 6px">[Town]</span>.</p>
+        <a href="/areas-we-serve" style="font-weight:600;color:#2A1856;text-underline-offset:3px">See care in [Town] →</a>
+      </div>
+    </div>
+  </section>
+</div></template>
+<script src="js/lib/react.production.min.js"></script>
+<script src="js/lib/react-dom.production.min.js"></script>
+<script src="js/lib/dc-lite.js"></script>
+<script src="js/01-interaction-states.js"></script>
+</body>
+</html>

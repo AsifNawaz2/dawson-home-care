@@ -1,0 +1,855 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dawson &amp; Dawson Home Care — Homepage (mobile)</title>
+<!-- Page settings can be changed with URL parameters: office=open|closed, showPending=true, heroHeadline=owner|family-run, startAt=intro|hero|the-moment|how-we-help|find-care|how-it-works|reviews|where-we-care|final-cta -->
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/02-home-mobile.css">
+</head>
+<body>
+<div id="app"></div>
+<template id="dc-template"><div class="dd" ref="{{rootRef}}" data-typing="false" style="position:relative;width:390px;height:844px;overflow:hidden;background:#FBF8F3">
+<div class="scroller" data-el="scroller" ref="{{scRef}}" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow-x:hidden;overflow-y:auto">
+<main id="top">
+
+<!-- ============ INTRO ============ -->
+<section data-el="intro" aria-label="Dawson &amp; Dawson Home Care" style="position:relative;height:844px;background:#FFFFFF;overflow:hidden">
+  <video data-el="intro-video" src="videos/intro-animation.mp4" poster="images/intro-end-frame.jpg" muted="{{yes}}" autoplay="" playsinline="" preload="auto" aria-hidden="true" style="position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;background:#FFFFFF"></video>
+  <div data-el="intro-hint" aria-hidden="true" style="opacity:0;position:absolute;left:0;right:0;bottom:56px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#2A1856;font-size:14px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;transition:opacity 500ms cubic-bezier(0.22,1,0.36,1)">
+    <span>Scroll</span>
+    <svg class="chev" width="24" height="36" viewBox="0 0 24 36" fill="none" stroke="#8E3BA8" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 6 6 6-6"></path><path d="m6 18 6 6 6-6"></path></svg>
+  </div>
+</section>
+
+<!-- ============ 1. HERO ============ -->
+<section id="hero" aria-labelledby="hero-title" class="pad" style="padding-top:104px;padding-bottom:72px">
+  <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">
+    <p style="display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 16px;border-radius:999px;background:#EEF6DC;color:#4A7309;font-size:16px;font-weight:600"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:#4A7309;flex:none"></span>Office open now</p>
+  </sc-if>
+  <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">
+    <p style="display:inline-flex;align-items:center;gap:10px;min-height:40px;padding:0 16px;border-radius:999px;background:#EEE9F8;color:#2A1856;font-size:16px;font-weight:600"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Office closed · Opens Monday at 8 AM</p>
+  </sc-if>
+  <sc-if value="{{heroOwner}}" hint-placeholder-val="{{true}}">
+    <h1 id="hero-title" class="ff" style="margin-top:20px;font-size:48px;line-height:1.03;color:#2A1856">Care that feels like <span style="color:#C25BD9">family</span> — from an owner who meets yours.</h1>
+  </sc-if>
+  <sc-if value="{{heroFamily}}" hint-placeholder-val="{{false}}">
+    <h1 id="hero-title" class="ff" style="margin-top:20px;font-size:48px;line-height:1.03;color:#2A1856">Care that feels like <span style="color:#C25BD9">family</span> — because it's run by one.</h1>
+  </sc-if>
+  <p class="lead" style="margin-top:16px">Help at home for a few hours or around the clock, 7 days a week. Local. Owner-run. Here since 2002.</p>
+  <img src="images/hero-caregivers.jpg" alt="Two smiling Dawson caregivers in lavender uniforms, standing in a family's living room." style="display:block;margin-top:28px;width:100%;height:280px;object-fit:cover;object-position:50% 30%;border-radius:20px">
+  <div style="margin-top:28px;display:flex;flex-direction:column;gap:12px">
+    <a class="btn btn-primary btn-full" href="/free-assessment"><sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">Get a Free Care Assessment</sc-if><sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">Request a Callback</sc-if></a>
+    <a class="btn btn-secondary btn-full" href="tel:+18433793321">
+      <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Call (843) 379-3321
+    </a>
+    <p class="sm muted" style="text-align:center">Free visit at home. No obligation.</p>
+  </div>
+  <ul style="list-style:none;padding:20px 0 0;margin-top:20px;border-top:1px solid #E7E1EE;display:flex;flex-direction:column;gap:10px;color:#2A1856;font-size:16px;font-weight:500">
+    <li style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Caring for families since 2002.</li>
+    <li style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg>Owner-run.</li>
+    <li style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>Care available 24/7</li>
+  </ul>
+</section>
+
+<!-- ============ 2. THE MOMENT ============ -->
+<section id="the-moment" aria-labelledby="moment-title" style="background:#FFFFFF">
+  <div class="pad"><a class="skip sr-only" href="#how-we-help">Skip to how we help</a></div>
+  <ol class="sr-only">
+    <li>Mom missed her pills again.</li>
+    <li>Dad fell getting out of the shower.</li>
+    <li>She hasn't left the house in a week.</li>
+    <li>You live three hours away.</li>
+  </ol>
+  <div data-el="mt-track" style="position:relative;height:1520px">
+    <div style="position:sticky;top:0;height:844px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;padding:72px 20px 72px">
+      <p class="eyebrow mw" data-mt-w="0">01 — The moment</p>
+      <h2 id="moment-title" style="display:flex;flex-direction:column;align-items:center;gap:4px;color:#2A1856">
+        <span style="font-family:'Poppins',sans-serif;font-weight:300;font-size:32px;line-height:1.15;letter-spacing:-0.01em"><span class="mw" data-mt-w="1">It</span> <span class="mw" data-mt-w="2">usually</span> <span class="mw" data-mt-w="3">starts</span> <span class="mw" data-mt-w="4">with</span></span>
+        <span class="mw ff" data-mt-w="5" style="font-size:76px;line-height:1;color:#2A1856;white-space:nowrap">a <span style="color:#C25BD9">moment.</span></span>
+      </h2>
+    </div>
+  </div>
+  <div data-el="st-track" style="position:relative;height:3720px">
+    <div aria-hidden="true" style="position:sticky;top:0;height:844px;display:flex;flex-direction:column;justify-content:center;gap:24px;padding:88px 20px 96px">
+      <div style="position:relative;width:350px;height:350px;border-radius:24px;overflow:hidden;background:#EEE9F8;flex:none">
+        <img class="st-img" data-st-img="0" data-active="true" src="images/moment-1.jpg" alt="">
+        <img class="st-img" data-st-img="1" src="images/moment-2.jpg" alt="">
+        <img class="st-img" data-st-img="2" src="images/moment-3.jpg" alt="">
+        <img class="st-img" data-st-img="3" src="images/moment-4.jpg" alt="">
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-height:150px">
+        <p class="st-line" data-st-line="0" data-state="current"><span data-st-text="0" data-text="Mom missed her pills again."></span><span class="caret"></span></p>
+        <p class="st-line" data-st-line="1" data-state="future"><span data-st-text="1" data-text="Dad fell getting out of the shower."></span><span class="caret"></span></p>
+        <p class="st-line" data-st-line="2" data-state="future"><span data-st-text="2" data-text="She hasn't left the house in a week."></span><span class="caret"></span></p>
+        <p class="st-line" data-st-line="3" data-state="future"><span data-st-text="3" data-text="You live three hours away."></span><span class="caret"></span></p>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="tick" data-st-tick="0" data-on="true"></span><span class="tick" data-st-tick="1"></span><span class="tick" data-st-tick="2"></span><span class="tick" data-st-tick="3"></span>
+        <span data-el="st-count" class="sm" style="font-weight:600;color:#5B5670;margin-left:6px">1 of 4</span>
+      </div>
+    </div>
+  </div>
+  <div class="pad" style="padding-bottom:88px">
+    <div style="padding-top:48px;border-top:1px solid #E7E1EE;display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+      <p class="dl" style="color:#2A1856">You don't have to figure this out alone.</p>
+      <p class="lead">We've helped Lowcountry families through moments like these since 2002.</p>
+      <a class="link" href="#how-we-help">See how we can help ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. HOW WE HELP ============ -->
+<section id="how-we-help" aria-labelledby="house-title">
+  <div class="pad" style="padding-top:88px;display:flex;flex-direction:column;gap:12px">
+    <a class="skip sr-only" href="#find-care">Skip to the next section</a>
+    <p class="eyebrow">02 — How we help</p>
+    <h2 id="house-title" class="h2">Every kind of help, under one roof.</h2>
+    <p style="font-size:18px">Keep scrolling to see each way we help.</p>
+  </div>
+  <div data-el="hw-track" style="position:relative;height:4640px">
+    <div style="position:sticky;top:0;height:844px;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:18px;padding:84px 20px 92px">
+      <div aria-hidden="true" style="position:relative;height:310px;flex:none">
+        <div class="batch" data-batch="0" style="transform:translate3d(0%,0,0);opacity:1"><div class="collage" style="transform:scale(0.5)"><span class="c-panel" style="left:202px;top:38px;width:343px;height:564px"></span><div class="cv" data-playing="false" style="left:413px;top:110px;z-index:1"><video data-hv="" src="videos/personal-care-1.mp4" poster="images/poster-personal-care-1.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:252px;top:183px;z-index:2"><video data-hv="" src="videos/personal-care-2.mp4" poster="images/poster-personal-care-2.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:92px;top:38px;z-index:3"><video data-hv="" src="videos/personal-care-3.mp4" poster="images/poster-personal-care-3.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div></div></div>
+        <div class="batch" data-batch="1" style="transform:translate3d(110%,0,0);opacity:0"><div class="collage" style="transform:scale(0.5)"><span class="c-panel" style="left:217px;top:33px;width:343px;height:562px"></span><div class="cv" data-playing="false" style="left:268px;top:32px;z-index:1"><video data-hv="" src="videos/home-help-1.mp4" poster="images/poster-home-help-1.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:106px;top:92px;z-index:2"><video data-hv="" src="videos/home-help-3.mp4" poster="images/poster-home-help-3.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:432px;top:177px;z-index:3"><video data-hv="" src="videos/home-help-2.mp4" poster="images/poster-home-help-2.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div></div></div>
+        <div class="batch" data-batch="2" style="transform:translate3d(110%,0,0);opacity:0"><div class="collage" style="transform:scale(0.5)"><span class="c-panel" style="left:193px;top:46px;width:343px;height:562px"></span><div class="cv" data-playing="false" style="left:245px;top:122px;z-index:1"><video data-hv="" src="videos/companionship-1.mp4" poster="images/poster-companionship-1.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:81px;top:48px;z-index:2"><video data-hv="" src="videos/companionship-3.mp4" poster="images/poster-companionship-3.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:410px;top:192px;z-index:3"><video data-hv="" src="videos/companionship-2.mp4" poster="images/poster-companionship-2.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div></div></div>
+        <div class="batch" data-batch="3" style="transform:translate3d(110%,0,0);opacity:0"><div class="collage" style="transform:scale(0.5)"><span class="c-panel" style="left:168px;top:50px;width:343px;height:563px"></span><div class="cv" data-playing="false" style="left:99px;top:50px;z-index:1"><video data-hv="" src="videos/24-hour-care-1.mp4" poster="images/poster-24-hour-care-1.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:340px;top:195px;z-index:2"><video data-hv="" src="videos/24-hour-care-2.mp4" poster="images/poster-24-hour-care-2.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div></div></div>
+        <div class="batch" data-batch="4" style="transform:translate3d(110%,0,0);opacity:0"><div class="collage" style="transform:scale(0.5)"><span class="c-panel" style="left:173px;top:39px;width:343px;height:563px"></span><div class="cv" data-playing="false" style="left:345px;top:39px;z-index:1"><video data-hv="" src="videos/respite-care-1.mp4" poster="images/poster-respite-care-1.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div><div class="cv" data-playing="false" style="left:103px;top:182px;z-index:2"><video data-hv="" src="videos/respite-care-2.mp4" poster="images/poster-respite-care-2.jpg" muted="{{yes}}" loop="{{yes}}" playsinline="" preload="metadata"></video><span class="cv-play" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span></div></div></div>
+      </div>
+      <div style="position:relative;min-height:232px">
+        <div class="hcard" data-hcard="0" data-active="true" style="background:#FFFFFF;border:1px solid #E7E1EE;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px">
+          <h3 class="h3">Personal Care</h3>
+          <p style="font-size:17px">Help with bathing, dressing and getting around — with dignity.</p>
+          <p class="sm muted">Also called: help with daily living (ADLs)</p>
+          <a class="link" href="/care/personal-care">See how we help →</a>
+        </div>
+        <div class="hcard" data-hcard="1" style="background:#FFFFFF;border:1px solid #E7E1EE;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px">
+          <h3 class="h3">Home Help</h3>
+          <p style="font-size:17px">Meals, laundry, errands and medication reminders, so the house keeps running.</p>
+          <p class="sm muted">Also called: homemaker care</p>
+          <a class="link" href="/care/home-help">See how we help →</a>
+        </div>
+        <div class="hcard" data-hcard="2" style="background:#FFFFFF;border:1px solid #E7E1EE;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px">
+          <h3 class="h3">Companionship</h3>
+          <p style="font-size:17px">Company, conversation and getting out of the house.</p>
+          <p class="sm muted">Also called: companion care</p>
+          <a class="link" href="/care/companionship">See how we help →</a>
+        </div>
+        <div class="hcard" data-hcard="3" style="background:#FFFFFF;border:1px solid #E7E1EE;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px">
+          <h3 class="h3">24-Hour &amp; Overnight Care</h3>
+          <p style="font-size:17px">Someone there, day and night.</p>
+          <p class="sm muted">Also called: round-the-clock care</p>
+          <a class="link" href="/care/24-hour-care">See how we help →</a>
+        </div>
+        <div class="hcard" data-hcard="4" style="background:#FFFFFF;border:1px solid #E7E1EE;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:8px">
+          <h3 class="h3">Respite Care</h3>
+          <p style="font-size:17px">A break for you. Your loved one keeps their routine.</p>
+          <p class="sm muted">Also called: respite</p>
+          <a class="link" href="/care/respite-care">See how we help →</a>
+        </div>
+      </div>
+      <div aria-hidden="true" style="display:flex;align-items:center;gap:8px">
+        <span class="tick" data-htick="0" data-on="true"></span><span class="tick" data-htick="1"></span><span class="tick" data-htick="2"></span><span class="tick" data-htick="3"></span><span class="tick" data-htick="4"></span>
+        <span data-el="hw-count" class="sm" style="font-weight:600;color:#5B5670;margin-left:6px">1 of 5</span>
+      </div>
+    </div>
+  </div>
+  <div class="pad" style="padding-top:24px;padding-bottom:88px;display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+    <p class="lead" style="color:#2A1856">Most families combine two or three. Your plan is built around your loved one.</p>
+    <p class="sm muted">All our care is non-medical. We work alongside your home health team.</p>
+    <sc-if value="{{pending}}" hint-placeholder-val="{{true}}">
+      <p class="sm muted">Already working with a hospice or palliative team? We can provide non-medical comfort and companionship alongside them. <span class="tbc">[Hospice/palliative support — to confirm]</span></p>
+    </sc-if>
+    <a class="btn btn-ghost btn-full" href="/care" style="margin-top:8px">See all care services</a>
+  </div>
+</section>
+
+<!-- ============ 4. FIND THE RIGHT CARE ============ -->
+<section id="find-care" aria-labelledby="quiz-title" class="pad" style="padding-top:80px;padding-bottom:80px;background:#F6EAFB">
+  <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+    <p class="eyebrow">03 — Find the right care</p>
+    <h2 id="quiz-title" class="h2">Not sure what you need?</h2>
+    <p class="lead">Most families aren't. Answer five quick questions and we'll suggest a plan.</p>
+    <p class="sm muted" style="display:flex;align-items:center;gap:8px"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>About 1 minute · No email needed</p>
+  </div>
+  <div style="margin-top:24px">
+    <div style="background:#FFFFFF;border-radius:20px;padding:22px 18px;display:flex;flex-direction:column;gap:20px">
+      <sc-if value="{{qz.asking}}" hint-placeholder-val="{{true}}">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center;min-height:48px">
+            <p class="sm" aria-live="polite" style="font-weight:600;color:#2A1856">{{qz.progressText}}</p>
+            <sc-if value="{{qz.canBack}}" hint-placeholder-val="{{false}}">
+              <button type="button" class="link sm" onClick="{{qz.back}}" style="background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:16px">← Back</button>
+            </sc-if>
+          </div>
+          <div aria-hidden="true" style="height:8px;border-radius:999px;border:1.5px solid #5B5670;overflow:hidden"><div style="width:{{qz.pct}}%;height:100%;background:#2A1856;transition:width 450ms cubic-bezier(0.22,1,0.36,1)"></div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <h3 class="h3">{{qz.title}}</h3>
+          <p class="sm muted">{{qz.helper}}</p>
+        </div>
+        <sc-if value="{{qz.isOptions}}" hint-placeholder-val="{{true}}">
+          <div style="display:grid;grid-template-columns:{{qz.cols}};gap:12px">
+            <sc-for list="{{qz.options}}" as="o" hint-placeholder-count="4">
+              <button type="button" class="ans" aria-pressed="{{o.pressed}}" onClick="{{o.pick}}" style="border:{{o.border}};background:{{o.bg}}">
+                <sc-if value="{{o.iP}}" hint-placeholder-val="{{false}}"><span aria-hidden="true" style="width:56px;height:56px;border-radius:16px;background:#EEE9F8;display:flex;align-items:center;justify-content:center;flex:none"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span></sc-if>
+                <sc-if value="{{o.iS}}" hint-placeholder-val="{{false}}"><span aria-hidden="true" style="width:56px;height:56px;border-radius:16px;background:#F6EAFB;display:flex;align-items:center;justify-content:center;flex:none"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path></svg></span></sc-if>
+                <sc-if value="{{o.iM}}" hint-placeholder-val="{{false}}"><span aria-hidden="true" style="width:56px;height:56px;border-radius:16px;background:#EEF6DC;display:flex;align-items:center;justify-content:center;flex:none"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path></svg></span></sc-if>
+                <sc-if value="{{o.iE}}" hint-placeholder-val="{{false}}"><span aria-hidden="true" style="width:56px;height:56px;border-radius:16px;background:#EEE9F8;display:flex;align-items:center;justify-content:center;flex:none"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M19 8v6"></path><path d="M22 11h-6"></path></svg></span></sc-if>
+                <span style="flex:1;display:flex;flex-direction:column">{{o.label}}<sc-if value="{{o.hasSub}}" hint-placeholder-val="{{false}}"><span class="ans-sub">{{o.sub}}</span></sc-if></span>
+                <sc-if value="{{o.sel}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" focusable="false" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><path d="M20 6 9 17l-5-5"></path></svg></sc-if>
+              </button>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{qz.isSelect}}" hint-placeholder-val="{{false}}">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <label for="mquiz-town" style="font-weight:600;color:#2A1856">Town</label>
+            <select id="mquiz-town" class="field" value="{{qz.a5}}" onChange="{{qz.setTown}}">
+              <option value="">Choose a town</option>
+              <optgroup label="Near our office"><option value="near" disabled="{{qz.yes}}">[Towns from areas.ts — to confirm]</option></optgroup>
+              <optgroup label="Extended service area"><option value="ext" disabled="{{qz.yes}}">[Towns from areas.ts — to confirm]</option></optgroup>
+              <option value="else">Somewhere else</option>
+              <option value="unsure">Not sure</option>
+            </select>
+          </div>
+          <sc-if value="{{qz.showOther}}" hint-placeholder-val="{{false}}">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <label for="mquiz-other" style="font-weight:600;color:#2A1856">Which town? (optional)</label>
+              <input id="mquiz-other" class="field" type="text" autocomplete="address-level2" value="{{qz.other}}" onChange="{{qz.setOther}}" aria-describedby="mquiz-other-help">
+              <p id="mquiz-other-help" class="sm muted">Type the town name. We'll check when we talk.</p>
+            </div>
+          </sc-if>
+        </sc-if>
+        <sc-if value="{{qz.hasError}}" hint-placeholder-val="{{false}}">
+          <p class="sm" role="alert" style="display:flex;align-items:center;gap:8px;color:#B42318;font-weight:500"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>{{qz.error}}</p>
+        </sc-if>
+        <sc-if value="{{qz.hasContinue}}" hint-placeholder-val="{{false}}">
+          <button type="button" class="btn btn-primary" aria-disabled="{{qz.contDisabled}}" onClick="{{qz.cont}}" style="width:100%">{{qz.contLabel}}</button>
+        </sc-if>
+      </sc-if>
+
+      <sc-if value="{{qz.done}}" hint-placeholder-val="{{false}}">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span aria-hidden="true" style="width:36px;height:36px;border-radius:50%;background:#2A1856;display:flex;align-items:center;justify-content:center;flex:none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94C723" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
+          <div aria-hidden="true" style="flex:1;height:8px;border-radius:999px;background:#2A1856"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <h3 class="h3" style="font-size:30px">{{qz.r.headline}}</h3>
+          <p>{{qz.r.intro}}</p>
+        </div>
+        <sc-if value="{{qz.r.hasPrimary}}" hint-placeholder-val="{{false}}">
+          <div style="border:2px solid #2A1856;border-radius:20px;padding:20px;background:#F6EAFB;display:flex;flex-direction:column;gap:10px">
+            <p class="eyebrow">Our suggestion</p>
+            <h4 class="h3">{{qz.r.name}}</h4>
+            <p style="font-weight:600;color:#2A1856">{{qz.r.promise}}</p>
+            <p>{{qz.r.introLine}}</p>
+            <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:6px">
+              <sc-for list="{{qz.r.bullets}}" as="b" hint-placeholder-count="3"><li style="display:flex;gap:10px;align-items:flex-start"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4A7309" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:4px"><path d="M20 6 9 17l-5-5"></path></svg>{{b.t}}</li></sc-for>
+            </ul>
+            <p style="font-weight:600;color:#2A1856;margin-top:6px">Why we suggest this</p>
+            <ul style="padding-left:20px;display:flex;flex-direction:column;gap:4px">
+              <sc-for list="{{qz.r.reasons}}" as="w" hint-placeholder-count="1"><li>{{w.t}}</li></sc-for>
+            </ul>
+            <a class="link" href="{{qz.r.href}}">{{qz.r.link}}</a>
+          </div>
+          <sc-if value="{{qz.r.hasAlso}}" hint-placeholder-val="{{false}}">
+            <h4 class="h3" style="font-size:24px">Also helpful</h4>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:12px">
+              <sc-for list="{{qz.r.also}}" as="a" hint-placeholder-count="2">
+                <div style="border:1px solid #E7E1EE;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px">
+                  <p style="font-weight:700;color:#2A1856">{{a.name}}</p>
+                  <p class="sm">{{a.line}}</p>
+                  <a class="link sm" href="{{a.href}}" style="font-size:16px">{{a.link}}</a>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </sc-if>
+        <sc-if value="{{qz.r.together}}" hint-placeholder-val="{{false}}">
+          <h4 class="h3" style="font-size:24px">The ways we help</h4>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{qz.r.all}}" as="a" hint-placeholder-count="5">
+              <div style="border:1px solid #E7E1EE;border-radius:16px;padding:16px 20px;display:flex;flex-direction:column;gap:4px">
+                <p style="font-weight:700;color:#2A1856">{{a.name}}</p>
+                <p class="sm">{{a.promise}}</p>
+                <a class="link sm" href="{{a.href}}" style="font-size:16px">{{a.link}}</a>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-for list="{{qz.r.notes}}" as="n" hint-placeholder-count="0">
+          <p class="sm" style="background:#EEE9F8;border-radius:12px;padding:14px 18px">{{n.t}}</p>
+        </sc-for>
+        <p class="sm muted">All our care is non-medical. We work alongside home health and hospice teams.</p>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <h4 class="h3" style="font-size:24px">Hours to start</h4>
+          <p>{{qz.r.hours}}</p>
+          <p class="sm muted">These are example schedules. We'll set the real one together.</p>
+        </div>
+        <sc-if value="{{qz.r.hasTown}}" hint-placeholder-val="{{false}}"><p>{{qz.r.townLine}}</p></sc-if>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <h4 class="h3" style="font-size:24px">{{qz.r.urgH}}</h4>
+          <p>{{qz.r.urgText}}</p>
+          <sc-if value="{{qz.r.urg911}}" hint-placeholder-val="{{false}}"><p class="sm muted">If someone is hurt or in danger, call 911.</p></sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;padding-top:20px;border-top:1px solid #E7E1EE">
+          <h4 class="h3" style="font-size:24px">Next step: a free visit at home</h4>
+          <p>{{qz.r.nextText}}</p>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <a class="btn btn-primary btn-full" href="/free-assessment?from=quiz"><sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">Get a Free Care Assessment</sc-if><sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">Request a Callback</sc-if></a>
+            <a class="btn btn-ghost btn-full" href="tel:+18433793321">Call (843) 379-3321</a>
+          </div>
+          <p class="sm muted">We've filled in your answers, so it only takes a minute.</p>
+        </div>
+        <div style="display:flex;gap:24px;flex-wrap:wrap">
+          <button type="button" class="link sm" onClick="{{qz.r.change}}" style="background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:16px">Change my answers</button>
+          <button type="button" class="link sm" onClick="{{qz.r.restart}}" style="background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:16px">Start over</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+  <a class="link" href="/find-care" style="margin-top:8px">Find the right care →</a>
+</section>
+
+<!-- ============ 5. HOW IT WORKS ============ -->
+<section id="how-it-works" aria-labelledby="how-title" class="pad" style="padding-top:88px;padding-bottom:88px">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <p class="eyebrow">04 — How it works</p>
+    <h2 id="how-title" class="h2">Getting started is simple.</h2>
+    <p class="lead">One call. One free visit. Then care that fits.</p>
+  </div>
+  <ol data-el="hiw" style="list-style:none;padding:0;margin-top:40px;position:relative">
+    <span aria-hidden="true" style="position:absolute;left:36px;top:38px;bottom:38px;width:4px;border-radius:999px;background:#EEE9F8"></span>
+    <span aria-hidden="true" data-el="hiw-fill" style="position:absolute;left:36px;top:38px;width:4px;height:0;border-radius:999px;background:#C25BD9;box-shadow:0 0 12px 2px rgba(194,91,217,0.6)"></span>
+    <svg aria-hidden="true" focusable="false" class="hiw-pulse" data-el="hiw-pulse" viewBox="0 0 40 140" width="32" height="112" style="transform:translate(-50%,0)"><path d="M20 0 V52 L11 60 L20 66 L5 77 L35 88 L17 96 L20 100 V140" fill="none" stroke="#C25BD9" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+    <li style="display:grid;grid-template-columns:76px minmax(0,1fr);column-gap:18px;position:relative">
+      <span class="node3d" data-hiw-node="0" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 96 96">
+            <ellipse cx="48" cy="88" rx="26" ry="4" fill="#1C0F3D" opacity="0.18"></ellipse>
+            <rect x="30" y="18" width="34" height="62" rx="9" fill="#1C0F3D"></rect>
+            <rect x="26" y="14" width="34" height="62" rx="9" fill="#8E3BA8"></rect>
+            <path d="M29.5 22 V68" stroke="#C25BD9" stroke-width="2.5" stroke-linecap="round"></path>
+            <rect x="31" y="21" width="24" height="44" rx="3" fill="#FFFFFF"></rect>
+            <circle cx="43" cy="70.5" r="2.5" fill="#F6EAFB"></circle>
+            <path d="M58 30 h24 a6 6 0 0 1 6 6 v10 a6 6 0 0 1 -6 6 h-14 l-8 7 v-7 h-2 a6 6 0 0 1 -6 -6 v-10 a6 6 0 0 1 6 -6z" fill="#4A7309" transform="translate(3 3)"></path>
+            <path d="M58 30 h24 a6 6 0 0 1 6 6 v10 a6 6 0 0 1 -6 6 h-14 l-8 7 v-7 h-2 a6 6 0 0 1 -6 -6 v-10 a6 6 0 0 1 6 -6z" fill="#94C723"></path>
+            <circle cx="62" cy="41" r="2.4" fill="#1C0F3D"></circle><circle cx="70" cy="41" r="2.4" fill="#1C0F3D"></circle><circle cx="78" cy="41" r="2.4" fill="#1C0F3D"></circle>
+          </svg></span>
+      <div style="padding:6px 0 48px;display:flex;flex-direction:column;gap:6px">
+        <p class="eyebrow">Step 1</p>
+        <h3 class="h3">Call or text us</h3>
+        <p style="font-size:17px">Tell us what's going on. We'll listen, answer your questions and set up a visit.</p>
+        <p class="sm muted">(843) 379-3321 · Office hours Monday–Friday, 8 AM–5 PM</p>
+      </div>
+    </li>
+    <li style="display:grid;grid-template-columns:76px minmax(0,1fr);column-gap:18px;position:relative">
+      <span class="node3d" data-hiw-node="1" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 96 96">
+            <ellipse cx="48" cy="86" rx="32" ry="4" fill="#1C0F3D" opacity="0.18"></ellipse>
+            <polygon points="64,46 80,38 80,72 64,80" fill="#8E3BA8"></polygon>
+            <rect x="18" y="46" width="46" height="34" fill="#F6EAFB"></rect>
+            <rect x="34" y="60" width="14" height="20" rx="2" fill="#2A1856"></rect>
+            <circle cx="45" cy="70" r="1.4" fill="#94C723"></circle>
+            <rect x="22" y="53" width="9" height="9" rx="1.5" fill="#94C723"></rect>
+            <rect x="51" y="53" width="9" height="9" rx="1.5" fill="#94C723"></rect>
+            <polygon points="41,20 57,12 84,38 68,46" fill="#2A1856"></polygon>
+            <polygon points="14,48 41,20 68,48" fill="#4B2E91"></polygon>
+            <path d="M19 45 L41 23" stroke="#C25BD9" stroke-width="2.5" stroke-linecap="round"></path>
+          </svg></span>
+      <div style="padding:0 0 48px">
+        <div data-surface="dark" style="background:#2A1856;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:10px">
+          <p style="align-self:flex-start;display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;background:#94C723;color:#1C0F3D;font-size:16px;font-weight:700">The Dawson difference</p>
+          <p class="eyebrow" style="margin-top:4px;color:#F6EAFB">Step 2</p>
+          <h3 class="h3" style="color:#FFFFFF;font-size:28px">Our owner visits — free</h3>
+          <p style="color:#FBF8F3;font-size:17px">Our owner comes to your loved one's home, meets the family and learns how they like to live.</p>
+          <p class="sm" style="color:#EEE9F8">Free · No obligation · At home</p>
+          <img src="images/owner-visit.jpg" alt="Two women talking, seated in armchairs in a bright room lined with bookshelves." style="display:block;margin-top:10px;width:100%;aspect-ratio:4 / 3;object-fit:cover;object-position:50% 38%;border-radius:14px">
+        </div>
+      </div>
+    </li>
+    <li style="display:grid;grid-template-columns:76px minmax(0,1fr);column-gap:18px;position:relative">
+      <span class="node3d" data-hiw-node="2" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 96 96">
+            <ellipse cx="50" cy="90" rx="26" ry="4" fill="#1C0F3D" opacity="0.18"></ellipse>
+            <rect x="28" y="22" width="48" height="66" rx="8" fill="#1C0F3D"></rect>
+            <rect x="24" y="18" width="48" height="66" rx="8" fill="#4B2E91"></rect>
+            <path d="M27.5 26 V78" stroke="#C25BD9" stroke-width="2.5" stroke-linecap="round"></path>
+            <rect x="30" y="26" width="36" height="52" rx="3" fill="#FFFFFF"></rect>
+            <rect x="38" y="14" width="24" height="12" rx="4" fill="#4A7309"></rect>
+            <rect x="36" y="12" width="24" height="12" rx="4" fill="#94C723"></rect>
+            <path d="M34 38 l3 3 l6 -6 M34 50 l3 3 l6 -6 M34 62 l3 3 l6 -6" stroke="#4A7309" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M47 38 H61 M47 50 H61 M47 62 H58" stroke="#EEE9F8" stroke-width="3.5" stroke-linecap="round"></path>
+          </svg></span>
+      <div style="padding:6px 0 48px;display:flex;flex-direction:column;gap:6px">
+        <p class="eyebrow">Step 3</p>
+        <h3 class="h3">We build your care plan</h3>
+        <p style="font-size:17px">Together, we plan the days, the hours and the help — around their routine.</p>
+      </div>
+    </li>
+    <li style="display:grid;grid-template-columns:76px minmax(0,1fr);column-gap:18px;position:relative">
+      <span class="node3d" data-hiw-node="3" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 96 96">
+            <ellipse cx="50" cy="88" rx="34" ry="4" fill="#1C0F3D" opacity="0.18"></ellipse>
+            <path d="M18 80 C18 64 26 56 38 56 C50 56 58 64 58 80 Z" fill="#4A7309" transform="translate(3 3)"></path>
+            <path d="M18 80 C18 64 26 56 38 56 C50 56 58 64 58 80 Z" fill="#94C723"></path>
+            <circle cx="41" cy="43" r="12" fill="#4A7309"></circle>
+            <circle cx="38" cy="40" r="12" fill="#94C723"></circle>
+            <circle cx="34" cy="36" r="3.5" fill="#EEF6DC"></circle>
+            <path d="M40 84 C40 68 48 60 60 60 C72 60 80 68 80 84 Z" fill="#8E3BA8" transform="translate(3 3)"></path>
+            <path d="M40 84 C40 68 48 60 60 60 C72 60 80 68 80 84 Z" fill="#C25BD9"></path>
+            <circle cx="63" cy="47" r="12" fill="#8E3BA8"></circle>
+            <circle cx="60" cy="44" r="12" fill="#C25BD9"></circle>
+            <circle cx="56" cy="40" r="3.5" fill="#F6EAFB"></circle>
+          </svg></span>
+      <div style="padding:6px 0 48px;display:flex;flex-direction:column;gap:6px">
+        <p class="eyebrow">Step 4</p>
+        <h3 class="h3">We match your caregiver</h3>
+        <p style="font-size:17px">We choose an experienced caregiver who fits your loved one's needs and schedule.</p>
+      </div>
+    </li>
+    <li style="display:grid;grid-template-columns:76px minmax(0,1fr);column-gap:18px;position:relative">
+      <span class="node3d" data-hiw-node="4" aria-hidden="true"><svg width="56" height="56" viewBox="0 0 96 96">
+            <ellipse cx="48" cy="90" rx="28" ry="4" fill="#1C0F3D" opacity="0.18"></ellipse>
+            <path d="M22 36 A28 28 0 0 1 70 26 M74 56 A28 28 0 0 1 26 66" fill="none" stroke="#4A7309" stroke-width="7" stroke-linecap="round" transform="translate(2 3)"></path>
+            <path d="M22 36 A28 28 0 0 1 70 26 M74 56 A28 28 0 0 1 26 66" fill="none" stroke="#94C723" stroke-width="7" stroke-linecap="round"></path>
+            <polygon points="74,16 78,33 62,29" fill="#94C723"></polygon>
+            <polygon points="22,76 18,59 34,63" fill="#94C723"></polygon>
+            <path d="M48 70 C30 58 26 48 26 41 C26 34 32 29 38 29 C43 29 46 32 48 35 C50 32 53 29 58 29 C64 29 70 34 70 41 C70 48 66 58 48 70 Z" fill="#8E3BA8" transform="translate(3 3)"></path>
+            <path d="M48 70 C30 58 26 48 26 41 C26 34 32 29 38 29 C43 29 46 32 48 35 C50 32 53 29 58 29 C64 29 70 34 70 41 C70 48 66 58 48 70 Z" fill="#C25BD9"></path>
+            <path d="M32 41 C32 37 35 34 38.5 34" fill="none" stroke="#F6EAFB" stroke-width="2.5" stroke-linecap="round"></path>
+          </svg></span>
+      <div style="padding:6px 0 0;display:flex;flex-direction:column;gap:6px">
+        <p class="eyebrow">Step 5</p>
+        <h3 class="h3">We keep checking in</h3>
+        <p style="font-size:17px">We follow up regularly and adjust the plan as needs change.</p>
+      </div>
+    </li>
+  </ol>
+  <div style="margin-top:40px;display:flex;flex-direction:column;gap:12px">
+    <a class="btn btn-primary btn-full" href="/free-assessment"><sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">Get a Free Care Assessment</sc-if><sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">Request a Callback</sc-if></a>
+    <a class="btn btn-ghost btn-full" href="/how-it-works">See how it works</a>
+  </div>
+</section>
+
+<!-- ============ 6. SINCE 2002 ============ -->
+<section aria-labelledby="since-title" class="pad" style="padding-top:80px;padding-bottom:80px;background:#EEE9F8">
+  <p class="eyebrow">05 — Since 2002</p>
+  <h2 id="since-title" style="margin-top:12px;display:flex;flex-direction:column;gap:6px;color:#2A1856">
+    <span class="ff" style="font-size:132px;line-height:0.95">{{years}}</span>
+    <span class="ff" style="font-size:36px;line-height:1.08">years caring for Lowcountry families</span>
+  </h2>
+  <p style="margin-top:20px">Dawson and Dawson Home Care has helped families stay at home since 2002. Today we're owner-run, licensed and insured, with our office right here in Beaufort.</p>
+  <div style="margin-top:32px">
+    <div aria-hidden="true" style="position:relative;height:48px">
+      <div style="position:absolute;left:12px;right:16px;top:21px;height:6px;border-radius:999px;background:#2A1856;box-shadow:0 0 16px 2px rgba(194,91,217,0.45)"></div>
+      <div style="position:absolute;left:0;top:11px;width:26px;height:26px;border-radius:50%;background:#2A1856;box-shadow:0 0 0 5px #FFFFFF"></div>
+      <div style="position:absolute;left:33.3%;top:12px;width:4px;height:24px;border-radius:2px;background:#2A1856"></div>
+      <div style="position:absolute;left:75%;top:12px;width:4px;height:24px;border-radius:2px;background:#2A1856"></div>
+      <div style="position:absolute;right:0;top:7px;width:34px;height:34px;border-radius:50%;background:#94C723;border:4px solid #2A1856;box-shadow:0 0 0 5px #F6EAFB,0 0 24px 6px rgba(148,199,35,0.55)"></div>
+    </div>
+    <ol style="list-style:none;padding:0;margin-top:16px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px">
+      <li style="display:flex;flex-direction:column;gap:6px"><span class="ff" style="font-size:40px;line-height:1;color:#2A1856">2002</span><span style="font-size:17px;line-height:1.45">— We begin caring for Lowcountry families.</span></li>
+      <li style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;text-align:right"><span class="ff" style="font-size:40px;line-height:1;color:#2A1856">{{currentYear}}</span><span style="font-size:17px;line-height:1.45">— {{years}} years later, still here.</span></li>
+    </ol>
+  </div>
+  <div style="margin-top:28px;padding-top:20px;border-top:1px solid #5B5670;display:flex;flex-direction:column;gap:6px">
+    <p class="sm" style="display:flex;align-items:flex-start;gap:10px;color:#2A1856"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>Our office: 69 Robert Smalls Parkway, Suite 3F, Beaufort, SC 29906</p>
+    <button type="button" class="link sm" aria-expanded="{{licExpanded}}" aria-controls="license-panel-m" onClick="{{toggleLic}}" style="background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:16px;align-self:flex-start">Licensed &amp; insured →</button>
+    <sc-if value="{{licOpen}}" hint-placeholder-val="{{true}}">
+      <p id="license-panel-m" class="sm" style="background:#FFFFFF;border-radius:12px;padding:14px 16px">South Carolina in-home care license <span class="tbc">[SC license number]</span></p>
+    </sc-if>
+  </div>
+</section>
+
+<!-- ============ 7. MEET THE OWNER ============ -->
+<section aria-labelledby="owner-title" class="pad" style="padding-top:88px;padding-bottom:88px">
+  <p class="eyebrow">06 — Meet the owner</p>
+  <h2 id="owner-title" class="dl" style="margin-top:12px;color:#2A1856">The person at your kitchen table runs the company.</h2>
+  <p class="lead" style="margin-top:16px">At Dawson, the owner meets every family personally — and keeps working with you to make sure care is done right.</p>
+  <figure style="margin-top:28px">
+    <div role="img" aria-label="[Owner name], owner of Dawson and Dawson Home Care, at the Beaufort office." style="width:100%;height:438px;border-radius:20px;background:#EEE9F8;display:flex;align-items:center;justify-content:center">
+      <img src="images/logo.png" alt="" style="width:220px;height:auto;display:block">
+    </div>
+    <figcaption class="sm muted" style="margin-top:10px">Owner portrait · 4:5</figcaption>
+  </figure>
+  <p style="margin-top:24px"><span class="tbc">[Owner first and last name]</span> leads Dawson and Dawson Home Care. <span class="tbc">[One sentence on their background in health and home care]</span>. <span class="tbc">[One sentence on why they started or run the company]</span>.</p>
+  <blockquote style="margin-top:28px;padding-top:24px;border-top:1px solid #E7E1EE;display:flex;flex-direction:column;gap:16px">
+    <svg aria-hidden="true" focusable="false" width="40" height="34" viewBox="0 0 48 40"><path d="M4 38 V24 C4 12 10 5 20 2 L22 7 C15 10 12 15 12 20 H20 V38 Z M28 38 V24 C28 12 34 5 44 2 L46 7 C39 10 36 15 36 20 H44 V38 Z" fill="#C25BD9"></path></svg>
+    <p class="q" style="font-size:22px;line-height:1.4;color:#2A1856">"<span class="tbc">[Owner quote — one sentence about why they do this work]</span>"</p>
+    <footer style="display:flex;flex-direction:column;gap:6px">
+      <div aria-hidden="true" style="width:220px;height:64px;border-radius:12px;background:#F6EAFB;display:flex;align-items:flex-end;padding:0 18px 16px"><span style="display:block;width:100%;height:2px;background:#2A1856"></span></div>
+      <p class="sm muted">Owner signature · SVG</p>
+      <p style="font-weight:600;color:#2A1856"><span class="tbc">[Owner name]</span>, Owner</p>
+    </footer>
+  </blockquote>
+  <div style="margin-top:28px;display:flex;flex-direction:column;gap:10px">
+    <div aria-hidden="true" style="width:100%;height:197px;border-radius:20px;background:#F6EAFB;display:flex;align-items:center;justify-content:center">
+      <span style="width:72px;height:72px;border-radius:50%;background:#2A1856;display:flex;align-items:center;justify-content:center"><svg width="30" height="30" viewBox="0 0 24 24" fill="#FFFFFF"><polygon points="7 4 20 12 7 20 7 4"></polygon></svg></span>
+    </div>
+    <p class="sm muted">Owner video · 16:9</p>
+    <button type="button" class="btn btn-ghost btn-full" aria-label="Play video: a short hello from [Owner name], with captions">
+      <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>Watch a short hello
+    </button>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span class="sm" style="display:inline-flex;align-items:center;gap:8px;color:#2A1856;font-weight:600"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="14" x="3" y="5" rx="2" ry="2"></rect><path d="M7 15h4M15 15h2M7 11h2M13 11h4"></path></svg>Captions on</span>
+      <button type="button" class="link sm" aria-expanded="{{trExpanded}}" onClick="{{toggleTr}}" style="background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:16px">{{trLabel}}</button>
+    </div>
+    <sc-if value="{{trOpen}}" hint-placeholder-val="{{false}}">
+      <p class="sm" style="background:#FFFFFF;border:1px solid #E7E1EE;border-radius:12px;padding:14px 16px"><span class="tbc">[Transcript of the owner video]</span></p>
+    </sc-if>
+  </div>
+  <a class="btn btn-ghost btn-full" href="/about" style="margin-top:20px">Read our story</a>
+</section>
+
+<!-- ============ 8. OUR CAREGIVERS ============ -->
+<section aria-labelledby="caregivers-title" style="padding-top:88px;padding-bottom:88px;background:#FFFFFF">
+  <div class="pad" style="display:flex;flex-direction:column;gap:12px">
+    <p class="eyebrow">07 — Our caregivers</p>
+    <h2 id="caregivers-title" class="h2">Meet the people who do the caring.</h2>
+    <p class="lead">Experienced caregivers — including Certified Nursing Assistants — with a real love for this work.</p>
+    <p class="sm muted">Drag, swipe or use the arrows to see more.</p>
+  </div>
+  <div role="region" aria-label="Our caregivers" class="cg-view" data-el="cg-view" style="margin-top:24px;overflow:hidden;padding:8px 20px">
+    <div data-el="cg-track" style="display:flex;gap:16px;transform:translateX(-{{slideOffset}}px);transition:transform 450ms cubic-bezier(0.22,1,0.36,1)">
+      <sc-for list="{{slides}}" as="s" hint-placeholder-count="6">
+        <article class="cg" data-flipped="{{s.flipped}}">
+          <div class="cg-in">
+            <div class="cg-face">
+              <div role="img" aria-label="Caregiver Name, a Dawson caregiver." style="width:280px;height:350px;background:#EEE9F8;display:flex;align-items:center;justify-content:center;flex:none">
+                <svg aria-hidden="true" focusable="false" width="180" height="200" viewBox="0 0 200 220"><g fill="none" stroke="#2A1856" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M40 104 L100 52 L160 104 V180 H40 Z" fill="#FFFFFF"></path><path d="M100 160 C84 148 72 138 72 126 C72 116 80 110 88 110 C94 110 98 114 100 118 C102 114 106 110 112 110 C120 110 128 116 128 126 C128 138 116 148 100 160 Z" fill="#F6EAFB"></path><path d="M20 180 H180"></path></g></svg>
+              </div>
+              <div style="padding:14px 20px 20px;display:flex;flex-direction:column;gap:4px;flex:1">
+                <p class="sm muted">Caregiver portrait · 4:5</p>
+                <h3 class="h3" style="margin-top:6px">Caregiver Name</h3>
+                <p class="sm"><span class="tbc">[Years]</span> years with Dawson</p>
+                <p class="sm"><span class="tbc">[Specialty]</span></p>
+                <button type="button" class="link sm" aria-pressed="{{s.flipped}}" onClick="{{s.flip}}" style="background:none;border:0;padding:0;cursor:pointer;font-family:inherit;font-size:16px;align-self:flex-start;margin-top:auto">Why I do this →</button>
+              </div>
+            </div>
+            <div class="cg-face cg-back">
+              <div style="padding:32px 22px 22px;display:flex;flex-direction:column;gap:16px;flex:1">
+                <p class="eyebrow">Why I do this</p>
+                <svg aria-hidden="true" focusable="false" width="36" height="30" viewBox="0 0 48 40"><path d="M4 38 V24 C4 12 10 5 20 2 L22 7 C15 10 12 15 12 20 H20 V38 Z M28 38 V24 C28 12 34 5 44 2 L46 7 C39 10 36 15 36 20 H44 V38 Z" fill="#C25BD9"></path></svg>
+                <p class="q" style="font-size:20px;line-height:1.45;color:#2A1856">"This is a sample card. A real caregiver's words will go here."</p>
+                <p class="ff" style="font-size:22px;color:#2A1856;margin-top:auto">Caregiver Name</p>
+                <button type="button" class="btn btn-ghost" onClick="{{s.flip}}" style="align-self:flex-start">Back to photo</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </div>
+  <div class="pad" style="margin-top:20px;display:flex;align-items:center;justify-content:space-between">
+    <button type="button" class="iconbtn" aria-label="Previous caregiver" aria-disabled="{{slideFirst}}" onClick="{{prevSlide}}"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg></button>
+    <p class="sm" aria-live="polite" style="font-weight:600;color:#2A1856">{{slidePos}}</p>
+    <button type="button" class="iconbtn" aria-label="Next caregiver" aria-disabled="{{slideLast}}" onClick="{{nextSlide}}"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg></button>
+  </div>
+  <div class="pad" style="margin-top:24px;display:flex;flex-direction:column;gap:4px">
+    <a class="btn btn-ghost btn-full" href="/about#caregivers">Meet the team</a>
+    <a class="link sm" href="/careers" style="font-size:16px;align-self:center">Want to join them? See caregiver jobs</a>
+  </div>
+</section>
+
+<!-- ============ 9. WHAT FAMILIES SAY ============ -->
+<section id="reviews" aria-labelledby="reviews-title" style="padding-top:88px;padding-bottom:88px">
+  <div class="pad" style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+    <p class="eyebrow">08 — What families say</p>
+    <h2 id="reviews-title" class="h2">In their words.</h2>
+    <p class="lead">Reviews from families in Beaufort and across the Lowcountry.</p>
+    <a href="https://maps.app.goo.gl/HEKXeuuT747yN3y96" style="display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 16px;border-radius:999px;background:#FFFFFF;border:1px solid #E7E1EE;color:#2A1856;font-weight:600;font-size:16px;text-decoration:none"><span aria-hidden="true" style="display:inline-flex;gap:2px"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></span>4.8 on Google · 33 reviews</a>
+  </div>
+  <div class="marquee" data-paused="{{pausedStr}}" style="margin-top:28px">
+    <div class="marquee-track">
+      <sc-for list="{{reviews}}" as="r" hint-placeholder-count="20">
+        <figure aria-hidden="{{r.hidden}}" style="flex:none;width:300px;margin-right:16px;background:#FFFFFF;border:1px solid #E7E1EE;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span aria-hidden="true" style="width:44px;height:44px;border-radius:50%;background:{{r.color}};color:#FFFFFF;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:18px;flex:none">{{r.initial}}</span>
+            <div><p style="font-weight:600;color:#2A1856;line-height:1.3">{{r.name}}</p><p class="sm muted">Google review</p></div>
+          </div>
+          <p role="img" aria-label="Rated 5 out of 5" style="display:flex;gap:3px"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></p>
+          <blockquote style="font-size:17px;line-height:1.55;color:#1E1A2B">"{{r.text}}"</blockquote>
+        </figure>
+      </sc-for>
+    </div>
+  </div>
+  <div class="pad" style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
+    <button type="button" class="btn btn-ghost btn-full" aria-pressed="{{pausedStr}}" onClick="{{togglePause}}">
+      <sc-if value="{{notPaused}}" hint-placeholder-val="{{true}}"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="14" y="4" width="4" height="16" rx="1"></rect><rect x="6" y="4" width="4" height="16" rx="1"></rect></svg>Pause reviews</sc-if>
+      <sc-if value="{{paused}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>Play reviews</sc-if>
+    </button>
+    <a class="btn btn-ghost btn-full" href="/reviews">Read all reviews</a>
+  </div>
+</section>
+
+<!-- ============ 10. COST ============ -->
+<section aria-labelledby="cost-title" class="pad" style="padding-top:88px;padding-bottom:88px;background:#FFFFFF">
+  <div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+    <p class="eyebrow">09 — Cost</p>
+    <h2 id="cost-title" class="h2">What will care cost?</h2>
+    <p class="lead">Move the sliders for a rough weekly and monthly range. No email, no sign-up.</p>
+    <p style="display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:999px;background:#F6EAFB;color:#8E3BA8;font-size:16px;font-weight:700">Illustrative estimate</p>
+  </div>
+  <div style="margin-top:28px;border:1px solid #E7E1EE;border-radius:20px;overflow:hidden">
+    <div style="padding:24px;display:flex;flex-direction:column;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><label for="hours-slider-m" style="font-weight:600;color:#2A1856">Hours per visit</label><span style="font-weight:700;color:#2A1856">{{hoursText}}</span></div>
+        <div style="position:relative">
+          <div aria-hidden="true" style="position:absolute;left:0;right:0;top:20px;height:8px;border-radius:999px;border:1.5px solid #5B5670;overflow:hidden"><div style="height:100%;width:{{hoursPct}}%;background:#2A1856"></div></div>
+          <input id="hours-slider-m" class="dd-range" type="range" min="2" max="24" step="1" value="{{hoursVal}}" aria-valuetext="{{hoursValueText}}" disabled="{{overnight}}" onChange="{{setHours}}">
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <p id="days-label-m" style="font-weight:600;color:#2A1856">Days per week</p>
+        <div role="group" aria-labelledby="days-label-m" style="display:flex;align-items:center;justify-content:space-between">
+          <button type="button" class="iconbtn" aria-label="Fewer days" aria-disabled="{{daysMin}}" onClick="{{fewerDays}}"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"></path></svg></button>
+          <span aria-live="polite" style="font-weight:700;font-size:22px;color:#2A1856">{{daysText}}</span>
+          <button type="button" class="iconbtn" aria-label="More days" aria-disabled="{{daysMax}}" onClick="{{moreDays}}"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button>
+        </div>
+      </div>
+      <div style="display:flex;align-items:flex-start;gap:16px;padding-top:24px;border-top:1px solid #E7E1EE">
+        <button type="button" role="switch" class="switch" aria-checked="{{overnightStr}}" aria-labelledby="overnight-label-m" aria-describedby="overnight-help-m" onClick="{{toggleOvernight}}" style="background:{{switchBg}};border:{{switchBorder}}"><span aria-hidden="true" style="position:absolute;top:4px;left:{{knobLeft}}px;width:24px;height:24px;border-radius:50%;background:{{knobBg}};transition:left 200ms"></span></button>
+        <div style="display:flex;flex-direction:column;gap:4px"><p id="overnight-label-m" style="font-weight:600;color:#2A1856">Overnight or 24-hour care</p><p id="overnight-help-m" class="sm muted">Turn on if someone needs to be there overnight or around the clock.</p></div>
+      </div>
+      <sc-if value="{{pending}}" hint-placeholder-val="{{true}}"><p class="sm muted">Visits start at <span class="tbc">[Minimum hours]</span> hours.</p></sc-if>
+    </div>
+    <div data-surface="dark" style="padding:24px;background:#1C0F3D;display:flex;flex-direction:column;gap:18px">
+      <p aria-hidden="true" class="ff" style="font-size:64px;line-height:1;color:#FFFFFF">{{weeklyHours}}<span style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:500;color:#EEE9F8"> hours a week</span></p>
+      <sc-if value="{{pending}}" hint-placeholder-val="{{true}}">
+        <div style="display:flex;flex-direction:column;gap:6px;color:#FBF8F3;font-size:17px">
+          <p>About <strong><span class="tbc">$[weekly min]</span>–<span class="tbc">$[weekly max]</span></strong> a week</p>
+          <p>About <strong><span class="tbc">$[monthly min]</span>–<span class="tbc">$[monthly max]</span></strong> a month</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{noPending}}" hint-placeholder-val="{{false}}"><p style="color:#FBF8F3;font-weight:600">Your rate is set at your free assessment — every plan is different.</p></sc-if>
+      <p class="sr-only" aria-live="polite">{{liveText}}</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div aria-hidden="true" style="height:12px;border-radius:999px;border:1.5px solid #EEE9F8;overflow:hidden"><div style="height:100%;width:{{scalePct}}%;background:#94C723"></div></div>
+        <div class="sm" style="display:flex;justify-content:space-between;color:#EEE9F8"><span>A few hours</span><span>Around the clock</span></div>
+      </div>
+      <p class="sm" style="color:#EEE9F8">Your exact rate is set at your free assessment.</p>
+      <a class="btn btn-primary btn-full" href="/free-assessment" style="white-space:normal;text-align:center">Get your exact plan — free assessment</a>
+      <a class="link sm" href="/paying-for-care" style="font-size:16px">Estimate your cost in detail</a>
+      <a class="link sm" href="/paying-for-care#ways-to-pay" style="font-size:16px;margin-top:-12px">See ways families pay for care</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 11. WHERE WE CARE ============ -->
+<section id="where-we-care" aria-labelledby="where-title" class="pad" style="padding-top:88px;padding-bottom:88px">
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <p class="eyebrow">10 — Where we care</p>
+    <h2 id="where-title" class="h2">Rooted in Beaufort. Caring across the Lowcountry.</h2>
+    <p class="lead">Our office is in Beaufort, and we care for families in towns nearby.</p>
+  </div>
+  <figure style="margin-top:24px;display:flex;flex-direction:column;gap:8px">
+    <a href="https://maps.app.goo.gl/HEKXeuuT747yN3y96" aria-label="Open our office in Google Maps" style="display:block;border-radius:20px;overflow:hidden;border:1px solid #E7E1EE;background:#EEE9F8">
+      <img src="images/google-map.jpg" alt="Google map of Beaufort showing Dawson and Dawson Home Care at 69 Robert Smalls Parkway, just south of Boundary Street." style="display:block;width:100%;height:280px;object-fit:cover;object-position:44% 50%">
+    </a>
+    <figcaption class="sm muted">Our office: 69 Robert Smalls Pkwy #3F, Beaufort · Map data ©2026 Google</figcaption>
+  </figure>
+  <div style="margin-top:24px;background:#FFFFFF;border:1px solid #E7E1EE;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px">
+    <p class="eyebrow">On Google Maps</p>
+    <h3 class="h3">Dawson and Dawson Home Care</h3>
+    <p style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#2A1856;font-weight:600"><span class="ff" aria-hidden="true" style="font-size:30px;line-height:1">4.8</span><span aria-hidden="true" style="display:inline-flex;gap:2px"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="#C25BD9"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></span><span class="sr-only">Rated 4.8 out of 5</span><span class="muted" style="font-weight:500">33 Google reviews</span></p>
+    <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;font-size:16px">
+      <li style="display:flex;gap:10px"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>69 Robert Smalls Pkwy #3F, Beaufort, SC 29906</li>
+      <li style="display:flex;gap:10px"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg><a href="tel:+18433793321" style="font-weight:600">(843) 379-3321</a></li>
+      <li style="display:flex;gap:10px"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg><a href="https://dawsonhomecare.com" style="font-weight:600">dawsonhomecare.com</a></li>
+      <li style="display:flex;gap:10px"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8E3BA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg><span><strong style="color:#2A1856">Office:</strong> Monday–Friday, 8 AM–5 PM · <strong style="color:#2A1856">Care:</strong> 24/7</span></li>
+    </ul>
+    <p style="align-self:flex-start;display:inline-flex;align-items:center;min-height:32px;padding:0 14px;border-radius:999px;background:#F6EAFB;color:#8E3BA8;font-size:16px;font-weight:600">Women-owned</p>
+    <a class="btn btn-secondary btn-full" href="https://maps.app.goo.gl/HEKXeuuT747yN3y96">Get directions</a>
+    <p class="sm muted" style="text-align:center">goes to Google Maps</p>
+  </div>
+  <form onSubmit="{{townSubmit}}" style="margin-top:20px;background:#FFFFFF;border:1px solid #E7E1EE;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:10px">
+    <label for="town-input-m" class="ff" style="font-size:24px;color:#2A1856">Do you serve my town?</label>
+    <p id="town-help-m" class="sm muted">Type your town or ZIP code.</p>
+    <div style="display:flex;gap:10px">
+      <input id="town-input-m" class="field" type="text" autocomplete="address-level2" value="{{townQ}}" onChange="{{townInput}}" aria-invalid="{{townInvalid}}" aria-describedby="town-help-m town-result-m" style="border:{{townBorder}}">
+      <button type="submit" class="btn btn-secondary" aria-label="Search" style="padding:0 18px;min-height:56px;flex:none"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></button>
+    </div>
+    <div id="town-result-m" aria-live="polite">
+      <sc-if value="{{townEmpty}}" hint-placeholder-val="{{false}}"><p class="sm" style="display:flex;align-items:center;gap:8px;color:#B42318;font-weight:500"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v4"></path><path d="M12 16h.01"></path></svg>Please type a town or ZIP code.</p></sc-if>
+      <sc-if value="{{townNoMatch}}" hint-placeholder-val="{{false}}"><div style="background:#EEE9F8;border-radius:12px;padding:14px 16px"><p style="font-weight:700;color:#2A1856">We may still be able to help.</p><p class="sm">Call <a href="tel:+18433793321" style="font-weight:600">(843) 379-3321</a> and we'll let you know.</p></div></sc-if>
+    </div>
+  </form>
+  <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
+    <h3 class="h3">Towns we serve</h3>
+    <ul style="list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:10px">
+      <li><a href="/areas-we-serve" style="display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #5B5670;background:#FFFFFF;text-decoration:none;color:#2A1856;font-weight:600"><span class="tbc">[Town]</span></a></li>
+      <li><a href="/areas-we-serve" style="display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #5B5670;background:#FFFFFF;text-decoration:none;color:#2A1856;font-weight:600"><span class="tbc">[Town]</span></a></li>
+      <li><a href="/areas-we-serve" style="display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #5B5670;background:#FFFFFF;text-decoration:none;color:#2A1856;font-weight:600"><span class="tbc">[Town]</span></a></li>
+      <li><a href="/areas-we-serve" style="display:inline-flex;align-items:center;min-height:48px;padding:0 18px;border-radius:999px;border:1.5px solid #5B5670;background:#FFFFFF;text-decoration:none;color:#2A1856;font-weight:600"><span class="tbc">[Town]</span></a></li>
+    </ul>
+    <a class="btn btn-ghost btn-full" href="/areas-we-serve" style="margin-top:8px">See all areas we serve</a>
+  </div>
+</section>
+
+<!-- ============ 12. FOR PROFESSIONALS ============ -->
+<section aria-labelledby="pros-title" data-surface="dark" class="pad" style="padding-top:80px;padding-bottom:80px;background:#1C0F3D;position:relative;overflow:hidden">
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 390 60" width="390" height="60" style="position:absolute;left:0;top:20px"><path d="M0 30 H220 L230 22 L238 30 H246 L258 4 L270 56 L280 16 L288 30 H390" fill="none" stroke="#C25BD9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+  <div style="position:relative;display:flex;flex-direction:column;gap:14px;padding-top:24px">
+    <p class="eyebrow">11 — For professionals</p>
+    <h2 id="pros-title" class="h2" style="color:#FFFFFF">Referring someone? It takes about 2 minutes.</h2>
+    <p class="lead" style="color:#EEE9F8">For discharge planners, case managers, social workers and care teams.</p>
+    <p style="color:#FBF8F3">Send a referral online or fax it to (866) 502-3509. We'll respond within <span class="tbc">[Response time]</span>.</p>
+    <a class="btn btn-primary btn-full" href="/for-professionals#refer" style="margin-top:8px">Make a referral</a>
+    <a class="btn btn-cream btn-full" href="tel:+18433793321">Call (843) 379-3321</a>
+    <p class="sm" style="color:#EEE9F8;text-align:center">Fax: (866) 502-3509</p>
+  </div>
+</section>
+
+<!-- ============ 13. QUESTIONS ============ -->
+<section aria-labelledby="faq-title" class="pad" style="padding-top:88px;padding-bottom:88px">
+  <p class="eyebrow">12 — Questions</p>
+  <h2 id="faq-title" class="h2" style="margin-top:12px">Questions families ask us.</h2>
+  <div style="margin-top:24px;border-top:1px solid #E7E1EE">
+    <div style="border-bottom:1px solid #E7E1EE">
+      <h3><button type="button" class="faq-q" aria-expanded="{{fq0.exp}}" aria-controls="mfaq-a0" onClick="{{fq0.toggle}}">What's the difference between home care and home health?<svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transform:{{fq0.rot}};transition:transform 360ms"><path d="m6 9 6 6 6-6"></path></svg></button></h3>
+      <sc-if value="{{fq0.open}}" hint-placeholder-val="{{true}}"><div id="mfaq-a0" style="padding:0 0 24px"><p>Home care is non-medical help at home: bathing, dressing, meals, housekeeping, company and medication reminders. That's what we do. Home health is medical care from nurses or therapists, usually ordered by a doctor. Many families use both, and we're happy to work alongside your home health team.</p></div></sc-if>
+    </div>
+    <div style="border-bottom:1px solid #E7E1EE">
+      <h3><button type="button" class="faq-q" aria-expanded="{{fq1.exp}}" aria-controls="mfaq-a1" onClick="{{fq1.toggle}}">How much does home care cost?<svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transform:{{fq1.rot}};transition:transform 360ms"><path d="m6 9 6 6 6-6"></path></svg></button></h3>
+      <sc-if value="{{fq1.open}}" hint-placeholder-val="{{false}}"><div id="mfaq-a1" style="padding:0 0 24px"><p>It depends on how many hours of help you need. Use our cost estimator for a rough range. Your exact rate is set at your free assessment.</p></div></sc-if>
+    </div>
+    <div style="border-bottom:1px solid #E7E1EE">
+      <h3><button type="button" class="faq-q" aria-expanded="{{fq2.exp}}" aria-controls="mfaq-a2" onClick="{{fq2.toggle}}">Does Medicare pay for home care?<svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transform:{{fq2.rot}};transition:transform 360ms"><path d="m6 9 6 6 6-6"></path></svg></button></h3>
+      <sc-if value="{{fq2.open}}" hint-placeholder-val="{{false}}"><div id="mfaq-a2" style="padding:0 0 24px"><p>Usually not. Medicare generally doesn't cover non-medical home care. Some families use long-term care insurance, VA benefits or Medicaid waiver programs. Ask us which might apply to you.</p></div></sc-if>
+    </div>
+    <div style="border-bottom:1px solid #E7E1EE">
+      <h3><button type="button" class="faq-q" aria-expanded="{{fq3.exp}}" aria-controls="mfaq-a3" onClick="{{fq3.toggle}}">Can you help at night or on weekends?<svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transform:{{fq3.rot}};transition:transform 360ms"><path d="m6 9 6 6 6-6"></path></svg></button></h3>
+      <sc-if value="{{fq3.open}}" hint-placeholder-val="{{false}}"><div id="mfaq-a3" style="padding:0 0 24px"><p>Yes. Care is available 24 hours a day, 7 days a week — a few hours or around the clock. Our office is open Monday to Friday, 8 AM to 5 PM.</p></div></sc-if>
+    </div>
+    <div style="border-bottom:1px solid #E7E1EE">
+      <h3><button type="button" class="faq-q" aria-expanded="{{fq4.exp}}" aria-controls="mfaq-a4" onClick="{{fq4.toggle}}">Who will come to my loved one's home?<svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transform:{{fq4.rot}};transition:transform 360ms"><path d="m6 9 6 6 6-6"></path></svg></button></h3>
+      <sc-if value="{{fq4.open}}" hint-placeholder-val="{{false}}"><div id="mfaq-a4" style="padding:0 0 24px"><p>An experienced Dawson caregiver chosen for your loved one's needs and schedule. Our team includes Certified Nursing Assistants, and our owner stays involved in every client's care.</p></div></sc-if>
+    </div>
+    <div style="border-bottom:1px solid #E7E1EE">
+      <h3><button type="button" class="faq-q" aria-expanded="{{fq5.exp}}" aria-controls="mfaq-a5" onClick="{{fq5.toggle}}">What happens at the free assessment?<svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;transform:{{fq5.rot}};transition:transform 360ms"><path d="m6 9 6 6 6-6"></path></svg></button></h3>
+      <sc-if value="{{fq5.open}}" hint-placeholder-val="{{false}}"><div id="mfaq-a5" style="padding:0 0 24px"><p>Our owner visits your loved one at home, at no cost. We talk about daily routines, the help they need and what matters most to them. Then we build a care plan together. There's no obligation.</p></div></sc-if>
+    </div>
+  </div>
+  <a class="btn btn-ghost btn-full" href="/faq" style="margin-top:24px">See all questions</a>
+</section>
+
+<!-- ============ 14. FINAL CTA (Dusk, plum half on phones) ============ -->
+<section id="final-cta" aria-labelledby="final-title" data-surface="dusk" class="pad" style="padding-top:88px;padding-bottom:88px;background-image:linear-gradient(135deg, #2A1856 0%, #4B2E91 55%, #C25BD9 100%);background-size:100% 220%;background-position:0 0;position:relative;overflow:hidden">
+  <svg aria-hidden="true" focusable="false" viewBox="0 0 390 60" width="390" height="60" style="position:absolute;left:0;bottom:24px"><path d="M0 30 H230 L240 22 L248 30 H256 L268 4 L280 56 L290 16 L298 30 H390" fill="none" stroke="#FBF8F3" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"></path></svg>
+  <div style="position:relative;display:flex;flex-direction:column;gap:18px">
+    <h2 id="final-title" class="dl" style="color:#FFFFFF;font-size:48px">Let's talk about your <span style="color:#F6EAFB">family</span>.</h2>
+    <p class="lead" style="color:#FBF8F3">One call. One free visit at home. No pressure.</p>
+    <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">
+      <p style="display:flex;gap:10px;align-items:flex-start;color:#FBF8F3"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#EEE9F8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:4px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Our office is closed right now. Request a callback and we'll reach you first thing Monday at 8 AM.</p>
+    </sc-if>
+    <a class="btn btn-primary btn-full" href="/free-assessment"><sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">Get a Free Care Assessment</sc-if><sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">Request a Callback</sc-if></a>
+    <a class="btn btn-cream btn-full" href="tel:+18433793321">Call (843) 379-3321</a>
+    <a class="btn btn-cream btn-full" href="sms:+18666329766">Text us (866) 632-9766</a>
+    <p class="sm" style="color:#EEE9F8">Msg &amp; data rates may apply. Reply STOP to opt out. <span class="tbc">[Final wording from COPY_LEGAL.md]</span></p>
+    <div style="display:flex;flex-direction:column;gap:4px;color:#FBF8F3;margin-top:8px">
+      <p><strong>Care:</strong> 24 hours a day, 7 days a week</p>
+      <p><strong>Office:</strong> Monday–Friday, 8 AM–5 PM</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot pad" data-surface="dark" style="background:#1C0F3D;color:#FBF8F3;padding-top:64px;padding-bottom:120px;display:flex;flex-direction:column;gap:36px">
+  <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
+    <a href="#top" aria-label="Dawson &amp; Dawson Home Care — home" style="display:inline-flex"><span style="display:block;background:#FBF8F3;border-radius:16px;padding:14px 18px"><img src="images/logo.png" alt="" width="200" height="109" style="display:block;width:200px;height:auto"></span></a>
+    <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}"><p class="sm" style="display:inline-flex;align-items:center;gap:10px;font-weight:600"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:#94C723"></span>Office open now · Call (843) 379-3321</p></sc-if>
+    <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}"><p class="sm" style="display:inline-flex;align-items:flex-start;gap:10px;font-weight:600"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#EEE9F8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" style="flex:none;margin-top:3px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Office closed · Opens Monday at 8 AM. Request a callback and we'll reach you first thing.</p></sc-if>
+    <p class="sm" style="color:#EEE9F8"><strong style="color:#FBF8F3">Care:</strong> 24 hours a day, 7 days a week</p>
+  </div>
+  <nav aria-labelledby="mfoot-contact" style="display:flex;flex-direction:column;gap:10px">
+    <p id="mfoot-contact" class="eyebrow">Contact us</p>
+    <a href="tel:+18433793321" style="font-weight:600">Call (843) 379-3321</a>
+    <a href="sms:+18666329766" style="font-weight:600">Text us (866) 632-9766</a>
+    <p style="color:#EEE9F8">Fax: (866) 502-3509</p>
+    <a href="mailto:info@dawsonhomecare.com">info@dawsonhomecare.com</a>
+    <p class="sm" style="color:#EEE9F8">69 Robert Smalls Parkway, Suite 3F, Beaufort, SC 29906</p>
+    <p class="sm" style="color:#EEE9F8"><strong style="color:#FBF8F3">Office:</strong> Monday–Friday, 8 AM–5 PM</p>
+  </nav>
+  <nav aria-labelledby="mfoot-care" style="display:flex;flex-direction:column;gap:10px">
+    <p id="mfoot-care" class="eyebrow">Care services</p>
+    <a href="/care/personal-care">Personal Care</a>
+    <a href="/care/home-help">Home Help</a>
+    <a href="/care/companionship">Companionship</a>
+    <a href="/care/respite-care">Respite Care</a>
+    <a href="/care/24-hour-care">24-Hour &amp; Overnight Care</a>
+    <a href="/care" style="font-weight:600">See all care services</a>
+  </nav>
+  <nav aria-label="More" style="display:flex;flex-direction:column;gap:10px">
+    <p class="eyebrow">Find the right care</p>
+    <a href="/how-it-works">See how it works</a>
+    <a href="/paying-for-care#ways-to-pay">See ways families pay for care</a>
+    <a href="/faq">See all questions</a>
+    <a href="/areas-we-serve">See all areas we serve</a>
+    <a href="/about">Read our story</a>
+    <a href="/careers">See caregiver jobs</a>
+    <a href="/for-professionals#refer">Make a referral</a>
+  </nav>
+  <div class="sm" style="padding-top:24px;border-top:1px solid #4B2E91;display:flex;flex-direction:column;gap:10px">
+    <p style="color:#EEE9F8">© {{currentYear}} Dawson and Dawson Home Care LLC</p>
+    <div style="display:flex;gap:20px;flex-wrap:wrap"><a href="/privacy-policy">Privacy Policy</a><a href="/sms-terms">SMS Terms</a><a href="https://www.instagram.com/dawsonhomecare/">Follow us on Instagram</a></div>
+  </div>
+</footer>
+</div>
+
+<!-- ============ HEADER (phone) ============ -->
+<header data-el="header" style="position:absolute;top:0;left:0;right:0;z-index:60;height:72px;padding:0 16px 0 20px;display:flex;align-items:center;justify-content:space-between;background:#FBF8F3;border-bottom:1px solid #E7E1EE;opacity:0">
+  <a href="#top" aria-label="Dawson &amp; Dawson Home Care — home" style="display:inline-flex;align-items:center;min-height:48px">
+    <img data-el="header-logo" src="images/logo.png" alt="" width="116" height="63" style="display:block;width:116px;height:auto;opacity:0">
+  </a>
+  <div style="display:flex;align-items:center;gap:8px">
+    <a href="tel:+18433793321" aria-label="Call (843) 379-3321" style="width:48px;height:48px;border-radius:50%;background:#2A1856;color:#FFFFFF;display:inline-flex;align-items:center;justify-content:center"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></a>
+    <button type="button" class="iconbtn" aria-label="{{menuLabel}}" aria-expanded="{{menuExpanded}}" aria-controls="m-menu" onClick="{{toggleMenu}}">
+      <sc-if value="{{menuClosed}}" hint-placeholder-val="{{true}}"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></sc-if>
+      <sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}"><svg aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></sc-if>
+    </button>
+  </div>
+</header>
+
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+  <nav id="m-menu" aria-label="Main" style="position:absolute;left:0;right:0;top:72px;bottom:72px;z-index:55;background:#FBF8F3;padding:28px 20px;display:flex;flex-direction:column;gap:6px;overflow-y:auto">
+    <a href="/care" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">Care services</a>
+    <a href="/how-it-works" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">How it works</a>
+    <a href="/paying-for-care" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">Paying for care</a>
+    <a href="/areas-we-serve" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">Areas we serve</a>
+    <a href="/about" onClick="{{closeMenu}}" class="ff" style="font-size:32px;color:#2A1856;text-decoration:none;min-height:56px;display:flex;align-items:center;border-bottom:1px solid #E7E1EE">Our story</a>
+    <div style="margin-top:24px;display:flex;flex-direction:column;gap:12px">
+      <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}"><p style="display:inline-flex;align-self:flex-start;align-items:center;gap:10px;min-height:40px;padding:0 16px;border-radius:999px;background:#EEF6DC;color:#4A7309;font-size:16px;font-weight:600"><span aria-hidden="true" style="width:10px;height:10px;border-radius:50%;background:#4A7309"></span>Office open now</p></sc-if>
+      <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}"><p style="display:inline-flex;align-self:flex-start;align-items:center;gap:10px;min-height:40px;padding:0 16px;border-radius:999px;background:#EEE9F8;color:#2A1856;font-size:16px;font-weight:600"><svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2A1856" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Office closed · Opens Monday at 8 AM</p></sc-if>
+      <p class="sm muted"><strong style="color:#2A1856">Care:</strong> 24 hours a day, 7 days a week</p>
+    </div>
+  </nav>
+</sc-if>
+
+<!-- ============ STICKY ACTION BAR ============ -->
+<nav class="mbar" data-el="mbar" aria-label="Quick contact" style="position:absolute;left:0;right:0;bottom:0;z-index:58;padding:8px 10px 8px;background:#FFFFFF;border-top:1px solid #E7E1EE;display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,0.9fr) minmax(0,1.5fr);gap:8px;opacity:0">
+  <a class="mbtn" href="tel:+18433793321" aria-label="Call Dawson at (843) 379-3321" style="background:#2A1856;color:#FFFFFF">
+    <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>Call
+  </a>
+  <a class="mbtn" href="sms:+18666329766" aria-label="Text Dawson at (866) 632-9766" style="background:#FFFFFF;color:#2A1856;border-color:#2A1856">
+    <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>Text
+  </a>
+  <sc-if value="{{isOpen}}" hint-placeholder-val="{{true}}">
+    <a class="mbtn" href="/free-assessment" aria-label="Get a free care assessment" style="background:#94C723;color:#1C0F3D">
+      <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>Free Assessment
+    </a>
+  </sc-if>
+  <sc-if value="{{isClosed}}" hint-placeholder-val="{{false}}">
+    <a class="mbtn" href="/free-assessment" aria-label="Request a callback" style="background:#94C723;color:#1C0F3D">
+      <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>Callback
+    </a>
+  </sc-if>
+</nav>
+
+<img data-el="fly-logo" src="images/logo.png" alt="" aria-hidden="true" style="position:absolute;left:0;top:0;z-index:70;pointer-events:none;display:block;width:300px;height:auto;opacity:0;will-change:transform,width,opacity">
+</div></template>
+<script src="js/lib/react.production.min.js"></script>
+<script src="js/lib/react-dom.production.min.js"></script>
+<script src="js/lib/dc-lite.js"></script>
+<script src="js/02-home-mobile.js"></script>
+</body>
+</html>
