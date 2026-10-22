@@ -1,6 +1,6 @@
 # BUILD_DECISIONS — Dawson & Dawson Home Care website
 
-**Status:** Phase 1 (read-only review). No code written yet. Waiting on the answers to §F before building.
+**Status:** Phase 1 complete. All 10 questions in §F answered on 22 Oct 2026 — see **§H. Your answers**. Every row below has been updated to the final decision. Ready for Phase 2.
 **Date:** 22 Oct 2026
 **Read for this file:** every file in `/docs` (02–11, BRAND_FINAL, COPY_HOME, COPY_SERVICES, COPY_TRUST, COPY_COST_FAQ, COPY_AREAS, COPY_CONVERSION, COPY_LEGAL, SPEC_FEATURES, SEO_PLAN, brand-palette-preview.html, both PNGs) and all 6 design HTML files in `/docs/design` with their CSS and JS (plus the `dc-lite.js` prototype engine, which isn't part of the build).
 
@@ -11,7 +11,7 @@
 
 ## A. What we're building (one paragraph)
 
-A new Next.js website for Dawson and Dawson Home Care LLC, a non-medical, owner-run home care agency at 69 Robert Smalls Parkway in Beaufort, SC, caring for Lowcountry families since 2002. It's a surprise rebuild that stays private (preview only, nothing goes live). The site has to feel premium and calm, be easy for worried adult children and seniors to use on a phone (big text, high contrast, WCAG 2.2 AA, a reduced-motion version of every animation), and turn visits into calls and free-assessment requests. It's built from the approved design (Anton + Poppins, the 16 locked colors, the scroll-driven Home story with the intro logo video, the video collages, the glowing How-It-Works line, the cursor ring) and fills in the approved copy word for word: Home, 5 service pages and a hub, a 5-question care quiz, a cost estimator (hours-only until real rates exist), a payment explorer, areas-we-serve plus 8 town pages, About/owner/caregivers/reviews, a professionals referral portal, careers (Hireology), FAQ with live search, a 5-step free-assessment form, contact, thank-you, 404 and the three legal pages. Every form posts to our own `/api/lead` or `/api/referral`, which runs in mock mode (saves JSON files locally) until GoHighLevel keys are added. Every unknown fact (owner name, license number, rates, towns, drive times, response times, reviews…) stays a visible `[[TO CONFIRM]]` placeholder that `npm run prelaunch` lists. From Phase 2 the repo gets a `.devcontainer` so your GitHub Codespace installs everything, starts the site on port 3000 and opens the preview by itself.
+A new Next.js website for Dawson and Dawson Home Care LLC, a non-medical, owner-run home care agency at 69 Robert Smalls Parkway in Beaufort, SC, caring for Lowcountry families since 2002. It's a surprise rebuild that stays private (preview only, nothing goes live). The site has to feel premium and calm, be easy for worried adult children and seniors to use on a phone (big text, high contrast, WCAG 2.2 AA, a reduced-motion version of every animation), and turn visits into calls and free-assessment requests. It's built from the approved design (Anton + Poppins, the 16 locked colors, the scroll-driven Home story with the intro logo video, the video collages, the glowing How-It-Works line, the cursor ring) and fills in the approved copy word for word: Home, 5 service pages and a hub, a 5-question care quiz, a cost estimator (hours-only until real rates exist), a payment explorer, areas-we-serve plus 8 town pages, About/owner/caregivers, real Google reviews, a professionals referral portal, careers (Hireology), FAQ with live search, a 5-step free-assessment form, contact, thank-you, 404 and the three legal pages. Every form posts to our own `/api/lead` or `/api/referral`, which runs in mock mode (saves JSON files locally) until GoHighLevel keys are added. Every unknown fact (owner last name and story, license number, rates, towns, drive times, response times…) stays a visible `[[TO CONFIRM]]` placeholder that `npm run prelaunch` lists. From Phase 2 the repo gets a `.devcontainer` so your GitHub Codespace installs everything, starts the site on port 3000 and opens the preview by itself.
 
 ---
 
@@ -50,7 +50,7 @@ All files are in `/docs/design`. They're placeholders until real photos/videos a
 | `poster-companionship-1/2/3.jpg` | 540×960 | 53–84 KB | Home collage 3 |
 | `poster-24-hour-care-1/2.jpg` | 540×960 | 50–63 KB | Home collage 4; `-1` also on the Personal Care "Pairs well with" card |
 | `poster-respite-care-1/2.jpg` | 540×960 | 62–68 KB | Home collage 5 |
-| `google-map.jpg` | 1600×973 | 235 KB | Home "10 — Where we care": a Google Maps screenshot of the office area, linked to Google Maps (see conflict D-17 and question 5) |
+| `google-map.jpg` | 1600×973 | 235 KB | In the design: Home "10 — Where we care", a Google Maps screenshot. **Not shipped** — replaced by our own SVG map in the same frame (conflict 30, answer 5) |
 
 Also in `/docs` (reference only, not shipped): `current-logo.png` (2000×2000, 1.5 MB — the client's current logo, the tracing source for the SVG), `palette-preview.png` (2390×5882, 2.9 MB) and `brand-palette-preview.html` (old palette preview using the retired fonts).
 
@@ -77,7 +77,7 @@ Collage videos only play while their collage is on screen, muted, looped, `plays
 | `poppins-latin(-ext)-600-normal` | 8 + 5 KB | Buttons (17px), labels, eyebrows, links |
 | `poppins-latin(-ext)-700-normal` | 8 + 5 KB | Badges, strong values |
 | `poppins-latin(-ext)-400-italic`, `-500-italic` | 8 + 6 KB, 8 + 6 KB | Quotes (owner quote, caregiver card backs, service-page review) |
-| `poppins-latin(-ext)-300-normal` | 8 + 5 KB | Only used by the Home "It usually starts with" line. **Not shipped** if we drop weight 300 (your rule; see question 7) |
+| `poppins-latin(-ext)-300-normal` | 8 + 5 KB | Only used by the Home "It usually starts with" line in the design. **Not shipped** — that line moves to weight 400 (answer 7) |
 
 Fonts are self-hosted with `next/font/local` (no Google request), `display: swap`, latin preloaded and latin-ext loaded only when needed.
 
@@ -89,18 +89,18 @@ SVG logo set per BRAND_FINAL §3 (horizontal, stacked, mark, reversed, mono; Opt
 
 ## D. Every conflict between the design and /docs — and what I'll follow
 
-"Design" = follow the design. "Docs" = follow the named doc. "You" = your Phase-1 instructions. Rows marked **(Q n)** depend on your answer to question n in §F; the default shown is what I'll do if you say "go with your defaults".
+"Design" = follow the design. "Docs" = follow the named doc. "You" = your Phase-1 instructions. Rows that depended on a question in §F now show the final decision and cite the answer ("answer n", see §H).
 
 ### D1. Brand, type and color
 
 | # | Conflict | Design says | Docs say | I'll follow |
 |---|---|---|---|---|
-| 1 | Fonts | Anton (display) + Poppins (body) | Fraunces + Plus Jakarta Sans (03, BRAND_FINAL, SPEC, SEO OG image) | **Design / you** — Anton + Poppins everywhere, including the OG image template and the logo wordmark tracing notes |
+| 1 | Fonts | Anton (display) + Poppins (body) | Fraunces + Plus Jakarta Sans (03, BRAND_FINAL, SPEC, SEO OG image) | **Design / you** — Anton + Poppins everywhere, including the OG image template. (The logo wordmark is traced from the real logo, see row 9) |
 | 2 | Italic accent words (*family*, *dignity*, *owner*…) | Accent word set in **color** (orchid-500 on light, orchid-100 on Dusk/dark), not italic — Anton has no italic | Italic, and "italic cream" on Dusk | **Design** — color accent, no italic. Orchid-500 is only allowed at ≥40px, and every H1/H2 accent is ≥40px, so it passes BRAND_FINAL rule 4 |
 | 3 | Type scale | Fixed sizes per screen: H1 72/96px desktop, 48px mobile; H2 52px; H3 28px; lead 22px; eyebrow 14px **600, tracking 0.14em** | Fluid clamp scale (Fraunces sizes), eyebrow 700 / 0.12em | **Design** sizes and eyebrow style. I'll make them fluid between the mobile and desktop design values so in-between widths don't jump |
-| 4 | Body text under 18px | Mobile Home uses 17px for card text, step text, review text; form step names are 13px (mobile) / 15px (desktop) | BRAND_FINAL: 18px body, 16px minimum, 14px only for eyebrows + cursor label | **You + BRAND_FINAL** — running text goes up to 18px; step names go up to 16px. Buttons stay at the designed 17px semibold (that's the BRAND_FINAL button spec, not body text) |
-| 5 | Poppins weight 300 | Home "It usually starts with" line is Poppins 300 (64px desktop / 32px mobile) | — | **You** — never 300. I'll use 400, the closest look (Q7) |
-| 6 | Small text at 16px | Helpers, captions, labels, footer lines are 16px | BRAND_FINAL allows 16px for captions/helpers/legal | **Design + BRAND_FINAL** — I'm reading your "body text never below 18px" as running paragraph text, so 16px stays for helpers/captions/labels (Q7) |
+| 4 | Body text under 18px | Mobile Home uses 17px for card text, step text, review text; form step names are 13px (mobile) / 15px (desktop) | BRAND_FINAL: 18px body, 16px minimum, 14px only for eyebrows + cursor label | **You + BRAND_FINAL** — running text goes up to 18px; step names go up to 16px. Buttons stay at the designed 17px semibold (that's the BRAND_FINAL button spec, not body text). Confirmed (answer 7) |
+| 5 | Poppins weight 300 | Home "It usually starts with" line is Poppins 300 (64px desktop / 32px mobile) | — | **You** — never 300. Weight 400 instead. Confirmed (answer 7) |
+| 6 | Small text at 16px | Helpers, captions, labels, footer lines are 16px | BRAND_FINAL allows 16px for captions/helpers/legal | **Design + BRAND_FINAL** — "body text never below 18px" means running paragraph text; 16px stays for helpers, captions and labels. Confirmed (answer 7) |
 | 7 | Shadows and glows | Uses soft shadows and glows made from the locked colors at partial opacity (card shadows, video shadows, orchid glows on the How-It-Works line and nodes, lime glow on the timeline end) | BRAND_FINAL rule 8 allows alpha only for cursor fills, room glow and button hover; SPEC puts "soft shadow" on hold | **Design** — every shadow/glow is kept. They're all alpha versions of the 16 locked colors, so no new hex values. (Color check: the design uses exactly the 16 BRAND_FINAL tokens, nothing else) |
 
 ### D2. Logo, intro and header/footer
@@ -108,9 +108,9 @@ SVG logo set per BRAND_FINAL §3 (horizontal, stacked, mark, reversed, mono; Opt
 | # | Conflict | Design says | Docs say | I'll follow |
 |---|---|---|---|---|
 | 8 | Header/footer logo | Raster `logo.png` (old colors); footer logo sits on a cream rounded pad | BRAND_FINAL §3: rebuilt SVG, new colors, 5 versions; footer = stacked **reversed** on plum-950 | **You + BRAND_FINAL** — SVG everywhere; footer uses the stacked reversed SVG directly on plum-950 (no cream pad). Option A live, Option B behind `NEXT_PUBLIC_LOGO_FIGURE` with the `/reveal-notes` A/B toggle |
-| 9 | Logo wordmark | The client's real logo (`current-logo.png`) says **"DAWSON AND DAWSON"** in uppercase serif with "HOME CARE LLC" below, has **two caring hands** under the roof, a dark-gray inner roof and a four-pane window | BRAND_FINAL §3 describes "Dawson & Dawson" in Fraunces with an ampersand, and doesn't mention the hands; its own rule says "the PNG's geometry wins" | **BRAND_FINAL's fidelity rule** — trace the PNG: uppercase serif wordmark, "AND", the hands, the window, "HOME CARE" + small "LLC", then recolor per BRAND_FINAL (no gray — inner roof becomes plum). The Fraunces/ampersand note is dropped because Fraunces is retired (Q8) |
-| 10 | First-visit logo intro | Home has its own intro: the logo **video** plays full screen, scrolling is locked until it ends (≤14 s, scrolling fast-forwards it 8×), then the logo **flies** into the header | BRAND_FINAL §3.3A: 1.4 s SVG draw-in in the header, once per session, never blocks anything | **Design on Home** (video + flight, exactly as designed). The flight uses the raster end-frame logo and cross-fades into the SVG header logo as it lands, so it matches the video's last frame. **BRAND_FINAL draw-in** only plays when the first page someone lands on isn't Home. I'll add a keyboard way to skip (Esc/Space/Enter/arrows + a visually hidden "Skip intro" button) because the design only skips on wheel/touch (Q9) |
-| 11 | Desktop header contents | Logo · 5 links (Care services, How it works, Paying for care, Areas we serve, Our story) · **Call** button. No dropdowns, no office chip, no Free Assessment button, no For Professionals | 06: Care ▾ mega-menu (5 services + quiz) · How It Works · Paying for Care · Areas · About ▾ (About, Reviews, Careers) · For Professionals · office chip · Call · Free Assessment | **Design** layout and look (Q6). The office chip already sits in the Home hero and footer in the design |
+| 9 | Logo wordmark | The client's real logo (`current-logo.png`) says **"DAWSON AND DAWSON"** in uppercase serif with "HOME CARE LLC" below, has **two caring hands** under the roof, a dark-gray inner roof and a four-pane window | BRAND_FINAL §3 describes "Dawson & Dawson" in Fraunces with an ampersand, and doesn't mention the hands; its own rule says "the PNG's geometry wins" | **Faithful copy of the real logo** (answer 8) — trace the PNG: uppercase serif wordmark "DAWSON AND DAWSON", the caring hands, the window, "HOME CARE" + small "LLC", then recolor per BRAND_FINAL (no gray — inner roof becomes plum). BRAND_FINAL's group structure, motion and Option B figure swap still apply |
+| 10 | First-visit logo intro | Home has its own intro: the logo **video** plays full screen, scrolling is locked until it ends (≤14 s, scrolling fast-forwards it 8×), then the logo **flies** into the header | BRAND_FINAL §3.3A: 1.4 s SVG draw-in in the header, once per session, never blocks anything | **Design on Home** (video + flight, exactly as designed). The flight uses the raster end-frame logo and cross-fades into the SVG header logo as it lands, so it matches the video's last frame. **BRAND_FINAL draw-in** only plays when the first page someone lands on isn't Home. **The intro plays once per browser session** (answer 9): later visits to Home that session open on the hero with the header already showing. I'll add a keyboard way to skip (Esc/Space/Enter/arrows + a visually hidden "Skip intro" button) because the design only skips on wheel/touch |
+| 11 | Desktop header contents | Logo · 5 links (Care services, How it works, Paying for care, Areas we serve, Our story) · **Call** button. No dropdowns, no office chip, no Free Assessment button, no For Professionals | 06: Care ▾ mega-menu (5 services + quiz) · How It Works · Paying for Care · Areas · About ▾ (About, Reviews, Careers) · For Professionals · office chip · Call · Free Assessment | **Design** — short menu kept (answer 6). Professionals, Reviews, Careers, FAQ, Contact and the legal pages stay reachable from the footer and from links on the pages themselves. The office chip already sits in the Home hero and footer in the design |
 | 12 | Header logo size + compact-on-scroll | 169px-wide logo, 112px-tall header; no compact animation shown; on Home the header fades in after the intro | BRAND_FINAL: 44px-tall logo that clip-morphs to the mark on scroll | **Design** sizes. I'll add BRAND_FINAL's scroll-compact morph (logo → mark) since the design has no conflicting behavior and it's specified animation for the logo itself |
 | 13 | Mobile action bar | White bar: plum **Call**, outlined **Text**, leaf **Free Assessment** (moon icon + "Callback" after hours); 2 buttons on the assessment page | SPEC §14: plum-950 bar, cream labels | **Design** look; docs behavior (hides when a form is on screen or the keyboard is open, safe-area inset, slot 3 removed on /free-assessment and /thank-you) |
 | 14 | Footer contents | 4 columns: logo + office status + Care 24/7 · Contact us · Care services · "Find the right care" links; bottom row: ©, Privacy, SMS Terms, Instagram | 06 + COPY_LEGAL + SEO_PLAN: also **Accessibility**, **Sitemap**, Directions, and a data-driven **Areas we serve** column | **Design** layout, plus the missing links added in the same style (legal/compliance requirement): Accessibility and Sitemap in the bottom row, Directions in Contact, an Areas column |
@@ -120,10 +120,10 @@ SVG logo set per BRAND_FINAL §3 (horizontal, stacked, mark, reversed, mono; Opt
 | # | Conflict | Design says | Docs say | I'll follow |
 |---|---|---|---|---|
 | 15 | Hero visual | One photo (`hero-caregivers.jpg`), buttons centered under the two-column hero, trust row with icons | 3-photo collage (`hero-1/2/3.jpg`) with parallax, Dusk glow blob | **Design** visual. Trust-row text: approved copy ("Since 2002 · Owner-run · Care 24/7") with the approved screen-reader sentence (Docs, content). Image alt: describes what the placeholder actually shows (COPY rule: alt must match the photo) |
-| 16 | "The moment" scene | **4** worry lines with **photos** (`moment-1..4`), typed out letter by letter with a blinking caret, "1 of 4", headline revealed word by word; pinned on desktop **and** mobile, for ~6.4 screen-heights | **5** lines (adds "And you haven't had a real day off in months."), line **illustrations** that draw in, "1 of 5", pin ≤150vh, no pin on mobile | **Design** animation, photos and pin lengths. Line count = Q3 (default: keep the design's 4) |
-| 17 | "How we help" (Dawson House) | The illustrated house is **gone**: five portrait **video collages** slide in from the right while a card shows each service | 06/07/SPEC/COPY: illustrated Lowcountry house, rooms light up, rooms are links, mobile room carousel | **Design** (Q4). The service order, names, promises, small labels and links stay from COPY_HOME |
-| 18 | "How we help" subline | "Keep scrolling to see each way we help." | "Scroll through the house. Each room is one way we help." / "Tap a room to see how we help." | **Design** wording, because the copy describes a house that the design removed (part of Q4) |
-| 19 | Quiz on Home | The **whole 5-question quiz** runs inline on Home, with the result shown right there | Home shows **question 1 only**; answering opens `/find-care` at question 2 | **Q2** (default: design — full quiz inline on Home, and the same quiz component on `/find-care`). Result content follows COPY_CONVERSION §9, so I add the two pieces the design result lacks: the mini cost estimator and "Email me this plan" |
+| 16 | "The moment" scene | **4** worry lines with **photos** (`moment-1..4`), typed out letter by letter with a blinking caret, "1 of 4", headline revealed word by word; pinned on desktop **and** mobile, for ~6.4 screen-heights | **5** lines (adds "And you haven't had a real day off in months."), line **illustrations** that draw in, "1 of 5", pin ≤150vh, no pin on mobile | **Design** animation, photos and pin lengths, and the design's **4 lines** (answer 3). The copy's 5th line is not used |
+| 17 | "How we help" (Dawson House) | The illustrated house is **gone**: five portrait **video collages** slide in from the right while a card shows each service | 06/07/SPEC/COPY: illustrated Lowcountry house, rooms light up, rooms are links, mobile room carousel | **Design** — the illustrated house is dropped everywhere (answer 4). The service order, names, promises, small labels and links stay from COPY_HOME |
+| 18 | "How we help" subline | "Keep scrolling to see each way we help." | "Scroll through the house. Each room is one way we help." / "Tap a room to see how we help." | **Design** wording, because the copy describes a house that's been dropped (answer 4) |
+| 19 | Quiz on Home | The **whole 5-question quiz** runs inline on Home, with the result shown right there | Home shows **question 1 only**; answering opens `/find-care` at question 2 | **Design** — the whole quiz runs inline on Home (answer 2), and the same quiz component runs on `/find-care`. Result content follows COPY_CONVERSION §9, so I add the two pieces the design result lacks: the mini cost estimator and "Email me this plan" |
 | 20 | Quiz answer types | Q2 (multi-select) uses toggle buttons | SPEC: native checkboxes for Q2 | **Design** look, **docs** semantics (real checkboxes under the designed cards) |
 | 21 | How it works | Sticky left column + single column of steps; 3D-style icons; glowing orchid line with a heartbeat pulse that travels down; step 2 is a dark plum card with a lime "The Dawson difference" badge | Alternating left/right steps on an SVG heartbeat path; step 2 is an orchid-100 card with a plum badge | **Design** |
 | 22 | Since 2002 | Big static number; no count-up | Count-up animation 0 → {years} | **Design** (no count-up). The number is computed from 2002, never hard-coded |
@@ -131,11 +131,11 @@ SVG logo set per BRAND_FINAL §3 (horizontal, stacked, mark, reversed, mono; Opt
 | 24 | Owner video | Shows a big play circle and "Watch a short hello" even though no video exists; the states sheet shows a "Video coming soon" card | 07/SPEC: coming-soon state, no dead play button | **Design's coming-soon card** (from the states sheet) until the video exists, then the designed play button |
 | 25 | Caregiver cards | Flip on mouse hover (desktop); tap button on mobile; one row, 3 steps of sliding | Flip on click/Enter via the "Why I do this" button, focus moves between faces | **Design** look and hover flip, plus the docs' button/keyboard/focus behavior, and quotes shown under the photo in reduced motion |
 | 26 | Reviews marquee | One row, 90 s per loop, 10 cards duplicated | Two rows moving in opposite directions at 30 px/s | **Design** |
-| 27 | Reviews content | **10 real-looking Google reviews with full names** (e.g. "Linda Pienik", "Penny Barrett"); they name "Monique", "Monique Dawson", "Jay", "Yulaunda", "Molly"; one calls the agency "Home Health Care" and one mentions medications | Placeholders only (`placeholder: true`), first name + last initial only, hide the chapter if fewer than 3 real reviews, never invent | **Docs** for now (Q1). If you confirm they're real Google reviews we're allowed to use, I'll load them as real reviews shown as "Linda P." etc. |
-| 28 | Google rating | "4.8 on Google · 33 reviews" shown as fact, linked to Google Maps | Hidden until confirmed | **Docs** — hidden until you confirm (Q1) |
+| 27 | Reviews content | **10 real-looking Google reviews with full names** (e.g. "Linda Pienik", "Penny Barrett"); they name "Monique", "Monique Dawson", "Jay", "Yulaunda", "Molly"; one calls the agency "Home Health Care" and one mentions medications | Placeholders only (`placeholder: true`), first name + last initial only, hide the chapter if fewer than 3 real reviews, never invent | **Design** — they're real Google reviews and we show them (answer 1). They go into `reviews.json` as real reviews (`placeholder: false`, `source: "Google"`), shown as first name + last initial ("Linda P.") per COPY_TRUST's privacy rule, text verbatim. That's 10 real reviews, so the ≥3-reviews launch rule passes and Home ch. 9 and `/reviews` are live. Service tags, relation and town stay empty unless the review text says them |
+| 28 | Google rating | "4.8 on Google · 33 reviews" shown as fact, linked to Google Maps | Hidden until confirmed | **Design** — real, shown (answer 1): "4.8 on Google · 33 reviews", stored in `site.config.ts` as confirmed with today's date so it's easy to update |
 | 29 | Estimator default + prices | Starts at 4 hours × **5** days = 20; always shows the "Illustrative estimate" badge and `$[…]` price placeholders | Starts at 4 × **3** = 12; all rates `null` → hours-only mode; badge only when prices show; Fewer/More **hours** buttons beside the slider | **Docs** for the numbers and logic (12 hours; hours-only line until real rates exist; no invented price). **Design** for the look; the Fewer/More hours buttons are added in the design's round-button style |
-| 30 | Where we care | **Google Maps screenshot** linked to Google, a "Dawson and Dawson Home Care — On Google Maps" card with rating, address, website, hours and a **"Women-owned"** chip, town search, town chips | Custom interactive SVG map of Beaufort County (no Google, no API), pulsing office pin, town dots with drive times, list fallback | **Q5** (default: design layout, but the screenshot is swapped for our own SVG map drawn in the same frame, since a Google screenshot can't be used without Google's terms and goes out of date). The "Women-owned" chip and rating are hidden until confirmed (Q1) |
-| 31 | Google Maps link | `https://maps.app.goo.gl/HEKXeuuT747yN3y96` | `http://goo.gl/maps/SVvYGS3TipaMpbgQ9` (04, COPY_CONVERSION) | **Docs** link for now; I'll check with you which one is current (Q5) |
+| 30 | Where we care | **Google Maps screenshot** linked to Google, a "Dawson and Dawson Home Care — On Google Maps" card with rating, address, website, hours and a **"Women-owned"** chip, town search, town chips | Custom interactive SVG map of Beaufort County (no Google, no API), pulsing office pin, town dots with drive times, list fallback | **Design layout with our own SVG map** in the screenshot's frame (answer 5 — you gave the link and didn't object to the map default; a Google screenshot can't be used without Google's terms and goes out of date). The "On Google Maps" card, the **"Women-owned"** chip and the rating are real and shown (answer 1) |
+| 31 | Google Maps link | `https://maps.app.goo.gl/HEKXeuuT747yN3y96` | `http://goo.gl/maps/SVvYGS3TipaMpbgQ9` (04, COPY_CONVERSION) | **Neither — your new link** (answer 5): `https://maps.app.goo.gl/efdxQNbog5ZGfmrM7`, copied from Google Maps on 22 Oct 2026. Used for every "Get directions" link and the JSON-LD `hasMap`/`sameAs`, stored once in `site.config.ts` |
 | 32 | Final CTA accent | "family" in orchid-100, not italic | Italic cream | **Design** (see row 2) |
 | 33 | Home chapter progress line (top of screen) and Lenis smooth scrolling | Neither exists; the design runs on normal browser scrolling | 07 §18 / SPEC §0.5 / §20.3 | **Design** on Home: no progress line, normal scrolling, so the designed scroll scenes behave exactly as approved. I'll still install Lenis behind a switch (`NEXT_PUBLIC_SMOOTH_SCROLL`, default off) so you can compare |
 | 34 | Pin lengths | Home scenes pin far longer than 150vh and pin on phones too | ≤150vh per pin, no pins on phones | **Design**. The docs' safety rules still apply: a skip link before every pinned scene, Space/Page Down work normally, nothing is hidden from screen readers |
@@ -147,7 +147,7 @@ SVG logo set per BRAND_FINAL §3 (horizontal, stacked, mark, reversed, mono; Opt
 |---|---|---|---|---|
 | 36 | Hero visual | Video collage (`personal-care-1/2/3`) | Photo `service-personal-care.jpg` (3:2) | **Design** — each service page gets its own collage from the matching videos. The alt text in COPY becomes the collage's hidden caption, worded to match what the placeholder videos show |
 | 37 | Hero second button | Ghost "Call" | "Secondary" (plum) "Call" | **Design** |
-| 38 | Review block | A real-looking Google review (Penny Barrett, mentions medications and "Monique") | One `reviews.json` item for that service with `placeholder: false`; section hidden if none | **Docs** (Q1) |
+| 38 | Review block | A real-looking Google review (Penny Barrett, mentions medications and "Monique") | One `reviews.json` item for that service with `placeholder: false`; section hidden if none | **Design** — real reviews (answer 1). Each service page shows a real review that fits that service (Penny Barrett's on Personal Care), shown as "Penny B." |
 | 39 | Placeholder lines | The design shows `[To confirm]` chips inline (e.g. Hoyer lift, typical start time) | Pending lines render only when `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true` | Same idea — the design's `.tbc` chip is how placeholders look when the flag is on (on by default in the preview) |
 
 ### D5. Forms, free assessment, thank-you
@@ -166,7 +166,7 @@ These don't contradict the design — the design just doesn't cover them: Comfor
 
 - BRAND_FINAL overrides 03 (focus ring 2px inner, 16 colors with `alert-700`, 14px eyebrow exception, footer pulse once per entry, Option A logo).
 - SEO_PLAN overrides every COPY "page meta (draft)". COPY_LEGAL overrides consent wording in 09 and COPY_CONVERSION.
-- SEO_PLAN's open calls D1–D5 (hero eyebrow, `/thank-you` robots, WordPress endpoints, legacy `/wp-content/` files, `/personal-care` redirect target): I'll use each recommended option unless you say otherwise (Q10).
+- SEO_PLAN's open calls D1–D5 — **recommended option for all five** (answer 10): D1 add the eyebrow **In-home care · Beaufort, SC** above the Home H1 · D2 `/thank-you` uses `noindex, nofollow` meta only, no robots.txt block · D3 WordPress endpoints return 410 Gone · D4 only still-referenced `/wp-content/` files are copied to `/public/legacy/` and redirected, the rest 410 · D5 `/personal-care` → `/care/personal-care`.
 
 ---
 
@@ -176,7 +176,7 @@ Yes — every page below is built with the design's fonts, colors, spacing, head
 
 | Page | Built from (closest designed parts) |
 |---|---|
-| `/care` (hub) | Personal Care hero frame + video collage, service cards in the "Pairs well with" style, Venn visual in the 3D-icon style, quiz CTA band (Home ch. 3/4), Dusk CTA |
+| `/care` (hub) | Personal Care hero frame + video collage (no house illustration — answer 4), service cards in the "Pairs well with" style, Venn visual in the 3D-icon style, quiz CTA band (Home ch. 3/4), Dusk CTA |
 | `/care/home-help`, `/care/companionship`, `/care/respite-care`, `/care/24-hour-care` | Personal Care template exactly (they're the same template with their own copy and videos) |
 | `/find-care` (quiz page) | Home quiz card + free-assessment page frame |
 | `/how-it-works` | Home How-It-Works (heartbeat + 3D steps) at full length, checklists in the service-page tick style, accordion |
@@ -192,14 +192,14 @@ Yes — every page below is built with the design's fonts, colors, spacing, head
 | `/privacy-policy`, `/sms-terms`, `/accessibility` | COPY_LEGAL layout (no hero image, no CTA band) in the design's type and colors |
 | `/sitemap` (HTML) | Footer link-list style |
 | `/thank-you` | The design's form success state + How-It-Works timeline (static) |
-| 404 | Hero frame + 4 buttons; the porch-light house illustration depends on Q4 |
+| 404 | Hero frame + 4 buttons; the porch-light house is dropped (answer 4), replaced by a video collage and the SVG logo |
 | Also: `/reveal-notes` (BRAND_FINAL logo A/B), `/styleguide` (SEO_PLAN, preview only) | Plain design-system pages |
 
 Every page has a reduced-motion version and a phone layout based on the Home-mobile patterns.
 
 ---
 
-## F. Questions (plain language — please answer these before I start building)
+## F. Questions (plain language) — **all answered, see §H**
 
 1. **Real Google facts in the design.** The design shows 10 Google reviews with full names, a "4.8 stars from 33 reviews" badge, a "Women-owned" label, and reviews that name "Monique Dawson" and "Jay". None of this is in the approved docs. Are these real (copied from their Google page), and may we show them? If yes, I'll show reviewers as first name + last initial (e.g. "Linda P."), and I'll use "Monique" as the owner's first name if you confirm she's the owner. If not, I'll keep the sample placeholders.
 
@@ -223,8 +223,27 @@ Every page has a reduced-motion version and a phone layout based on the Home-mob
 
 ---
 
-## G. What happens next (after your answers)
+## G. What happens next
 
 - **Phase 2:** Next.js (App Router, TypeScript, Tailwind v4 with the 16 locked tokens), the `.devcontainer` (installs dependencies, starts `npm run dev` on port 3000, opens the preview automatically in your Codespace), design assets copied to `/public` with the same filenames, global layout (header, footer, mobile bar, cursor, Comfort Controls, office status), SVG logo, then Home.
 - All placeholder facts stay visible as `[[TO CONFIRM]]` chips in the preview (`NEXT_PUBLIC_SHOW_PLACEHOLDERS=true`) and are listed by `npm run prelaunch`.
 - Forms run in `LEAD_MODE=mock` (saved to `.leads/*.json`, git-ignored). Nothing is sent anywhere, and every page is `noindex`.
+
+---
+
+## H. Your answers (22 Oct 2026) and what they change
+
+| # | Question | Your answer | What changes in the build |
+|---|---|---|---|
+| 1 | Real Google facts in the design | **Yes, all real — show them** | The 10 Google reviews ship as real reviews (first name + last initial, e.g. "Linda P."), the "4.8 on Google · 33 reviews" badge and the "Women-owned" chip are shown, and the owner's first name **Monique** is confirmed (it fills `{ownerFirstName}`, e.g. "Meet Monique." on /about and "Monique, Owner" in the assessment panel). Only "Monique" is treated as confirmed: her last name, title wording, background, quote, photo and who "Jay" is stay `[[TO CONFIRM]]`. One review calls the agency "Home Health Care" and some mention medications — they're shown verbatim because they're the family's own words; our own copy stays non-medical |
+| 2 | Quiz on Home | **Whole quiz on Home** | Full 5-question quiz with result inline in Home ch. 4; same component on `/find-care` |
+| 3 | "The moment" lines | **Keep 4** | 4 lines, 4 photos, "1 of 4" — the copy's 5th line isn't used |
+| 4 | Illustrated Dawson House | **Drop it** | No house anywhere (Home, Care hub, 404). Video collages and the design's 3D icons take its place |
+| 5 | Map + directions link | **Link: `https://maps.app.goo.gl/efdxQNbog5ZGfmrM7`** | Every "Get directions" link uses this URL. The map itself: our own SVG map in the design's frame (the default — you didn't object; tell me if you'd rather keep the screenshot) |
+| 6 | Top menu | **Keep the short menu** | Logo · 5 links · Call, exactly as designed |
+| 7 | Text size and weight | **Yes** | Paragraphs ≥ 18px, helpers/captions/labels 16px, no weight 300 (heading uses 400) |
+| 8 | Logo | **Yes, faithful copy** | "DAWSON AND DAWSON", caring hands, "HOME CARE LLC", recolored to the 16 tokens |
+| 9 | Home intro video | **Once per session** | Plays on the first Home visit in a browser session, with keyboard skip; later visits open on the hero |
+| 10 | SEO open calls | **Yes, recommended options** | D1–D5 as listed in §D7 |
+
+**Placeholder list after these answers** — no longer placeholders: reviews, Google rating and count, "Women-owned", owner first name, Google Maps link. Still `[[TO CONFIRM]]` (unchanged): owner last name/background/quote/photo/video/signature, the two-owner question, SC license number, rates and minimum visit hours, service-area towns and drive times, response times, after-hours line for existing clients, hospice/palliative support, transport, pill organizers, overnight awake vs sleep-over, careers details, caregiver cards, family-run headline swap, and the rest of the lists in each COPY file.
