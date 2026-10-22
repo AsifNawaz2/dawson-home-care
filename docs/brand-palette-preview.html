@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dawson Palette Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --plum-950:#1C0F3D;--plum-800:#2A1856;--plum-600:#4B2E91;--plum-100:#EEE9F8;
+  --orchid-500:#C25BD9;--orchid-700:#8E3BA8;--orchid-100:#F6EAFB;
+  --leaf-500:#94C723;--leaf-700:#4A7309;--leaf-100:#EEF6DC;
+  --cream:#FBF8F3;--white:#FFFFFF;--ink:#1E1A2B;--muted:#5B5670;--line:#E7E1EE;
+  --dusk:linear-gradient(135deg,#2A1856 0%,#4B2E91 55%,#C25BD9 100%);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:400 18px/1.65 "Plus Jakarta Sans",system-ui,sans-serif}
+.wrap{max-width:1120px;margin:0 auto;padding:48px 16px 80px}
+h1,h2{font-family:Fraunces,Georgia,serif;font-weight:500;color:var(--plum-800);letter-spacing:-.02em;margin:0}
+h1{font-size:clamp(40px,6vw,72px);line-height:1.02}
+h1 em{color:var(--orchid-700)}
+h2{font-size:clamp(28px,3.4vw,40px);margin:64px 0 8px}
+.eyebrow{font-size:14px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orchid-700)}
+p.lead{font-size:clamp(19px,2vw,22px);color:var(--muted);max-width:60ch}
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px}
+.pair{background:var(--white);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.pair .sw{display:grid;grid-template-columns:1fr 1fr;height:120px}
+.pair .sw div{display:flex;align-items:flex-end;padding:10px;font:600 13px/1.2 "Plus Jakarta Sans";}
+.pair .meta{padding:14px 16px;font-size:15px;color:var(--muted)}
+.pair .meta b{color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:20px}
+.tok{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.tok .c{height:84px}
+.tok .t{padding:10px 12px;font-size:14px;line-height:1.35}
+.tok .t b{display:block;font-size:15px}
+.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;font:600 17px "Plus Jakarta Sans";text-decoration:none;border:2px solid transparent;transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s,background .25s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px -12px rgba(28,15,61,.5)}
+.btn:focus-visible{outline:3px solid var(--leaf-500);outline-offset:3px}
+.b-leaf{background:var(--leaf-500);color:var(--plum-950)}
+.b-plum{background:var(--plum-800);color:#fff}.b-plum:hover{background:var(--plum-600)}
+.b-ghost{border-color:var(--plum-800);color:var(--plum-800)}
+.old .btn{border-radius:0;text-transform:uppercase;font-size:14px;letter-spacing:.04em}
+.hero{margin-top:24px;border-radius:28px;background:var(--dusk);color:#fff;padding:clamp(28px,5vw,64px);position:relative;overflow:hidden}
+.hero h3{font-family:Fraunces,serif;font-weight:500;font-size:clamp(34px,5vw,60px);line-height:1.05;margin:0 0 14px;max-width:16ch}
+.hero h3 em{color:var(--leaf-500)}
+.hero p{max-width:46ch;color:#EEE9F8;margin:0 0 26px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:var(--leaf-100);color:var(--leaf-700);font-weight:600;font-size:15px;padding:8px 14px;border-radius:999px;margin-bottom:22px}
+.chip i{width:9px;height:9px;border-radius:50%;background:var(--leaf-700);display:inline-block}
+.hero .b-ghost{border-color:var(--cream);color:var(--cream)}
+table{width:100%;border-collapse:collapse;margin-top:20px;background:var(--white);border-radius:16px;overflow:hidden;font-size:16px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line)}
+th{background:var(--plum-100);color:var(--plum-800);font-weight:700}
+.ok{color:var(--leaf-700);font-weight:700}.no{color:#B42318;font-weight:700}
+.dot{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px;border:1px solid var(--line)}
+.note{font-size:16px;color:var(--muted);margin-top:10px}
+/* cursor demo */
+@media (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .ring{position:fixed;left:0;top:0;width:36px;height:36px;margin:-18px 0 0 -18px;border:1.5px solid var(--orchid-500);border-radius:50%;pointer-events:none;z-index:999;transition:width .25s cubic-bezier(.22,1,.36,1),height .25s cubic-bezier(.22,1,.36,1),margin .25s cubic-bezier(.22,1,.36,1),background .25s,border-color .25s;opacity:0}
+  .ring.on{opacity:1}
+  .ring.hover{width:64px;height:64px;margin:-32px 0 0 -32px;background:rgba(194,91,217,.14);border-color:rgba(194,91,217,.6)}
+  .ring.dark{border-color:var(--leaf-500)}
+  .ring.dark.hover{background:rgba(148,199,35,.18)}
+}
+</style>
+</head>
+<body>
+<div class="ring" aria-hidden="true"></div>
+<main class="wrap">
+  <div class="eyebrow">Dawson &amp; Dawson Home Care · Brand palette v1 (locked)</div>
+  <h1>Same colors. <em>Better</em> versions.</h1>
+  <p class="lead">Their plum, orchid and lime — deepened, cleaned up and made accessible. Move your mouse over the buttons to see the cursor ring.</p>
+
+  <h2>Old → New</h2>
+  <div class="compare">
+    <div class="pair"><div class="sw"><div style="background:#3B2772;color:#fff">Old #3B2772</div><div style="background:#2A1856;color:#fff">New #2A1856</div></div><div class="meta"><b>Plum</b> — deeper and more premium.</div></div>
+    <div class="pair"><div class="sw"><div style="background:#BB70CD;color:#1C0F3D">Old #BB70CD</div><div style="background:#C25BD9;color:#1C0F3D">New #C25BD9</div></div><div class="meta"><b>Orchid</b> — brighter and cleaner.</div></div>
+    <div class="pair"><div class="sw"><div style="background:#8CBC1C;color:#1C0F3D">Old #8CBC1C</div><div style="background:#94C723;color:#1C0F3D">New #94C723</div></div><div class="meta"><b>Leaf</b> — fresher lime, paired with plum text.</div></div>
+    <div class="pair"><div class="sw"><div style="background:#333333;color:#fff">Old #333333</div><div style="background:#1E1A2B;color:#fff">New #1E1A2B</div></div><div class="meta"><b>Ink</b> — warm, plum-tinted text.</div></div>
+  </div>
+
+  <h2>Full token set</h2>
+  <div class="grid">
+    <div class="tok"><div class="c" style="background:#1C0F3D"></div><div class="t"><b>plum-950</b>#1C0F3D</div></div>
+    <div class="tok"><div class="c" style="background:#2A1856"></div><div class="t"><b>plum-800 · primary</b>#2A1856</div></div>
+    <div class="tok"><div class="c" style="background:#4B2E91"></div><div class="t"><b>plum-600</b>#4B2E91</div></div>
+    <div class="tok"><div class="c" style="background:#EEE9F8"></div><div class="t"><b>plum-100</b>#EEE9F8</div></div>
+    <div class="tok"><div class="c" style="background:#C25BD9"></div><div class="t"><b>orchid-500 · accent</b>#C25BD9</div></div>
+    <div class="tok"><div class="c" style="background:#8E3BA8"></div><div class="t"><b>orchid-700 · text</b>#8E3BA8</div></div>
+    <div class="tok"><div class="c" style="background:#F6EAFB"></div><div class="t"><b>orchid-100</b>#F6EAFB</div></div>
+    <div class="tok"><div class="c" style="background:#94C723"></div><div class="t"><b>leaf-500 · action</b>#94C723</div></div>
+    <div class="tok"><div class="c" style="background:#4A7309"></div><div class="t"><b>leaf-700 · text</b>#4A7309</div></div>
+    <div class="tok"><div class="c" style="background:#EEF6DC"></div><div class="t"><b>leaf-100</b>#EEF6DC</div></div>
+    <div class="tok"><div class="c" style="background:#FBF8F3"></div><div class="t"><b>cream · page</b>#FBF8F3</div></div>
+    <div class="tok"><div class="c" style="background:#1E1A2B"></div><div class="t"><b>ink · body</b>#1E1A2B</div></div>
+    <div class="tok"><div class="c" style="background:#5B5670"></div><div class="t"><b>muted</b>#5B5670</div></div>
+    <div class="tok"><div class="c" style="background:#E7E1EE"></div><div class="t"><b>line</b>#E7E1EE</div></div>
+  </div>
+
+  <h2>Buttons</h2>
+  <div class="old">
+    <p class="note">Today (fails contrast):</p>
+    <div class="btns"><a class="btn" href="#" style="background:#8CBC1C;color:#fff">Get your free care assessment</a><a class="btn" href="#" style="background:#BB70CD;color:#fff">Call now! (843) 379-3321</a></div>
+  </div>
+  <p class="note">New:</p>
+  <div class="btns">
+    <a class="btn b-leaf" href="#">Get a Free Care Assessment</a>
+    <a class="btn b-plum" href="#">Call (843) 379-3321</a>
+    <a class="btn b-ghost" href="#">Find the right care</a>
+  </div>
+
+  <h2>In context</h2>
+  <section class="hero" data-cursor-theme="dark">
+    <span class="chip"><i></i>Office open now · Care 24/7</span>
+    <h3>Care that feels like <em>family</em> — because it's run by one.</h3>
+    <p>Owner-run in Beaufort since 2002. Help at home for a few hours or around the clock, 7 days a week.</p>
+    <div class="btns">
+      <a class="btn b-leaf" href="#">Get a Free Care Assessment</a>
+      <a class="btn b-ghost" href="#">Call (843) 379-3321</a>
+    </div>
+  </section>
+
+  <h2>Contrast check</h2>
+  <table>
+    <thead><tr><th>Pair</th><th>Ratio</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td><span class="dot" style="background:#2A1856"></span>White on plum-800</td><td>15.4:1</td><td class="ok">Pass — all text</td></tr>
+      <tr><td><span class="dot" style="background:#94C723"></span>Plum-950 on leaf-500 (green button)</td><td>8.8:1</td><td class="ok">Pass — all text</td></tr>
+      <tr><td><span class="dot" style="background:#FBF8F3"></span>Ink on cream</td><td>16.0:1</td><td class="ok">Pass — all text</td></tr>
+      <tr><td><span class="dot" style="background:#FBF8F3"></span>Muted on cream</td><td>6.6:1</td><td class="ok">Pass — all text</td></tr>
+      <tr><td><span class="dot" style="background:#FFFFFF"></span>Orchid-700 on white</td><td>6.3:1</td><td class="ok">Pass — all text</td></tr>
+      <tr><td><span class="dot" style="background:#C25BD9"></span>White on orchid-500</td><td>3.6:1</td><td class="ok">Large text only</td></tr>
+      <tr><td><span class="dot" style="background:#8CBC1C"></span>White on old lime (today)</td><td>2.3:1</td><td class="no">Fail</td></tr>
+      <tr><td><span class="dot" style="background:#BB70CD"></span>White on old orchid (today)</td><td>3.3:1</td><td class="no">Fail for button text</td></tr>
+    </tbody>
+  </table>
+</main>
+<script>
+(function(){
+  var ring=document.querySelector('.ring');
+  if(!window.matchMedia('(pointer:fine)').matches||window.matchMedia('(prefers-reduced-motion: reduce)').matches){return;}
+  var x=0,y=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){x=e.clientX;y=e.clientY;ring.classList.add('on');
+    var t=e.target.closest('a,button,[data-cursor]');ring.classList.toggle('hover',!!t);
+    ring.classList.toggle('dark',!!e.target.closest('[data-cursor-theme="dark"]'));});
+  document.addEventListener('mouseleave',function(){ring.classList.remove('on')});
+  (function loop(){rx+=(x-rx)*.15;ry+=(y-ry)*.15;ring.style.transform='translate('+rx+'px,'+ry+'px)';requestAnimationFrame(loop)})();
+  document.querySelectorAll('a[href="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault()})});
+})();
+</script>
+</body>
+</html>
