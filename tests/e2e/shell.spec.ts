@@ -3,6 +3,11 @@ import AxeBuilder from "@axe-core/playwright";
 
 const PAGES = ["/", "/styleguide", "/this-page-does-not-exist"];
 
+// The Home intro video is covered in home.spec.ts; here every test starts as a returning visitor.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => sessionStorage.setItem("dd:home-intro", "1"));
+});
+
 for (const path of PAGES) {
   test(`axe: no WCAG 2.2 AA violations on ${path}`, async ({ page }) => {
     await page.goto(path);
@@ -118,16 +123,19 @@ test("comfort controls apply text size, contrast and motion and survive reload",
 });
 
 test("page transition: curtain covers, then focus lands on the new H1", async ({ page }, info) => {
-  await page.goto("/");
+  await page.goto("/styleguide");
   await page.waitForTimeout(1500);
   const curtain = page.locator(".dd-curtain");
-  await page.getByRole("link", { name: "Open the styleguide" }).click();
+  await page
+    .getByRole("banner")
+    .getByRole("link", { name: "Dawson & Dawson Home Care — home" })
+    .click();
   if (info.project.name === "desktop-reduced") {
     await expect(curtain).toHaveAttribute("data-phase", "idle");
   } else {
     await expect(curtain).not.toHaveAttribute("data-phase", "idle");
   }
-  await expect(page).toHaveURL(/\/styleguide$/);
+  await expect(page).toHaveURL(/\/$/);
   await expect(curtain).toHaveAttribute("data-phase", "idle", { timeout: 3000 });
   await expect(page.getByRole("heading", { level: 1 })).toBeFocused();
 });

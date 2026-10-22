@@ -155,10 +155,12 @@ function runHeader(root: HTMLElement) {
         raf = 0;
         const y = window.scrollY;
         const d = y - lastY;
-        if (y <= 80) apply(false);
+        // Home intro: the logo flies into the header over the first 70% of a screen — stay full size.
+        const floor = html.dataset.homeIntro === "play" ? window.innerHeight * 0.75 : 80;
+        if (y <= floor) apply(false);
         else if (d > 8) apply(true);
         else if (d < -8) apply(false);
-        if (Math.abs(d) > 8 || y <= 80) lastY = y;
+        if (Math.abs(d) > 8 || y <= floor) lastY = y;
       });
     };
     window.addEventListener("scroll", onScroll, { passive: true });

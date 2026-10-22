@@ -83,6 +83,14 @@
     @slot;
   }
 }
+/* Full motion = neither of the above. Scroll scenes render their live layout only here. */
+@custom-variant live {
+  @media (prefers-reduced-motion: no-preference) {
+    &:where(html:not([data-motion="reduce"]) *) {
+      @slot;
+    }
+  }
+}
 @custom-variant high-contrast {
   &:where(html[data-contrast="high"] *) {
     @slot;
@@ -140,6 +148,7 @@ html[data-contrast="high"] {
     color: var(--color-ink);
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: calc(var(--header-h) + 16px);
+    scrollbar-gutter: stable; /* no sideways jump when the Home intro unlocks scrolling */
   }
   body {
     margin: 0;
@@ -948,6 +957,30 @@ html[data-contrast="high"] {
     color: var(--color-white);
   }
 
+  /* In-page skip link before a pinned scene (design .skip): hidden until focused */
+  .skip:not(:focus) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .skip:focus {
+    position: static;
+    display: inline-flex;
+    margin: 0 0 16px;
+    padding: 12px 20px;
+    background: var(--color-plum-800);
+    color: var(--color-white);
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
   /* ---------- Mobile action bar button (design .mbtn) ---------- */
   .mbtn {
     display: flex;
@@ -1302,4 +1335,29 @@ html[data-motion="reduce"] .dd-logo[data-pulse="true"] [data-part="heartbeat-pul
 }
 html[data-motion="reduce"] .dd-curtain {
   display: none;
+}
+
+/* ===================================================================
+   Home intro (design 01/02-home): while the intro video plays, the header, phone bar and
+   comfort button sit over it, invisible, and fade in as the logo flies into the header.
+   components/home/HomeIntro.tsx drives the --hi-* values on <html>.
+   =================================================================== */
+html[data-hi-lock] {
+  background: var(--color-white); /* the reserved scrollbar strip matches the white intro */
+}
+html[data-home-intro="play"] [data-site-header] {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  opacity: var(--hi-header, 0);
+}
+html[data-home-intro="play"] [data-logo-motion="header"] {
+  opacity: var(--hi-logo, 0);
+}
+html[data-home-intro="play"] :is([data-mobile-bar], [data-comfort]) {
+  opacity: var(--hi-bar, 0);
+}
+html[data-home-intro="play"]:not([data-hi-chrome="on"])
+  :is([data-site-header], [data-mobile-bar], [data-comfort]) {
+  pointer-events: none;
 }

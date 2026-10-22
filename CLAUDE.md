@@ -23,11 +23,13 @@ How to read it: the design decides how things **look and move**; the docs decide
 - **Logo:** faithful SVG rebuild of `docs/current-logo.png` ("DAWSON AND DAWSON", caring hands, "HOME CARE LLC") in the new colors — `components/brand/Logo.tsx` (variants: stacked · horizontal · mark · mark-small; tones: default · reversed · mono-plum · mono-cream). **Option A** (wheelchair) is live; **Option B** (two people) via `NEXT_PUBLIC_LOGO_FIGURE=b`. Motion in `LogoMotion.tsx` + CSS. Static files: `npm run logos` → `public/logo/*`, favicon, app icons. The Home **intro video + end frame stay as designed** (Phase 3) and fly into this SVG header logo; the SVG draw-in intro plays once per session on other landing pages.
 - **Header:** the design's short menu (logo · Care services · How it works · Paying for care · Areas we serve · Our story · Call). "Care services" opens the Care mega-menu (5 services + quiz). No extra items in the bar.
 - **Home (Phase 3):** whole quiz inline on Home; "The moment" keeps 4 lines; the illustrated Dawson House is dropped everywhere (video collages instead); intro video once per session.
+- **Home intro:** plays when Home is the page a visitor **lands on**, once per tab session (`sessionStorage` `dd:home-intro`, decided pre-paint in `lib/headScript.ts` → `html[data-home-intro="play"|"still"]`). Client-side navigation back to Home never replays it. While it plays, the header/phone bar/comfort button are fixed and faded by `--hi-*` vars (`components/home/HomeIntro.tsx`). Open a new tab to see it again.
+- **Home scroll scenes** port the design's own maths (`components/home/scroll.ts`): sticky "tracks" in `svh`, progress from `getBoundingClientRect`, direct DOM writes per frame (no React state). The live and still layouts are both in the DOM and switched by CSS with the `live:` / `reduce-motion:` variants, so there's no flash before hydration.
 - **Real facts confirmed by the owner:** Google reviews (show first name + last initial), 4.8 ★ / 33 reviews, "Women-owned", owner first name **Monique**, Google Maps link `https://maps.app.goo.gl/efdxQNbog5ZGfmrM7`. Everything else unknown stays a placeholder.
 - **Placeholders:** every unconfirmed fact lives in `content/site.config.ts` as `toConfirm(...)` / `confirmed: false` / `null`, and renders as a `.tbc` chip only when `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true`. Never invent facts. Images/videos in `public/` are placeholders — **keep their filenames stable**. `npm run prelaunch` lists everything left.
 - **Non-medical only.** Never imply nursing, medical care, dementia/memory care or live-in care. "Clients", never "patients".
 - **Accessibility: WCAG 2.2 AA.** Touch targets ≥ **48px**. Visible focus ring everywhere (3px leaf + 2px plum-950 inner; cream on Dusk). State is never color alone. Body links underlined. Accessible names include the visible label (2.5.3).
-- **Reduced motion:** every animation has a reduced version. Reduced = OS setting **or** Comfort Controls (`html[data-motion="reduce"]`). Use `useMotionMode()` / `isReducedMotion()` (`lib/motionMode.ts`) and the `reduce-motion:` Tailwind variant. Server render = static/reduced layout.
+- **Reduced motion:** every animation has a reduced version. Reduced = OS setting **or** Comfort Controls (`html[data-motion="reduce"]`). Use `useMotionMode()` / `isReducedMotion()` (`lib/motionMode.ts`) and the `reduce-motion:` / `live:` (full motion) Tailwind variants. Server render = static/reduced layout.
 - **Office hours vs care:** Office Mon–Fri 8 AM–5 PM (America/New_York, `lib/officeHours.ts`); Care 24/7. After hours every "Get a Free Care Assessment" becomes "Request a Callback" (`<CtaLabel />`).
 - **Smooth scrolling (Lenis)** is off by default (`NEXT_PUBLIC_SMOOTH_SCROLL`) — the design runs on normal scrolling.
 - **Indexing:** everything is `noindex` unless `NEXT_PUBLIC_INDEXABLE=true` (production domain only). `/styleguide` 404s in production.
@@ -57,8 +59,9 @@ components/
   cursor/  CursorRing.tsx
   layout/  SiteChrome Header HeaderBar Footer MobileActionBar OfficeStatus ComfortControls NotFoundContent
   motion/  PageTransition.tsx  SmoothScroll.tsx
-  home/ features/ ui/   (later phases)
-content/   site.config.ts (facts + flags) · navigation.ts · tokens.ts · copy/ (later)
+  home/    one component per Home chapter + home.css + scroll.ts (scene helpers)
+  features/ ui/   (later phases)
+content/   site.config.ts (facts + flags) · navigation.ts · tokens.ts · copy/ (page copy, e.g. home.ts)
 lib/       officeHours · years · motionMode · storage · contrast · headScript · cn
 styles/    globals.css (tokens + design component classes, ported from docs/design/css)
 public/    images/ videos/ (design placeholders, same filenames) · logo/ · icons/

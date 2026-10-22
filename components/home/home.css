@@ -1,0 +1,325 @@
+/*
+ * Home chapters — ported from docs/design/css/01-home-desktop.css + 02-home-mobile.css.
+ * Desktop values apply from 64rem (lg); below that the phone design is used (a little larger
+ * from 48rem, so tablets in portrait aren't left with phone-sized pictures).
+ * Every moving part has a reduced-motion state (OS setting or Comfort Controls).
+ */
+@reference "../../styles/globals.css";
+
+/* ---------- Intro (video → logo flies into the header) ---------- */
+.home-intro {
+  display: none;
+}
+html[data-home-intro="play"] .home-intro {
+  display: block;
+  height: 100svh;
+}
+html[data-home-intro="still"] .home-intro {
+  display: block;
+  height: min(810px, calc(100svh - var(--header-h)));
+}
+html[data-home-intro="still"] .home-intro video,
+html[data-home-intro="play"] .home-intro .intro-still {
+  display: none;
+}
+.intro-hint {
+  opacity: 0;
+  transition: opacity 500ms var(--ease-out-expo);
+}
+html[data-home-intro="still"] .intro-hint {
+  opacity: 1;
+}
+.fly-logo {
+  display: none;
+}
+html[data-home-intro="play"] .fly-logo {
+  display: block;
+}
+/* Header is fixed over the intro, so the hero makes room for it (design heroPadTop 184 / 104). */
+html[data-home-intro="play"] .home-hero {
+  padding-top: calc(var(--header-h) + 32px);
+  @variant lg {
+    padding-top: calc(var(--header-h) + 72px);
+  }
+}
+
+.mouse {
+  width: 28px;
+  height: 44px;
+  border: 2px solid var(--color-plum-800);
+  border-radius: 14px;
+  position: relative;
+}
+.mouse::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 4px;
+  height: 9px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--color-orchid-500);
+  animation: dd-wheel 1.6s ease-in-out infinite;
+}
+.hint-arrow {
+  animation: dd-bob 1.6s ease-in-out infinite;
+}
+.chev {
+  animation: dd-bob-m 1.6s ease-in-out infinite;
+}
+@keyframes dd-wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+@keyframes dd-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+@keyframes dd-bob-m {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+/* ---------- 01 — The moment ---------- */
+.mw {
+  display: inline-block;
+  will-change: transform, opacity;
+  @variant reduce-motion {
+    opacity: 1 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+}
+.moment-lead {
+  font-family: var(--font-sans);
+  font-weight: 400; /* design 300 → 400 (BUILD_DECISIONS answer 7) */
+  font-size: clamp(2rem, 1.257rem + 3.048vw, 4rem); /* 32 → 64 */
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+.moment-big {
+  font-size: clamp(4.75rem, 2.614rem + 8.762vw, 10.5rem); /* 76 → 168 */
+  line-height: 1;
+  white-space: nowrap;
+}
+.moment-img {
+  --st-img: min(350px, 100%, calc(100svh - 400px));
+  width: var(--st-img);
+  @variant md {
+    --st-img: min(480px, 100%, calc(100svh - 420px));
+  }
+  @variant lg {
+    --st-img: min(600px, max(320px, calc(100svh - 200px)), 44vw);
+  }
+}
+.st-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  opacity: 0;
+  transform: scale(1.06) translateX(40px);
+  transition:
+    opacity 700ms var(--ease-out-expo),
+    transform 900ms var(--ease-out-expo);
+  @variant lg {
+    transform: scale(1.06) translateX(48px);
+  }
+}
+.st-img[data-active="true"] {
+  opacity: 1;
+  transform: none;
+}
+.st-line {
+  font-family: var(--font-sans);
+  font-size: var(--text-base); /* design 17/22 → never under 18 */
+  line-height: 1.4;
+  color: var(--color-muted);
+  font-weight: 500;
+  transition: color 400ms;
+  @variant lg {
+    font-size: 1.375rem;
+  }
+}
+.st-line[data-state="current"] {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1.6rem + 2.67vw, 3.75rem); /* 36 → 60 */
+  line-height: 1.08;
+  color: var(--color-plum-800);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+.st-line[data-state="future"] {
+  display: none;
+}
+.caret {
+  display: none;
+}
+.st-line[data-state="current"] .caret {
+  display: inline-block;
+  width: 4px;
+  height: 0.82em;
+  margin-left: 6px;
+  vertical-align: -0.04em;
+  background: var(--color-orchid-500);
+  animation: dd-blink 1s steps(1) infinite;
+  @variant lg {
+    width: 5px;
+    margin-left: 8px;
+  }
+  @variant reduce-motion {
+    animation: none;
+  }
+}
+@keyframes dd-blink {
+  50% {
+    opacity: 0;
+  }
+}
+.tick {
+  display: block;
+  width: 32px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-line);
+  transition: background-color 300ms;
+  @variant lg {
+    width: 40px;
+  }
+}
+.tick[data-on="true"] {
+  background: var(--color-plum-800);
+}
+
+/* ---------- 02 — How we help ---------- */
+.hcard {
+  grid-area: 1 / 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(16px);
+  transition:
+    opacity 500ms,
+    transform 600ms var(--ease-out-expo);
+}
+.hcard[data-active="true"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+}
+/* Collage width: phone 350 (design scale 0.5); desktop 700 × min(1, (vh − 190) / 620), ≥ 420 */
+.hw-stage {
+  --cw: min(350px, 100cqw, calc((100svh - 460px) * 1.129));
+  height: calc(var(--cw) * 620 / 700);
+  @variant md {
+    --cw: min(560px, 100cqw, calc((100svh - 520px) * 1.129));
+  }
+  @variant lg {
+    --cw: min(clamp(420px, calc((100svh - 190px) * 1.129), 700px), 100cqw);
+  }
+}
+.hw-static {
+  --cw: min(700px, 100cqw);
+}
+.batch {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  will-change: transform, opacity;
+}
+/* Collage on the design's 700 × 620 canvas, in container units so it scales as one piece. */
+.collage {
+  position: relative;
+  width: var(--cw);
+  aspect-ratio: 700 / 620;
+  flex: none;
+  container-type: inline-size;
+}
+.c-panel {
+  position: absolute;
+  border-radius: calc(16cqw / 7);
+  background: var(--color-plum-100);
+  border: 2px solid var(--color-line);
+}
+.cv {
+  position: absolute;
+  width: calc(240cqw / 7);
+  height: 60cqw;
+  overflow: hidden;
+  border-radius: calc(6cqw / 7);
+  background: var(--color-plum-100);
+  box-shadow: 0 calc(24cqw / 7) calc(48cqw / 7) rgb(28 15 61 / 0.16);
+}
+.cv video,
+.cv img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cv-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(92cqw / 7);
+  height: calc(92cqw / 7);
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: rgb(28 15 61 / 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 400ms;
+}
+.cv-play svg {
+  width: calc(34cqw / 7);
+  height: calc(34cqw / 7);
+  margin-left: calc(4cqw / 7);
+}
+.cv[data-playing="true"] .cv-play {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mouse::after,
+  .hint-arrow,
+  .chev {
+    animation: none;
+  }
+  .st-img,
+  .hcard {
+    transition: none;
+  }
+}
+html[data-motion="reduce"] .mouse::after,
+html[data-motion="reduce"] :is(.hint-arrow, .chev) {
+  animation: none;
+}
+html[data-motion="reduce"] :is(.st-img, .hcard) {
+  transition: none;
+}

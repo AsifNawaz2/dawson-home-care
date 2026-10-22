@@ -1,41 +1,29 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { CtaLabel, OfficeStatusChip } from "@/components/layout/OfficeStatus";
+import { HomeIntro } from "@/components/home/HomeIntro";
+import { Hero } from "@/components/home/Hero";
+import { TheMoment } from "@/components/home/TheMoment";
+import { HowWeHelp } from "@/components/home/HowWeHelp";
+import "@/components/home/home.css";
 
 export const metadata: Metadata = {
   title: "In-Home Care in Beaufort, SC | Dawson & Dawson Home Care",
+  description:
+    "Owner-run, non-medical home care in Beaufort, SC since 2002. Personal care, home help, companionship, respite and 24-hour care. Free in-home assessment.",
 };
 
 /**
- * TEMPORARY — preview landing for Phase 2 (site shell). The designed Home page
- * (intro video, hero, 12 chapters) replaces this file in Phase 3.
+ * Home (design 01-home-desktop + 02-home-mobile, COPY_HOME). One component per chapter in
+ * components/home/. Chapters 03–12 and the final CTA follow in the next step of Phase 3.
  */
-export default function PreviewHome() {
+export default function HomePage() {
   return (
-    <section aria-labelledby="preview-title" className="wrap py-20 xl:py-28">
-      <div className="flex max-w-[52rem] flex-col items-start gap-6">
-        <OfficeStatusChip />
-        <p className="eyebrow">Preview build · Phase 2 of the rebuild</p>
-        <h1 id="preview-title" className="h1-hero">
-          The site <span className="accent">shell</span> is ready.
-        </h1>
-        <p className="lead">
-          Header, Care menu, footer, phone action bar, office hours, comfort settings, cursor ring
-          and page transitions are in place. The designed Home page arrives in the next phase.
-        </p>
-        <div className="flex flex-wrap gap-4">
-          <Link href="/styleguide" className="btn btn-primary" data-cursor-label="View">
-            Open the styleguide
-          </Link>
-          <Link href="/free-assessment" className="btn btn-ghost">
-            <CtaLabel />
-          </Link>
-        </div>
-        <p className="sm muted">
-          Links to pages that aren&apos;t built yet show the site&apos;s 404 page. Nothing here is
-          public — every page is set to &ldquo;noindex&rdquo;.
-        </p>
-      </div>
-    </section>
+    <>
+      <HomeIntro />
+      <Hero />
+      <TheMoment />
+      <HowWeHelp />
+      {/* Target of the "Skip to the next section" link until chapter 03 (Find the right care) lands. */}
+      <div id="find-care" tabIndex={-1} />
+    </>
   );
 }

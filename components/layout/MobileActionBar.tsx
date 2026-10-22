@@ -76,6 +76,7 @@ export function MobileActionBar() {
   return (
     <nav
       aria-label="Quick contact"
+      data-mobile-bar=""
       inert={hidden || undefined}
       className={cn(
         "fixed inset-x-0 bottom-0 z-[200] grid gap-2 border-t border-line bg-white px-2.5 pt-2 pb-[calc(8px+env(safe-area-inset-bottom))] transition-[transform,visibility] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden print:hidden reduce-motion:transition-none",

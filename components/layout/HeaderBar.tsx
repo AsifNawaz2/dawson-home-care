@@ -25,6 +25,7 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const hoverTimer = useRef(0);
+  const hoverOpenedAt = useRef(0);
 
   const closeAll = useCallback(() => {
     setMegaOpen(false);
@@ -44,6 +45,7 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
     if (!megaOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
+        window.clearTimeout(hoverTimer.current);
         setMegaOpen(false);
         triggerRef.current?.focus();
       }
@@ -93,7 +95,13 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
   const hoverOpen = (open: boolean) => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     window.clearTimeout(hoverTimer.current);
-    hoverTimer.current = window.setTimeout(() => setMegaOpen(open), open ? 90 : 220);
+    hoverTimer.current = window.setTimeout(
+      () => {
+        if (open) hoverOpenedAt.current = Date.now();
+        setMegaOpen(open);
+      },
+      open ? 90 : 220,
+    );
   };
 
   const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
@@ -126,7 +134,12 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
                 aria-expanded={megaOpen}
                 aria-controls={megaId}
                 aria-current={isCurrent(item.href) ? "page" : undefined}
-                onClick={() => setMegaOpen((o) => !o)}
+                onClick={() => {
+                  window.clearTimeout(hoverTimer.current); // a pending hover-open mustn't undo this
+                  // A click just after hover opened the menu means "open", not "close".
+                  if (megaOpen && Date.now() - hoverOpenedAt.current < 700) return;
+                  setMegaOpen((o) => !o);
+                }}
                 onPointerEnter={() => hoverOpen(true)}
               >
                 {item.label}

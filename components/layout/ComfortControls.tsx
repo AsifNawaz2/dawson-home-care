@@ -4,6 +4,8 @@
  * Comfort Controls (07 §17, SPEC §19): text size, high contrast, reduce motion.
  * Saved to localStorage (try/catch) and applied pre-paint by the <head> script.
  * Strings are SPEC Appendix B (proposed — approve before launch).
+ * Placement: bottom-left with its label from 768px (SPEC §19); on phones the icon-only button sits
+ * bottom-right, above the action bar, so it doesn't cover the Home scenes' progress ticks.
  */
 import { useEffect, useId, useRef, useState } from "react";
 import { Accessibility, X } from "lucide-react";
@@ -96,7 +98,10 @@ export function ComfortControls() {
   };
 
   return (
-    <div className="fixed bottom-[calc(var(--mbar-h)+16px+env(safe-area-inset-bottom))] left-4 z-[210] print:hidden">
+    <div
+      data-comfort=""
+      className="fixed right-4 bottom-[calc(var(--mbar-h)+16px+env(safe-area-inset-bottom))] z-[210] md:right-auto md:left-4 print:hidden"
+    >
       <div
         id={panelId}
         ref={panelRef}
@@ -104,7 +109,7 @@ export function ComfortControls() {
         aria-modal="false"
         aria-labelledby={headingId}
         hidden={!open}
-        className="absolute bottom-[calc(100%+12px)] left-0 w-[min(360px,calc(100vw-32px))] rounded-[20px] border border-line bg-white p-6 text-ink shadow-[0_24px_64px_rgb(42_24_86/0.16)]"
+        className="absolute right-0 bottom-[calc(100%+12px)] w-[min(360px,calc(100vw-32px))] rounded-[20px] border border-line bg-white p-6 text-ink shadow-[0_24px_64px_rgb(42_24_86/0.16)] md:right-auto md:left-0"
       >
         <div className="flex items-start justify-between gap-4">
           <h2 id={headingId} className="h3">
