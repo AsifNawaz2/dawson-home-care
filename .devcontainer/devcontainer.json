@@ -1,0 +1,39 @@
+{
+  // Dawson & Dawson Home Care — GitHub Codespaces setup.
+  // Opening a Codespace installs everything, starts the website and opens the preview.
+  // Nothing to type: wait for the "Website preview" tab (or click "Open in Browser" if your
+  // browser blocks the pop-up).
+  "name": "Dawson & Dawson Home Care",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "hostRequirements": { "cpus": 2, "memory": "4gb" },
+  "containerEnv": {
+    "NEXT_TELEMETRY_DISABLED": "1",
+    "NEXT_PUBLIC_SHOW_PLACEHOLDERS": "true",
+    "LEAD_MODE": "mock"
+  },
+  "forwardPorts": [3000],
+  "portsAttributes": {
+    "3000": { "label": "Website preview", "onAutoForward": "openBrowser" }
+  },
+  "otherPortsAttributes": { "onAutoForward": "silent" },
+  // 1) Install dependencies once, when the Codespace is created.
+  "postCreateCommand": "npm ci --no-audit --no-fund",
+  // 2) Start the dev server every time the Codespace opens. Port 3000 is forwarded and opened.
+  "postAttachCommand": { "website": "npm run dev -- --port 3000" },
+  "waitFor": "postCreateCommand",
+  "customizations": {
+    "codespaces": { "openFiles": ["README.md"] },
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "remote.autoForwardPortsSource": "process"
+      }
+    }
+  }
+}
