@@ -176,21 +176,23 @@ export function CostEstimator({
       {full && banner && (
         <div className="banner flex-wrap" aria-live="polite">
           <p>
-            {banner.startsWith("quiz:") && (
-              <>
-                We&apos;ve started this from your quiz answer: <strong>{banner.slice(5)}</strong>.
-                Change anything to match your plans.
-              </>
-            )}
-            {banner === "home" && "We've kept the numbers you chose on our home page."}
-            {banner.startsWith("service:") && (
-              <>
-                We&apos;ve started this at an example for{" "}
-                <strong>{serviceName(banner.slice(8))}</strong>: {v.hoursPerVisit} hours a visit,{" "}
-                {v.daysPerWeek} days a week{v.overnight ? ", with overnight care" : ""}. Change
-                anything to match your plans.
-              </>
-            )}
+            <span>
+              {banner.startsWith("quiz:") && (
+                <>
+                  We&apos;ve started this from your quiz answer: <strong>{banner.slice(5)}</strong>.
+                  Change anything to match your plans.
+                </>
+              )}
+              {banner === "home" && "We've kept the numbers you chose on our home page."}
+              {banner.startsWith("service:") && (
+                <>
+                  We&apos;ve started this at an example for{" "}
+                  <strong>{serviceName(banner.slice(8))}</strong>: {v.hoursPerVisit} hours a visit,{" "}
+                  {v.daysPerWeek} days a week{v.overnight ? ", with overnight care" : ""}. Change
+                  anything to match your plans.
+                </>
+              )}
+            </span>
           </p>
           <button
             type="button"

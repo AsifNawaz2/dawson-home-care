@@ -14,6 +14,7 @@ export function AssessmentButton({
   open,
   closed,
   onNavigate,
+  variant = "primary",
 }: {
   href?: string;
   className?: string;
@@ -23,11 +24,16 @@ export function AssessmentButton({
   closed?: string;
   /** Runs before navigating (e.g. hand the quiz answers to the form). */
   onNavigate?: () => void;
+  variant?: "primary" | "ghost";
 }) {
   const { isClosed } = useOfficeStatus();
   const to = isClosed ? `${href}${href.includes("?") ? "&" : "?"}after_hours=true` : href;
   return (
-    <Link href={to} className={cn("btn btn-primary", className)} onClick={onNavigate}>
+    <Link
+      href={to}
+      className={cn("btn", variant === "ghost" ? "btn-ghost" : "btn-primary", className)}
+      onClick={onNavigate}
+    >
       <CtaLabel open={open} closed={closed} />
     </Link>
   );

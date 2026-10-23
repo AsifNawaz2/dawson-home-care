@@ -90,6 +90,7 @@ export async function POST(request: Request) {
     prefill_source: m.prefill_source,
     service_page_needs: m.service_page_needs,
     payment_interest: m.payment_interest,
+    payment_explored: m.payment_explored,
     after_hours: m.after_hours,
     ...Object.fromEntries(Object.entries(m.quiz).map(([k, val]) => [k, val])),
     ...Object.fromEntries(Object.entries(m.estimator).map(([k, val]) => [`estimator_${k}`, val])),

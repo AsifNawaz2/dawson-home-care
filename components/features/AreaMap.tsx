@@ -50,10 +50,10 @@ const ys = pts.map((p) => p[1]!);
 const cx = (Math.min(...xs) + Math.max(...xs)) / 2;
 const cy = (Math.min(...ys) + Math.max(...ys)) / 2;
 
-function frame(ratio: number, padX = 1.3) {
+function frame(ratio: number, padX = 1.3, padY = 1.22) {
   const W = Math.max(
     (Math.max(...xs) - Math.min(...xs)) * padX,
-    (Math.max(...ys) - Math.min(...ys)) * 1.22 * ratio,
+    (Math.max(...ys) - Math.min(...ys)) * padY * ratio,
   );
   const H = W / ratio;
   const VB = { x: r1(cx - W / 2), y: r1(cy - H / 2), w: r1(W), h: r1(H) };
@@ -76,7 +76,8 @@ function frame(ratio: number, padX = 1.3) {
   };
   return { ratio, VB, pos, ringLabel, office: pos(OFFICE.coords.lng, OFFICE.coords.lat) };
 }
-const WIDE = frame(720 / 520);
+/** Tight enough that Beaufort and Lady's Island sit ≥ 24px apart (WCAG 2.5.8 target spacing). */
+const WIDE = frame(720 / 520, 1.3, 1.08);
 const PHONE = frame(350 / 330, 1.14);
 
 const SMALL = "(width < 48rem)";
@@ -244,7 +245,8 @@ export function AreaMap({
           <circle cx="12" cy="10" r="3.2" fill="var(--color-leaf-500)" />
         </svg>
         <p className="map-pill map-office-label">
-          <strong>Our office</strong> · 69 Robert Smalls Pkwy, Beaufort
+          {/* Short on the map; the address is in the caption right under it. */}
+          <strong>Our office</strong>
         </p>
       </div>
 
@@ -289,7 +291,7 @@ export function AreaMap({
                 aria-hidden="true"
                 className={cn(
                   "map-pill map-label",
-                  (LABEL_LEFT.has(a.slug) || p.left > (small ? 55 : 80)) && "map-label-left",
+                  (LABEL_LEFT.has(a.slug) || p.left > (small ? 55 : 88)) && "map-label-left",
                 )}
               >
                 {a.name}

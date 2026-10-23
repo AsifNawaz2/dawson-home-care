@@ -1499,15 +1499,15 @@ html:not([data-motion="reduce"]) .quiz-result {
   }
   .map-dot {
     position: absolute;
-    left: -14px;
-    top: -14px;
-    width: 28px;
-    height: 28px;
+    left: -12px;
+    top: -12px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 2;
+    z-index: 4; /* above the office pin, so no link is covered (WCAG 2.5.8) */
   }
   .map-dot-in {
     width: 14px;
@@ -1581,6 +1581,7 @@ html:not([data-motion="reduce"]) .quiz-result {
   }
   .pin-icon {
     position: absolute;
+    pointer-events: none;
     max-width: none;
     width: 32px;
     height: 32px;
@@ -1655,4 +1656,85 @@ html:not([data-motion="reduce"]) .quiz-result {
 }
 html[data-motion="reduce"] :is(.pin-ring, .map-town .map-dot::after) {
   display: none;
+}
+
+/* Agency checklist print sheet (COPY_COST_FAQ §03): neutral, no Dawson answers. */
+.agency-print {
+  display: none;
+}
+@media print {
+  html[data-print="agency"] body * {
+    visibility: hidden;
+  }
+  html[data-print="agency"] .agency-print {
+    display: block;
+    position: absolute;
+    inset: 0 0 auto 0;
+    color: var(--color-ink);
+    font-size: 12pt;
+  }
+  html[data-print="agency"] .agency-print,
+  html[data-print="agency"] .agency-print * {
+    visibility: visible;
+  }
+  .agency-print h2 {
+    font-family: var(--font-display);
+    font-size: 22pt;
+    margin-bottom: 12pt;
+  }
+  .agency-print table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .agency-print th,
+  .agency-print td {
+    border: 1px solid var(--color-ink);
+    padding: 6pt;
+    text-align: left;
+    vertical-align: top;
+  }
+  .agency-print td:first-child {
+    width: 46%;
+  }
+  .agency-print td:not(:first-child) {
+    height: 42pt;
+  }
+  .agency-print .grp {
+    background: var(--color-plum-100);
+  }
+  .agency-print small {
+    display: block;
+    font-size: 9pt;
+    margin-top: 2pt;
+  }
+  .agency-print p {
+    margin-top: 12pt;
+    font-size: 10pt;
+  }
+}
+
+/* FAQ search matches (no new colour — leaf-100 behind ink). */
+mark {
+  background: var(--color-leaf-100);
+  color: inherit;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+@keyframes dd-faq-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+html:not([data-motion="reduce"]) .faq-a[data-open="true"] {
+  animation: dd-faq-open 360ms var(--ease-out-expo);
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-a[data-open="true"] {
+    animation: none !important;
+  }
+}
+/* Search fields have their own labelled "Clear search" button. */
+input[type="search"]::-webkit-search-cancel-button {
+  appearance: none;
 }

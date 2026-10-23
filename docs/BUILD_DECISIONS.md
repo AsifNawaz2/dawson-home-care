@@ -170,6 +170,23 @@ These don't contradict the design — the design just doesn't cover them: Comfor
 
 ---
 
+### D8. Found while building Phase 4 (services, forms, features, rest of Home)
+
+| # | Conflict | Design says | Docs say | I followed |
+|---|---|---|---|---|
+| 43 | Service-area map base | Google Maps screenshot (row 30: our own SVG instead) | SPEC §6.2: coastline + water from 1:500k Census files, processed at build time | **Schematic map for now**: every town at its real projected position, the office pin and straight-line 10/20/30-mile rings — no coastline. The Census server can't be reached from the build container, and the only reachable public data (us-atlas, 1:10m) draws Beaufort County as one blob with Hilton Head inland, which would be wrong. `npm run map -- <1:500k TopoJSON>` adds the real coastline later; `npm run prelaunch` lists it |
+| 44 | Map office label | — | "**Our office** · 69 Robert Smalls Pkwy, Beaufort" always visible | "**Our office**" on the map (the full label covered the Burton dot); the full address is the map's caption right underneath |
+| 45 | Map town targets | — | 14px dots, 48px hit area where space allows; list as the equivalent control | 24px hit areas and a slightly tighter crop so the closest pair (Beaufort / Lady's Island) is ≥ 24px apart (WCAG 2.5.8 passes without the exception) |
+| 46 | Texting note under "Text us" (Home final CTA) | "Msg & data rates may apply. Reply STOP to opt out. [Final wording from COPY_LEGAL.md]" | COPY_LEGAL §1.5 has the final texting line | **COPY_LEGAL §1.5** wording + SMS Terms link — the placeholder pointed to it |
+| 47 | Reviews data | Real Google reviews | Phase 4 request said "Reviews (placeholder:true)" | **Answer 1 stands**: the 10 real reviews stay `placeholder: false`. The Reviews component also handles `placeholder: true` items (a [Sample] chip, only while placeholders are on), and hides the chapter with fewer than 3 real reviews |
+| 48 | Caregiver cards | Six "Caregiver Name" sample cards | Placeholder cards until real caregivers, never realistic fake names | Same six sample cards from `content/caregivers.ts`, shown only while placeholders are on (production hides the carousel until real cards exist) |
+| 49 | Owner video slot | Play button | Coming-soon state | Row 24 — "Video coming soon" card; the play button, captions note and transcript toggle come with the real video |
+| 50 | Quiz result mini estimator | — | Mini estimator + its own CTA, then the result CTA | The mini estimator's own button is left out: two "Get your exact plan" buttons in a row, and only the result CTA carries the quiz answers to the form |
+| 51 | Plain links on dark/Dusk bands | Not shown | Body links underlined, AA contrast | Plain links on plum/Dusk are cream (orchid-700 fails there) |
+| 52 | Service "A day with us" steps not reached yet | Whole step faded to 22% opacity (text ~1.5:1) | WCAG 2.2 AA contrast | Same slide-in and faded dot; the **words** turn muted (7:1) instead of fading. Reads the same "not yet", passes AA |
+| 53 | "Since 2002" number | Static number | Count-up | Row 22, computed in the browser (no clock reads during prerender); the space is held so nothing jumps |
+| 54 | FAQ structured data | — | FAQPage JSON-LD on /faq | Left for the SEO phase with the rest of the JSON-LD (none is built yet); the data (`blocksToText`) is ready |
+
 ## E. Pages in 06_SITEMAP_AND_PAGES.md with no design — confirmed: built in the same design language
 
 Yes — every page below is built with the design's fonts, colors, spacing, header/footer, eyebrow → Anton H2 → lead rhythm, buttons, cards, dark bands, Dusk CTA band, cursor ring and reduced-motion rules, reusing the closest designed sections. No new visual styles, no new colors.

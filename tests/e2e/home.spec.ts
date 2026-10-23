@@ -65,7 +65,14 @@ test.describe("Home chapters", () => {
 
   test("axe: no WCAG 2.2 AA violations, scrolled through every chapter", async ({ page }) => {
     await page.goto("/");
-    for (const id of ["#the-moment", "#how-we-help"]) {
+    for (const id of [
+      "#the-moment",
+      "#how-we-help",
+      "#find-care",
+      "#reviews",
+      "#where-we-care",
+      "#final-cta",
+    ]) {
       await page.locator(id).scrollIntoViewIfNeeded();
       await page.waitForTimeout(300);
     }

@@ -124,6 +124,8 @@ export const leadMetaSchema = z.object({
   estimator: z.record(z.string(), z.string()).default({}),
   quiz: z.record(z.string(), z.string()).default({}),
   payment_interest: z.string().max(60).default(""),
+  /** Payment Explorer panels opened (comma-separated ids, sessionStorage `payment_explored`). */
+  payment_explored: z.string().max(200).default(""),
   after_hours: z.boolean().default(false),
   page_url: z.string().max(500).default(""),
   utm: z.record(z.string(), z.string()).default({}),

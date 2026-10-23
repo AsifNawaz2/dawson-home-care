@@ -12,6 +12,10 @@ const PATTERNS = [
   [/placeholder:\s*true/g, "placeholder: true"],
   [/rateConfirmed:\s*false/g, "rates not confirmed (estimator shows hours only)"],
   [/toConfirm\(\s*$/g, "unconfirmed fact (multi-line, see next lines)"],
+  [
+    /detailed:\s*false/g,
+    "service-area map is schematic — run `npm run map -- <1:500k Census TopoJSON>`",
+  ],
 ];
 
 async function walk(dir) {
@@ -49,6 +53,14 @@ const PLACEHOLDER_MEDIA = [
 ];
 for (const f of PLACEHOLDER_MEDIA)
   hits.push(`public/images/${f}  placeholder photo (design stand-in)`);
+// Media the owner still has to send (slots built, placeholders showing).
+for (const f of [
+  "owner-portrait.jpg (Home ch. 06 shows the logo)",
+  'owner-intro.mp4 + captions + transcript (Home ch. 06 shows "Video coming soon")',
+  "owner-signature.svg (Home ch. 06)",
+  "caregiver portraits + quotes (content/caregivers.ts)",
+])
+  hits.push(`media  missing: ${f}`);
 
 if (hits.length) {
   console.log(`Pre-launch check: ${hits.length} item(s) still to confirm or replace:\n`);

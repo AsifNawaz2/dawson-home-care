@@ -317,6 +317,7 @@ export function AssessmentForm() {
             prefill_source: meta.current.prefill_source,
             service_page_needs: meta.current.service_page_needs,
             payment_interest: meta.current.payment_interest,
+            payment_explored: (readStorage("session", "payment_explored") ?? "").slice(0, 200),
             after_hours: afterHours,
             hours_per_week: values.hours_preset === "estimate" ? estimateWeekly : null,
             estimator: meta.current.estimator,

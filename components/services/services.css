@@ -187,20 +187,34 @@
   grid-template-columns: 56px minmax(0, 1fr);
   column-gap: 18px;
   padding-bottom: 28px;
-  transition:
-    opacity 600ms var(--ease-out-expo),
-    transform 700ms var(--ease-out-expo);
+  transition: transform 700ms var(--ease-out-expo);
   @variant lg {
     grid-template-columns: 72px minmax(0, 1fr);
     column-gap: 28px;
   }
   @variant live {
-    opacity: 0.22;
     transform: translateX(24px);
   }
 }
+/*
+ * Steps not reached yet: the design fades the whole step to 0.22, which leaves readable text at
+ * ~1.5:1. We fade the dot only and turn the words muted (7:1) — same "not yet" read, AA contrast
+ * (BUILD_DECISIONS row 52).
+ */
+.day-step[data-on="false"] .day-dot {
+  @variant live {
+    opacity: 0.22;
+  }
+}
+.day-step[data-on="false"] :is(time, h3, p, strong) {
+  @variant live {
+    color: var(--color-muted);
+  }
+}
+.day-step :is(time, h3, p, strong) {
+  transition: color 600ms var(--ease-out-expo);
+}
 .day-step[data-on="true"] {
-  opacity: 1;
   transform: none;
 }
 .day-dot {
@@ -218,7 +232,8 @@
   transition:
     background-color 500ms,
     border-color 500ms,
-    box-shadow 500ms;
+    box-shadow 500ms,
+    opacity 600ms var(--ease-out-expo);
   @variant lg {
     width: 72px;
     height: 72px;
