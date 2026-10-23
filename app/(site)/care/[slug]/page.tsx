@@ -1,4 +1,7 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { faqPageForService, serviceNode } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { notFound } from "next/navigation";
 import { servicePages, getServicePage, assessmentHref } from "@/content/services";
 import { ServiceHero } from "@/components/services/ServiceHero";
@@ -17,8 +20,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: PageProps<"/care/[slug]">): Promise<Metadata> {
-  const page = getServicePage((await params).slug);
-  return page ? { title: page.meta.title, description: page.meta.description } : {};
+  const { slug } = await params;
+  return getServicePage(slug) ? pageMetadata(`/care/${slug}`) : {};
 }
 
 /** Service page template (design 03-personal-care-desktop, COPY_SERVICES). */
@@ -36,6 +39,7 @@ export default async function ServicePageRoute({ params }: PageProps<"/care/[slu
       <ServiceFaq page={page} />
       <ServiceReview slug={page.slug} />
       <DuskCta title={page.cta.title} href={assessmentHref(page.slug)} />
+      <JsonLd data={[serviceNode(page), faqPageForService(page)]} />
     </>
   );
 }

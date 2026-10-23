@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { MessageSquare, Moon, Phone } from "lucide-react";
 import { contact, hours } from "@/content/site.config";
 import { assessmentHero, assessmentMeta } from "@/content/assessment";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageCrumbs } from "@/components/seo/PageCrumbs";
 import { AssessmentForm, ClockLine } from "@/components/forms/AssessmentForm";
 import { AssessmentAside } from "@/components/forms/AssessmentAside";
 import { NextOpen, WhenClosed } from "@/components/layout/OfficeStatus";
 import "@/components/forms/forms.css";
 
-export const metadata: Metadata = {
-  title: assessmentMeta.title,
-  description: assessmentMeta.description,
-};
+export const metadata: Metadata = pageMetadata("/free-assessment");
 
 const phone = contact.phone.value;
 const text = contact.tollFree.value;
@@ -21,7 +19,7 @@ export default function FreeAssessmentPage() {
   const h = assessmentHero;
   return (
     <div className="wrap">
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Free Assessment" }]} />
+      <PageCrumbs path="/free-assessment" />
       <div className="grid items-start gap-6 pt-4 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-16 lg:pt-6">
         <div className="flex min-w-0 flex-col gap-6">
           <section

@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { careItemList } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
 import Image from "next/image";
 import Link from "next/link";
 import { flags } from "@/content/site.config";
 import { services } from "@/content/navigation";
 import { careHub, hubCollage } from "@/content/careHub";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageCrumbs } from "@/components/seo/PageCrumbs";
 import { AssessmentButton } from "@/components/ui/AssessmentButton";
 import { AutoCollage } from "@/components/ui/Collage";
 import { DuskCta } from "@/components/ui/DuskCta";
 import { CareVenn } from "@/components/services/CareVenn";
 import "@/components/services/services.css";
 
-export const metadata: Metadata = {
-  title: careHub.meta.title,
-  description: careHub.meta.description,
-};
+export const metadata: Metadata = pageMetadata("/care");
 
 const nameOf = (slug: string) => services.find((s) => s.slug === slug)?.name ?? slug;
 
@@ -25,7 +25,7 @@ export default function CareHubPage() {
     <>
       <section aria-labelledby="hub-title" className="relative overflow-hidden">
         <div className="wrap">
-          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Care" }]} />
+          <PageCrumbs path="/care" />
           <div className="grid gap-10 pt-4 pb-[72px] lg:grid-cols-[minmax(0,1fr)_minmax(0,620px)] lg:items-center lg:gap-12 lg:pt-6 lg:pb-20">
             <div className="flex flex-col items-start gap-5">
               <p className="eyebrow">{hero.eyebrow}</p>
@@ -211,6 +211,7 @@ export default function CareHubPage() {
       </section>
 
       <DuskCta title={careHub.cta.title} />
+      <JsonLd data={[careItemList()]} />
     </>
   );
 }

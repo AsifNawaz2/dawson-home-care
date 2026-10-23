@@ -6,7 +6,7 @@ import { Phone } from "lucide-react";
 import { contact, hours } from "@/content/site.config";
 import { collages } from "@/content/copy/home";
 import { assessmentHref, type ServicePage } from "@/content/services";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageCrumbs } from "@/components/seo/PageCrumbs";
 import { AssessmentButton } from "@/components/ui/AssessmentButton";
 import { AutoCollage } from "@/components/ui/Collage";
 
@@ -17,13 +17,7 @@ export function ServiceHero({ page }: { page: ServicePage }) {
   return (
     <section aria-labelledby="svc-title" className="relative overflow-hidden">
       <div className="wrap">
-        <Breadcrumbs
-          items={[
-            { label: "Home", href: "/" },
-            { label: "Care", href: "/care" },
-            { label: page.name },
-          ]}
-        />
+        <PageCrumbs path={`/care/${page.slug}`} />
         <div className="grid gap-10 pt-4 pb-[72px] lg:grid-cols-[minmax(0,1fr)_minmax(0,620px)] lg:items-center lg:gap-12 lg:pt-6 lg:pb-20">
           <div className="flex flex-col items-start gap-5">
             <div className="flex flex-col gap-1.5">

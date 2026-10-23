@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { CalendarClock, Clock3, MoonStar } from "lucide-react";
 import { freeHelp } from "@/content/payments";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageCrumbs } from "@/components/seo/PageCrumbs";
 import { AssessmentButton } from "@/components/ui/AssessmentButton";
 import { DuskCta } from "@/components/ui/DuskCta";
 import { ExtLink } from "@/components/ui/Blocks";
@@ -12,11 +13,7 @@ import { PaymentExplorer } from "@/components/features/PaymentExplorer";
 import { AgencyChecklist } from "@/components/features/AgencyChecklist";
 import "@/components/forms/forms.css";
 
-export const metadata: Metadata = {
-  title: "Paying for Home Care in Beaufort, SC | Dawson & Dawson",
-  description:
-    "Estimate the cost of home care and see how families pay: private pay, long-term care insurance, VA benefits, Medicaid waivers — and what Medicare covers.",
-};
+export const metadata: Metadata = pageMetadata("/paying-for-care");
 
 const SECTION = "scroll-mt-[calc(var(--header-h)+24px)] lg:scroll-mt-[calc(var(--header-h)+92px)]";
 
@@ -43,7 +40,7 @@ export default function PayingForCarePage() {
   return (
     <>
       <div className="wrap">
-        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Paying for Care" }]} />
+        <PageCrumbs path="/paying-for-care" />
         <section
           aria-labelledby="pfc-title"
           className="flex max-w-[900px] flex-col items-start gap-3.5 pt-6 pb-12 lg:gap-4 lg:pt-10 lg:pb-16"
