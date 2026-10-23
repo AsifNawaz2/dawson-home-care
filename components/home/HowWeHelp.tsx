@@ -9,12 +9,12 @@
  * "1 of 5". Only the collage on screen plays. Tabbing to a card's link scrolls to that card.
  * Reduced motion: five rows of card + still collage (posters), nothing moves or plays.
  */
-import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { useMotionMode } from "@/lib/motionMode";
 import { services } from "@/content/navigation";
-import { collages, howWeHelp, type Collage as CollageData } from "@/content/copy/home";
+import { collages, howWeHelp } from "@/content/copy/home";
+import { Collage } from "@/components/ui/Collage";
 import { flags, service } from "@/content/site.config";
 import { clamp, ease, useScrollScene } from "./scroll";
 
@@ -223,60 +223,6 @@ function ServiceCard({
           <span aria-hidden="true"> →</span>
         </span>
       </Link>
-    </div>
-  );
-}
-
-const pct = (v: number) => `${(v / 7).toFixed(4)}cqw`;
-
-/** The design's 700 × 620 collage: lavender panel + portrait clips (videos, or posters when still). */
-function Collage({ data, playable = false }: { data: CollageData; playable?: boolean }) {
-  return (
-    <div className="collage">
-      <span
-        className="c-panel"
-        style={{
-          left: pct(data.panel.left),
-          top: pct(data.panel.top),
-          width: pct(data.panel.width),
-          height: pct(data.panel.height),
-        }}
-      />
-      {data.clips.map((c, i) => (
-        <div
-          key={c.name}
-          className="cv"
-          data-playing="false"
-          style={{ left: pct(c.left), top: pct(c.top), zIndex: i + 1 }}
-        >
-          {playable ? (
-            <video
-              src={`/videos/${c.name}.mp4`}
-              poster={`/images/poster-${c.name}.jpg`}
-              muted
-              loop
-              playsInline
-              preload="none"
-              tabIndex={-1}
-              onPlaying={(e) => e.currentTarget.parentElement?.setAttribute("data-playing", "true")}
-              onPause={(e) => e.currentTarget.parentElement?.setAttribute("data-playing", "false")}
-            />
-          ) : (
-            <Image
-              src={`/images/poster-${c.name}.jpg`}
-              alt=""
-              width={540}
-              height={960}
-              sizes="240px"
-            />
-          )}
-          <span className="cv-play">
-            <svg viewBox="0 0 24 24" fill="currentColor" className="text-white">
-              <polygon points="7 4 20 12 7 20 7 4" />
-            </svg>
-          </span>
-        </div>
-      ))}
     </div>
   );
 }

@@ -1,0 +1,363 @@
+/*
+ * Service-page template — ported from docs/design/css/03-personal-care-desktop.css.
+ * No phone design exists for this template, so phone sizes follow the Home-mobile patterns
+ * (BUILD_DECISIONS §B). Every transition has a reduced-motion state.
+ */
+@reference "../../styles/globals.css";
+
+.crumbs a {
+  color: var(--color-muted);
+  text-decoration: none;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+}
+.crumbs a:hover {
+  color: var(--color-plum-800);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- 01 — This helps if… ---------- */
+.chk {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 72px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-muted);
+  cursor: pointer;
+  font-size: var(--text-base);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--color-ink);
+  transition:
+    border-color 250ms,
+    background-color 250ms,
+    box-shadow 250ms,
+    transform 200ms var(--ease-out-expo);
+  @variant lg {
+    gap: 20px;
+    min-height: 84px;
+    padding: 16px 24px;
+    font-size: 1.1875rem;
+  }
+}
+@media (hover: hover) {
+  .chk:hover {
+    border-color: var(--color-orchid-500);
+    background: var(--color-orchid-100);
+    box-shadow:
+      0 0 0 4px rgb(194 91 217 / 0.22),
+      0 0 36px 8px rgb(194 91 217 / 0.45);
+    transform: translateY(-2px);
+  }
+}
+.chk input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+}
+.chk:has(input:checked) {
+  border: 2px solid var(--color-plum-800);
+  background: var(--color-plum-100);
+}
+.chk:has(input:focus-visible) {
+  outline: 3px solid var(--color-leaf-500);
+  outline-offset: 3px;
+}
+.box {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 2px solid var(--color-plum-800);
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  transition:
+    background-color 250ms,
+    transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.chk:has(input:checked) .box {
+  background: var(--color-leaf-500);
+  border-color: var(--color-leaf-500);
+  transform: scale(1.08);
+}
+.box path {
+  stroke-dasharray: 24;
+  stroke-dashoffset: 24;
+  transition: stroke-dashoffset 320ms var(--ease-out-expo) 60ms;
+}
+.chk:has(input:checked) .box path {
+  stroke-dashoffset: 0;
+}
+.fit-result {
+  animation: fit-in 500ms var(--ease-out-expo);
+}
+@keyframes fit-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* ---------- 02 — What we help with ---------- */
+.inc {
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: 24px;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  column-gap: 18px;
+  row-gap: 6px;
+  align-items: start;
+  transition:
+    transform 300ms var(--ease-out-expo),
+    box-shadow 300ms,
+    border-color 300ms;
+  @variant lg {
+    padding: 28px;
+    grid-template-columns: 88px minmax(0, 1fr);
+    column-gap: 24px;
+  }
+}
+.ic3d {
+  grid-row: 1 / span 2;
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: var(--color-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 14px 28px rgb(42 24 86 / 0.14),
+    inset 0 -6px 0 var(--color-plum-100);
+  transition:
+    background-color 300ms,
+    box-shadow 300ms;
+  @variant lg {
+    width: 88px;
+    height: 88px;
+    border-radius: 26px;
+  }
+}
+.ic3d svg {
+  width: 42px;
+  height: 42px;
+  transition: filter 300ms;
+  @variant lg {
+    width: 56px;
+    height: 56px;
+  }
+}
+@media (hover: hover) {
+  .inc:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-orchid-500);
+    box-shadow:
+      0 0 0 4px rgb(194 91 217 / 0.18),
+      0 24px 48px rgb(42 24 86 / 0.14);
+  }
+  .inc:hover .ic3d {
+    background: var(--color-plum-600);
+    box-shadow:
+      0 0 0 6px rgb(194 91 217 / 0.22),
+      0 0 40px 10px rgb(194 91 217 / 0.45),
+      inset 0 -6px 0 var(--color-plum-800);
+  }
+  .inc:hover .ic3d svg {
+    filter: brightness(0) invert(1);
+  }
+}
+
+/* ---------- 03 — A day with Dawson ---------- */
+.day-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  column-gap: 18px;
+  padding-bottom: 28px;
+  transition:
+    opacity 600ms var(--ease-out-expo),
+    transform 700ms var(--ease-out-expo);
+  @variant lg {
+    grid-template-columns: 72px minmax(0, 1fr);
+    column-gap: 28px;
+  }
+  @variant live {
+    opacity: 0.22;
+    transform: translateX(24px);
+  }
+}
+.day-step[data-on="true"] {
+  opacity: 1;
+  transform: none;
+}
+.day-dot {
+  position: relative;
+  z-index: 2;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 2px solid var(--color-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-plum-800);
+  transition:
+    background-color 500ms,
+    border-color 500ms,
+    box-shadow 500ms;
+  @variant lg {
+    width: 72px;
+    height: 72px;
+  }
+}
+.day-step[data-cur="true"] .day-dot {
+  background: var(--color-plum-600);
+  border-color: var(--color-plum-600);
+  color: var(--color-white);
+  box-shadow:
+    0 0 0 6px rgb(194 91 217 / 0.22),
+    0 0 36px 8px rgb(194 91 217 / 0.5);
+}
+.day-line {
+  left: 27px;
+  @variant lg {
+    left: 35px;
+  }
+}
+.sky {
+  position: relative;
+  height: 280px;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--color-leaf-100);
+  transition: background-color 900ms;
+  @variant lg {
+    height: 360px;
+  }
+}
+.sky[data-night="true"] {
+  background: var(--color-plum-800);
+}
+.sky-body {
+  transition: transform 900ms var(--ease-out-expo);
+}
+.sky .sun,
+.sky .moon {
+  transition: opacity 600ms;
+}
+
+/* ---------- 05 — Pairs well with / 06 — Cost ---------- */
+.pair {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  border: 1px solid var(--color-line);
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--color-white);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    transform 300ms var(--ease-out-expo),
+    box-shadow 300ms,
+    border-color 300ms;
+  @variant md {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+}
+.pair img {
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  object-fit: cover;
+  object-position: 50% 25%;
+  display: block;
+  transition: transform 600ms var(--ease-out-expo);
+}
+@media (hover: hover) {
+  .pair:hover {
+    color: inherit;
+    transform: translateY(-6px);
+    border-color: var(--color-orchid-500);
+    box-shadow:
+      0 0 0 4px rgb(194 91 217 / 0.18),
+      0 24px 48px rgb(42 24 86 / 0.14);
+  }
+  .pair:hover img {
+    transform: scale(1.05);
+  }
+}
+.wk {
+  flex: 1;
+  height: 100%;
+  border-radius: 10px;
+  background: var(--color-plum-100);
+  position: relative;
+  overflow: hidden;
+}
+.wk span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-plum-800);
+  border-radius: 10px;
+}
+
+/* ---------- Reduced motion (OS or Comfort Controls) ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .chk,
+  .inc,
+  .pair,
+  .pair img,
+  .day-step,
+  .box,
+  .box path,
+  .sky,
+  .sky-body,
+  .ic3d,
+  .ic3d svg {
+    transition: none;
+  }
+  .chk:hover,
+  .inc:hover,
+  .pair:hover,
+  .pair:hover img {
+    transform: none;
+  }
+  .fit-result {
+    animation: none;
+  }
+}
+html[data-motion="reduce"]
+  :is(.chk, .inc, .pair, .pair img, .day-step, .box, .sky, .sky-body, .ic3d, .ic3d svg),
+html[data-motion="reduce"] .box path {
+  transition: none;
+}
+html[data-motion="reduce"] :is(.chk, .inc, .pair, .pair img):hover {
+  transform: none;
+}
+html[data-motion="reduce"] .fit-result {
+  animation: none;
+}
+
+/* Hub Venn: a service link lights up its circle */
+.venn:has(a[data-s="pc"]:is(:hover, :focus-visible)) circle[data-s="pc"],
+.venn:has(a[data-s="hh"]:is(:hover, :focus-visible)) circle[data-s="hh"],
+.venn:has(a[data-s="co"]:is(:hover, :focus-visible)) circle[data-s="co"] {
+  fill: rgb(194 91 217 / 0.5);
+}

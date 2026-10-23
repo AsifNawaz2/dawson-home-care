@@ -252,59 +252,6 @@ html[data-home-intro="play"] .home-hero {
   align-items: center;
   will-change: transform, opacity;
 }
-/* Collage on the design's 700 × 620 canvas, in container units so it scales as one piece. */
-.collage {
-  position: relative;
-  width: var(--cw);
-  aspect-ratio: 700 / 620;
-  flex: none;
-  container-type: inline-size;
-}
-.c-panel {
-  position: absolute;
-  border-radius: calc(16cqw / 7);
-  background: var(--color-plum-100);
-  border: 2px solid var(--color-line);
-}
-.cv {
-  position: absolute;
-  width: calc(240cqw / 7);
-  height: 60cqw;
-  overflow: hidden;
-  border-radius: calc(6cqw / 7);
-  background: var(--color-plum-100);
-  box-shadow: 0 calc(24cqw / 7) calc(48cqw / 7) rgb(28 15 61 / 0.16);
-}
-.cv video,
-.cv img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.cv-play {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: calc(92cqw / 7);
-  height: calc(92cqw / 7);
-  translate: -50% -50%;
-  border-radius: 50%;
-  background: rgb(28 15 61 / 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 400ms;
-}
-.cv-play svg {
-  width: calc(34cqw / 7);
-  height: calc(34cqw / 7);
-  margin-left: calc(4cqw / 7);
-}
-.cv[data-playing="true"] .cv-play {
-  opacity: 0;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .mouse::after,
   .hint-arrow,

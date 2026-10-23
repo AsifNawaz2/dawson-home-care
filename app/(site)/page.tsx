@@ -3,6 +3,7 @@ import { HomeIntro } from "@/components/home/HomeIntro";
 import { Hero } from "@/components/home/Hero";
 import { TheMoment } from "@/components/home/TheMoment";
 import { HowWeHelp } from "@/components/home/HowWeHelp";
+import { FindCare } from "@/components/home/FindCare";
 import "@/components/home/home.css";
 
 export const metadata: Metadata = {
@@ -22,8 +23,7 @@ export default function HomePage() {
       <Hero />
       <TheMoment />
       <HowWeHelp />
-      {/* Target of the "Skip to the next section" link until chapter 03 (Find the right care) lands. */}
-      <div id="find-care" tabIndex={-1} />
+      <FindCare />
     </>
   );
 }
