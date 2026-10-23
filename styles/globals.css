@@ -191,6 +191,13 @@ html[data-contrast="high"] {
   a:hover {
     color: var(--color-plum-800);
   }
+  /* Plain links on plum and Dusk bands (contrast: cream on plum-950/plum-800). */
+  :where([data-surface="dark"], [data-surface="dusk"]) a {
+    color: var(--color-cream);
+  }
+  :where([data-surface="dark"], [data-surface="dusk"]) a:hover {
+    color: var(--color-white);
+  }
   img,
   video,
   svg {
@@ -1479,4 +1486,173 @@ html:not([data-motion="reduce"]) .quiz-result {
   .quiz-result {
     animation: none !important;
   }
+}
+
+/* ===================================================================
+   Service-area map (components/features/AreaMap.tsx, SPEC_FEATURES §6.3)
+   =================================================================== */
+@layer components {
+  .area-map .map-town,
+  .area-map .map-office {
+    width: 0;
+    height: 0;
+  }
+  .map-dot {
+    position: absolute;
+    left: -14px;
+    top: -14px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  .map-dot-in {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-plum-800);
+    transition:
+      width 200ms var(--ease-out-expo),
+      height 200ms var(--ease-out-expo),
+      background-color 200ms;
+  }
+  .map-town[data-tier="extended"] .map-dot-in {
+    background: var(--color-white);
+    border: 3px solid var(--color-plum-800);
+  }
+  .map-town:is([data-hot="true"], [data-match="true"]) .map-dot-in {
+    width: 22px;
+    height: 22px;
+    background: var(--color-orchid-500);
+    border: 2px solid var(--color-plum-800);
+  }
+  .map-town[data-match="true"] .map-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--color-orchid-500);
+    animation: dd-ring 600ms var(--ease-out-expo) 1 forwards;
+  }
+  .map-pill {
+    position: absolute;
+    white-space: nowrap;
+    background: var(--color-cream);
+    color: var(--color-ink);
+    border-radius: 999px;
+    padding: 2px 10px;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    line-height: 1.5;
+    pointer-events: none;
+  }
+  .map-label {
+    left: 14px;
+    top: -14px;
+  }
+  .map-label-left {
+    left: auto;
+    right: 14px;
+  }
+  .map-tip {
+    position: absolute;
+    left: 18px;
+    bottom: 14px;
+    z-index: 5;
+    min-width: 220px;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    border-radius: 14px;
+    padding: 12px 14px;
+    font-size: var(--text-sm);
+    color: var(--color-ink);
+    box-shadow: 0 12px 32px rgb(42 24 86 / 0.14);
+  }
+  .map-tip-left {
+    left: auto;
+    right: 18px;
+  }
+  .map-tip-below {
+    bottom: auto;
+    top: 14px;
+  }
+  .pin-icon {
+    position: absolute;
+    max-width: none;
+    width: 32px;
+    height: 32px;
+    left: -16px;
+    top: -30px;
+    z-index: 3;
+    filter: drop-shadow(0 4px 6px rgb(42 24 86 / 0.25));
+  }
+  .map-office-label {
+    right: 20px;
+    top: 4px;
+    z-index: 3;
+    background: var(--color-white);
+    border: 1px solid var(--color-line);
+    font-weight: 400;
+  }
+  .map-office-label strong {
+    font-weight: 700;
+    color: var(--color-plum-800);
+  }
+  .pin-ring {
+    position: absolute;
+    left: -16px;
+    top: -16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--color-leaf-500);
+    opacity: 0;
+  }
+  .map-office[data-ripple="true"] .pin-ring {
+    animation: dd-ripple 1600ms var(--ease-out-expo) 3;
+  }
+  .map-office[data-ripple="true"] .pin-ring-2 {
+    animation-delay: 400ms;
+  }
+  /* Phones: the map is a picture; search + the town list are the controls (SPEC §6.6). */
+  @media (width < 48rem) {
+    .map-dot {
+      pointer-events: none;
+    }
+    .map-office-label {
+      display: none;
+    }
+  }
+}
+@keyframes dd-ripple {
+  from {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+@keyframes dd-ring {
+  from {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  to {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pin-ring,
+  .map-town .map-dot::after {
+    display: none;
+  }
+}
+html[data-motion="reduce"] :is(.pin-ring, .map-town .map-dot::after) {
+  display: none;
 }

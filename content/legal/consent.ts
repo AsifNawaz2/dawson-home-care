@@ -119,3 +119,7 @@ export function buildConsentProof(input: {
     consent_user_agent: anyTicked ? input.userAgent.slice(0, 300) : "",
   };
 }
+
+/** Small line under every "Text us" link (COPY_LEGAL §1.5 — final). Followed by an "SMS Terms" link. */
+export const textLineNote =
+  "When you text this number, we'll text you back about your message. Msg & data rates may apply. Reply STOP to opt out.";

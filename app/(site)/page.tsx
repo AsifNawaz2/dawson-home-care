@@ -4,6 +4,16 @@ import { Hero } from "@/components/home/Hero";
 import { TheMoment } from "@/components/home/TheMoment";
 import { HowWeHelp } from "@/components/home/HowWeHelp";
 import { FindCare } from "@/components/home/FindCare";
+import { HowItWorks } from "@/components/home/HowItWorks";
+import { Since2002 } from "@/components/home/Since2002";
+import { MeetOwner } from "@/components/home/MeetOwner";
+import { Caregivers } from "@/components/home/Caregivers";
+import { Reviews } from "@/components/home/Reviews";
+import { HomeCost } from "@/components/home/HomeCost";
+import { WhereWeCare } from "@/components/home/WhereWeCare";
+import { ForProfessionals } from "@/components/home/ForProfessionals";
+import { HomeFaq } from "@/components/home/HomeFaq";
+import { FinalCta } from "@/components/home/FinalCta";
 import "@/components/home/home.css";
 
 export const metadata: Metadata = {
@@ -14,7 +24,7 @@ export const metadata: Metadata = {
 
 /**
  * Home (design 01-home-desktop + 02-home-mobile, COPY_HOME). One component per chapter in
- * components/home/. Chapters 03–12 and the final CTA follow in the next step of Phase 3.
+ * components/home/.
  */
 export default function HomePage() {
   return (
@@ -24,6 +34,16 @@ export default function HomePage() {
       <TheMoment />
       <HowWeHelp />
       <FindCare />
+      <HowItWorks />
+      <Since2002 />
+      <MeetOwner />
+      <Caregivers />
+      <Reviews />
+      <HomeCost />
+      <WhereWeCare />
+      <ForProfessionals />
+      <HomeFaq />
+      <FinalCta />
     </>
   );
 }
