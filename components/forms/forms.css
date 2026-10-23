@@ -1,0 +1,217 @@
+/*
+ * Form system — ported from docs/design/css/04-free-assessment-desktop.css + -mobile.css.
+ * Used by /free-assessment, the Care Quiz and later forms. Field/option styles live in
+ * styles/globals.css (.field .lbl .help .emsg .opt .ock .rdot .sbox).
+ */
+@reference "../../styles/globals.css";
+
+.fcard {
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: 28px;
+  box-shadow: 0 24px 64px rgb(42 24 86 / 0.08);
+  padding: 22px 18px 26px;
+  @variant md {
+    padding: 36px 36px 32px;
+  }
+  @variant lg {
+    padding: 44px 48px 40px;
+  }
+}
+.fstep {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.sh {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 0.005em;
+  font-size: var(--text-sh);
+  line-height: 1.1;
+  color: var(--color-plum-800);
+  outline: none;
+}
+.fs {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+.oic {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--color-plum-100);
+  color: var(--color-plum-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  transition: background-color 250ms;
+}
+.opt:has(input:checked) .oic {
+  background: var(--color-white);
+}
+.opt-tall .ock {
+  border-radius: 9px;
+}
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: var(--color-leaf-100);
+  border-radius: 16px;
+  padding: 12px 16px 12px 20px;
+  color: var(--color-ink);
+}
+.banner p {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.bdot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-leaf-700);
+  color: var(--color-white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.sumlist {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-line);
+  margin: 0;
+}
+.sumrow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: 16px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--color-line);
+  @variant md {
+    grid-template-columns: 170px minmax(0, 1fr) auto;
+  }
+}
+.sumrow dt {
+  font-weight: 600;
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  grid-column: 1 / -1;
+  padding-top: 6px;
+  @variant md {
+    grid-column: auto;
+    padding-top: 0;
+  }
+}
+.sumrow dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.spin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2.5px solid rgb(28 15 61 / 0.3);
+  border-top-color: var(--color-plum-950);
+  animation: dd-spin 0.8s linear infinite;
+}
+@keyframes dd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.okpath {
+  stroke-dasharray: 140;
+  stroke-dashoffset: 140;
+  animation: dd-draw 600ms var(--ease-out-expo) forwards;
+}
+@keyframes dd-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.pfill {
+  transform-origin: 0 50%;
+  transition: transform 600ms var(--ease-out-expo);
+}
+.fa-aside {
+  background: var(--color-orchid-100);
+  border-radius: 28px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  @variant lg {
+    padding: 36px 32px;
+  }
+}
+.nx {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  column-gap: 14px;
+  position: relative;
+}
+.nxn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-plum-800);
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 4px var(--color-orchid-100);
+}
+.notice {
+  background: var(--color-plum-100);
+  border-radius: 12px;
+  padding: 14px 16px;
+  color: var(--color-plum-800);
+}
+.esum {
+  background: var(--color-plum-100);
+  border-left: 4px solid var(--color-alert-700);
+  border-radius: 12px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  outline: none;
+}
+.esum a {
+  color: var(--color-alert-700);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .okpath,
+  .spin {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .pfill,
+  .oic {
+    transition: none;
+  }
+}
+html[data-motion="reduce"] :is(.okpath, .spin) {
+  animation: none;
+  stroke-dashoffset: 0;
+}
+html[data-motion="reduce"] :is(.pfill, .oic) {
+  transition: none;
+}

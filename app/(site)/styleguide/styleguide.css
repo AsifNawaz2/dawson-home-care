@@ -1,0 +1,51 @@
+/* Styleguide-only helpers: freeze hover/focus states so they can be compared side by side
+   (same approach as docs/design/01-interaction-states.html). */
+.sg-hover.btn {
+  transform: translateY(-2px);
+}
+.sg-hover.btn-primary {
+  box-shadow: inset 0 0 0 999px rgb(255 255 255 / 0.12);
+}
+.sg-hover.btn-secondary {
+  background: var(--color-plum-600);
+}
+.sg-hover.btn-ghost {
+  background: var(--color-plum-100);
+}
+.sg-hover.btn-cream {
+  box-shadow: inset 0 0 0 999px rgb(251 248 243 / 0.12);
+}
+.sg-focus {
+  outline: 3px solid var(--color-leaf-500);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--color-plum-950);
+}
+.sg-focus-dusk {
+  outline: 3px solid var(--color-cream);
+  outline-offset: 3px;
+}
+.sg-field-hover {
+  border-color: var(--color-plum-600);
+}
+.sg-field-focus {
+  border: 2px solid var(--color-plum-800);
+  outline: 3px solid var(--color-leaf-500);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--color-plum-950);
+}
+.sg-ring {
+  position: relative;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.sg-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-muted);
+}
+[data-surface="dark"] .sg-label,
+[data-surface="dusk"] .sg-label {
+  color: var(--color-plum-100);
+}

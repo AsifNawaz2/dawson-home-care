@@ -1,0 +1,6 @@
+docs/
+public/
+.next/
+node_modules/
+components/brand/logo-paths.ts
+package-lock.json
