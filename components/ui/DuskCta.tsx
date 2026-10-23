@@ -48,8 +48,14 @@ export function DuskCta({
       <div className="relative wrap pt-[88px] pb-[152px] lg:pt-24">
         <div className="flex max-w-[780px] flex-col gap-6">
           <h2 id={id} className="dl max-w-[600px] text-white">
-            {title[0]} <span className="accent">{title[1]}</span>
-            {title[2].startsWith(".") ? "" : " "}
+            {title[0]}
+            {title[1] && (
+              <>
+                {" "}
+                <span className="accent">{title[1]}</span>
+              </>
+            )}
+            {title[2] && !/^[.,!?]/.test(title[2]) ? " " : ""}
             {title[2]}
           </h2>
           <p className="lead text-cream">{lead}</p>

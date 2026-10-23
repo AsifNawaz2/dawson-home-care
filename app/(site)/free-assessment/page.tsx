@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { MessageSquare, Moon, Phone } from "lucide-react";
 import { contact, hours } from "@/content/site.config";
-import { assessmentHero, assessmentMeta } from "@/content/assessment";
+import { assessmentHero } from "@/content/assessment";
 import { PageCrumbs } from "@/components/seo/PageCrumbs";
 import { AssessmentForm, ClockLine } from "@/components/forms/AssessmentForm";
 import { AssessmentAside } from "@/components/forms/AssessmentAside";

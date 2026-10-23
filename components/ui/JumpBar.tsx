@@ -7,7 +7,16 @@
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 
-export function JumpBar({ items }: { items: { id: string; label: string }[] }) {
+export function JumpBar({
+  items,
+  label = "On this page",
+  currentValue = "true",
+}: {
+  items: { id: string; label: string }[];
+  label?: string;
+  /** aria-current value for the item in view ("step" for a list of steps). */
+  currentValue?: "true" | "step";
+}) {
   const [current, setCurrent] = useState<string | null>(null);
   useEffect(() => {
     const els = items.map((i) => document.getElementById(i.id)).filter(Boolean) as HTMLElement[];
@@ -26,7 +35,7 @@ export function JumpBar({ items }: { items: { id: string; label: string }[] }) {
   }, [items]);
   return (
     <nav
-      aria-label="On this page"
+      aria-label={label}
       className="z-20 border-y border-line bg-cream/95 backdrop-blur lg:sticky lg:top-[var(--header-h)]"
     >
       <ol className="wrap flex gap-2 overflow-x-auto py-2.5">
@@ -34,7 +43,7 @@ export function JumpBar({ items }: { items: { id: string; label: string }[] }) {
           <li key={it.id} className="flex-none">
             <a
               href={`#${it.id}`}
-              aria-current={current === it.id ? "true" : undefined}
+              aria-current={current === it.id ? currentValue : undefined}
               className={cn(
                 "inline-flex min-h-12 items-center gap-2 rounded-full border-[1.5px] px-4 font-semibold no-underline transition-colors",
                 current === it.id
