@@ -21,6 +21,10 @@ import "@/components/home/home.css";
 
 export const metadata: Metadata = pageMetadata("/");
 
+const Later = ({ children }: { children: React.ReactNode }) => (
+  <div className="cv-later">{children}</div>
+);
+
 /**
  * Home (design 01-home-desktop + 02-home-mobile, COPY_HOME). One component per chapter in
  * components/home/.
@@ -34,15 +38,35 @@ export default function HomePage() {
       <HowWeHelp />
       <FindCare />
       <HowItWorks />
-      <Since2002 />
-      <MeetOwner />
-      <Caregivers />
-      <Reviews />
-      <HomeCost />
-      <WhereWeCare />
-      <ForProfessionals />
-      <HomeFaq />
-      <FinalCta />
+      {/* After the last scroll scene: rendered by the browser only as they come near the
+          screen (content-visibility), so a phone's first load does far less layout work. */}
+      <Later>
+        <Since2002 />
+      </Later>
+      <Later>
+        <MeetOwner />
+      </Later>
+      <Later>
+        <Caregivers />
+      </Later>
+      <Later>
+        <Reviews />
+      </Later>
+      <Later>
+        <HomeCost />
+      </Later>
+      <Later>
+        <WhereWeCare />
+      </Later>
+      <Later>
+        <ForProfessionals />
+      </Later>
+      <Later>
+        <HomeFaq />
+      </Later>
+      <Later>
+        <FinalCta />
+      </Later>
       <JsonLd data={[website()]} />
     </>
   );

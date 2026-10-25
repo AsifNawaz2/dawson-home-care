@@ -26,3 +26,5 @@ export const LOGO_LINES = {
 } as const;
 
 export const LOGO_GLASS = { x: 966, y: 239, width: 156, height: 150, rx: 12 } as const;
+
+export type LogoFillKey = keyof typeof LOGO_FILLS;

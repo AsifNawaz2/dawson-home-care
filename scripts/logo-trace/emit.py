@@ -33,6 +33,8 @@ export const LOGO_LINES = {{
 }} as const;
 
 export const LOGO_GLASS = {{ x: {gx}, y: {gy}, width: {gw}, height: {gh}, rx: {gr} }} as const;
+
+export type LogoFillKey = keyof typeof LOGO_FILLS;
 '''
 open('./components/brand/logo-paths.ts','w').write(out)
 print(len(out))

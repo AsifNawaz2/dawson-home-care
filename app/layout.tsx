@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { anton, poppins } from "./fonts";
+import { anton, poppins, poppinsItalic } from "./fonts";
 import { HEAD_SCRIPT } from "@/lib/headScript";
 import { flags, siteUrl } from "@/content/site.config";
 import { localBusiness } from "@/lib/schema";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { LogoSprite } from "@/components/brand/LogoSprite";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -27,11 +28,17 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${anton.variable} ${poppins.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${anton.variable} ${poppins.variable} ${poppinsItalic.variable}`}
+      data-logo-figure={flags.logoFigure}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: HEAD_SCRIPT }} />
       </head>
       <body>
+        <LogoSprite />
         {children}
         {/* Site-wide business node (SEO_PLAN §3.2); pages add their own nodes. */}
         <JsonLd data={[localBusiness()]} />

@@ -4,7 +4,9 @@
  * The design's video collage: a lavender panel on a 700 × 620 canvas with 2–3 portrait clips.
  * Decorative (always aria-hidden by the caller); the page text carries the meaning.
  *
- *  - <Collage data playable />   videos, played/paused by the parent scene (Home "How we help").
+ *  - <Collage data playable lazyPoster />   videos, played/paused by the parent scene (Home
+ *    "How we help"). Their posters load only when the scene comes near the screen, so they
+ *    don't compete with the intro film on a phone's first load.
  *  - <Collage data />            still posters (reduced motion).
  *  - <AutoCollage data />        service heroes: plays while on screen, posters in reduced motion.
  */
@@ -15,9 +17,37 @@ import { useMotionMode } from "@/lib/motionMode";
 
 const cq = (v: number) => `${(v / 7).toFixed(4)}cqw`;
 
-export function Collage({ data, playable = false }: { data: CollageData; playable?: boolean }) {
+export function Collage({
+  data,
+  playable = false,
+  lazyPoster = false,
+}: {
+  data: CollageData;
+  playable?: boolean;
+  lazyPoster?: boolean;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const root = ref.current;
+    if (!playable || !lazyPoster || !root) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        root.querySelectorAll<HTMLVideoElement>("video[data-poster]").forEach((v) => {
+          v.poster = v.dataset.poster ?? "";
+        });
+        io.disconnect();
+      },
+      { rootMargin: "150% 0px" },
+    );
+    // Watch the scene, not the clip: slides waiting off to the side are clipped from view.
+    io.observe(root.closest("[data-poster-scope]") ?? root);
+    return () => io.disconnect();
+  }, [playable, lazyPoster]);
+
   return (
-    <div className="collage">
+    <div className="collage" ref={ref}>
       <span
         className="c-panel"
         style={{
@@ -37,7 +67,8 @@ export function Collage({ data, playable = false }: { data: CollageData; playabl
           {playable ? (
             <video
               src={`/videos/${c.name}.mp4`}
-              poster={`/images/poster-${c.name}.jpg`}
+              poster={lazyPoster ? undefined : `/images/poster-${c.name}.jpg`}
+              data-poster={lazyPoster ? `/images/poster-${c.name}.jpg` : undefined}
               muted
               loop
               playsInline

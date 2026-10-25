@@ -173,6 +173,9 @@ export function CtaLabel({
 
 /** Renders children only while the office is closed (after-hours lines). */
 export function WhenClosed({ children }: { children: React.ReactNode }) {
-  const { isClosed } = useOfficeStatus();
-  return isClosed ? <>{children}</> : null;
+  const { isClosed, known } = useOfficeStatus();
+  if (known) return isClosed ? <>{children}</> : null;
+  // Before the clock is read in React: in the HTML, shown or hidden by html[data-office] (set
+  // before first paint by lib/headScript.ts), so the line doesn't push the page down later.
+  return <div className="when-closed contents">{children}</div>;
 }

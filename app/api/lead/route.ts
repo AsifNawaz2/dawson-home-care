@@ -2,13 +2,14 @@
  * POST /api/lead — every family form posts here (CLAUDE.md "Leads: LEAD_MODE").
  *
  *  - Same zod schema as the browser; field messages come back for the error summary.
- *  - Honeypot filled → success, lead dropped silently.
+ *  - Honeypot filled → success, lead dropped silently. Turnstile (only with TURNSTILE_SECRET_KEY)
+ *    refused → 403 "spam-check".
  *  - Same phone + same form within 10 minutes → "duplicate".
  *  - Consent proof (COPY_LEGAL §1.4) is built here, with server time, IP and user agent.
  *  - form_type=quiz_plan ("Email me this plan" on the quiz result): email + quiz_* fields +
  *    the email consent text and server timestamp (COPY_CONVERSION §9.7).
  *  - LEAD_MODE=mock (default): saved to ./.leads/<time>-<form>.json, nothing leaves the machine.
- *    LEAD_MODE=live: POSTed to GHL_WEBHOOK_URL (GoHighLevel inbound webhook).
+ *    LEAD_MODE=live: GoHighLevel webhook or API v2 (lib/ghl.ts), with tags.
  */
 import { assessmentSchema, leadMetaSchema } from "@/lib/schemas/assessment";
 import { buildConsentProof } from "@/content/legal/consent";
@@ -17,7 +18,16 @@ import { hoursOptions } from "@/content/assessment";
 import { quizPlanMetaSchema, quizPlanSchema } from "@/lib/schemas/quizPlan";
 import { CURRENT_EMAIL_PLAN_CONSENT, emailPlanConsent } from "@/content/legal/consent";
 import { contactMetaSchema, contactSchema } from "@/lib/schemas/contact";
-import { deliver, fieldErrors, forget, isDuplicate, json, requestIp, utmFields } from "@/lib/leads";
+import {
+  deliver,
+  fieldErrors,
+  forget,
+  isDuplicate,
+  json,
+  passesTurnstile,
+  requestIp,
+  utmFields,
+} from "@/lib/leads";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -26,9 +36,13 @@ export async function POST(request: Request) {
   } catch {
     return json({ ok: false, code: "bad-request" }, 400);
   }
-  const { values, meta } = (body ?? {}) as { values?: unknown; meta?: { form_type?: unknown } };
-  if (meta?.form_type === "quiz_plan") return quizPlan(values, meta);
-  if (meta?.form_type === "contact") return contactMessage(request, values, meta);
+  const { values, meta, turnstile } = (body ?? {}) as {
+    values?: unknown;
+    meta?: { form_type?: unknown };
+    turnstile?: unknown;
+  };
+  if (meta?.form_type === "quiz_plan") return quizPlan(request, values, meta, turnstile);
+  if (meta?.form_type === "contact") return contactMessage(request, values, meta, turnstile);
 
   const parsed = assessmentSchema.safeParse(values);
   const parsedMeta = leadMetaSchema.safeParse(meta ?? { form_type: "assessment" });
@@ -40,11 +54,12 @@ export async function POST(request: Request) {
 
   // Honeypot: pretend all is well.
   if (v.website) return json({ ok: true });
+  const ip = requestIp(request);
+  if (!(await passesTurnstile(turnstile, ip))) return json({ ok: false, code: "spam-check" }, 403);
 
   const key = `${m.form_type}:${nationalDigits(v.phone)}`;
   if (isDuplicate(key)) return json({ ok: false, code: "duplicate" }, 409);
 
-  const ip = requestIp(request);
   const proof = buildConsentProof({
     transactional: v.sms_transactional_consent,
     marketing: v.sms_marketing_consent,
@@ -91,7 +106,7 @@ export async function POST(request: Request) {
   return json({ ok: true });
 }
 
-async function quizPlan(values: unknown, meta: unknown) {
+async function quizPlan(request: Request, values: unknown, meta: unknown, turnstile: unknown) {
   const parsed = quizPlanSchema.safeParse(values);
   const parsedMeta = quizPlanMetaSchema.safeParse(meta);
   if (!parsed.success || !parsedMeta.success) {
@@ -100,6 +115,8 @@ async function quizPlan(values: unknown, meta: unknown) {
   const v = parsed.data;
   const m = parsedMeta.data;
   if (v.website) return json({ ok: true });
+  if (!(await passesTurnstile(turnstile, requestIp(request))))
+    return json({ ok: false, code: "spam-check" }, 403);
 
   const key = `quiz_plan:${v.email.toLowerCase()}`;
   if (isDuplicate(key)) return json({ ok: false, code: "duplicate" }, 409);
@@ -127,7 +144,12 @@ async function quizPlan(values: unknown, meta: unknown) {
 }
 
 /** Contact form (COPY_CONVERSION §7 "04"): form_type=contact, topic as a GHL field. */
-async function contactMessage(request: Request, values: unknown, meta: unknown) {
+async function contactMessage(
+  request: Request,
+  values: unknown,
+  meta: unknown,
+  turnstile: unknown,
+) {
   const parsed = contactSchema.safeParse(values);
   const parsedMeta = contactMetaSchema.safeParse(meta);
   if (!parsed.success || !parsedMeta.success)
@@ -135,6 +157,8 @@ async function contactMessage(request: Request, values: unknown, meta: unknown) 
   const v = parsed.data;
   const m = parsedMeta.data;
   if (v.website) return json({ ok: true });
+  const ip = requestIp(request);
+  if (!(await passesTurnstile(turnstile, ip))) return json({ ok: false, code: "spam-check" }, 403);
 
   const key = `contact:${nationalDigits(v.phone) || v.email.toLowerCase()}`;
   if (isDuplicate(key)) return json({ ok: false, code: "duplicate" }, 409);
@@ -143,7 +167,7 @@ async function contactMessage(request: Request, values: unknown, meta: unknown) 
     transactional: v.sms_transactional_consent,
     marketing: v.sms_marketing_consent,
     pageUrl: m.page_url,
-    ip: requestIp(request),
+    ip,
     userAgent: request.headers.get("user-agent") ?? "",
   });
   const lead = {

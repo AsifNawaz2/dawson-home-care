@@ -171,8 +171,11 @@ export const integrations = {
   /** LeadConnector (GoHighLevel) form seen on the current site. */
   ghlFormId: verified("tkgwDE5LF5f9rgsw3R2x"),
   currentMetaDescription: verified("Personalized Attention for All Your Health-Related Needs"),
-  /** Cloudflare Turnstile on the forms. Not wired yet, so its Privacy §2/§5 lines stay hidden. */
-  turnstile: false as boolean,
+  /**
+   * Cloudflare Turnstile on the forms (components/forms/Turnstile.tsx). On once TURNSTILE_SITE_KEY
+   * is set; the Privacy §2/§5 lines about it show only then, so they are never untrue.
+   */
+  turnstile: Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY) as boolean,
 } as const;
 
 /** SMS + legal settings (COPY_LEGAL). */

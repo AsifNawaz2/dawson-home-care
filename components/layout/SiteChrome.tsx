@@ -3,6 +3,7 @@ import { CursorRing } from "@/components/cursor/CursorRing";
 import { PageTransitionProvider } from "@/components/motion/PageTransition";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { flags } from "@/content/site.config";
+import { Attribution } from "@/components/forms/Attribution";
 import { ComfortControls } from "./ComfortControls";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
@@ -33,6 +34,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         <ComfortControls />
         <CursorRing />
         <SmoothScroll />
+        <Attribution />
       </PageTransitionProvider>
     </OfficeStatusProvider>
   );

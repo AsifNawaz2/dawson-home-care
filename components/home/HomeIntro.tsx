@@ -24,6 +24,7 @@ export function HomeIntro() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const flyRef = useRef<HTMLImageElement>(null);
+  const stillRef = useRef<HTMLImageElement>(null);
   const hintRef = useRef<HTMLDivElement>(null);
   const endedRef = useRef(false);
   const forcedRef = useRef(false);
@@ -38,7 +39,8 @@ export function HomeIntro() {
     const video = videoRef.current;
     const fly = flyRef.current;
     const hint = hintRef.current;
-    if (html.dataset.homeIntro !== "play" || !section || !video || !fly || !hint) return;
+    const still = stillRef.current;
+    if (html.dataset.homeIntro !== "play" || !section || !video || !fly || !hint || !still) return;
 
     const vars = ["--hi-header", "--hi-logo", "--hi-bar"] as const;
     const resetChrome = () => {
@@ -95,6 +97,8 @@ export function HomeIntro() {
       const flying = ended && p > 0.001 && p < 0.999 && !forced;
       fly.style.opacity = flying ? String(1 - swap) : "0";
       video.style.opacity = ended && p > 0.001 ? "0" : "1";
+      // Never let the stand-in show through while the logo flies out of the frame.
+      still.style.visibility = ended && p > 0.001 ? "hidden" : "";
 
       const ho = forced ? 1 : clamp((p - 0.55) / 0.45);
       const bo = forced ? 1 : clamp((p - 0.7) / 0.3);
@@ -177,6 +181,11 @@ export function HomeIntro() {
       // The head script usually started it already; if autoplay is blocked, end at once.
       if (video.paused) video.play().catch(finish);
     }
+    // Escape pressed before hydration (lib/headScript.ts remembers it).
+    if ("hiEsc" in html.dataset) {
+      delete html.dataset.hiEsc;
+      finish();
+    }
     update();
     revealIfFocused(document.activeElement); // Tab may have reached the header before hydration
 
@@ -212,24 +221,28 @@ export function HomeIntro() {
             Skip intro
           </button>
         </div>
+        {/* The video's last frame: the reduced-motion still, and — sized for the screen, under the
+            video, which covers it exactly — the poster until the film's first frame (a phone gets
+            ~20 KB instead of a 1080p JPEG). Hidden only while the logo flies out. */}
+        <Image
+          ref={stillRef}
+          src="/images/intro-end-frame.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          preload
+          className="intro-still bg-white object-contain"
+        />
         <video
           ref={videoRef}
           id="home-intro-video"
           src="/videos/intro-animation.mp4"
-          poster="/images/intro-end-frame.jpg"
           muted
           playsInline
           preload="none"
           aria-hidden="true"
           tabIndex={-1}
-          className="absolute inset-0 size-full bg-white object-contain"
-        />
-        <Image
-          src="/images/intro-end-frame.jpg"
-          alt=""
-          fill
-          sizes="100vw"
-          className="intro-still bg-white object-contain"
+          className="absolute inset-0 size-full object-contain"
         />
         <div
           ref={hintRef}

@@ -10,6 +10,10 @@ Private preview of the new website for Dawson and Dawson Home Care LLC (Beaufort
 
 Every time you reopen the Codespace, the website starts again automatically.
 
+**Reveal notes:** add `/reveal-notes` to the preview address. It lists what's new, the seven fixes, lets you switch the logo between Option A and Option B, and shows everything we still need from you. It isn't linked from the site and won't exist on the live website.
+
+Forms in the preview don't send anything: each request is saved as a file in the Codespace (`.leads/`) so you can see exactly what GoHighLevel will receive.
+
 ## For developers
 
 See [CLAUDE.md](CLAUDE.md) for sources of truth, decisions, conventions and commands, and [docs/BUILD_DECISIONS.md](docs/BUILD_DECISIONS.md) for every design decision.

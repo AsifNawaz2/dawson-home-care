@@ -38,6 +38,7 @@ export function Footer() {
                   tone="reversed"
                   figure={flags.logoFigure}
                   uid="ftr"
+                  switchable
                   className="h-auto w-full"
                 />
               </LogoMotion>

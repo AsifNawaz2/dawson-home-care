@@ -10,12 +10,28 @@
  *   mark-small  — simplified, thicker cut for ≤32px (favicon, app icons). No hands.
  * Tones: default · reversed (plum-950 only) · mono-plum · mono-cream.
  * Figure: "a" (wheelchair, live) · "b" (two people, behind NEXT_PUBLIC_LOGO_FIGURE).
+ *
+ * The big traced shapes (hands, wordmark, figure…) are drawn once per page by <LogoSprite />
+ * (root layout) and each logo `<use>`s them — a page carries several logos (header, footer,
+ * curtain, photo slots), and inlining ~33 KB of path data in each made the HTML heavy.
+ * Standalone files (npm run logos) pass `paths` to inline them instead.
  */
-import { LOGO_FILLS, LOGO_GLASS, LOGO_LINES } from "./logo-paths";
+import { LOGO_GLASS, LOGO_LINES, type LogoFillKey } from "./logo-paths";
 
 export type LogoVariant = "stacked" | "horizontal" | "mark" | "mark-small";
 export type LogoTone = "default" | "reversed" | "mono-plum" | "mono-cream";
 export type LogoFigure = "a" | "b";
+type Paths = Record<LogoFillKey, string>;
+
+/** One traced shape: a <use> of the page's sprite, or the path itself in standalone files. */
+function Shape({
+  k,
+  paths,
+  ...rest
+}: { k: LogoFillKey; paths?: Paths } & React.SVGProps<SVGPathElement>) {
+  if (paths) return <path d={paths[k]} {...rest} />;
+  return <use href={`#ddl-${k}`} {...(rest as React.SVGProps<SVGUseElement>)} />;
+}
 
 const T = {
   plum950: "#1C0F3D",
@@ -134,10 +150,17 @@ type LogoProps = {
   figure?: LogoFigure;
   /** Unique per instance on a page (masks need ids). */
   uid: string;
+  /**
+   * Render both figures; html[data-logo-figure] picks the visible one (default from
+   * NEXT_PUBLIC_LOGO_FIGURE, overridden for this tab by the /reveal-notes A/B toggle).
+   */
+  switchable?: boolean;
   /** Header instance that runs the first-visit intro: adds the draw-in reveal masks. */
   intro?: boolean;
   /** Standalone use (no wrapping link): gives the SVG role="img" + <title>. */
   title?: string;
+  /** Inline the traced shapes (static files, no <LogoSprite /> on the page). */
+  paths?: Paths;
   className?: string;
   style?: React.CSSProperties;
 };
@@ -147,8 +170,10 @@ export function Logo({
   tone = "default",
   figure = "a",
   uid,
+  switchable = false,
   intro = false,
   title,
+  paths,
   className,
   style,
 }: LogoProps) {
@@ -159,9 +184,16 @@ export function Logo({
     : ({ "aria-hidden": true, focusable: "false" } as const);
 
   const mark = (
-    <Mark c={c} figure={figure} id={id} intro={intro} small={variant === "mark-small"} />
+    <Mark
+      c={c}
+      figure={switchable ? "both" : figure}
+      id={id}
+      intro={intro}
+      small={variant === "mark-small"}
+      paths={paths}
+    />
   );
-  const word = <Wordmark c={c} intro={intro} />;
+  const word = <Wordmark c={c} intro={intro} paths={paths} />;
 
   return (
     <svg
@@ -216,12 +248,14 @@ function Mark({
   id,
   intro,
   small,
+  paths,
 }: {
   c: LogoColors;
-  figure: LogoFigure;
+  figure: LogoFigure | "both";
   id: (s: string) => string;
   intro: boolean;
   small: boolean;
+  paths?: Paths;
 }) {
   const thick = small
     ? { stroke: "currentColor", strokeWidth: SMALL_STROKE, strokeLinejoin: "round" as const }
@@ -247,7 +281,7 @@ function Mark({
             <RevealMask id={id("rv-window")} d={LOGO_LINES.windowReveal} width={44} />
           </>
         )}
-        {figure === "b" && (
+        {figure !== "a" && (
           <mask
             id={id("heart")}
             maskUnits="userSpaceOnUse"
@@ -263,15 +297,17 @@ function Mark({
       </defs>
       <g data-part="house">
         <g data-part="house-roof">
-          <path
-            d={LOGO_FILLS.roof}
+          <Shape
+            k="roof"
+            paths={paths}
             fill={c.roof}
             style={{ color: c.roof }}
             {...thick}
             mask={intro ? `url(#${id("rv-roof")})` : undefined}
           />
-          <path
-            d={LOGO_FILLS.innerRoof}
+          <Shape
+            k="innerRoof"
+            paths={paths}
             fill={c.inner}
             style={{ color: c.inner }}
             {...thick}
@@ -300,9 +336,10 @@ function Mark({
             style={{ filter: "blur(40px)" }}
           />
         )}
-        <path
+        <Shape
+          k="window"
+          paths={paths}
           data-part="window"
-          d={LOGO_FILLS.window}
           fill={c.window}
           style={{ color: c.window }}
           {...(small ? { stroke: "currentColor", strokeWidth: 14 } : {})}
@@ -311,14 +348,21 @@ function Mark({
       </g>
       {!small && (
         <g data-part="hands">
-          <path d={LOGO_FILLS.hands} fill={c.hands} />
+          <Shape k="hands" paths={paths} fill={c.hands} />
         </g>
       )}
       <g data-part="figure" style={{ transformOrigin: "50% 100%", transformBox: "fill-box" }}>
-        {figure === "a" ? (
-          <path d={LOGO_FILLS.figureA} fill={c.figure} {...figureStroke} />
-        ) : (
-          <g mask={`url(#${id("heart")})`}>
+        {figure !== "b" && (
+          <Shape
+            k="figureA"
+            paths={paths}
+            fill={c.figure}
+            {...figureStroke}
+            data-fig={figure === "both" ? "a" : undefined}
+          />
+        )}
+        {figure !== "a" && (
+          <g mask={`url(#${id("heart")})`} data-fig={figure === "both" ? "b" : undefined}>
             <g data-part="figure-caregiver">
               <circle {...FIGURE_B.caregiverHead} fill={c.figure} {...figureStroke} />
               <path d={FIGURE_B.caregiverBody} fill={c.figure} {...figureStroke} />
@@ -335,7 +379,7 @@ function Mark({
   );
 }
 
-function Wordmark({ c, intro }: { c: LogoColors; intro: boolean }) {
+function Wordmark({ c, intro, paths }: { c: LogoColors; intro: boolean; paths?: Paths }) {
   const line = {
     fill: "none",
     stroke: c.line,
@@ -368,13 +412,13 @@ function Wordmark({ c, intro }: { c: LogoColors; intro: boolean }) {
         />
       </g>
       <g data-part="wordmark-name">
-        <path d={LOGO_FILLS.nameDark} fill={c.name} />
-        <path d={LOGO_FILLS.nameAnd} fill={c.and} />
+        <Shape k="nameDark" paths={paths} fill={c.name} />
+        <Shape k="nameAnd" paths={paths} fill={c.and} />
       </g>
       <g data-part="wordmark-descriptor">
         <path d={LOGO_LINES.bar} fill="none" stroke={c.desc} strokeWidth={10} />
-        <path d={LOGO_FILLS.homeCare} fill={c.desc} />
-        <path d={LOGO_FILLS.llc} fill={c.desc} />
+        <Shape k="homeCare" paths={paths} fill={c.desc} />
+        <Shape k="llc" paths={paths} fill={c.desc} />
       </g>
     </g>
   );

@@ -6,6 +6,13 @@
  */
 @reference "../../styles/globals.css";
 
+/* Chapters after the last scroll scene (app/(site)/page.tsx <Later>): skipped by layout and
+   paint until near the screen. `auto` keeps each one's real height once it has rendered. */
+.cv-later {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
 /* ---------- Intro (video → logo flies into the header) ---------- */
 .home-intro {
   display: none;
@@ -18,10 +25,10 @@ html[data-home-intro="still"] .home-intro {
   display: block;
   height: min(810px, calc(100svh - var(--header-h)));
 }
-html[data-home-intro="still"] .home-intro video,
-html[data-home-intro="play"] .home-intro .intro-still {
+html[data-home-intro="still"] .home-intro video {
   display: none;
 }
+
 .intro-hint {
   opacity: 0;
   transition: opacity 500ms var(--ease-out-expo);
