@@ -1,10 +1,11 @@
 /**
  * Shared lead plumbing for the API routes (CLAUDE.md "Leads: LEAD_MODE"):
- * duplicate guard, request IP and delivery (mock file or GoHighLevel webhook).
+ * duplicate guard, request IP, spam checks and delivery (mock file or GoHighLevel, lib/ghl.ts).
  */
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import type { z } from "zod";
+import { sendToGhl, withTags, type Lead } from "./ghl";
 
 const recent = new Map<string, number>();
 const TEN_MIN = 10 * 60 * 1000;
@@ -35,20 +36,50 @@ export function fieldErrors(error: z.ZodError | undefined): Record<string, strin
 
 /** "utm_source" etc. from the meta object the browser sends. */
 export const utmFields = (utm: Record<string, string>) =>
-  Object.fromEntries(Object.entries(utm).map(([k, val]) => [`utm_${k}`, val]));
+  Object.fromEntries(Object.entries(cleanUtm(utm)).map(([k, val]) => [`utm_${k}`, val]));
 
-/** Mock: write ./.leads/<time>-<form>.json. Live: POST to the GoHighLevel webhook. */
-export async function deliver(lead: { form_type: string; received_at: string }): Promise<boolean> {
+/** utm_* from the browser (first touch, lib/attribution.ts), keys and values trimmed. */
+export const cleanUtm = (utm: Record<string, string>) =>
+  Object.fromEntries(
+    Object.entries(utm)
+      .filter(([k]) => /^[a-z_]{1,20}$/.test(k))
+      .slice(0, 10)
+      .map(([k, val]) => [k, String(val).slice(0, 200)]),
+  );
+
+/**
+ * Cloudflare Turnstile (invisible). Off until TURNSTILE_SECRET_KEY is set: then every lead needs
+ * a token that Cloudflare accepts. Network trouble on our side lets the lead through (the
+ * honeypot and duplicate guard still apply) — losing a family's request is worse than spam.
+ */
+export async function passesTurnstile(token: unknown, ip: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true;
+  if (typeof token !== "string" || !token) return false;
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body: new URLSearchParams({ secret, response: token, ...(ip ? { remoteip: ip } : {}) }),
+      signal: AbortSignal.timeout(8000),
+    });
+    const data = (await res.json()) as { success?: boolean };
+    return data.success === true;
+  } catch (err) {
+    console.error("[lead] Turnstile check unreachable, letting the lead through", err);
+    return true;
+  }
+}
+
+/**
+ * Mock (default): write ./.leads/<time>-<form>.json — exactly the body a GHL webhook would get.
+ * Live: GoHighLevel webhook or API v2 (lib/ghl.ts).
+ */
+export async function deliver(raw: Lead): Promise<boolean> {
+  const lead = withTags(raw);
   try {
     if (process.env.LEAD_MODE === "live") {
-      const url = process.env.GHL_WEBHOOK_URL;
-      if (!url) throw new Error("GHL_WEBHOOK_URL is not set");
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify(lead),
-      });
-      if (!res.ok) throw new Error(`GoHighLevel answered ${res.status}`);
+      await sendToGhl(lead);
+      console.info(`[lead:live] ${lead.form_type} sent to GoHighLevel`);
     } else {
       const dir = path.join(process.cwd(), ".leads");
       await mkdir(dir, { recursive: true });

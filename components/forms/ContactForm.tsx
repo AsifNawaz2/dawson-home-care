@@ -24,9 +24,11 @@ import { formatPhone } from "@/lib/phone";
 import { writeStorage } from "@/lib/storage";
 import { isReducedMotion } from "@/lib/motionMode";
 import { useHydrated } from "@/lib/useHydrated";
+import { leadPageUrl, leadUtm } from "@/lib/attribution";
 import { cn } from "@/lib/cn";
 import { NextOpen, useOfficeStatus } from "@/components/layout/OfficeStatus";
 import { CheckIcon, ErrorSummary, FieldError, type SummaryItem } from "./FormBits";
+import { useTurnstile } from "./Turnstile";
 
 type Name = FieldPath<ContactValues>;
 
@@ -53,6 +55,7 @@ export function ContactForm() {
   const { isClosed } = useOfficeStatus();
   const uid = useId();
   const hydrated = useHydrated();
+  const turnstile = useTurnstile();
   const [summary, setSummary] = useState<SummaryItem[] | null>(null);
   const [sendState, setSendState] = useState<"idle" | "sending" | "sent">("idle");
   const [sendError, setSendError] = useState<{ text: string; urgent: boolean } | null>(null);
@@ -104,20 +107,18 @@ export function ContactForm() {
     setSendState("sending");
     try {
       const values = getValues();
+      const turnstileToken = await turnstile.getToken();
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           values,
+          turnstile: turnstileToken,
           meta: {
             form_type: "contact",
             after_hours: isClosed,
-            page_url: window.location.href.split("?")[0],
-            utm: Object.fromEntries(
-              [...new URLSearchParams(window.location.search)]
-                .filter(([k]) => k.startsWith("utm_"))
-                .map(([k, val]) => [k.slice(4), val]),
-            ),
+            page_url: leadPageUrl(),
+            utm: leadUtm(),
           },
         }),
       });
@@ -186,6 +187,8 @@ export function ContactForm() {
       {summary && summary.length > 0 && (
         <ErrorSummary ref={summaryRef} title={summaryTitle(summary.length, true)} items={summary} />
       )}
+
+      {turnstile.slot}
 
       {/* Honeypot */}
       <div className="sr-only" aria-hidden="true">

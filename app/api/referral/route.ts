@@ -2,11 +2,21 @@
  * POST /api/referral — the /for-professionals referral form (COPY_CONVERSION §5 "03").
  * Same zod schema as the browser; honeypot → silent success; same referrer phone within
  * 10 minutes → "duplicate". form_type=referral, GHL tag `referral` (07 §13).
- * LEAD_MODE=mock (default): ./.leads/*.json. LEAD_MODE=live: GoHighLevel webhook.
+ * Turnstile (only with TURNSTILE_SECRET_KEY) refused → 403 "spam-check".
+ * LEAD_MODE=mock (default): ./.leads/*.json. LEAD_MODE=live: GoHighLevel (lib/ghl.ts).
  */
 import { townLabel } from "@/content/assessment";
 import { REFERRAL_PERMISSION, referralHoursOptions } from "@/content/referral";
-import { deliver, fieldErrors, forget, isDuplicate, json, utmFields } from "@/lib/leads";
+import {
+  deliver,
+  fieldErrors,
+  forget,
+  isDuplicate,
+  json,
+  passesTurnstile,
+  requestIp,
+  utmFields,
+} from "@/lib/leads";
 import { nationalDigits, toE164 } from "@/lib/phone";
 import { referralMetaSchema, referralSchema } from "@/lib/schemas/referral";
 
@@ -17,7 +27,11 @@ export async function POST(request: Request) {
   } catch {
     return json({ ok: false, code: "bad-request" }, 400);
   }
-  const { values, meta } = (body ?? {}) as { values?: unknown; meta?: unknown };
+  const { values, meta, turnstile } = (body ?? {}) as {
+    values?: unknown;
+    meta?: unknown;
+    turnstile?: unknown;
+  };
   const parsed = referralSchema.safeParse(values);
   const parsedMeta = referralMetaSchema.safeParse(meta ?? { form_type: "referral" });
   if (!parsed.success || !parsedMeta.success)
@@ -25,6 +39,8 @@ export async function POST(request: Request) {
   const v = parsed.data;
   const m = parsedMeta.data;
   if (v.website) return json({ ok: true });
+  if (!(await passesTurnstile(turnstile, requestIp(request))))
+    return json({ ok: false, code: "spam-check" }, 403);
 
   const key = `referral:${nationalDigits(v.referrer_phone)}`;
   if (isDuplicate(key)) return json({ ok: false, code: "duplicate" }, 409);

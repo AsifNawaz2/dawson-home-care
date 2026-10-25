@@ -60,9 +60,11 @@ import { formatPhone } from "@/lib/phone";
 import { readStorage, writeStorage } from "@/lib/storage";
 import { isReducedMotion } from "@/lib/motionMode";
 import { useHydrated } from "@/lib/useHydrated";
+import { leadPageUrl, leadUtm } from "@/lib/attribution";
 import { cn } from "@/lib/cn";
 import { NextOpen, useOfficeStatus } from "@/components/layout/OfficeStatus";
 import { readNeeds } from "@/components/services/FitChecklist";
+import { useTurnstile } from "./Turnstile";
 import {
   CheckIcon,
   ErrorSummary,
@@ -133,6 +135,7 @@ export function AssessmentForm() {
   const moved = useRef(false);
   const uid = useId();
   const hydrated = useHydrated();
+  const turnstile = useTurnstile();
 
   const {
     register,
@@ -309,11 +312,13 @@ export function AssessmentForm() {
     setSendState("sending");
     try {
       const values = getValues();
+      const turnstileToken = await turnstile.getToken();
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           values,
+          turnstile: turnstileToken,
           meta: {
             form_type: "assessment",
             prefill_source: meta.current.prefill_source,
@@ -324,12 +329,8 @@ export function AssessmentForm() {
             hours_per_week: values.hours_preset === "estimate" ? estimateWeekly : null,
             estimator: meta.current.estimator,
             quiz: meta.current.quiz,
-            page_url: window.location.href.split("?")[0],
-            utm: Object.fromEntries(
-              [...new URLSearchParams(window.location.search)]
-                .filter(([k]) => k.startsWith("utm_"))
-                .map(([k, val]) => [k.slice(4), val]),
-            ),
+            page_url: leadPageUrl(),
+            utm: leadUtm(),
           },
         }),
       });
@@ -613,6 +614,8 @@ export function AssessmentForm() {
                   />
                 </div>
               )}
+
+              {turnstile.slot}
 
               {/* Honeypot */}
               <div className="sr-only" aria-hidden="true">
