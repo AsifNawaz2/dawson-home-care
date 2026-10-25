@@ -150,7 +150,7 @@ export default function ReviewsPage() {
           </div>
           <div className="flex flex-col gap-4 rounded-[20px] border border-line p-6 lg:p-10">
             <h3 className="h3">Something we could do better?</h3>
-            <p>
+            <p className="[overflow-wrap:anywhere]">
               Tell us directly. Call {phone.display} or email {email}.
               {ph && (
                 <>

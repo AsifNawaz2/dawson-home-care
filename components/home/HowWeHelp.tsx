@@ -139,7 +139,7 @@ export function HowWeHelp() {
               </div>
             </div>
             <div aria-hidden="true" className="@container max-lg:order-first">
-              <div className="hw-stage relative">
+              <div className="hw-stage relative" data-poster-scope="">
                 {services.map((s, i) => (
                   <div
                     key={s.slug}
@@ -150,7 +150,7 @@ export function HowWeHelp() {
                       opacity: i === 0 ? 1 : 0,
                     }}
                   >
-                    <Collage data={collages[s.slug]} playable />
+                    <Collage data={collages[s.slug]} playable lazyPoster />
                   </div>
                 ))}
               </div>

@@ -142,6 +142,18 @@ html[data-contrast="high"] {
    Base
    =================================================================== */
 @layer base {
+  /* <WhenClosed> before hydration: the pre-paint script decides (lib/headScript.ts). */
+  html:not([data-office="closed"]) .when-closed {
+    display: none;
+  }
+  /* Italic Poppins is its own (not preloaded) family — app/fonts.ts. */
+  :is(em, i, cite):not(.not-italic) {
+    font-family: var(--font-poppins-italic), var(--font-sans);
+  }
+  /* Long addresses (info@dawsonhomecare.com) wrap instead of pushing a 320px page sideways. */
+  a[href^="mailto:"] {
+    overflow-wrap: anywhere;
+  }
   html {
     font-size: calc(100% * var(--text-scale, 1));
     background: var(--color-cream);
@@ -314,7 +326,7 @@ html[data-contrast="high"] {
     color: var(--color-orchid-100);
   }
   .q {
-    font-family: var(--font-sans);
+    font-family: var(--font-poppins-italic), var(--font-sans);
     font-style: italic;
     font-weight: 500;
   }
@@ -1186,6 +1198,11 @@ html[data-contrast="high"] {
    =================================================================== */
 .dd-logo {
   overflow: visible;
+}
+/* Switchable logos (header, footer) carry both figures; html[data-logo-figure] shows one. */
+html:not([data-logo-figure="b"]) .dd-logo [data-fig="b"],
+html[data-logo-figure="b"] .dd-logo [data-fig="a"] {
+  display: none;
 }
 .dd-logo [data-part="heartbeat-pulse"] {
   opacity: 0;
