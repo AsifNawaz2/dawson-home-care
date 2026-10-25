@@ -82,7 +82,7 @@ export function HomeIntro() {
       const vr = video.getBoundingClientRect();
       const s = Math.min(vr.width / 1920, vr.height / 1080);
       const sL = vr.left + (vr.width - 1920 * s) / 2 + 42 * s;
-      const sT = vr.top + (vr.height - 1080 * s) / 2 + 36 * s;
+      const sT = vr.top + (vr.height - 1080 * s) / 2 + 39 * s;
       const sW = 1837 * s;
       // End: the SVG logo in the header.
       const r = headerLogo?.getBoundingClientRect();
@@ -280,10 +280,11 @@ export function HomeIntro() {
           </svg>
         </div>
       </section>
-      {/* The video's last-frame logo, flown into the header (design data-el="fly-logo"). */}
+      {/* The video's last-frame logo, flown into the header (design data-el="fly-logo").
+          Cut out of the frame by scripts/intro-video.mjs (npm run intro). */}
       <Image
         ref={flyRef}
-        src="/images/logo.png"
+        src="/images/intro-logo.png"
         alt=""
         aria-hidden="true"
         width={1837}
