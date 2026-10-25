@@ -4,7 +4,7 @@
  */
 import { z } from "zod";
 import { msg } from "@/lib/formMessages";
-import { choice, longText, name, phone } from "./fields";
+import { always, choice, longText, name, phone } from "./fields";
 
 export const assessmentSchema = z
   .object({
@@ -62,7 +62,7 @@ export const assessmentSchema = z
     } else if (email && !z.email().safeParse(email).success) {
       ctx.addIssue({ code: "custom", path: ["email"], message: msg.emailInvalid });
     }
-  });
+  }, always);
 
 export type AssessmentValues = z.input<typeof assessmentSchema>;
 

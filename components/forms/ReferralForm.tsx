@@ -34,6 +34,7 @@ import { emailSuggestion, looksLikeDob, sendMsg, summaryTitle } from "@/lib/form
 import { formatPhone } from "@/lib/phone";
 import { writeStorage } from "@/lib/storage";
 import { isReducedMotion } from "@/lib/motionMode";
+import { useHydrated } from "@/lib/useHydrated";
 import { cn } from "@/lib/cn";
 import { NextOpen, useOfficeStatus } from "@/components/layout/OfficeStatus";
 import { CheckIcon, ErrorSummary, FieldError, type SummaryItem } from "./FormBits";
@@ -60,6 +61,7 @@ export function ReferralForm() {
   const router = useRouter();
   const { isClosed } = useOfficeStatus();
   const uid = useId();
+  const hydrated = useHydrated();
   const [summary, setSummary] = useState<SummaryItem[] | null>(null);
   const [sendState, setSendState] = useState<"idle" | "sending" | "sent">("idle");
   const [sendError, setSendError] = useState<{ text: string; urgent: boolean } | null>(null);
@@ -506,7 +508,7 @@ export function ReferralForm() {
           </div>
         )}
         <button
-          type="submit"
+          type={hydrated ? "submit" : "button"}
           className="btn btn-primary self-start max-sm:w-full"
           aria-disabled={sending || undefined}
         >

@@ -35,3 +35,12 @@ export const longText = (max: number) =>
 /** Today's date in Beaufort (America/New_York) as YYYY-MM-DD. Call at validation time only. */
 export const todayEt = () =>
   new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" }).format(new Date());
+
+/**
+ * Object-level (cross-field) checks run even while other fields still have errors, so every
+ * message shows in the first error summary. Zod 4 skips them by default once a field fails.
+ */
+export const always = {
+  when: (payload: { value: unknown }) =>
+    typeof payload.value === "object" && payload.value !== null,
+};

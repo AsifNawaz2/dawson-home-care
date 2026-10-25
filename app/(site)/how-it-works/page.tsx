@@ -135,18 +135,19 @@ export default function HowItWorksPage() {
             {FACTS.filter((f) => f.show).map(({ Icon, label, value }) => (
               <div
                 key={label}
-                className="flex items-start gap-4 rounded-[20px] border border-line bg-cream p-5"
+                className="relative flex min-h-[88px] flex-col gap-0.5 rounded-[20px] border border-line bg-cream py-5 pr-5 pl-[84px]"
               >
-                <span
-                  aria-hidden="true"
-                  className="flex size-12 flex-none items-center justify-center rounded-2xl bg-plum-100 text-plum-800"
-                >
-                  <Icon size={24} strokeWidth={1.75} />
-                </span>
-                <div className="flex flex-col gap-0.5">
-                  <dt className="font-bold text-plum-800">{label}</dt>
-                  <dd>{value}</dd>
-                </div>
+                {/* The icon sits inside the <dt> so the <dl> holds only dt/dd groups. */}
+                <dt className="font-bold text-plum-800">
+                  <span
+                    aria-hidden="true"
+                    className="absolute top-5 left-5 flex size-12 items-center justify-center rounded-2xl bg-plum-100 text-plum-800"
+                  >
+                    <Icon size={24} strokeWidth={1.75} />
+                  </span>
+                  {label}
+                </dt>
+                <dd>{value}</dd>
               </div>
             ))}
           </dl>

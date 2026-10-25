@@ -2,7 +2,7 @@
 import { z } from "zod";
 import { msg } from "@/lib/formMessages";
 import { checkPhone } from "@/lib/phone";
-import { choice, longText, name, phone } from "./fields";
+import { always, choice, longText, name, phone } from "./fields";
 
 export const contactSchema = z
   .object({
@@ -22,7 +22,7 @@ export const contactSchema = z
     website: z.string(),
   })
   .superRefine((v, ctx) => {
-    const noPhone = checkPhone(v.phone) === "empty";
+    const noPhone = checkPhone(v.phone ?? "") === "empty";
     if (noPhone && !v.email) {
       for (const path of ["phone", "email"])
         ctx.addIssue({ code: "custom", path: [path], message: msg.phoneOrEmail });
@@ -34,7 +34,7 @@ export const contactSchema = z
       ctx.addIssue({ code: "custom", path: ["email"], message: msg.emailRequired });
     if ((v.preferred_contact === "call" || v.preferred_contact === "text") && noPhone)
       ctx.addIssue({ code: "custom", path: ["phone"], message: msg.phoneRequired });
-  });
+  }, always);
 
 export type ContactValues = z.input<typeof contactSchema>;
 

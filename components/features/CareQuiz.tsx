@@ -42,6 +42,7 @@ import { CURRENT_EMAIL_PLAN_CONSENT, emailPlanConsent } from "@/content/legal/co
 import { hoursPresets } from "@/content/quiz";
 import { readStorage, writeStorage } from "@/lib/storage";
 import { isReducedMotion } from "@/lib/motionMode";
+import { useHydrated } from "@/lib/useHydrated";
 import { sendMsg } from "@/lib/formMessages";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -692,6 +693,7 @@ function EmailPlan({
   H4: "h3" | "h4";
 }) {
   const uid = useId();
+  const hydrated = useHydrated();
   const t = resultUi.emailPlan;
   const { isClosed } = useOfficeStatus();
   const [state, setState] = useState<"idle" | "sent" | "failed" | "offline">("idle");
@@ -818,7 +820,7 @@ function EmailPlan({
         </p>
       )}
       <button
-        type="submit"
+        type={hydrated ? "submit" : "button"}
         className="btn btn-secondary self-start max-sm:w-full"
         aria-disabled={isSubmitting || undefined}
       >

@@ -212,6 +212,7 @@ html[data-contrast="high"] {
   }
   /* Body links are always underlined (BRAND_FINAL §1.1 rule 6) */
   .prose a,
+  .legal a:not(.btn),
   p a:not(.btn):not(.link):not([class*="no-underline"]) {
     text-decoration: underline;
     text-decoration-thickness: 1px;

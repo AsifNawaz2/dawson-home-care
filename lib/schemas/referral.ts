@@ -4,7 +4,7 @@
  */
 import { z } from "zod";
 import { msg } from "@/lib/formMessages";
-import { choice, longText, name, phone, todayEt } from "./fields";
+import { always, choice, longText, name, phone, todayEt } from "./fields";
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -82,7 +82,7 @@ export const referralSchema = z
       if (d < today) issue(msg.datePast);
       else if (d > limit) issue(msg.dateTooFar);
     }
-  });
+  }, always);
 
 export type ReferralValues = z.input<typeof referralSchema>;
 

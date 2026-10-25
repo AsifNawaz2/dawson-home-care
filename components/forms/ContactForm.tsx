@@ -23,6 +23,7 @@ import { emailSuggestion, sendMsg, summaryTitle } from "@/lib/formMessages";
 import { formatPhone } from "@/lib/phone";
 import { writeStorage } from "@/lib/storage";
 import { isReducedMotion } from "@/lib/motionMode";
+import { useHydrated } from "@/lib/useHydrated";
 import { cn } from "@/lib/cn";
 import { NextOpen, useOfficeStatus } from "@/components/layout/OfficeStatus";
 import { CheckIcon, ErrorSummary, FieldError, type SummaryItem } from "./FormBits";
@@ -41,12 +42,17 @@ const topicOptions = [
 ] as const;
 
 const targetId = (name: Name) =>
-  name === "preferred_contact" ? "preferred_contact-call" : (name as string);
+  name === "preferred_contact"
+    ? "preferred_contact-call"
+    : name === "message"
+      ? "contact-message" // the section itself is #message (COPY_CONVERSION §7)
+      : (name as string);
 
 export function ContactForm() {
   const router = useRouter();
   const { isClosed } = useOfficeStatus();
   const uid = useId();
+  const hydrated = useHydrated();
   const [summary, setSummary] = useState<SummaryItem[] | null>(null);
   const [sendState, setSendState] = useState<"idle" | "sending" | "sent">("idle");
   const [sendError, setSendError] = useState<{ text: string; urgent: boolean } | null>(null);
@@ -363,14 +369,14 @@ export function ContactForm() {
       </fieldset>
 
       <div className="fld">
-        <label className="lbl" htmlFor="message">
+        <label className="lbl" htmlFor="contact-message">
           Your message (required)
         </label>
         <p id="message-help" className="help">
           Please don&apos;t include medical details.
         </p>
         <textarea
-          id="message"
+          id="contact-message"
           className="field !min-h-[160px] resize-y !py-3.5 leading-normal"
           rows={5}
           maxLength={1000}
@@ -441,7 +447,7 @@ export function ContactForm() {
           </div>
         )}
         <button
-          type="submit"
+          type={hydrated ? "submit" : "button"}
           className="btn btn-primary self-start max-sm:w-full"
           aria-disabled={sending || undefined}
         >
