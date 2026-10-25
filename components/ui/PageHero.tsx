@@ -39,7 +39,10 @@ export function PageHero({
           aside && "lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:items-center lg:gap-16",
         )}
       >
-        <section aria-labelledby={id} className="flex max-w-[900px] flex-col items-start gap-3.5 lg:gap-4">
+        <section
+          aria-labelledby={id}
+          className="flex max-w-[900px] flex-col items-start gap-3.5 lg:gap-4"
+        >
           <p className="eyebrow">{eyebrow}</p>
           <h1
             id={id}

@@ -90,7 +90,11 @@ export function TickList({
         ))}
       </ul>
       <p aria-live="polite" className="font-semibold text-plum-800 empty:hidden">
-        {n === items.length ? done : n > 0 ? progress.replace("{n}", String(n)).replace("{total}", String(items.length)) : ""}
+        {n === items.length
+          ? done
+          : n > 0
+            ? progress.replace("{n}", String(n)).replace("{total}", String(items.length))
+            : ""}
       </p>
       {printLabel && (
         <button type="button" className="btn btn-ghost self-start max-sm:w-full" onClick={print}>

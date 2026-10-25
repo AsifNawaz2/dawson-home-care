@@ -81,11 +81,21 @@ export function TownList() {
               return (
                 <li key={a.slug}>
                   {a.hasPage ? (
-                    <Link id={townRowId(a.slug)} href={`/areas-we-serve/${a.slug}`} className={cls} data-cursor-label="View">
+                    <Link
+                      id={townRowId(a.slug)}
+                      href={`/areas-we-serve/${a.slug}`}
+                      className={cls}
+                      data-cursor-label="View"
+                    >
                       {body}
                     </Link>
                   ) : (
-                    <a id={townRowId(a.slug)} href={`tel:${phone.tel}`} className={cls} data-cursor-label="Call">
+                    <a
+                      id={townRowId(a.slug)}
+                      href={`tel:${phone.tel}`}
+                      className={cls}
+                      data-cursor-label="Call"
+                    >
                       {body}
                     </a>
                   )}

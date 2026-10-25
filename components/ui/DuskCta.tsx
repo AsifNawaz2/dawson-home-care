@@ -15,11 +15,17 @@ export function DuskCta({
   lead = "One call. One free visit at home. No pressure.",
   href = "/free-assessment",
   id = "cta-title",
+  actions,
+  afterHours = true,
 }: {
   title: [string, string, string];
   lead?: string;
   href?: string;
   id?: string;
+  /** Replaces the standard three buttons (e.g. Careers: Apply on Hireology + Call). */
+  actions?: React.ReactNode;
+  /** The after-hours line (family CTAs only). */
+  afterHours?: boolean;
 }) {
   return (
     <section
@@ -59,34 +65,40 @@ export function DuskCta({
             {title[2]}
           </h2>
           <p className="lead text-cream">{lead}</p>
-          <WhenClosed>
-            <p className="flex max-w-[480px] items-start gap-2.5 text-cream">
-              <Moon
-                aria-hidden
-                size={22}
-                strokeWidth={1.75}
-                className="mt-1 flex-none text-plum-100"
-              />
-              <span>
-                Our office is closed right now. Request a callback and we&apos;ll reach you first
-                thing <NextOpen />.
-              </span>
-            </p>
-          </WhenClosed>
+          {afterHours && (
+            <WhenClosed>
+              <p className="flex max-w-[480px] items-start gap-2.5 text-cream">
+                <Moon
+                  aria-hidden
+                  size={22}
+                  strokeWidth={1.75}
+                  className="mt-1 flex-none text-plum-100"
+                />
+                <span>
+                  Our office is closed right now. Request a callback and we&apos;ll reach you first
+                  thing <NextOpen />.
+                </span>
+              </p>
+            </WhenClosed>
+          )}
           <div className="mt-2 flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-4">
-            <AssessmentButton href={href} className="max-md:w-full" />
-            <a
-              className="btn btn-cream max-md:w-full"
-              href={`tel:${phone.tel}`}
-              data-cursor-label="Call"
-            >
-              <Phone aria-hidden size={20} strokeWidth={1.75} className="ring-icon" />
-              Call {phone.display}
-            </a>
-            <a className="btn btn-cream max-md:w-full" href={`sms:${text.tel}`}>
-              <MessageSquare aria-hidden size={20} strokeWidth={1.75} />
-              Text us {text.display}
-            </a>
+            {actions ?? (
+              <>
+                <AssessmentButton href={href} className="max-md:w-full" />
+                <a
+                  className="btn btn-cream max-md:w-full"
+                  href={`tel:${phone.tel}`}
+                  data-cursor-label="Call"
+                >
+                  <Phone aria-hidden size={20} strokeWidth={1.75} className="ring-icon" />
+                  Call {phone.display}
+                </a>
+                <a className="btn btn-cream max-md:w-full" href={`sms:${text.tel}`}>
+                  <MessageSquare aria-hidden size={20} strokeWidth={1.75} />
+                  Text us {text.display}
+                </a>
+              </>
+            )}
           </div>
           <div className="mt-3 flex flex-col gap-1 text-cream">
             <p>

@@ -39,7 +39,8 @@ export function DriveMap({ area }: { area: Area }) {
   const uy = dy / len;
   const nx = -uy;
   const ny = ux;
-  const at = (t: number, off = 0) => `${r1(ox + ux * len * t + nx * off)} ${r1(oy + uy * len * t + ny * off)}`;
+  const at = (t: number, off = 0) =>
+    `${r1(ox + ux * len * t + nx * off)} ${r1(oy + uy * len * t + ny * off)}`;
   const s = Math.min(len * 0.06, W * 0.05);
   const d = `M${at(0)} L${at(0.42)} L${at(0.46, -s)} L${at(0.5, s * 1.4)} L${at(0.54, -s * 0.8)} L${at(0.58)} L${at(1)}`;
 
@@ -85,7 +86,10 @@ export function DriveMap({ area }: { area: Area }) {
         />
       </svg>
       <span className="absolute size-0" style={pct(ox, oy)}>
-        <svg viewBox="0 0 24 24" className="absolute -top-[30px] -left-4 size-8 max-w-none drop-shadow-[0_4px_6px_rgb(42_24_86/0.25)]">
+        <svg
+          viewBox="0 0 24 24"
+          className="absolute -top-[30px] -left-4 size-8 max-w-none drop-shadow-[0_4px_6px_rgb(42_24_86/0.25)]"
+        >
           <path
             d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"
             fill="var(--color-plum-800)"

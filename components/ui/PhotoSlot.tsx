@@ -24,7 +24,11 @@ export function PhotoSlot({
         style={{ aspectRatio: ratio }}
         className="flex w-full items-center justify-center overflow-hidden rounded-[20px] bg-plum-100"
       >
-        <Logo variant="mark" uid={`ps-${label.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`} className="h-auto w-[28%] max-w-[180px] opacity-90" />
+        <Logo
+          variant="mark"
+          uid={`ps-${label.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`}
+          className="h-auto w-[28%] max-w-[180px] opacity-90"
+        />
       </div>
       {flags.showPlaceholders && <figcaption className="sm muted">{label}</figcaption>}
     </figure>

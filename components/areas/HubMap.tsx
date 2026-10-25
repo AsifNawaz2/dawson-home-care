@@ -18,7 +18,10 @@ export function HubMap() {
               <strong className="text-plum-800">Near our office</strong>
             </li>
             <li className="flex items-center gap-2">
-              <span aria-hidden="true" className="size-3.5 rounded-full border-[3px] border-plum-800 bg-white" />
+              <span
+                aria-hidden="true"
+                className="size-3.5 rounded-full border-[3px] border-plum-800 bg-white"
+              />
               <span>
                 <strong className="text-plum-800">Extended service area</strong> — call to check
                 scheduling

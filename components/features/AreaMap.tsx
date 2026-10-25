@@ -94,7 +94,6 @@ const useSmall = () =>
     () => false,
   );
 
-
 export function AreaMap({
   highlight,
   label = "Map of Beaufort County and nearby towns. Our office is in Beaufort. Every town on the map is also listed below.",
