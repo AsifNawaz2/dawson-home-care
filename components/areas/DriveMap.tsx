@@ -47,10 +47,7 @@ export function DriveMap({ area }: { area: Area }) {
   useEffect(() => {
     const el = box.current;
     if (!el) return;
-    if (isReducedMotion()) {
-      setDrawn(true);
-      return;
-    }
+    if (isReducedMotion()) return; // CSS shows the line drawn in reduced motion
     const io = new IntersectionObserver(
       ([e]) => {
         if (e?.isIntersecting) {

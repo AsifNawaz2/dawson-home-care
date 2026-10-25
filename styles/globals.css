@@ -1781,8 +1781,10 @@ input[type="search"]::-webkit-search-cancel-button {
 @media (prefers-reduced-motion: reduce) {
   .drive-line {
     transition: none;
+    stroke-dashoffset: 0;
   }
 }
 html[data-motion="reduce"] .drive-line {
   transition: none;
+  stroke-dashoffset: 0;
 }
