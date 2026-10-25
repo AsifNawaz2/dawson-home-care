@@ -59,6 +59,7 @@ import { emailSuggestion, looksLikeDob, sendMsg, summaryTitle } from "@/lib/form
 import { formatPhone } from "@/lib/phone";
 import { readStorage, writeStorage } from "@/lib/storage";
 import { isReducedMotion } from "@/lib/motionMode";
+import { useHydrated } from "@/lib/useHydrated";
 import { cn } from "@/lib/cn";
 import { NextOpen, useOfficeStatus } from "@/components/layout/OfficeStatus";
 import { readNeeds } from "@/components/services/FitChecklist";
@@ -131,6 +132,7 @@ export function AssessmentForm() {
   const summaryRef = useRef<HTMLDivElement>(null);
   const moved = useRef(false);
   const uid = useId();
+  const hydrated = useHydrated();
 
   const {
     register,
@@ -1205,7 +1207,7 @@ export function AssessmentForm() {
                   </button>
                 )}
                 <button
-                  type="submit"
+                  type={hydrated ? "submit" : "button"}
                   className="btn btn-primary sm:order-first"
                   aria-disabled={sending || undefined}
                   onClick={(e) => {

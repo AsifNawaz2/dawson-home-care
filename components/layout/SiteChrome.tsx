@@ -22,7 +22,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         }
       >
         <a className="skip-link" href="#main">
-          Skip to main content
+          Skip to content
         </a>
         <Header />
         <main id="main" tabIndex={-1} className="outline-none" data-inert-when-menu="">

@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { contact } from "@/content/site.config";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageCrumbs } from "@/components/seo/PageCrumbs";
 import { CareQuiz } from "@/components/features/CareQuiz";
 import { Clock } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Find the Right Home Care: 1-Minute Quiz | Dawson & Dawson",
-  description:
-    "Not sure what kind of home care you need? Answer five quick questions and get a suggested plan for your family. No email needed.",
-};
+export const metadata: Metadata = pageMetadata("/find-care");
 
 const phone = contact.phone.value;
 
@@ -18,7 +15,7 @@ export default function FindCarePage() {
   return (
     <div className="bg-orchid-100 pb-20 lg:pb-28">
       <div className="wrap">
-        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Find the Right Care" }]} />
+        <PageCrumbs path="/find-care" />
         <div className="mx-auto flex max-w-[760px] flex-col gap-8 pt-6 lg:gap-10 lg:pt-10">
           <section
             aria-labelledby="fc-title"

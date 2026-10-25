@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
+import { faqPageForFaq } from "@/lib/schema";
+import { JsonLd } from "@/components/seo/JsonLd";
 import Link from "next/link";
 import { Mail, MessageSquare, Moon, Phone } from "lucide-react";
 import { contact, hours } from "@/content/site.config";
-import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
+import { PageCrumbs } from "@/components/seo/PageCrumbs";
 import { AssessmentButton } from "@/components/ui/AssessmentButton";
 import { DuskCta } from "@/components/ui/DuskCta";
 import { NextOpen, WhenClosed } from "@/components/layout/OfficeStatus";
 import { FaqSearch } from "@/components/features/FaqSearch";
 
-export const metadata: Metadata = {
-  title: "Home Care Questions & Answers | Dawson & Dawson, Beaufort SC",
-  description:
-    "Plain answers about non-medical home care in Beaufort, SC: getting started, services, cost and payment, caregivers, safety, hospice and medical questions.",
-};
+export const metadata: Metadata = pageMetadata("/faq");
 
 const phone = contact.phone.value;
 const text = contact.tollFree.value;
@@ -23,7 +22,7 @@ export default function FaqPage() {
   return (
     <>
       <div className="wrap">
-        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "FAQ" }]} />
+        <PageCrumbs path="/faq" />
         <section
           aria-labelledby="faq-h1"
           className="flex max-w-[900px] flex-col items-start gap-3.5 pt-6 pb-10 lg:gap-4 lg:pt-10 lg:pb-14"
@@ -112,6 +111,7 @@ export default function FaqPage() {
       </section>
 
       <DuskCta title={["Ask us", "anything", "."]} />
+      <JsonLd data={[faqPageForFaq()]} />
     </>
   );
 }

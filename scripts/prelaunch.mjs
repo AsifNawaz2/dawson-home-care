@@ -13,6 +13,11 @@ const PATTERNS = [
   [/rateConfirmed:\s*false/g, "rates not confirmed (estimator shows hours only)"],
   [/toConfirm\(\s*$/g, "unconfirmed fact (multi-line, see next lines)"],
   [
+    /(privacy|sms|accessibility): null as string \| null/g,
+    "legal page 'Last updated' date not set",
+  ],
+  [/a11yAuditDate: null/g, "accessibility audit date not set (Accessibility §5 hidden)"],
+  [
     /detailed:\s*false/g,
     "service-area map is schematic — run `npm run map -- <1:500k Census TopoJSON>`",
   ],

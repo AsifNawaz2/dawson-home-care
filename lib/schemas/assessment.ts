@@ -3,19 +3,8 @@
  * zodResolver) and /api/lead, so the browser and the server say exactly the same thing.
  */
 import { z } from "zod";
-import { looksLikeMbi, looksLikeSsn, looksLikeUrl, msg } from "@/lib/formMessages";
-import { checkPhone } from "@/lib/phone";
-
-const name = (required: string | null) =>
-  z
-    .string()
-    .trim()
-    .max(40, msg.nameTooLong)
-    .refine((s) => !looksLikeUrl(s), msg.nameIsUrl)
-    .refine((s) => required === null || s.length > 0, required ?? "");
-
-const choice = <T extends string>(values: readonly [T, ...T[]], message: string) =>
-  z.enum(values, { error: () => message });
+import { msg } from "@/lib/formMessages";
+import { always, choice, longText, name, phone } from "./fields";
 
 export const assessmentSchema = z
   .object({
@@ -55,20 +44,11 @@ export const assessmentSchema = z
     // Step 4
     first_name: name(msg.firstNameRequired),
     last_name: name(null),
-    phone: z.string().superRefine((s, ctx) => {
-      const c = checkPhone(s);
-      if (c === "empty") ctx.addIssue({ code: "custom", message: msg.phoneRequired });
-      else if (c === "nonUs") ctx.addIssue({ code: "custom", message: msg.phoneNonUs });
-      else if (c === "invalid") ctx.addIssue({ code: "custom", message: msg.phoneInvalid });
-    }),
+    phone: phone(),
     email: z.string().trim(),
     preferred_contact: choice(["call", "text", "email"], msg.contactRequired),
     best_time: z.enum(["morning", "midday", "afternoon", "any"]).or(z.literal("")),
-    notes: z
-      .string()
-      .max(1000, msg.tooLong(1000))
-      .refine((s) => !looksLikeSsn(s), msg.ssnFound)
-      .refine((s) => !looksLikeMbi(s), msg.mbiFound),
+    notes: longText(1000),
     // Step 5
     sms_transactional_consent: z.boolean(),
     sms_marketing_consent: z.boolean(),
@@ -82,7 +62,7 @@ export const assessmentSchema = z
     } else if (email && !z.email().safeParse(email).success) {
       ctx.addIssue({ code: "custom", path: ["email"], message: msg.emailInvalid });
     }
-  });
+  }, always);
 
 export type AssessmentValues = z.input<typeof assessmentSchema>;
 

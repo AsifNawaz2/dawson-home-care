@@ -9,9 +9,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Clock, Globe, MapPin, Phone } from "lucide-react";
-import { areasByTier } from "@/content/areas";
+import { areasByTier, townRowId } from "@/content/areas";
 import { business, contact, links, reputation } from "@/content/site.config";
-import { AreaMap, townRowId } from "@/components/features/AreaMap";
+import { AreaMap } from "@/components/features/AreaMap";
 import { TownSearch } from "@/components/features/TownSearch";
 
 const phone = contact.phone.value;

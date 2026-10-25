@@ -29,3 +29,10 @@ export const colorTokens = [
   { token: "line", hex: "#E7E1EE", use: "Decorative borders and dividers only" },
   { token: "alert-700", hex: "#B42318", use: "Errors only: text, icon, 2px border" },
 ] as const;
+
+type Token = (typeof colorTokens)[number]["token"];
+/** token name → hex, for places that can't use CSS variables (OG images, static exports). */
+export const tokens = Object.fromEntries(colorTokens.map((t) => [t.token, t.hex])) as Record<
+  Token,
+  string
+>;

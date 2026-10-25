@@ -212,6 +212,7 @@ html[data-contrast="high"] {
   }
   /* Body links are always underlined (BRAND_FINAL §1.1 rule 6) */
   .prose a,
+  .legal a:not(.btn),
   p a:not(.btn):not(.link):not([class*="no-underline"]) {
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -1737,4 +1738,86 @@ html:not([data-motion="reduce"]) .faq-a[data-open="true"] {
 /* Search fields have their own labelled "Clear search" button. */
 input[type="search"]::-webkit-search-cancel-button {
   appearance: none;
+}
+
+/* Print one section only (TickList "Print this list"). */
+.print-only {
+  display: none;
+}
+@media print {
+  html[data-printing] body * {
+    visibility: hidden;
+  }
+  html[data-printing] [data-print-target],
+  html[data-printing] [data-print-target] * {
+    visibility: visible;
+  }
+  html[data-printing] [data-print-target] {
+    position: absolute;
+    inset: 0 0 auto 0;
+    padding: 24pt;
+  }
+  html[data-printing] [data-print-target] .print-only {
+    display: block;
+  }
+  html[data-printing] [data-print-target] button {
+    display: none;
+  }
+  html[data-printing] [data-print-target] .tick-box {
+    color: transparent !important;
+    background: var(--color-white) !important;
+    border-color: var(--color-ink) !important;
+  }
+}
+
+/* Town-page drive line (SPEC §6.4): draws once, 900ms in-out; reduced motion = drawn. */
+.drive-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 900ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+.drive-line[data-drawn="true"] {
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .drive-line {
+    transition: none;
+    stroke-dashoffset: 0;
+  }
+}
+html[data-motion="reduce"] .drive-line {
+  transition: none;
+  stroke-dashoffset: 0;
+}
+
+/* Legal pages (COPY_LEGAL §0): reading layout; print hides the chrome and prints link URLs. */
+.legal-section :is(ul, ol):not([class]) {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 1.5rem;
+  list-style: disc;
+}
+.legal-section ul:not([class]) li::marker {
+  color: var(--color-plum-800);
+}
+.legal-section h3 {
+  font-size: 1.375rem;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--color-plum-800);
+  margin-top: 8px;
+}
+@media print {
+  html:has(.legal) :is([data-site-header], footer.foot, .skip-link) {
+    display: none !important;
+  }
+  .legal a[href]:not([href^="#"])::after {
+    content: " (" attr(href) ")";
+    font-size: 0.875em;
+    overflow-wrap: anywhere;
+  }
+  .legal nav[aria-label="On this page"] {
+    position: static;
+  }
 }

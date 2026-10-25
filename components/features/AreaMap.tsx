@@ -15,7 +15,7 @@
  * interactive layer. The office pin ripples 3 times when the map comes into view, then stops.
  */
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { areas, areasByTier, OFFICE, formatDrive, type Area } from "@/content/areas";
+import { areas, areasByTier, OFFICE, formatDrive, townRowId, type Area } from "@/content/areas";
 import { flags } from "@/content/site.config";
 import { project } from "@/lib/projection";
 import { lowcountry } from "@/content/map/lowcountry";
@@ -93,8 +93,6 @@ const useSmall = () =>
     () => window.matchMedia(SMALL).matches,
     () => false,
   );
-
-export const townRowId = (slug: string) => `town-row-${slug}`;
 
 export function AreaMap({
   highlight,

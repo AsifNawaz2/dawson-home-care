@@ -14,75 +14,20 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { caregivers, type Caregiver } from "@/content/caregivers";
+import { visibleCaregivers, type Caregiver } from "@/content/caregivers";
+import {
+  Facts,
+  Portrait,
+  QuoteMark,
+  SampleChip,
+  StillCard,
+} from "@/components/trust/CaregiverCard";
 import { flags } from "@/content/site.config";
 import { useMotionMode } from "@/lib/motionMode";
-import { Tbc } from "@/components/ui/Tbc";
 
 const TR = "transform 450ms cubic-bezier(0.22,1,0.36,1)";
 
-const shown = caregivers.filter((c) => !c.placeholder || flags.showPlaceholders);
-
-function Portrait({ c }: { c: Caregiver }) {
-  return (
-    <div
-      role="img"
-      aria-label={`${c.firstName}, a Dawson caregiver.`}
-      className="flex h-[350px] flex-none items-center justify-center bg-plum-100 lg:h-[370px]"
-    >
-      <svg
-        aria-hidden="true"
-        focusable="false"
-        viewBox="0 0 200 220"
-        className="h-[200px] w-[180px] lg:h-[220px] lg:w-[200px]"
-      >
-        <g
-          fill="none"
-          stroke="var(--color-plum-800)"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M40 104 L100 52 L160 104 V180 H40 Z" fill="var(--color-white)" />
-          <path
-            d="M100 160 C84 148 72 138 72 126 C72 116 80 110 88 110 C94 110 98 114 100 118 C102 114 106 110 112 110 C120 110 128 116 128 126 C128 138 116 148 100 160 Z"
-            fill="var(--color-orchid-100)"
-          />
-          <path d="M20 180 H180" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
-function Facts({ c }: { c: Caregiver }) {
-  return (
-    <>
-      {c.placeholder && <p className="sm muted">Caregiver portrait · 4:5</p>}
-      <h3 className="h3 mt-1.5 lg:mt-2">{c.firstName}</h3>
-      <p className="sm">
-        {c.yearsWithDawson ?? <Tbc tbc={{ chip: "[Years]" }} />} years with Dawson
-      </p>
-      <p className="sm">{c.specialty ?? <Tbc tbc={{ chip: "[Specialty]" }} />}</p>
-    </>
-  );
-}
-
-function QuoteMark() {
-  return (
-    <svg
-      aria-hidden="true"
-      focusable="false"
-      viewBox="0 0 48 40"
-      className="h-[30px] w-9 lg:h-[34px] lg:w-10"
-    >
-      <path
-        d="M4 38 V24 C4 12 10 5 20 2 L22 7 C15 10 12 15 12 20 H20 V38 Z M28 38 V24 C28 12 34 5 44 2 L46 7 C39 10 36 15 36 20 H44 V38 Z"
-        fill="var(--color-orchid-500)"
-      />
-    </svg>
-  );
-}
+const shown = visibleCaregivers(flags.showPlaceholders);
 
 function FlipCard({ c, onFocusCard }: { c: Caregiver; onFocusCard: () => void }) {
   const [flipped, setFlipped] = useState(false);
@@ -101,6 +46,7 @@ function FlipCard({ c, onFocusCard }: { c: Caregiver; onFocusCard: () => void })
     <article className="cg" data-flipped={flipped} onFocus={onFocusCard}>
       <div className="cg-in">
         <div className="cg-face" inert={flipped}>
+          <SampleChip c={c} />
           <Portrait c={c} />
           <div className="flex flex-1 flex-col gap-1 px-5 pt-3.5 pb-5 lg:gap-1.5 lg:px-6 lg:pt-4 lg:pb-6">
             <Facts c={c} />
@@ -129,24 +75,6 @@ function FlipCard({ c, onFocusCard }: { c: Caregiver; onFocusCard: () => void })
               Back to photo
             </button>
           </div>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-function StillCard({ c, onFocusCard }: { c: Caregiver; onFocusCard: () => void }) {
-  return (
-    <article
-      className="cg-still overflow-hidden rounded-[20px] border border-line bg-white"
-      onFocus={onFocusCard}
-    >
-      <Portrait c={c} />
-      <div className="flex flex-col gap-1 px-5 pt-3.5 pb-5 lg:gap-1.5 lg:px-6 lg:pt-4 lg:pb-6">
-        <Facts c={c} />
-        <div className="mt-3 flex flex-col gap-3 rounded-2xl bg-orchid-100 p-4">
-          <p className="eyebrow">Why I do this</p>
-          <p className="q text-plum-800">&ldquo;{c.quote}&rdquo;</p>
         </div>
       </div>
     </article>

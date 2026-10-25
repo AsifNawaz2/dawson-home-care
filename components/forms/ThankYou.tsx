@@ -7,14 +7,24 @@
  */
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { contact, flags, hours } from "@/content/site.config";
+import { contact, flags, hours, service } from "@/content/site.config";
 import { THANKYOU_KEY } from "@/content/assessment";
 import { readStorage, writeStorage } from "@/lib/storage";
 import { NextOpen, useOfficeStatus } from "@/components/layout/OfficeStatus";
 import { CheckIcon } from "./FormBits";
 
 type Form = "assessment" | "callback" | "referral" | "contact";
-type Saved = { firstName?: string; form?: Form; reachVerb?: "call" | "text" | "email" };
+/** `closed` = the office state when the referral/contact form was sent (never the view time). */
+type Saved = {
+  firstName?: string;
+  form?: Form;
+  reachVerb?: "call" | "text" | "email";
+  closed?: boolean;
+};
+const ph = flags.showPlaceholders;
+const officeResponse = service.responseTimeOffice;
+const referralResponse = service.referralResponseTime;
+const saveNumber = contact.callbackNumberIsMain;
 
 const FAMILY_CARDS = [
   {
@@ -42,7 +52,7 @@ const FAMILY_CARDS = [
 export function ThankYou() {
   const [saved, setSaved] = useState<Saved>({});
   const [param, setParam] = useState<Form>("assessment");
-  const { isClosed } = useOfficeStatus();
+  const office = useOfficeStatus();
 
   useEffect(() => {
     const f = new URLSearchParams(window.location.search).get("form");
@@ -58,6 +68,8 @@ export function ThankYou() {
 
   const form: Form = saved.form ?? param;
   const closed = form === "callback";
+  /** Referral / contact: closed at send time (falls back to now if the tab lost it). */
+  const isClosed = saved.closed ?? office.isClosed;
   const verb = saved.reachVerb ?? "call";
   const name = saved.firstName ? `, ${saved.firstName}` : "";
   const title =
@@ -121,33 +133,65 @@ export function ThankYou() {
             `We've got your request. Our office is open now, so we'll ${verb} you as soon as we can.`
           )}
         </p>
-        {form === "assessment" && flags.showPlaceholders && (
-          <p className="sm muted">
-            Most families hear from us within{" "}
-            <span className="tbc">[Response time during office hours]</span>.
-          </p>
-        )}
+        {form === "assessment" &&
+          (officeResponse.confirmed && officeResponse.value ? (
+            <p className="sm muted">Most families hear from us within {officeResponse.value}.</p>
+          ) : (
+            ph && (
+              <p className="sm muted">
+                Most families hear from us within{" "}
+                <span className="tbc">[Response time during office hours]</span>.
+              </p>
+            )
+          ))}
         {form === "referral" && (
-          <p className="sm muted">Have paperwork to send? Fax it to {contact.fax.value.display}.</p>
+          <>
+            {referralResponse.confirmed && referralResponse.value ? (
+              <p className="sm muted">We respond to referrals within {referralResponse.value}.</p>
+            ) : (
+              ph && (
+                <p className="sm muted">
+                  We respond to referrals within{" "}
+                  <span className="tbc">[Referral response time]</span>.
+                </p>
+              )
+            )}
+            <p className="sm muted">
+              Have paperwork to send? Fax it to {contact.fax.value.display}.
+            </p>
+          </>
         )}
         {closed && (
           <>
             <p className="sm muted">If someone is hurt or in danger, call 911.</p>
-            {flags.showPlaceholders && (
+            {contact.afterHoursClientLine.confirmed && contact.afterHoursClientLine.value ? (
               <p className="sm muted">
-                Already a client? Reach us after hours at{" "}
-                <span className="tbc">[After-hours line for existing clients]</span>.
+                Already a client? Reach us after hours at {contact.afterHoursClientLine.value}.
               </p>
+            ) : (
+              ph && (
+                <p className="sm muted">
+                  Already a client? Reach us after hours at{" "}
+                  <span className="tbc">[After-hours line for existing clients]</span>.
+                </p>
+              )
             )}
           </>
         )}
-        {form !== "referral" && flags.showPlaceholders && (
+        {form !== "referral" && (ph || (saveNumber.confirmed && saveNumber.value)) && (
           <div className="mt-2 self-stretch rounded-[20px] bg-plum-100 p-5">
             <h2 className="h3 !text-[1.375rem]">Save our number</h2>
             <p>
               Add {contact.phone.value.display} to your phone as &ldquo;Dawson Home Care&rdquo; — so
-              you know it&apos;s us when we call.{" "}
-              <span className="tbc">[Does the office call families back from this number?]</span>
+              you know it&apos;s us when we call.
+              {!saveNumber.confirmed && (
+                <>
+                  {" "}
+                  <span className="tbc">
+                    [Does the office call families back from this number?]
+                  </span>
+                </>
+              )}
             </p>
           </div>
         )}
@@ -178,6 +222,7 @@ export function ThankYou() {
                     t: "Care starts",
                     l: "And we keep you and the family in the loop.",
                     done: false,
+                    chip: "[How Dawson updates referral sources after care starts]",
                   },
                 ]
               : [
@@ -209,7 +254,7 @@ export function ThankYou() {
                   </p>
                   {"when" in s && s.when ? (
                     <p>
-                      {closed ? (
+                      {closed || (form === "contact" && isClosed) ? (
                         <>
                           First thing <NextOpen />.
                         </>
@@ -219,7 +264,17 @@ export function ThankYou() {
                       We&apos;ll answer your questions and set up the visit.
                     </p>
                   ) : (
-                    s.l && <p>{s.l}</p>
+                    s.l && (
+                      <p>
+                        {s.l}
+                        {"chip" in s && s.chip && ph && (
+                          <>
+                            {" "}
+                            <span className="tbc">{s.chip}</span>
+                          </>
+                        )}
+                      </p>
+                    )
                   )}
                 </div>
               </li>

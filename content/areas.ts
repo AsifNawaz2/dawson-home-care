@@ -304,3 +304,6 @@ export function matchAreas(query: string): Area[] {
   if (exact.length) return exact;
   return areas.filter((a) => names(a).some((x) => x.startsWith(n)));
 }
+
+/** Id of a town's row in the "Towns we serve" list (map markers for towns without a page link here). */
+export const townRowId = (slug: string) => `town-row-${slug}`;

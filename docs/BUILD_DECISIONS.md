@@ -185,7 +185,29 @@ These don't contradict the design — the design just doesn't cover them: Comfor
 | 51 | Plain links on dark/Dusk bands | Not shown | Body links underlined, AA contrast | Plain links on plum/Dusk are cream (orchid-700 fails there) |
 | 52 | Service "A day with us" steps not reached yet | Whole step faded to 22% opacity (text ~1.5:1) | WCAG 2.2 AA contrast | Same slide-in and faded dot; the **words** turn muted (7:1) instead of fading. Reads the same "not yet", passes AA |
 | 53 | "Since 2002" number | Static number | Count-up | Row 22, computed in the browser (no clock reads during prerender); the space is held so nothing jumps |
-| 54 | FAQ structured data | — | FAQPage JSON-LD on /faq | Left for the SEO phase with the rest of the JSON-LD (none is built yet); the data (`blocksToText`) is ready |
+| 54 | FAQ structured data | — | FAQPage JSON-LD on /faq | Built in Phase 5 with the rest of the JSON-LD (row 55) |
+
+### D9. Found while building Phase 5 (remaining pages, SEO)
+
+| # | Conflict | Design says | Docs say | I followed |
+|---|---|---|---|---|
+| 55 | Metadata, OG, JSON-LD | — | SEO_PLAN §1–§3 | Every page's title, description, canonical, robots and OG/Twitter come from `content/seo.ts` (SEO_PLAN §8) via `pageMetadata()`. One generated OG image per page at `/og/<key>`, prerendered. JSON-LD: LocalBusiness on every page, WebSite on Home, ItemList on /care, Service + FAQPage on services and towns, FAQPage on /faq, BreadcrumbList on every inner page. Unconfirmed properties (geo, license, hasMap) are left out. Everything stays `noindex` until `NEXT_PUBLIC_INDEXABLE=true` |
+| 56 | OG image fonts | — | SEO_PLAN: Fraunces title | **Anton + Poppins** (fonts decision). `next/og` can't read woff2, so the two weights it needs ship as woff from @fontsource (OFL, licences included) in `app/og/fonts` |
+| 57 | Town, team and owner photos | Stock photos in the design | Real photos only, placeholders until then | `PhotoSlot`: a plum-100 frame with the logo mark; its label shows only with placeholders on. Filenames are listed by `npm run prelaunch` |
+| 58 | /resources empty state | — | No COPY file for /resources (SEO_PLAN: new) | Proposed lines: "Our first guides are on the way." / "Until then, these pages answer the questions families ask us most." + links to existing pages. Noindex until 3 posts |
+| 59 | /sitemap (HTML) | — | No COPY; "every indexable page, grouped like §4.1, built from seo.ts" | H1 "Every page in one list.", lead from the meta description, groups in the description's order. With placeholders on, pages still waiting on their index rule (towns, /resources) are listed with a chip so you can reach them |
+| 60 | Referral form "Which town?" | — | Field table: optional · §8.2: "required there" | **Required** (§8.2 is the validation table) |
+| 61 | /contact "Get directions" | — | COPY_CONVERSION uses the old `goo.gl/maps/SVvYGS3…` link | Your Google Maps link (answer 5), same as every other "Get directions" |
+| 62 | /contact Text card legal line | — | `[[TO CONFIRM: final wording from COPY_LEGAL.md]]` | COPY_LEGAL §1.5 final line + SMS Terms link (COPY_LEGAL overrides it) |
+| 63 | Accessibility statement vs the build | — | COPY_LEGAL §4 | Kept verbatim except where it would be untrue today: "the illustrated house is also a list of our services" is dropped (no house — answer 4); the Comfort Controls button is "at the bottom left (bottom right on phones)"; the **Video** paragraph shows only with placeholders on until the owner video ships with captions (COPY_LEGAL §7 C22); §5 "How we test" appears once `legal.a11yAuditDate` is set. The skip link now reads "Skip to content", as the statement says |
+| 64 | Legal "Last updated" dates | — | Fixed dates set by hand at launch | `legal.updated.*` stay `null`: the line is hidden in production and shows a chip in preview. `npm run prelaunch` lists them |
+| 65 | Turnstile lines (Privacy §2, §5) | — | Show when `TURNSTILE_SITE_KEY` is set | Turnstile isn't wired into the forms yet, so `integrations.turnstile = false` keeps those lines hidden even if a key is set (they'd be untrue) |
+| 66 | Unknown town / service URLs | — | 404 status | With Cache Components the page shell streams before `notFound()`, so unknown slugs answered 200. `proxy.ts` sends unknown `/care/*` and `/areas-we-serve/*` to the 404 page with a real 404 |
+| 67 | Forms before the page is ready | — | "Nothing sensitive ever goes in a URL" | Every form's send button is a plain button until React is ready, so an early click can't fall back to a browser GET that would put names and numbers in the address bar |
+| 68 | Error summary completeness | — | §8.1: the summary lists every answer to check | Cross-field rules (start date, "Other" role/town, phone-or-email, email for "Email me") now run on the first Send too (Zod 4 skipped them while any other field had an error) |
+| 69 | Thank-you after a referral or message | — | §4: open/closed decided at send time | Referral and contact now store the office state when sent, like the assessment; confirmed response times and the after-hours client line render once set |
+| 70 | 404 robots | — | SEO_PLAN §1.3: non-index pages are `noindex, follow` (only /thank-you is `nofollow`) | 404 is `noindex, follow` |
+| 71 | Branch | — | — | PR #1 was merged; Phase 5 continues on the same branch (its content matched `main` when Phase 5 started) and goes up as a new pull request |
 
 ## E. Pages in 06_SITEMAP_AND_PAGES.md with no design — confirmed: built in the same design language
 
