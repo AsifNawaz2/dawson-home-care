@@ -5,7 +5,7 @@ import { NotFoundContent } from "@/components/layout/NotFoundContent";
 
 export const metadata: Metadata = {
   title: { absolute: notFoundTitle },
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
 };
 
 export default function GlobalNotFound() {

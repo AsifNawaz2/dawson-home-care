@@ -8,6 +8,7 @@
  *  - No SMS consents (referrers choose phone or email). Permission checkbox is required.
  *  - Nothing is stored in the browser — client details stay in the form until it's sent.
  */
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState } from "react";
 import { useForm, useWatch, type FieldPath } from "react-hook-form";
@@ -516,6 +517,9 @@ export function ReferralForm() {
           {sending ? "Sending your referral." : ""}
         </p>
         <p className="help">Prefer fax? Send it to {fax.display}.</p>
+        <p className="help">
+          How we handle this information: <Link href="/privacy-policy">Privacy Policy</Link>
+        </p>
       </div>
     </form>
   );

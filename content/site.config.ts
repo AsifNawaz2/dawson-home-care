@@ -171,6 +171,8 @@ export const integrations = {
   /** LeadConnector (GoHighLevel) form seen on the current site. */
   ghlFormId: verified("tkgwDE5LF5f9rgsw3R2x"),
   currentMetaDescription: verified("Personalized Attention for All Your Health-Related Needs"),
+  /** Cloudflare Turnstile on the forms. Not wired yet, so its Privacy §2/§5 lines stay hidden. */
+  turnstile: false as boolean,
 } as const;
 
 /** SMS + legal settings (COPY_LEGAL). */
@@ -188,6 +190,8 @@ export const legal = {
     accessibility: null as string | null,
   },
   analytics: "none" as "none" | "ga4" | "ga4-ads",
+  /** Date of the last full accessibility review (ISO). Accessibility §5 renders only once set. */
+  a11yAuditDate: null as string | null,
 } as const;
 
 /** Runtime flags from the environment (.env.example documents them). */

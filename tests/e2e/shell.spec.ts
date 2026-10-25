@@ -29,7 +29,7 @@ test("skip link moves to main content", async ({ page, isMobile }) => {
   test.skip(isMobile, "keyboard test");
   await page.goto("/");
   await page.keyboard.press("Tab");
-  const skip = page.getByRole("link", { name: "Skip to main content" });
+  const skip = page.getByRole("link", { name: "Skip to content" });
   await expect(skip).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/#main$/);
