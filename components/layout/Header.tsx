@@ -13,6 +13,7 @@ export function Header() {
             variant="stacked"
             figure={flags.logoFigure}
             uid="hdr"
+            switchable
             intro
             className="h-auto w-full"
           />

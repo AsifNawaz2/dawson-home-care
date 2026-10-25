@@ -11,6 +11,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { renderToStaticMarkup } from "react-dom/server";
 import sharp from "sharp";
 import { Logo, type LogoFigure, type LogoTone, type LogoVariant } from "../components/brand/Logo";
+import { LOGO_FILLS } from "../components/brand/logo-paths";
 
 const CREAM = "#FBF8F3";
 
@@ -22,6 +23,7 @@ function svg(variant: LogoVariant, tone: LogoTone, figure: LogoFigure = "a") {
       figure={figure}
       uid={`dd-${variant}-${tone}`}
       title="Dawson & Dawson Home Care"
+      paths={LOGO_FILLS}
     />,
   );
   // Static files keep BRAND_FINAL's ids (React uses data-part to avoid duplicate ids on a page).
