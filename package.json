@@ -13,6 +13,7 @@
     "logos": "tsx scripts/export-logos.tsx",
     "map": "tsx scripts/build-map.ts",
     "images": "node scripts/optimize-images.mjs",
+    "intro": "node scripts/intro-video.mjs",
     "prelaunch": "tsx scripts/prelaunch.ts",
     "test:e2e": "playwright test",
     "check": "npm run lint && npm run typecheck && npm run format:check"

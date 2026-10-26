@@ -40,7 +40,7 @@ All files are in `/docs/design`. They're placeholders until real photos/videos a
 
 | File | Pixels | Size | Where it's used |
 |---|---|---|---|
-| `intro-end-frame.jpg` | 1920×1080 | 102 KB | Home intro: poster of the intro video, and the still frame shown in reduced motion. It's the last frame of the video (the old-color logo) |
+| `intro-end-frame.jpg` | 1920×1080 | 102 KB | Home intro: poster of the intro video, and the still frame shown in reduced motion. It's the last frame of the video (the old-color logo). **Replaced** by the last frame of the owner's new animation (row 84) |
 | `logo.png` | 1837×1002 (transparent) | 574 KB | In the design: header, footer, the logo that flies from the intro into the header, and inside the owner/caregiver placeholders. **In the build it's replaced by the new SVG logo** everywhere except the intro flight (see §D, row 8) |
 | `hero-caregivers.jpg` | 2000×1116 | 204 KB | Home hero photo (desktop + mobile) — "two caregivers in lavender uniforms" |
 | `moment-1.jpg` … `moment-4.jpg` | 1200×1200 each | 184–237 KB | Home "01 — The moment": one photo per worry line (desktop pinned scene, mobile scene, reduced-motion grid) |
@@ -58,7 +58,7 @@ Also in `/docs` (reference only, not shipped): `current-logo.png` (2000×2000, 1
 
 | File | Format | Size | Where it's used |
 |---|---|---|---|
-| `intro-animation.mp4` | 1920×1080, 30 fps, 8.1 s | 558 KB | Home intro (logo animation). Plays once, then the logo flies into the header |
+| `intro-animation.mp4` | 1920×1080, 30 fps, 8.1 s | 558 KB | Home intro (logo animation). Plays once, then the logo flies into the header. **Replaced** by the owner's new animation (row 84) |
 | `personal-care-1/2/3.mp4` | 540×960 portrait, 24 fps, 8 s loop | 465–611 KB | Home "How we help" collage 1 + Personal Care page hero collage |
 | `home-help-1/2/3.mp4` | 540×960, 8 s loop | 384–613 KB | Home collage 2 (and future Home Help hero) |
 | `companionship-1/2/3.mp4` | 540×960, 8 s loop | 267–994 KB | Home collage 3 (and future Companionship hero) |
@@ -225,6 +225,7 @@ These don't contradict the design — the design just doesn't cover them: Comfor
 | 81 | 320px reflow | — | WCAG 1.4.10 | Long unbroken text (`info@dawsonhomecare.com`, URLs in the reveal list) wraps (`overflow-wrap: anywhere` on mailto links) — /reviews, /privacy-policy and /accessibility scrolled sideways by 13–15 px |
 | 82 | Logo A/B on /reveal-notes | — | BRAND_FINAL §3.5: toggle swaps the **live** header logo | Header and footer logos carry both figures; `html[data-logo-figure]` (default from `NEXT_PUBLIC_LOGO_FIGURE`, overridden for the tab by the toggle) shows one |
 | 83 | `npm run prelaunch` | — | List every placeholder | Rewritten as `scripts/prelaunch.ts` on `lib/prelaunch.ts`: one plain-language, de-duplicated list grouped for the owner (the same list is "What we need from you" on /reveal-notes), then every raw occurrence with file:line (`-- --short` hides those). Adds the design's stand-in photos/videos and launch-day needs (GHL access, Turnstile, analytics IDs, www vs apex, DNS/Search Console) |
+| 84 | New intro animation | Design: `intro-animation.mp4` (hands → house → wordmark) | Owner, 25 Oct 2026: `docs/new_intro_logo_animation.mp4` (1920×1080, 30 fps, 8.0 s, with an audio track) replaces it everywhere | **Owner's video**, same behavior (once per session, Skip intro, Esc/scroll fast-forward, reduced motion = end frame). `npm run intro` (`scripts/intro-video.mjs`, ffmpeg) writes the same filenames: `intro-animation.mp4` (H.264 High, audio dropped — it always plays muted —, faststart, CRF 26: 1.5 MB → 395 KB, SSIM 0.998), `intro-end-frame.jpg` (the source's last frame) and `intro-logo.png` (that frame's logo un-composited from white, 1837×1002 at 42,39) for the flight, so it matches the video exactly. The design's `logo.png` stays only in the owner placeholders |
 
 ## E. Pages in 06_SITEMAP_AND_PAGES.md with no design — confirmed: built in the same design language
 
