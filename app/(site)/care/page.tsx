@@ -26,7 +26,7 @@ export default function CareHubPage() {
       <section aria-labelledby="hub-title" className="relative overflow-hidden">
         <div className="wrap">
           <PageCrumbs path="/care" />
-          <div className="grid gap-10 pt-4 pb-[72px] lg:grid-cols-[minmax(0,1fr)_minmax(0,620px)] lg:items-center lg:gap-12 lg:pt-6 lg:pb-20">
+          <div className="grid gap-10 pt-4 pb-[72px] lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:items-center lg:gap-12 lg:pt-6 lg:pb-20">
             <div className="flex flex-col items-start gap-5">
               <p className="eyebrow">{hero.eyebrow}</p>
               <h1 id="hub-title" tabIndex={-1} className="h1-display text-plum-800">
@@ -43,7 +43,10 @@ export default function CareHubPage() {
               <p className="sm muted">{hero.microcopy}</p>
             </div>
             <figure>
-              <div aria-hidden="true" className="@container [--cw:min(658px,100cqw)]">
+              <div
+                aria-hidden="true"
+                className="@container [--cw:min(520px,100cqw,calc((var(--fit-h)-32px)*1.129))] lg:flex lg:justify-center"
+              >
                 <AutoCollage data={hubCollage} />
               </div>
               <figcaption className="sr-only">{hero.collageCaption}</figcaption>
@@ -52,7 +55,7 @@ export default function CareHubPage() {
         </div>
       </section>
 
-      <section aria-labelledby="cards-title" className="bg-white py-[72px] lg:py-24">
+      <section aria-labelledby="cards-title" className="bg-white py-[72px] lg:py-section-sm">
         <div className="wrap">
           <div className="flex flex-col gap-4">
             <p className="eyebrow">{cards.eyebrow}</p>
@@ -98,8 +101,8 @@ export default function CareHubPage() {
         </div>
       </section>
 
-      <section aria-labelledby="plan-title" className="py-[72px] lg:py-24">
-        <div className="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
+      <section aria-labelledby="plan-title" className="py-[72px] lg:py-section-sm">
+        <div className="wrap grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-4">
             <p className="eyebrow">{plan.eyebrow}</p>
             <h2 id="plan-title" className="h2">
@@ -136,8 +139,11 @@ export default function CareHubPage() {
         </div>
       </section>
 
-      <section aria-labelledby="hub-quiz-title" className="bg-orchid-100 py-[72px] lg:py-24">
-        <div className="wrap flex flex-col items-start gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+      <section
+        aria-labelledby="hub-quiz-title"
+        className="bg-orchid-100 py-[72px] lg:py-section-sm"
+      >
+        <div className="wrap flex flex-col items-start gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div className="flex max-w-[720px] flex-col gap-4">
             <p className="eyebrow">{quiz.eyebrow}</p>
             <h2 id="hub-quiz-title" className="h2">
@@ -156,8 +162,8 @@ export default function CareHubPage() {
         </div>
       </section>
 
-      <section aria-labelledby="dont-title" className="bg-white py-[72px] lg:py-24">
-        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20">
+      <section aria-labelledby="dont-title" className="bg-white py-[72px] lg:py-section-sm">
+        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-16">
           <div className="flex flex-col gap-4">
             <p className="eyebrow">{dont.eyebrow}</p>
             <h2 id="dont-title" className="h2">

@@ -93,7 +93,7 @@ export function TheMoment() {
       <div ref={titleTrack} className="relative live:h-[180svh] lg:live:h-[200svh]">
         <div
           ref={titlePin}
-          className="wrap flex flex-col items-center gap-5 pt-[88px] text-center lg:gap-7 lg:pt-32 live:sticky live:top-0 live:h-svh live:justify-center live:pt-[72px] live:pb-[72px] lg:live:pt-24 lg:live:pb-0"
+          className="wrap flex flex-col items-center gap-5 pt-[88px] text-center lg:gap-7 lg:pt-section-lg live:sticky live:top-0 live:h-svh live:justify-center live:pt-[72px] live:pb-[72px] lg:live:pt-[var(--header-h)] lg:live:pb-0"
         >
           <p className="eyebrow mw" data-w="0">
             {moment.eyebrow}
@@ -122,7 +122,7 @@ export function TheMoment() {
           ref={linesPin}
           className="sticky top-0 flex h-svh flex-col justify-center lg:flex-row lg:items-center"
         >
-          <div className="wrap flex flex-col gap-6 pt-[88px] pb-24 lg:grid lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-20 lg:pt-[72px] lg:pb-0">
+          <div className="wrap flex flex-col gap-6 pt-[88px] pb-24 lg:grid lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-14 lg:pt-[var(--header-h)] lg:pb-0">
             <div className="moment-img relative aspect-square flex-none overflow-hidden rounded-3xl bg-plum-100">
               {moment.lines.map((l, i) => (
                 <Image
@@ -131,7 +131,7 @@ export function TheMoment() {
                   alt=""
                   width={1200}
                   height={1200}
-                  sizes="(min-width: 64rem) 600px, 350px"
+                  sizes="(min-width: 64rem) 480px, 350px"
                   className="st-img"
                   data-img=""
                   data-active={i === 0 ? "true" : "false"}
@@ -173,7 +173,7 @@ export function TheMoment() {
       {/* Reduced motion: the four photos and lines, still */}
       <div
         aria-hidden="true"
-        className="wrap mt-14 grid gap-10 lg:mt-20 lg:grid-cols-2 lg:gap-12 live:hidden"
+        className="wrap mt-14 grid gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-12 live:hidden"
       >
         {moment.lines.map((l) => (
           <figure key={l.text} className="flex flex-col gap-5">
@@ -185,13 +185,13 @@ export function TheMoment() {
               sizes="(min-width: 64rem) 640px, 100vw"
               className="aspect-[4/3] w-full rounded-3xl object-cover"
             />
-            <p className="ff text-[2rem] leading-[1.1] text-plum-800 lg:text-[2.5rem]">{l.text}</p>
+            <p className="ff text-[2rem] leading-[1.1] text-plum-800">{l.text}</p>
           </figure>
         ))}
       </div>
 
-      <div className="wrap pb-[88px] lg:pb-32">
-        <div className="mt-16 flex flex-col items-start gap-4 border-t border-line pt-12 lg:mt-24 lg:grid lg:grid-cols-[minmax(0,1fr)_440px] lg:items-end lg:gap-20 lg:pt-16 max-lg:live:mt-0">
+      <div className="wrap pb-[88px] lg:pb-section-lg">
+        <div className="mt-16 flex flex-col items-start gap-4 border-t border-line pt-12 lg:mt-18 lg:grid lg:grid-cols-[minmax(0,1fr)_400px] lg:items-end lg:gap-16 lg:pt-12 max-lg:live:mt-0">
           <p className="dl text-plum-800">{moment.resolution}</p>
           <div className="flex flex-col items-start gap-4">
             <p className="lead">{moment.followUp}</p>

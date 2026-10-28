@@ -18,10 +18,7 @@ export function AssessmentAside() {
   const ownerName = owner.firstName.confirmed ? owner.firstName.value : null;
   return (
     <aside aria-labelledby="next-title" className="fa-aside">
-      <h2
-        id="next-title"
-        className="ff text-[1.875rem] leading-[1.1] text-plum-800 lg:text-[2.125rem]"
-      >
+      <h2 id="next-title" className="ff text-[1.875rem] leading-[1.1] text-plum-800">
         What happens next
       </h2>
       <ol className="relative flex flex-col gap-[18px]">

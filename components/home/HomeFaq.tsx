@@ -12,8 +12,8 @@ const ITEMS: AccordionItem[] = featuredFaqs.map((f) => ({
 
 export function HomeFaq() {
   return (
-    <section aria-labelledby="faq-title" className="py-[88px] lg:py-32">
-      <div className="wrap grid items-start lg:grid-cols-[400px_minmax(0,1fr)] lg:gap-24">
+    <section aria-labelledby="faq-title" className="py-[88px] lg:py-section-lg">
+      <div className="wrap grid items-start lg:grid-cols-[360px_minmax(0,1fr)] lg:gap-18">
         <div className="flex flex-col items-start gap-3 lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:gap-6">
           <p className="eyebrow">12 — Questions</p>
           <h2 id="faq-title" className="h2">

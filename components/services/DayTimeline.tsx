@@ -55,8 +55,8 @@ export function DayTimeline({ page }: { page: ServicePage }) {
   const y = Math.round(360 - 240 * Math.sin(ang));
 
   return (
-    <section aria-labelledby="day-title" className="bg-white py-[72px] lg:py-24">
-      <div className="wrap grid items-start gap-10 lg:grid-cols-2 lg:gap-24">
+    <section aria-labelledby="day-title" className="bg-white py-[72px] lg:py-section-sm">
+      <div className="wrap grid items-start gap-10 lg:grid-cols-2 lg:gap-18">
         <div className="flex flex-col gap-4 lg:sticky lg:top-[152px]">
           <p className="eyebrow">{day.eyebrow}</p>
           <h2 id="day-title" className="h2">

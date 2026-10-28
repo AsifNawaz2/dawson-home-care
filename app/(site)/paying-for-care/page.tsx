@@ -46,10 +46,7 @@ export default function PayingForCarePage() {
           className="flex max-w-[900px] flex-col items-start gap-3.5 pt-6 pb-12 lg:gap-4 lg:pt-10 lg:pb-16"
         >
           <p className="eyebrow">Paying for care</p>
-          <h1
-            id="pfc-title"
-            className="ff text-[2.875rem] leading-[1.03] text-plum-800 lg:text-[5.25rem] lg:leading-none"
-          >
+          <h1 id="pfc-title" className="h1-page">
             What care costs — and how families <span className="accent">pay</span> for it.
           </h1>
           <p className="lead max-w-[700px]">
@@ -77,7 +74,7 @@ export default function PayingForCarePage() {
       <section
         id="estimator"
         aria-labelledby="est-title"
-        className={`bg-white py-[72px] lg:py-28 ${SECTION}`}
+        className={`bg-white py-[72px] lg:py-section ${SECTION}`}
       >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <div className="flex max-w-[760px] flex-col gap-3 lg:gap-4">
@@ -128,7 +125,7 @@ export default function PayingForCarePage() {
       <section
         id="ways-to-pay"
         aria-labelledby="pay-title"
-        className={`py-[72px] lg:py-28 ${SECTION}`}
+        className={`py-[72px] lg:py-section ${SECTION}`}
       >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <div className="flex max-w-[760px] flex-col gap-3 lg:gap-4">
@@ -183,7 +180,7 @@ export default function PayingForCarePage() {
       <section
         id="questions-to-ask"
         aria-labelledby="ask-title"
-        className={`bg-white py-[72px] lg:py-28 ${SECTION}`}
+        className={`bg-white py-[72px] lg:py-section ${SECTION}`}
       >
         <div className="wrap flex flex-col gap-8 lg:gap-10">
           <div className="flex max-w-[760px] flex-col gap-3 lg:gap-4">

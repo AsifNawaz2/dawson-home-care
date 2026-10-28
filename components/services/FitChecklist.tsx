@@ -47,9 +47,9 @@ export function FitChecklist({ page }: { page: ServicePage }) {
     <section
       id="right-for-you"
       aria-labelledby="fit-title"
-      className="bg-orchid-100 py-[72px] lg:py-24"
+      className="bg-orchid-100 py-[72px] lg:py-section-sm"
     >
-      <div className="wrap grid items-start gap-8 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-20">
+      <div className="wrap grid items-start gap-8 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-16">
         <div className="flex flex-col gap-4 lg:sticky lg:top-[152px]">
           <p className="eyebrow">01 — Is this right for you?</p>
           <h2 id="fit-title" className="dl text-plum-800">

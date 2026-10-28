@@ -7,7 +7,7 @@ export function ServiceReview({ slug }: { slug: ServiceSlug }) {
   const r = reviewForService(slug);
   if (!r) return null;
   return (
-    <section aria-label="What a family says" className="py-[72px] lg:py-24">
+    <section aria-label="What a family says" className="py-[72px] lg:py-section-sm">
       <div className="wrap">
         <figure className="mx-auto flex max-w-[1040px] flex-col items-center gap-5 text-center lg:gap-[22px]">
           <svg
@@ -21,7 +21,7 @@ export function ServiceReview({ slug }: { slug: ServiceSlug }) {
             <path d="M4 38 V24 C4 12 10 5 20 2 L22 7 C15 10 12 15 12 20 H20 V38 Z M28 38 V24 C28 12 34 5 44 2 L46 7 C39 10 36 15 36 20 H44 V38 Z" />
           </svg>
           <Stars rating={r.rating} />
-          <blockquote className="q text-[1.25rem] leading-normal text-plum-800 lg:text-[1.625rem]">
+          <blockquote className="q text-[1.25rem] leading-normal text-plum-800 lg:text-[1.375rem]">
             &ldquo;{r.text}&rdquo;
           </blockquote>
           <figcaption className="flex items-center gap-3.5">

@@ -91,7 +91,7 @@ export default function AreasPage() {
       <section
         id="find-your-town"
         aria-labelledby="find-title"
-        className="bg-white py-[72px] lg:py-28"
+        className="bg-white py-[72px] lg:py-section"
       >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead
@@ -103,7 +103,7 @@ export default function AreasPage() {
         </div>
       </section>
 
-      <section id="towns" aria-labelledby="towns-title" className="py-[72px] lg:py-28">
+      <section id="towns" aria-labelledby="towns-title" className="py-[72px] lg:py-section">
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead id="towns-title" title="Towns we serve" />
           <TownList />
@@ -130,7 +130,7 @@ export default function AreasPage() {
         </div>
       </section>
 
-      <section aria-labelledby="same-title" className="bg-plum-100 py-[72px] lg:py-24">
+      <section aria-labelledby="same-title" className="bg-plum-100 py-[72px] lg:py-section-sm">
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead id="same-title" title="Wherever you live, it's the same Dawson." />
           <ul className="grid gap-4 md:grid-cols-3">
@@ -142,7 +142,7 @@ export default function AreasPage() {
                 >
                   <Icon size={24} strokeWidth={1.75} />
                 </span>
-                <h3 className="h3 !text-[1.5rem]">{title}</h3>
+                <h3 className="h3 !text-h4">{title}</h3>
                 <p>{t}</p>
               </li>
             ))}
@@ -150,8 +150,8 @@ export default function AreasPage() {
         </div>
       </section>
 
-      <section aria-labelledby="where-faq-title" className="py-[72px] lg:py-28">
-        <div className="wrap grid items-start gap-8 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-20">
+      <section aria-labelledby="where-faq-title" className="py-[72px] lg:py-section">
+        <div className="wrap grid items-start gap-8 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-16">
           <SectionHead id="where-faq-title" title="Questions about where we care" />
           <Accordion
             items={FAQS.map((f) => ({

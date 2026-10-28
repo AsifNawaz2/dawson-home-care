@@ -30,13 +30,13 @@ export function Since2002() {
   const n = years === null ? <span className="invisible">00</span> : years;
 
   return (
-    <section aria-labelledby="since-title" className="bg-plum-100 py-20 lg:py-28">
-      <div className="wrap grid items-center gap-0 lg:grid-cols-2 lg:gap-24">
+    <section aria-labelledby="since-title" className="bg-plum-100 py-20 lg:py-section">
+      <div className="wrap grid items-center gap-0 lg:grid-cols-2 lg:gap-18">
         <div className="flex flex-col gap-3 lg:gap-4">
           <p className="eyebrow">05 — Since 2002</p>
           <h2 id="since-title" className="flex flex-col gap-1.5 text-plum-800 lg:gap-2">
-            <span className="ff text-[8.25rem] leading-[0.95] lg:text-[11rem]">{n}</span>
-            <span className="ff text-[2.25rem] leading-[1.08] lg:text-[3.25rem]">
+            <span className="ff text-numeral">{n}</span>
+            <span className="ff text-[2.25rem] leading-[1.08] lg:text-[2.625rem]">
               years caring for Lowcountry families
             </span>
           </h2>
@@ -56,15 +56,13 @@ export function Since2002() {
             </div>
             <ol className="mt-4 grid list-none grid-cols-2 gap-4 p-0 lg:mt-5 lg:gap-6">
               <li className="flex flex-col gap-1.5 lg:gap-2">
-                <span className="ff text-[2.5rem] leading-none text-plum-800 lg:text-[3.25rem]">
-                  2002
-                </span>
+                <span className="ff text-stat text-plum-800">2002</span>
                 <span className="text-ink lg:text-[1.25rem] lg:leading-[1.45]">
                   — We begin caring for Lowcountry families.
                 </span>
               </li>
               <li className="flex flex-col items-end gap-1.5 text-right lg:gap-2">
-                <span className="ff text-[2.5rem] leading-none text-plum-800 lg:text-[3.25rem]">
+                <span className="ff text-stat text-plum-800">
                   {year ?? <span className="invisible">0000</span>}
                 </span>
                 <span className="text-ink lg:text-[1.25rem] lg:leading-[1.45]">

@@ -102,18 +102,20 @@ export const collages: Record<ServiceSlug, Collage> = {
       { name: "companionship-2", left: 410, top: 192 },
     ],
   },
+  // Two-clip collages: moved right of the design (+44 / +40) so they rest centred like the
+  // three-clip ones above (owner, Oct 2026).
   "24-hour-care": {
-    panel: { left: 168, top: 50, width: 343, height: 563 },
+    panel: { left: 212, top: 50, width: 343, height: 563 },
     clips: [
-      { name: "24-hour-care-1", left: 99, top: 50 },
-      { name: "24-hour-care-2", left: 340, top: 195 },
+      { name: "24-hour-care-1", left: 143, top: 50 },
+      { name: "24-hour-care-2", left: 384, top: 195 },
     ],
   },
   "respite-care": {
-    panel: { left: 173, top: 39, width: 343, height: 563 },
+    panel: { left: 213, top: 39, width: 343, height: 563 },
     clips: [
-      { name: "respite-care-1", left: 345, top: 39 },
-      { name: "respite-care-2", left: 103, top: 182 },
+      { name: "respite-care-1", left: 385, top: 39 },
+      { name: "respite-care-2", left: 143, top: 182 },
     ],
   },
 };

@@ -13,7 +13,7 @@ export function ForProfessionals() {
       aria-labelledby="pros-title"
       data-surface="dark"
       data-cursor-theme="dark"
-      className="relative overflow-hidden bg-plum-950 py-20 lg:py-28"
+      className="relative overflow-hidden bg-plum-950 py-20 lg:py-section"
     >
       <svg
         aria-hidden="true"
@@ -32,7 +32,7 @@ export function ForProfessionals() {
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <div className="relative wrap grid items-end gap-3.5 pt-6 lg:grid-cols-2 lg:gap-24 lg:pt-12">
+      <div className="relative wrap grid items-end gap-3.5 pt-6 lg:grid-cols-2 lg:gap-18 lg:pt-12">
         <div className="flex flex-col gap-3.5 lg:gap-4">
           <p className="eyebrow">11 — For professionals</p>
           <h2 id="pros-title" className="h2 text-white">

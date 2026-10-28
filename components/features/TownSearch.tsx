@@ -50,11 +50,7 @@ export function TownSearch({ onMatch }: { onMatch: (slugs: string[]) => void }) 
       onSubmit={submit}
       className="flex flex-col gap-2.5 rounded-[20px] border border-line bg-white p-[22px] lg:gap-3 lg:p-8"
     >
-      <label
-        id={`${uid}-l`}
-        htmlFor={`${uid}-q`}
-        className="ff text-[1.5rem] text-plum-800 lg:text-[1.625rem]"
-      >
+      <label id={`${uid}-l`} htmlFor={`${uid}-q`} className="ff text-[1.5rem] text-plum-800">
         Do you serve my town?
       </label>
       <p id={`${uid}-help`} className="sm muted">

@@ -33,31 +33,50 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  /* ---------- Type scale (design px, fluid 390px → 1440px viewport) ---------- */
-  --text-display: clamp(3.25rem, 2.229rem + 4.19vw, 6rem); /* service-page H1 52 → 96 */
+  /* ---------- Type scale (fluid 390px → 1440px viewport) ----------
+     Desktop sizes are the design's × ~0.78 (owner, Oct 2026: "the 75% zoom proportion") so a
+     section fits one laptop screen. Phone sizes are unchanged. Reading text is NOT scaled:
+     body 18px, lead 19 → 20px, helpers 16px. Always rem, never vw/vh alone, so Comfort
+     Controls text size and browser zoom still enlarge every line. */
+  --text-display: clamp(3.25rem, 2.786rem + 1.905vw, 4.5rem); /* service-page H1 52 → 72 */
   --text-display--line-height: 1;
-  --text-hero: clamp(3rem, 2.443rem + 2.286vw, 4.5rem); /* Home H1 48 → 72 */
+  --text-page: clamp(2.875rem, 2.457rem + 1.714vw, 4rem); /* inner-page H1 46 → 64 */
+  --text-page--line-height: 1.03;
+  --text-hero: clamp(3rem, 2.814rem + 0.762vw, 3.5rem); /* Home H1 48 → 56 */
   --text-hero--line-height: 1.04;
-  --text-dl: clamp(2.625rem, 1.929rem + 2.857vw, 4.5rem); /* display-l 42 → 72 */
+  --text-dl: clamp(2.625rem, 2.3rem + 1.333vw, 3.5rem); /* display-l 42 → 56 */
   --text-dl--line-height: 1.05;
-  --text-h2: clamp(2.25rem, 1.879rem + 1.524vw, 3.25rem); /* 36 → 52 */
+  --text-h2: clamp(2.25rem, 2.111rem + 0.571vw, 2.625rem); /* 36 → 42 */
   --text-h2--line-height: 1.08;
-  --text-sh: clamp(2rem, 1.665rem + 0.952vw, 2.625rem); /* form step heading 32 → 42 */
+  --text-sh: clamp(2rem, 1.954rem + 0.19vw, 2.125rem); /* form step heading 32 → 34 */
   --text-sh--line-height: 1.1;
-  --text-h3: clamp(1.5rem, 1.407rem + 0.381vw, 1.75rem); /* 24 → 28 */
+  --text-h3: clamp(1.375rem, 1.329rem + 0.19vw, 1.5rem); /* 22 → 24 */
   --text-h3--line-height: 1.2;
-  --text-faq: clamp(1.3125rem, 1.243rem + 0.286vw, 1.5rem); /* 21 → 24 */
+  --text-h4: 1.375rem; /* 22 — small Anton card titles (was !text-[1.5rem]) */
+  --text-h4--line-height: 1.2;
+  --text-faq: clamp(1.25rem, 1.227rem + 0.095vw, 1.3125rem); /* 20 → 21 */
   --text-faq--line-height: 1.3;
-  --text-lead: clamp(1.1875rem, 1.118rem + 0.286vw, 1.375rem); /* 19 → 22 */
+  --text-lead: clamp(1.1875rem, 1.164rem + 0.095vw, 1.25rem); /* 19 → 20 */
   --text-lead--line-height: 1.55;
   --text-base: 1.125rem; /* 18 — body minimum */
   --text-base--line-height: 1.65;
-  --text-btn: 1.0625rem; /* 17 — button labels (BRAND_FINAL button spec) */
+  --text-btn: 1rem; /* 16 — button labels */
   --text-btn--line-height: 1.2;
   --text-sm: 1rem; /* 16 — helpers, captions, labels only */
   --text-sm--line-height: 1.55;
   --text-eyebrow: 0.875rem; /* 14 — eyebrows + cursor label only */
   --text-eyebrow--line-height: 1.4;
+  /* Big Anton numbers (Since 2002 "24", the estimator total, stats) */
+  --text-numeral: clamp(8.25rem, 8.064rem + 0.762vw, 8.75rem); /* 132 → 140 (design 176) */
+  --text-numeral--line-height: 0.95;
+  --text-stat: clamp(2.5rem, 2.453rem + 0.19vw, 2.625rem); /* 40 → 42 */
+  --text-stat--line-height: 1;
+
+  /* ---------- Section rhythm (vertical padding of a page section) ----------
+     Use py-section / py-section-sm / py-section-lg from lg up; phones keep 72 / 88px. */
+  --spacing-section: 5rem; /* 80 — was 112 */
+  --spacing-section-sm: 4.5rem; /* 72 — was 96 */
+  --spacing-section-lg: 6rem; /* 96 — was 128 */
 
   /* ---------- Shape ---------- */
   --radius-pill: 999px;
@@ -108,10 +127,17 @@
   --header-h: 72px;
   --mbar-h: 0px;
   --gutter: clamp(1.25rem, -0.143rem + 5.714vw, 5rem); /* design: 20px phone → 80px desktop */
+  /* Page width: content stops growing at 1280 − 2 × gutter (was 1440, the design's) so wide
+     screens keep the calm proportion. The header bar is wider (wrap-wide) to fit its buttons. */
+  --wrap-max: 1280px;
+  --wrap-wide-max: 1440px;
+  /* Tallest a picture or video card may be on a laptop: the screen minus the header and room
+     for the section's own padding, so a whole section fits on one screen. */
+  --fit-h: calc(100svh - var(--header-h) - 96px);
 }
 @media (min-width: 80rem) {
   :root {
-    --header-h: 112px;
+    --header-h: 80px; /* design 112 */
   }
 }
 @media (max-width: 47.99rem) {
@@ -133,7 +159,13 @@ html[data-contrast="high"] {
 
 @utility wrap {
   width: 100%;
-  max-width: 1440px;
+  max-width: var(--wrap-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility wrap-wide {
+  width: 100%;
+  max-width: var(--wrap-wide-max);
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
@@ -284,6 +316,14 @@ html[data-contrast="high"] {
     letter-spacing: 0.005em;
     color: var(--color-plum-800);
   }
+  /* Inner-page H1 (PageHero, legal, quiz, assessment, paying, FAQ) */
+  .h1-page {
+    font-family: var(--font-display);
+    font-size: var(--text-page);
+    line-height: 1.03;
+    letter-spacing: 0.005em;
+    color: var(--color-plum-800);
+  }
   .h1-display {
     font-family: var(--font-display);
     font-size: var(--text-display);
@@ -389,6 +429,13 @@ html[data-contrast="high"] {
   }
   @media (max-width: 47.99rem) {
     .btn {
+      padding: 0 24px;
+    }
+  }
+  /* Laptop scale: 48px tall (the touch-target minimum), slimmer sides. */
+  @media (min-width: 64rem) {
+    .btn {
+      min-height: 48px;
       padding: 0 24px;
     }
   }
@@ -504,6 +551,7 @@ html[data-contrast="high"] {
     text-decoration: none;
     font-weight: 500;
     font-size: var(--text-sm);
+    white-space: nowrap;
     min-height: 48px;
     display: inline-flex;
     align-items: center;
@@ -620,7 +668,7 @@ html[data-contrast="high"] {
     background: var(--color-white);
     border: 1px solid var(--color-line);
     border-radius: var(--radius-card);
-    padding: 32px;
+    padding: 28px;
   }
   html[data-contrast="high"] .card {
     border: 2px solid var(--color-plum-800);
@@ -692,7 +740,7 @@ html[data-contrast="high"] {
     display: flex;
     align-items: center;
     gap: 14px;
-    min-height: 76px;
+    min-height: 68px; /* design 76 */
     padding: 14px 18px;
     border-radius: 18px;
     border: 1.5px solid var(--color-muted);
@@ -896,8 +944,8 @@ html[data-contrast="high"] {
     display: flex;
     align-items: center;
     gap: 16px;
-    min-height: 96px;
-    padding: 16px 20px;
+    min-height: 80px; /* design 96 */
+    padding: 14px 20px;
     border-radius: 20px;
     text-align: left;
     font-family: inherit;
@@ -985,8 +1033,8 @@ html[data-contrast="high"] {
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    min-height: 72px;
-    padding: 20px 0;
+    min-height: 64px; /* design 72 */
+    padding: 16px 0;
     background: transparent;
     border: 0;
     text-align: left;

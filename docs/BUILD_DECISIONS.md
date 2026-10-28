@@ -304,3 +304,13 @@ Every page has a reduced-motion version and a phone layout based on the Home-mob
 | 10 | SEO open calls | **Yes, recommended options** | D1–D5 as listed in §D7 |
 
 **Placeholder list after these answers** — no longer placeholders: reviews, Google rating and count, "Women-owned", owner first name, Google Maps link. Still `[[TO CONFIRM]]` (unchanged): owner last name/background/quote/photo/video/signature, the two-owner question, SC license number, rates and minimum visit hours, service-area towns and drive times, response times, after-hours line for existing clients, hospice/palliative support, transport, pill organizers, overnight awake vs sleep-over, careers details, caregiver cards, family-run headline swap, and the rest of the lists in each COPY file.
+
+---
+
+## I. Owner changes after review (28 Oct 2026)
+
+| # | Change | Why | What changed in the build |
+|---|---|---|---|
+| 1 | **Laptop scale** — the whole site ~20–25% smaller on desktop/laptop | At 100% zoom on a MacBook the design felt too big; the owner liked the 75%-zoom proportion | Tokens, not zoom: Anton display/heading sizes, header (112 → 80px, logo 169 → 120px), buttons (48px tall from `lg`), section padding (`py-section*`), page width (`--wrap-max` 1280), image/video cards capped by `--fit-h` so each pinned scene fits a 1280×720 screen. Reading text unchanged (body 18px, lead 20px, helpers 16px). Phones unchanged. Rules in CLAUDE.md "Laptop scale" |
+| 2 | **How we help, services 4 and 5** rest further right | The two-clip collages ended left of centre, unlike services 1–3 | Collage coordinates in `content/copy/home.ts` moved right (+44 / +40 on the 700-wide canvas) so their centre matches services 1–3; the slide animation is unchanged. The stage is now centred in its column. Same collages on the 24-Hour and Respite service heroes |
+| 3 | **Header Free Assessment button** — overrides §H answer 6 | Owner asked for it next to Call | Green "Get a Free Assessment" (after hours "Request a Callback") before Call. The bar uses `wrap-wide` (1440) so both fit; below 1440px Call reads "Call" (number kept in its accessible name); with larger Comfort text the Assessment button steps aside so the bar never scrolls sideways |

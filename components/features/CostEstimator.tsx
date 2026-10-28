@@ -386,13 +386,13 @@ export function CostEstimator({
             <span
               ref={numRef}
               aria-hidden="true"
-              className={compact ? "text-[3.5rem]" : "text-[4rem] lg:text-[5.5rem]"}
+              className={compact ? "text-[3.5rem]" : "text-[4rem] lg:text-[4.25rem]"}
             >
               {est.weeklyHours}
             </span>
             <span
               aria-hidden="true"
-              className="font-sans text-[1.25rem] font-medium text-plum-100 lg:text-[1.75rem]"
+              className="font-sans text-[1.25rem] font-medium text-plum-100 lg:text-[1.5rem]"
             >
               {" "}
               hours a week

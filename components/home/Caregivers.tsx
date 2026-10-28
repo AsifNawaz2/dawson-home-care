@@ -68,9 +68,7 @@ function FlipCard({ c, onFocusCard }: { c: Caregiver; onFocusCard: () => void })
             <p className="q text-[1.25rem] leading-[1.45] text-plum-800 lg:text-[1.375rem]">
               &ldquo;{c.quote}&rdquo;
             </p>
-            <p className="ff mt-auto text-[1.375rem] text-plum-800 lg:text-[1.5rem]">
-              {c.firstName}
-            </p>
+            <p className="ff mt-auto text-[1.375rem] text-plum-800">{c.firstName}</p>
             <button ref={back} type="button" className="btn btn-ghost self-start" onClick={flip}>
               Back to photo
             </button>
@@ -257,9 +255,9 @@ export function Caregivers() {
   );
 
   return (
-    <section aria-labelledby="caregivers-title" className="bg-white py-[88px] lg:py-32">
+    <section aria-labelledby="caregivers-title" className="bg-white py-[88px] lg:py-section-lg">
       <div className="wrap">
-        <div className="grid items-end gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
+        <div className="grid items-end gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
           <div className="flex flex-col gap-3 lg:gap-4">
             <p className="eyebrow">07 — Our caregivers</p>
             <h2 id="caregivers-title" className="h2">

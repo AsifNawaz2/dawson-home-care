@@ -108,14 +108,10 @@ export function LegalPage({
   );
 
   return (
-    <div className="legal wrap pb-20 lg:pb-28">
+    <div className="legal wrap pb-20 lg:pb-section">
       <PageCrumbs path={path} />
       <div className="flex max-w-[65ch] flex-col gap-4 pt-6 pb-10 lg:pt-10 lg:pb-14">
-        <h1
-          id="page-title"
-          tabIndex={-1}
-          className="ff text-[2.875rem] leading-[1.03] text-plum-800 outline-none lg:text-[5.25rem] lg:leading-none"
-        >
+        <h1 id="page-title" tabIndex={-1} className="h1-page outline-none">
           {title}
         </h1>
         <p className="lead">{lead}</p>
@@ -133,7 +129,7 @@ export function LegalPage({
         )}
       </div>
 
-      <div className="grid items-start gap-10 lg:grid-cols-[280px_minmax(0,65ch)] lg:gap-16">
+      <div className="grid items-start gap-10 lg:grid-cols-[280px_minmax(0,65ch)] lg:gap-12">
         <nav
           aria-label="On this page"
           className="hidden lg:sticky lg:top-[calc(var(--header-h)+24px)] lg:block print:block"
@@ -176,7 +172,7 @@ export function LegalPage({
               aria-labelledby={`${s.id}-title`}
               className="legal-section flex scroll-mt-[calc(var(--header-h)+24px)] flex-col gap-4"
             >
-              <h2 id={`${s.id}-title`} className="h2 !text-[2rem] lg:!text-[2.5rem]">
+              <h2 id={`${s.id}-title`} className="h2 !text-[2rem] lg:!text-[2.125rem]">
                 {s.title}
               </h2>
               {s.body}

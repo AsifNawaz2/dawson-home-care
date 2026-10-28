@@ -152,7 +152,11 @@ export default function CareersPage() {
         </a>
       </PageHero>
 
-      <section id="why-dawson" aria-labelledby="why-title" className="bg-white py-[72px] lg:py-28">
+      <section
+        id="why-dawson"
+        aria-labelledby="why-title"
+        className="bg-white py-[72px] lg:py-section"
+      >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead id="why-title" eyebrow="01 — Why Dawson" title="Why work at Dawson." />
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -167,7 +171,7 @@ export default function CareersPage() {
                 >
                   <Icon size={24} strokeWidth={1.75} />
                 </span>
-                <h3 className="h3 !text-[1.5rem]">{title}</h3>
+                <h3 className="h3 !text-h4">{title}</h3>
                 <p>{text}</p>
                 {chip && ph && <p>{tbc(chip)}</p>}
               </li>
@@ -190,9 +194,9 @@ export default function CareersPage() {
       <section
         id="the-work"
         aria-labelledby="work-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-section"
       >
-        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
+        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <div className="flex flex-col gap-8">
             <SectionHead
               id="work-title"
@@ -241,7 +245,11 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <section id="roles" aria-labelledby="roles-title" className="bg-white py-[72px] lg:py-28">
+      <section
+        id="roles"
+        aria-labelledby="roles-title"
+        className="bg-white py-[72px] lg:py-section"
+      >
         <div className="wrap flex flex-col gap-8">
           <SectionHead id="roles-title" eyebrow="03 — Roles" title="Roles we hire for." />
           {ph && (
@@ -249,14 +257,14 @@ export default function CareersPage() {
               <p>{tbc("[current role types — check the Hireology listings at the reveal]")}</p>
               <ul className="grid gap-4 md:grid-cols-2">
                 <li className="flex flex-col gap-2 rounded-[20px] border border-line bg-cream p-6">
-                  <h3 className="h3 !text-[1.5rem]">Caregiver</h3>
+                  <h3 className="h3 !text-h4">Caregiver</h3>
                   <p>
                     Non-medical care at home: personal care, home help and companionship.{" "}
                     {tbc("[requirements — e.g. experience, driver's license, reliable car]")}
                   </p>
                 </li>
                 <li className="flex flex-col gap-2 rounded-[20px] border border-line bg-cream p-6">
-                  <h3 className="h3 !text-[1.5rem]">Certified Nursing Assistant (CNA)</h3>
+                  <h3 className="h3 !text-h4">Certified Nursing Assistant (CNA)</h3>
                   <p>
                     Our team includes CNAs.{" "}
                     {tbc(
@@ -284,7 +292,7 @@ export default function CareersPage() {
       </section>
 
       {cards.length > 0 && (realCards >= 3 || ph) && (
-        <section id="team" aria-labelledby="team-title" className="py-[72px] lg:py-28">
+        <section id="team" aria-labelledby="team-title" className="py-[72px] lg:py-section">
           <div className="wrap flex flex-col gap-8 lg:gap-12">
             <SectionHead
               id="team-title"
@@ -302,8 +310,12 @@ export default function CareersPage() {
         </section>
       )}
 
-      <section id="apply" aria-labelledby="apply-title" className="bg-white py-[72px] lg:py-28">
-        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
+      <section
+        id="apply"
+        aria-labelledby="apply-title"
+        className="bg-white py-[72px] lg:py-section"
+      >
+        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <div className="flex flex-col gap-6">
             <SectionHead id="apply-title" eyebrow="05 — Apply" title="Ready to apply?" />
             <ol className="flex flex-col gap-4">

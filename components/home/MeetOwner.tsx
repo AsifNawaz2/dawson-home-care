@@ -32,8 +32,8 @@ const ownerName = owner.firstName.value;
 export function MeetOwner() {
   const ph = flags.showPlaceholders;
   return (
-    <section aria-labelledby="owner-title" className="py-[88px] lg:py-32">
-      <div className="wrap flex flex-col lg:grid lg:grid-cols-[520px_minmax(0,1fr)] lg:items-start lg:gap-24">
+    <section aria-labelledby="owner-title" className="py-[88px] lg:py-section-lg">
+      <div className="wrap flex flex-col lg:grid lg:grid-cols-[420px_minmax(0,1fr)] lg:items-start lg:gap-18">
         {/* Left on desktop: portrait + video. On phones these slot between the words. */}
         <div className="contents lg:flex lg:flex-col lg:gap-12">
           <figure className="order-2 mt-7 lg:mt-0">
@@ -47,7 +47,7 @@ export function MeetOwner() {
                 alt=""
                 width={600}
                 height={600}
-                className="block h-auto w-[220px] lg:w-[300px]"
+                className="block h-auto w-[220px] lg:w-[240px]"
               />
             </div>
             {ph && (
@@ -94,7 +94,7 @@ export function MeetOwner() {
           {ph && (
             <blockquote className="order-4 mt-7 flex flex-col gap-4 border-t border-line pt-6 lg:mt-6 lg:gap-6 lg:pt-8">
               {QUOTE_MARK}
-              <p className="q text-[1.375rem] leading-[1.4] text-plum-800 lg:text-[1.75rem]">
+              <p className="q text-[1.375rem] leading-[1.4] text-plum-800 lg:text-[1.5rem]">
                 &ldquo;
                 <Tbc tbc={{ chip: "[Owner quote — one sentence about why they do this work]" }} />
                 &rdquo;

@@ -17,8 +17,8 @@ export function ServiceFaq({ page }: { page: ServicePage }) {
       ),
     }));
   return (
-    <section aria-labelledby="faq-title" className="bg-white py-[72px] lg:py-24">
-      <div className="wrap grid items-start gap-8 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-20">
+    <section aria-labelledby="faq-title" className="bg-white py-[72px] lg:py-section-sm">
+      <div className="wrap grid items-start gap-8 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-16">
         <div className="flex flex-col gap-4 lg:sticky lg:top-[152px]">
           <p className="eyebrow">07 — Questions</p>
           <h2 id="faq-title" className="h2">

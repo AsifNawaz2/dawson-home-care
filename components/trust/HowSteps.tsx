@@ -77,7 +77,7 @@ export function HowSteps() {
     const py = animate ? clamp(window.innerHeight * 0.55 - lr.top, 0, lr.height) : lr.height;
     pulse.current.style.transform = `translate(-50%,${py - (desk ? 76 : 56)}px)`;
     pulse.current.style.opacity = animate ? "1" : "0";
-    fill.current.style.height = `${Math.max(0, Math.min(lr.height - (desk ? 120 : 76), py - (desk ? 60 : 38)))}px`;
+    fill.current.style.height = `${Math.max(0, Math.min(lr.height - (desk ? 96 : 76), py - (desk ? 48 : 38)))}px`;
     nodes.forEach((n) => {
       const r = n.getBoundingClientRect();
       n.dataset.lit = String(!animate || py >= r.top + r.height / 2 - lr.top - 10);
@@ -90,12 +90,12 @@ export function HowSteps() {
     <ol ref={list} className="relative list-none p-0">
       <span
         aria-hidden="true"
-        className="absolute top-[38px] bottom-[38px] left-9 w-1 rounded-full bg-plum-100 lg:top-[60px] lg:bottom-[60px] lg:left-[58px]"
+        className="absolute top-[38px] bottom-[38px] left-9 w-1 rounded-full bg-plum-100 lg:top-[48px] lg:bottom-[48px] lg:left-[46px]"
       />
       <span
         ref={fill}
         aria-hidden="true"
-        className="absolute top-[38px] left-9 h-0 w-1 rounded-full bg-orchid-500 shadow-[0_0_12px_2px_rgb(194_91_217/0.6)] lg:top-[60px] lg:left-[58px]"
+        className="absolute top-[38px] left-9 h-0 w-1 rounded-full bg-orchid-500 shadow-[0_0_12px_2px_rgb(194_91_217/0.6)] lg:top-[48px] lg:left-[46px]"
       />
       <svg
         ref={pulse}
@@ -120,10 +120,10 @@ export function HowSteps() {
           <li
             key={s.n}
             id={`step-${s.n}`}
-            className="relative grid scroll-mt-[calc(var(--header-h)+92px)] grid-cols-[76px_minmax(0,1fr)] gap-x-[18px] lg:grid-cols-[120px_minmax(0,1fr)] lg:gap-x-10"
+            className="relative grid scroll-mt-[calc(var(--header-h)+92px)] grid-cols-[76px_minmax(0,1fr)] gap-x-[18px] lg:grid-cols-[96px_minmax(0,1fr)] lg:gap-x-8"
           >
             <span className="node3d" data-hiw-node={i} aria-hidden="true">
-              <svg viewBox="0 0 96 96" className="size-14 lg:size-[88px]">
+              <svg viewBox="0 0 96 96" className="size-14 lg:size-[70px]">
                 {STEP_ICONS[i]}
               </svg>
             </span>
@@ -142,7 +142,7 @@ export function HowSteps() {
                   </p>
                 )}
                 <p className={dark ? "eyebrow mt-2 !text-orchid-100" : "eyebrow"}>Step {s.n}</p>
-                <h3 className={dark ? "h3 text-white lg:!text-[2.25rem]" : "h3"}>{s.title}</h3>
+                <h3 className={dark ? "h3 text-white lg:!text-[1.875rem]" : "h3"}>{s.title}</h3>
                 <Detail s={s} dark={dark} />
 
                 {s.n === 1 && (

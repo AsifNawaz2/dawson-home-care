@@ -80,7 +80,7 @@ export function ThankYou() {
         : `Thank you${name}.`;
 
   return (
-    <div className="wrap pt-10 pb-16 lg:pt-16 lg:pb-24">
+    <div className="wrap pt-10 pb-16 lg:pt-16 lg:pb-section-sm">
       <div className="fcard flex max-w-[880px] flex-col items-start gap-[18px]">
         <span aria-hidden="true">
           <svg width="88" height="88" viewBox="0 0 88 88" fill="none">
@@ -103,7 +103,7 @@ export function ThankYou() {
         <h1
           id="ty-title"
           tabIndex={-1}
-          className="ff text-[2.5rem] leading-[1.05] text-plum-800 lg:text-[3.5rem]"
+          className="ff text-[2.5rem] leading-[1.05] text-plum-800 lg:text-[2.75rem]"
         >
           {title}
         </h1>
@@ -283,7 +283,7 @@ export function ThankYou() {
         </section>
       </div>
 
-      <section aria-labelledby="wait-title" className="mt-14 lg:mt-20">
+      <section aria-labelledby="wait-title" className="mt-14 lg:mt-16">
         <h2 id="wait-title" className="h2">
           While you wait
         </h2>

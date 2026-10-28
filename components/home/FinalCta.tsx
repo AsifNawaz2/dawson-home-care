@@ -20,7 +20,7 @@ export function FinalCta() {
       aria-labelledby="final-title"
       data-surface="dusk"
       data-cursor-theme="dark"
-      className="relative overflow-hidden bg-dusk max-lg:bg-[length:100%_220%] max-lg:bg-top lg:min-h-[860px]"
+      className="relative overflow-hidden bg-dusk max-lg:bg-[length:100%_220%] max-lg:bg-top lg:min-h-[680px]"
     >
       <svg
         aria-hidden="true"
@@ -39,7 +39,7 @@ export function FinalCta() {
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <div className="relative wrap pt-[88px] pb-[112px] lg:pt-[120px] lg:pb-[208px]">
+      <div className="relative wrap pt-[88px] pb-[112px] lg:pt-24 lg:pb-40">
         <div className="flex max-w-[560px] flex-col gap-[18px] lg:gap-6">
           <h2 id="final-title" className="dl text-white max-lg:!text-[3rem]">
             Let&apos;s talk about your <span className="accent">family</span>.

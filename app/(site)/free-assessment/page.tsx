@@ -20,18 +20,14 @@ export default function FreeAssessmentPage() {
   return (
     <div className="wrap">
       <PageCrumbs path="/free-assessment" />
-      <div className="grid items-start gap-6 pt-4 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-16 lg:pt-6">
+      <div className="grid items-start gap-6 pt-4 lg:grid-cols-[minmax(0,1fr)_400px] lg:gap-12 lg:pt-6">
         <div className="flex min-w-0 flex-col gap-6">
           <section
             aria-labelledby="fa-title"
             className="flex flex-col items-start gap-3.5 lg:gap-4"
           >
             <p className="eyebrow">{h.eyebrow}</p>
-            <h1
-              id="fa-title"
-              tabIndex={-1}
-              className="ff text-[2.875rem] leading-[1.03] text-plum-800 lg:text-[5.25rem] lg:leading-none"
-            >
+            <h1 id="fa-title" tabIndex={-1} className="h1-page">
               {h.title[0]} <span className="accent">{h.title[1]}</span>
               {h.title[2]}
             </h1>
@@ -68,10 +64,10 @@ export default function FreeAssessmentPage() {
 
       <section
         aria-labelledby="talk-title"
-        className="mt-16 flex flex-col gap-6 border-t border-line pt-14 pb-16 lg:mt-24 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-12 lg:pt-[72px] lg:pb-24"
+        className="mt-16 flex flex-col gap-6 border-t border-line pt-14 pb-16 lg:mt-18 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-12 lg:pt-[72px] lg:pb-section-sm"
       >
         <div className="flex max-w-[620px] flex-col gap-3">
-          <h2 id="talk-title" className="h2 lg:!text-[3rem]">
+          <h2 id="talk-title" className="h2 lg:!text-[2.375rem]">
             Prefer to talk it through?
           </h2>
           <p className="lead">

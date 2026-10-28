@@ -9,7 +9,7 @@ export function SafeBand({ page }: { page: ServicePage }) {
       aria-labelledby="safe-title"
       data-surface="dark"
       data-cursor-theme="dark"
-      className="relative overflow-hidden bg-plum-950 pt-[88px] pb-[72px] lg:pt-[104px] lg:pb-24"
+      className="relative overflow-hidden bg-plum-950 pt-[88px] pb-[72px] lg:pt-section lg:pb-section-sm"
     >
       <svg
         aria-hidden="true"
@@ -40,7 +40,7 @@ export function SafeBand({ page }: { page: ServicePage }) {
             <li key={p.title} className="flex flex-col gap-3.5 border-t-2 border-plum-600 pt-7">
               <span
                 aria-hidden="true"
-                className="ff text-[3rem] leading-none text-orchid-500 lg:text-[4rem]"
+                className="ff text-[3rem] leading-none text-orchid-500 lg:text-[3.25rem]"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>

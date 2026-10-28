@@ -8,7 +8,7 @@ import { TownSearch } from "@/components/features/TownSearch";
 export function HubMap() {
   const [hits, setHits] = useState<string[]>([]);
   return (
-    <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,720px)_minmax(0,1fr)] lg:gap-16">
+    <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,720px)_minmax(0,1fr)] lg:gap-12">
       <figure className="flex flex-col gap-3">
         <AreaMap highlight={hits} />
         <figcaption className="flex flex-col gap-2">

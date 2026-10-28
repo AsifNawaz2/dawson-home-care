@@ -28,10 +28,7 @@ export default function FaqPage() {
           className="flex max-w-[900px] flex-col items-start gap-3.5 pt-6 pb-10 lg:gap-4 lg:pt-10 lg:pb-14"
         >
           <p className="eyebrow">Questions &amp; answers</p>
-          <h1
-            id="faq-h1"
-            className="ff text-[2.875rem] leading-[1.03] text-plum-800 lg:text-[5.25rem] lg:leading-none"
-          >
+          <h1 id="faq-h1" className="h1-page">
             Your questions, <span className="accent">answered</span>.
           </h1>
           <p className="lead max-w-[720px]">
@@ -55,12 +52,12 @@ export default function FaqPage() {
         </section>
       </div>
 
-      <div className="wrap pb-20 lg:pb-28">
+      <div className="wrap pb-20 lg:pb-section">
         <FaqSearch />
       </div>
 
-      <section aria-labelledby="still-title" className="bg-white py-[72px] lg:py-24">
-        <div className="wrap grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+      <section aria-labelledby="still-title" className="bg-white py-[72px] lg:py-section-sm">
+        <div className="wrap grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
           <div className="flex flex-col gap-4">
             <h2 id="still-title" className="h2">
               Still have a question?

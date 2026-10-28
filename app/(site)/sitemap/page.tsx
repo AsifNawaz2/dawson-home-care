@@ -68,7 +68,7 @@ export default function SitemapPage() {
         title={["", "Every page", "in one list."]}
         lead="Care services, areas we serve, paying for care, help for families, and how to reach us."
       />
-      <section aria-label="All pages" className="bg-white py-[72px] lg:py-24">
+      <section aria-label="All pages" className="bg-white py-[72px] lg:py-section-sm">
         <div className="wrap grid gap-x-12 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {GROUPS.map((g) => {
             const items = g.paths

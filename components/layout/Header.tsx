@@ -8,7 +8,7 @@ export function Header() {
   return (
     <HeaderBar
       logo={
-        <LogoMotion kind="header" className="block w-[116px] xl:w-[169px]">
+        <LogoMotion kind="header" className="block w-[116px] xl:w-[120px]">
           <Logo
             variant="stacked"
             figure={flags.logoFigure}

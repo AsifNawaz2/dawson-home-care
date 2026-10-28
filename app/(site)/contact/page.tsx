@@ -71,7 +71,7 @@ export default function ContactPage() {
       <section
         id="ways-to-reach-us"
         aria-labelledby="ways-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-section"
       >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead id="ways-title" eyebrow="01 — Ways to reach us" title="Ways to reach us." />
@@ -80,7 +80,7 @@ export default function ContactPage() {
               <span aria-hidden="true" className={cardIcon}>
                 <Phone size={24} strokeWidth={1.75} />
               </span>
-              <h3 className="h3 !text-[1.5rem]">Call</h3>
+              <h3 className="h3 !text-h4">Call</h3>
               <a
                 href={`tel:${phone.tel}`}
                 data-cursor-label="Call"
@@ -94,7 +94,7 @@ export default function ContactPage() {
               <span aria-hidden="true" className={cardIcon}>
                 <MessageSquare size={24} strokeWidth={1.75} />
               </span>
-              <h3 className="h3 !text-[1.5rem]">Text</h3>
+              <h3 className="h3 !text-h4">Text</h3>
               <a
                 href={`sms:${text.tel}`}
                 className="ff text-[1.75rem] leading-tight text-plum-800 no-underline after:absolute after:inset-0 after:rounded-[20px]"
@@ -110,7 +110,7 @@ export default function ContactPage() {
               <span aria-hidden="true" className={cardIcon}>
                 <Mail size={24} strokeWidth={1.75} />
               </span>
-              <h3 className="h3 !text-[1.5rem]">Email</h3>
+              <h3 className="h3 !text-h4">Email</h3>
               <a
                 href={`mailto:${email}`}
                 className="text-[1.125rem] font-semibold [overflow-wrap:anywhere] text-plum-800 no-underline after:absolute after:inset-0 after:rounded-[20px] sm:text-[1.25rem]"
@@ -123,7 +123,7 @@ export default function ContactPage() {
               <span aria-hidden="true" className={cardIcon}>
                 <Printer size={24} strokeWidth={1.75} />
               </span>
-              <h3 className="h3 !text-[1.5rem]">Fax</h3>
+              <h3 className="h3 !text-h4">Fax</h3>
               <p className="ff text-[1.75rem] leading-tight text-plum-800">{fax.display}</p>
               <p>For healthcare referrals and paperwork.</p>
               <p>
@@ -135,7 +135,7 @@ export default function ContactPage() {
               <span aria-hidden="true" className={cardIcon}>
                 <MapPin size={24} strokeWidth={1.75} />
               </span>
-              <h3 className="h3 !text-[1.5rem]">Visit</h3>
+              <h3 className="h3 !text-h4">Visit</h3>
               <address className="text-[1.25rem] font-semibold text-plum-800 not-italic">
                 {address.street.value}, {address.suite.value}, {address.city.value},{" "}
                 {address.region.value} {address.postalCode.value}
@@ -151,9 +151,9 @@ export default function ContactPage() {
       <section
         id="map"
         aria-labelledby="map-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-section"
       >
-        <div className="wrap grid items-start gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <div className="wrap grid items-start gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
           <div className="flex flex-col gap-4">
             <SectionHead id="map-title" eyebrow="02 — Find us" title="Find our office." />
             <address className="text-plum-800 not-italic">
@@ -179,7 +179,7 @@ export default function ContactPage() {
       <section
         id="hours"
         aria-labelledby="hours-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-section"
       >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead id="hours-title" eyebrow="03 — Hours" title="Two kinds of hours." />
@@ -233,9 +233,9 @@ export default function ContactPage() {
       <section
         id="message"
         aria-labelledby="message-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-section"
       >
-        <div className="wrap grid items-start gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <div className="wrap grid items-start gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
           <SectionHead
             id="message-title"
             eyebrow="04 — Send a message"

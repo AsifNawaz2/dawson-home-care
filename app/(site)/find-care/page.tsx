@@ -13,7 +13,7 @@ const phone = contact.phone.value;
 /** Care Quiz page (COPY_CONVERSION §9, styled as the design's Home quiz card). */
 export default function FindCarePage() {
   return (
-    <div className="bg-orchid-100 pb-20 lg:pb-28">
+    <div className="bg-orchid-100 pb-20 lg:pb-section">
       <div className="wrap">
         <PageCrumbs path="/find-care" />
         <div className="mx-auto flex max-w-[760px] flex-col gap-8 pt-6 lg:gap-10 lg:pt-10">
@@ -22,10 +22,7 @@ export default function FindCarePage() {
             className="flex flex-col items-start gap-3.5 lg:gap-4"
           >
             <p className="eyebrow">Find the right care</p>
-            <h1
-              id="fc-title"
-              className="ff text-[2.875rem] leading-[1.03] text-plum-800 lg:text-[5.25rem] lg:leading-none"
-            >
+            <h1 id="fc-title" className="h1-page">
               Find the right <span className="accent">care.</span>
             </h1>
             <p className="lead">

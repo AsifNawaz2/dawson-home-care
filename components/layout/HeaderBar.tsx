@@ -1,9 +1,11 @@
 "use client";
 
 /**
- * Site header (design 01-home-desktop / 02-home-mobile): logo · 5 links · Call on desktop;
- * logo · call circle · menu button on phones. "Care services" opens the Care mega-menu
- * (5 services + quiz), keeping the bar itself exactly as designed.
+ * Site header (design 01-home-desktop / 02-home-mobile): logo · 5 links · Free Assessment ·
+ * Call on desktop; logo · call circle · menu button on phones. "Care services" opens the Care
+ * mega-menu (5 services + quiz). The bar uses the wider `wrap-wide` so both buttons fit; below
+ * 1440px the Call button shows "Call" only (the number stays in its accessible name), and with
+ * Comfort Controls larger text (html[data-text-scale]) the Free Assessment button steps aside.
  */
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,6 +14,7 @@ import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { contact, hours } from "@/content/site.config";
 import { mainNav, megaMenu, services } from "@/content/navigation";
 import { OfficeStatusChip } from "./OfficeStatus";
+import { AssessmentButton } from "@/components/ui/AssessmentButton";
 import { cn } from "@/lib/cn";
 
 const phone = contact.phone.value;
@@ -112,7 +115,7 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
       data-site-header=""
       onPointerLeave={() => hoverOpen(false)}
     >
-      <div className="wrap flex min-h-[72px] items-center justify-between gap-8 max-xl:pr-4 max-xl:pl-5 xl:min-h-[112px]">
+      <div className="wrap-wide flex min-h-[72px] items-center justify-between gap-5 max-xl:pr-4 max-xl:pl-5 xl:min-h-[var(--header-h)] min-[90rem]:gap-6">
         <Link
           href="/"
           aria-label="Dawson & Dawson Home Care — home"
@@ -123,7 +126,7 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
         </Link>
 
         {/* Desktop navigation */}
-        <nav aria-label="Main" className="hidden items-center gap-8 xl:flex">
+        <nav aria-label="Main" className="hidden items-center gap-4 xl:flex min-[90rem]:gap-5">
           {mainNav.map((item) =>
             "mega" in item ? (
               <button
@@ -147,7 +150,10 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
                   aria-hidden
                   size={16}
                   strokeWidth={1.75}
-                  className={cn("transition-transform duration-300", megaOpen && "rotate-180")}
+                  className={cn(
+                    "flex-none transition-transform duration-300",
+                    megaOpen && "rotate-180",
+                  )}
                 />
               </button>
             ) : (
@@ -164,14 +170,18 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
           )}
         </nav>
 
-        <a
-          className="btn btn-secondary hidden xl:inline-flex"
-          href={`tel:${phone.tel}`}
-          data-cursor-label="Call"
-        >
-          <Phone aria-hidden size={20} strokeWidth={1.75} className="ring-icon" />
-          Call {phone.display}
-        </a>
+        <div className="hidden items-center gap-2.5 xl:flex">
+          <AssessmentButton
+            className="px-5 [html[data-text-scale]_&]:hidden"
+            open="Get a Free Assessment"
+          />
+          <a className="btn btn-secondary px-5" href={`tel:${phone.tel}`} data-cursor-label="Call">
+            <Phone aria-hidden size={18} strokeWidth={1.75} className="ring-icon" />
+            <span>
+              Call<span className="max-[89.99rem]:sr-only"> {phone.display}</span>
+            </span>
+          </a>
+        </div>
 
         {/* Phone header controls */}
         <div className="flex items-center gap-2 xl:hidden">
@@ -210,7 +220,7 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
         <div className="wrap grid grid-cols-[300px_minmax(0,1fr)] gap-16 py-12">
           <div className="flex flex-col items-start gap-4">
             <p className="eyebrow">{megaMenu.eyebrow}</p>
-            <p className="h3 !text-[2.25rem] !leading-[1.08]">{megaMenu.heading}</p>
+            <p className="h3 !text-[1.875rem] !leading-[1.08]">{megaMenu.heading}</p>
             <Link href={megaMenu.all.href} className="link" data-cursor-label="View">
               {megaMenu.all.label}
             </Link>
@@ -223,7 +233,7 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
                   data-cursor-label="Open"
                   className="group flex flex-1 flex-col gap-2 rounded-[20px] border border-line bg-white p-6 text-ink no-underline transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-orchid-500 hover:text-ink hover:shadow-[0_0_0_4px_rgb(194_91_217/0.18),0_24px_48px_rgb(42_24_86/0.14)] reduce-motion:hover:translate-y-0"
                 >
-                  <span className="h3 !text-[1.5rem]">{s.name}</span>
+                  <span className="h3 !text-h4">{s.name}</span>
                   <span>{s.promise}</span>
                   <span className="sm muted mt-auto">{s.smallLabel}</span>
                 </Link>
@@ -235,7 +245,7 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
                 data-cursor-label="Open"
                 className="flex flex-1 flex-col justify-center gap-2 rounded-[20px] bg-orchid-100 p-6 text-plum-800 no-underline hover:text-plum-800"
               >
-                <span className="h3 !text-[1.5rem]">{megaMenu.quiz.label}</span>
+                <span className="h3 !text-h4">{megaMenu.quiz.label}</span>
                 <span className="sm muted">{megaMenu.quiz.line}</span>
                 <span className="link min-h-0">Find the right care →</span>
               </Link>

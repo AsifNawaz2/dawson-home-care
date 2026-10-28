@@ -12,9 +12,9 @@ export function FindCare() {
       id="find-care"
       tabIndex={-1}
       aria-labelledby="quiz-title"
-      className="scroll-mt-[var(--header-h)] bg-orchid-100 py-20 outline-none lg:py-28"
+      className="scroll-mt-[var(--header-h)] bg-orchid-100 py-20 outline-none lg:py-section"
     >
-      <div className="wrap grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_640px] lg:gap-24">
+      <div className="wrap grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_560px] lg:gap-18">
         <div className="flex flex-col items-start gap-3 lg:gap-4">
           <p className="eyebrow">03 — Find the right care</p>
           <h2 id="quiz-title" className="h2">
@@ -31,7 +31,7 @@ export function FindCare() {
             Find the right care →
           </Link>
         </div>
-        <div className="min-w-0 rounded-[20px] bg-white px-[18px] py-[22px] lg:p-10">
+        <div className="min-w-0 rounded-[20px] bg-white px-[18px] py-[22px] lg:p-8">
           <CareQuiz variant="home" />
           <noscript>
             <Link className="link" href="/find-care">
