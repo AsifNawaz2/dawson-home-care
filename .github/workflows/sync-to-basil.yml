@@ -1,0 +1,49 @@
+
+name: Sync Dawson Home Care to Basil
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repository
+        uses: actions/checkout@v4
+
+      - name: Checkout Basil repository
+        uses: actions/checkout@v4
+        with:
+          repository: basil0789/Dawson-Website-
+          token: ${{ secrets.DEST_REPO_TOKEN }}
+          ref: main
+          path: destination
+
+      - name: Synchronize project files
+        run: |
+          rsync -av --delete \
+            --exclude='.git' \
+            --exclude='.github/workflows/sync-to-basil.yml' \
+            ./ destination/
+
+      - name: Commit and push changes
+        working-directory: destination
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to synchronize."
+          else
+            git commit -m "Sync from AsifNawaz2/dawson-home-care"
+            git push origin main
+          fi
