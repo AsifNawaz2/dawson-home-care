@@ -10,4 +10,5 @@ One component per chapter of `docs/design/01-home-desktop.html` / `02-home-mobil
 | `HowWeHelp.tsx` | 02 — How we help (video collages)                                    |
 
 `home.css` holds the ported design styles; `scroll.ts` the shared scroll-scene maths.
+`CtaTravel.tsx` (rendered by the hero) flies the hero's button pair into the header on desktop.
 Copy lives in `content/copy/home.ts`.

@@ -51,6 +51,17 @@ test("native cursor is never hidden", async ({ page }) => {
 test.describe("desktop", () => {
   test.skip(({ isMobile }) => isMobile, "desktop only");
 
+  test("tabbing through the sticky header never scrolls the page", async ({ page }) => {
+    await page.goto("/about");
+    await page.evaluate(() => window.scrollTo(0, 1500));
+    const header = page.locator("[data-site-header]");
+    await header.getByRole("link", { name: /home/ }).focus();
+    for (let i = 0; i < 7; i++) {
+      await page.keyboard.press("Tab");
+      expect(await page.evaluate(() => window.scrollY)).toBe(1500);
+    }
+  });
+
   test("Care mega-menu opens, lists 5 services and closes on Escape", async ({ page }) => {
     await page.goto("/");
     const trigger = page.getByRole("button", { name: "Care services" });

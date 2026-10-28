@@ -6,6 +6,9 @@
  * mega-menu (5 services + quiz). The bar uses the wider `wrap-wide` so both buttons fit; below
  * 1440px the Call button shows "Call" only (the number stays in its accessible name), and with
  * Comfort Controls larger text (html[data-text-scale]) the Free Assessment button steps aside.
+ *
+ * Home (desktop): the bar starts without buttons and the links spread out; the hero's buttons
+ * travel up into the dock as the page scrolls (components/home/CtaTravel.tsx, data-cta-* hooks).
  */
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,7 +17,7 @@ import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { contact, hours } from "@/content/site.config";
 import { mainNav, megaMenu, services } from "@/content/navigation";
 import { OfficeStatusChip } from "./OfficeStatus";
-import { AssessmentButton } from "@/components/ui/AssessmentButton";
+import { HeaderCtas } from "./HeaderCtas";
 import { cn } from "@/lib/cn";
 
 const phone = contact.phone.value;
@@ -108,14 +111,19 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
   };
 
   const isCurrent = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
+  const isHome = pathname === "/";
 
   return (
     <header
       className="sticky top-0 z-[100] border-b border-line bg-cream"
       data-site-header=""
+      data-home-cta={isHome ? "" : undefined}
       onPointerLeave={() => hoverOpen(false)}
     >
-      <div className="wrap-wide flex min-h-[72px] items-center justify-between gap-5 max-xl:pr-4 max-xl:pl-5 xl:min-h-[var(--header-h)] min-[90rem]:gap-6">
+      <div
+        data-cta-bar=""
+        className="wrap-wide flex min-h-[72px] items-center justify-between gap-5 max-xl:pr-4 max-xl:pl-5 xl:min-h-[var(--header-h)] min-[90rem]:gap-6"
+      >
         <Link
           href="/"
           aria-label="Dawson & Dawson Home Care — home"
@@ -126,7 +134,11 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
         </Link>
 
         {/* Desktop navigation */}
-        <nav aria-label="Main" className="hidden items-center gap-4 xl:flex min-[90rem]:gap-5">
+        <nav
+          aria-label="Main"
+          data-cta-nav=""
+          className="hidden items-center gap-4 xl:flex min-[90rem]:gap-5"
+        >
           {mainNav.map((item) =>
             "mega" in item ? (
               <button
@@ -170,17 +182,8 @@ export function HeaderBar({ logo }: { logo: React.ReactNode }) {
           )}
         </nav>
 
-        <div className="hidden items-center gap-2.5 xl:flex">
-          <AssessmentButton
-            className="px-5 [html[data-text-scale]_&]:hidden"
-            open="Get a Free Assessment"
-          />
-          <a className="btn btn-secondary px-5" href={`tel:${phone.tel}`} data-cursor-label="Call">
-            <Phone aria-hidden size={18} strokeWidth={1.75} className="ring-icon" />
-            <span>
-              Call<span className="max-[89.99rem]:sr-only"> {phone.display}</span>
-            </span>
-          </a>
+        <div className="hidden items-center xl:flex" data-cta-dock="">
+          <HeaderCtas where="header" />
         </div>
 
         {/* Phone header controls */}
