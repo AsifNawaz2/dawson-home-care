@@ -209,12 +209,12 @@ test.describe("Home header buttons (BUILD_DECISIONS §I.4)", () => {
     expect(docked.visible).toEqual(["header"]);
     expect(docked.top).toBe(16);
 
-    // Keyboard: the docked pair follows the last link in the bar. (Chrome scrolls up ~400px when
-    // a link in the sticky bar takes focus, so do this well past the journey.)
-    await page.evaluate(() => window.scrollTo(0, 4000));
+    // Keyboard: the docked pair follows the last link in the bar (and the page doesn't move).
+    const y = await page.evaluate(() => window.scrollY);
     await page.locator("[data-cta-nav]").getByRole("link", { name: "Our story" }).focus();
     await page.keyboard.press("Tab");
     await expect(page.locator('[data-cta-pair="header"] a').first()).toBeFocused();
+    expect(await page.evaluate(() => window.scrollY)).toBe(y);
 
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect.poll(async () => (await snapshot(page)).visible).toEqual(["hero"]);

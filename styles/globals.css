@@ -194,6 +194,11 @@ html[data-contrast="high"] {
     scroll-padding-top: calc(var(--header-h) + 16px);
     scrollbar-gutter: stable; /* no sideways jump when the Home intro unlocks scrolling */
   }
+  /* The sticky header bar sits inside that padding, so Chrome thought a focused header link was
+     hidden and scrolled the page ~400px up to centre it. Cancel the padding for the bar. */
+  [data-site-header] > [data-cta-bar] * {
+    scroll-margin-top: calc(-1 * (var(--header-h) + 16px));
+  }
   body {
     margin: 0;
     min-height: 100dvh;
