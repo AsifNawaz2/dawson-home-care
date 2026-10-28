@@ -33,7 +33,7 @@ export default function ResourcesPage() {
         title={["Guides for", "families", "."]}
         lead="Plain-language guides for families caring for an older parent in Beaufort and the Lowcountry: getting started, paying for care and caregiver support."
       />
-      <section aria-labelledby="res-title" className="bg-white py-[72px] lg:py-24">
+      <section aria-labelledby="res-title" className="bg-white py-[72px] lg:py-section-sm">
         <div className="wrap flex flex-col gap-8">
           {publishedPosts.length === 0 ? (
             <>
@@ -76,7 +76,7 @@ export default function ResourcesPage() {
                     key={p.slug}
                     className="flex flex-col gap-2 rounded-[20px] border border-line p-6"
                   >
-                    <h3 className="h3 !text-[1.5rem]">{p.title}</h3>
+                    <h3 className="h3 !text-h4">{p.title}</h3>
                     <p>{p.description}</p>
                   </li>
                 ))}

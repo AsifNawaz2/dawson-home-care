@@ -18,7 +18,7 @@ export function ServiceHero({ page }: { page: ServicePage }) {
     <section aria-labelledby="svc-title" className="relative overflow-hidden">
       <div className="wrap">
         <PageCrumbs path={`/care/${page.slug}`} />
-        <div className="grid gap-10 pt-4 pb-[72px] lg:grid-cols-[minmax(0,1fr)_minmax(0,620px)] lg:items-center lg:gap-12 lg:pt-6 lg:pb-20">
+        <div className="grid gap-10 pt-4 pb-[72px] lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:items-center lg:gap-12 lg:pt-6 lg:pb-20">
           <div className="flex flex-col items-start gap-5">
             <div className="flex flex-col gap-1.5">
               <p className="eyebrow">Care services</p>
@@ -61,7 +61,10 @@ export function ServiceHero({ page }: { page: ServicePage }) {
             </p>
           </div>
           <figure className="relative">
-            <div aria-hidden="true" className="@container [--cw:min(658px,100cqw)]">
+            <div
+              aria-hidden="true"
+              className="@container [--cw:min(520px,100cqw,calc((var(--fit-h)-32px)*1.129))] lg:flex lg:justify-center"
+            >
               <AutoCollage data={collages[page.slug]} />
             </div>
             <figcaption className="sr-only">{hero.collageCaption}</figcaption>

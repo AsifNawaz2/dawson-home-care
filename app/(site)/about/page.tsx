@@ -84,15 +84,19 @@ export default function AboutPage() {
       </PageHero>
 
       {/* 01 — Story */}
-      <section id="story" aria-labelledby="story-title" className="bg-plum-100 py-[72px] lg:py-28">
-        <div className="wrap grid items-start gap-10 lg:grid-cols-2 lg:gap-24">
+      <section
+        id="story"
+        aria-labelledby="story-title"
+        className="bg-plum-100 py-[72px] lg:py-section"
+      >
+        <div className="wrap grid items-start gap-10 lg:grid-cols-2 lg:gap-18">
           <div className="flex flex-col gap-3 lg:gap-4">
             <p className="eyebrow">01 — Our story</p>
             <h2 id="story-title" className="flex flex-col gap-2 text-plum-800">
-              <span className="ff text-[8.25rem] leading-[0.95] lg:text-[11rem]">
+              <span className="ff text-numeral">
                 <YearsSince />
               </span>
-              <span className="ff text-[2.25rem] leading-[1.08] lg:text-[3.25rem]">
+              <span className="ff text-[2.25rem] leading-[1.08] lg:text-[2.625rem]">
                 years of caring for Lowcountry families.
               </span>
             </h2>
@@ -166,9 +170,9 @@ export default function AboutPage() {
       <section
         id="owner"
         aria-labelledby="owner-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-section"
       >
-        <div className="wrap grid items-start gap-10 lg:grid-cols-[440px_minmax(0,1fr)] lg:gap-24">
+        <div className="wrap grid items-start gap-10 lg:grid-cols-[400px_minmax(0,1fr)] lg:gap-18">
           <div className="flex flex-col gap-6 lg:sticky lg:top-[calc(var(--header-h)+24px)]">
             <figure>
               <div
@@ -187,7 +191,7 @@ export default function AboutPage() {
               {ph && <figcaption className="sm muted mt-2.5">Owner portrait · 4:5</figcaption>}
             </figure>
             <div className="flex flex-col gap-3 rounded-[20px] border border-line bg-white p-6">
-              <h3 className="h3 !text-[1.5rem]">At a glance</h3>
+              <h3 className="h3 !text-h4">At a glance</h3>
               <dl className="flex flex-col gap-2">
                 <div>
                   <dt className="font-bold text-plum-800">Role</dt>
@@ -290,7 +294,11 @@ export default function AboutPage() {
       </section>
 
       {/* 03 — Values */}
-      <section id="values" aria-labelledby="values-title" className="bg-white py-[72px] lg:py-28">
+      <section
+        id="values"
+        aria-labelledby="values-title"
+        className="bg-white py-[72px] lg:py-section"
+      >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead
             id="values-title"
@@ -310,7 +318,7 @@ export default function AboutPage() {
                 >
                   <Icon size={24} strokeWidth={1.75} />
                 </span>
-                <h3 className="h3 !text-[1.5rem]">{title}</h3>
+                <h3 className="h3 !text-h4">{title}</h3>
                 <p>{text}</p>
                 <p className="mt-auto">
                   <strong className="text-plum-800">What it means for you:</strong> {means}
@@ -325,7 +333,7 @@ export default function AboutPage() {
       <section
         id="caregivers"
         aria-labelledby="cg-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-section"
       >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead
@@ -362,10 +370,10 @@ export default function AboutPage() {
       <section
         id="licensed"
         aria-labelledby="lic-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-section"
       >
         <HashFocus id="licensed" />
-        <div className="wrap grid items-start gap-8 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-20">
+        <div className="wrap grid items-start gap-8 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-16">
           <SectionHead
             id="lic-title"
             eyebrow="05 — Licensed & insured"
@@ -381,7 +389,7 @@ export default function AboutPage() {
                 className="flex-none text-orchid-700"
               />
               <div className="flex flex-col gap-1">
-                <h3 className="h3 !text-[1.5rem]">State license</h3>
+                <h3 className="h3 !text-h4">State license</h3>
                 <p>Dawson and Dawson Home Care LLC is licensed in South Carolina.</p>
                 {credentials.scLicenseNumber.confirmed ? (
                   <p>License number: {credentials.scLicenseNumber.value}</p>
@@ -410,7 +418,7 @@ export default function AboutPage() {
                 className="flex-none text-orchid-700"
               />
               <div className="flex flex-col gap-1">
-                <h3 className="h3 !text-[1.5rem]">Insured</h3>
+                <h3 className="h3 !text-h4">Insured</h3>
                 <p>
                   We carry insurance.
                   {ph && (
@@ -430,7 +438,7 @@ export default function AboutPage() {
                 className="flex-none text-orchid-700"
               />
               <div className="flex flex-col gap-1">
-                <h3 className="h3 !text-[1.5rem]">Our caregivers</h3>
+                <h3 className="h3 !text-h4">Our caregivers</h3>
                 <p>Our team includes Certified Nursing Assistants.</p>
                 {ph && (
                   <p>
@@ -450,7 +458,7 @@ export default function AboutPage() {
                 className="flex-none text-orchid-700"
               />
               <div className="flex flex-col gap-1">
-                <h3 className="h3 !text-[1.5rem]">Non-medical care</h3>
+                <h3 className="h3 !text-h4">Non-medical care</h3>
                 <p>
                   All our care is non-medical. We don&apos;t give injections, change wound dressings
                   or provide nursing. We&apos;re happy to work alongside your home health or hospice
@@ -467,7 +475,7 @@ export default function AboutPage() {
                   className="flex-none text-orchid-700"
                 />
                 <div className="flex flex-col gap-1">
-                  <h3 className="h3 !text-[1.5rem]">Check it yourself</h3>
+                  <h3 className="h3 !text-h4">Check it yourself</h3>
                   <p>
                     Look up our license on the state&apos;s website →{" "}
                     <span className="tbc">[public license lookup URL]</span>
@@ -486,7 +494,7 @@ export default function AboutPage() {
       </section>
 
       {/* 06 — Community */}
-      <section id="community" aria-labelledby="comm-title" className="py-[72px] lg:py-28">
+      <section id="community" aria-labelledby="comm-title" className="py-[72px] lg:py-section">
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead
             id="comm-title"

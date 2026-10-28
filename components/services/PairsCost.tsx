@@ -10,12 +10,12 @@ export function PairsCost({ page }: { page: ServicePage }) {
   const e = page.cost.estimator;
   const fill = e.overnight || e.hours >= 24 ? 100 : Math.min(100, 15 + e.hours * 10);
   return (
-    <div className="py-[72px] lg:py-24">
+    <div className="py-[72px] lg:py-section-sm">
       <div className="wrap grid items-stretch gap-10 lg:grid-cols-2">
         <section aria-labelledby="pairs-title" className="flex flex-col">
           <div className="flex flex-col gap-4">
             <p className="eyebrow">05 — Pairs well with</p>
-            <h2 id="pairs-title" className="h2 lg:!text-[3rem]">
+            <h2 id="pairs-title" className="h2 lg:!text-[2.375rem]">
               Pairs well with.
             </h2>
           </div>
@@ -51,7 +51,7 @@ export function PairsCost({ page }: { page: ServicePage }) {
           className="flex flex-col items-start gap-4 rounded-[28px] border border-line bg-white p-6 md:p-10 lg:px-12 lg:py-11"
         >
           <p className="eyebrow">06 — Cost</p>
-          <h2 id="cost-title" className="h2 lg:!text-[3rem]">
+          <h2 id="cost-title" className="h2 lg:!text-[2.375rem]">
             {page.cost.title}
           </h2>
           <p>{page.cost.body}</p>

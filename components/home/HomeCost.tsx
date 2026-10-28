@@ -7,9 +7,9 @@ import { Badge, CostEstimator } from "@/components/features/CostEstimator";
 
 export function HomeCost() {
   return (
-    <section aria-labelledby="cost-title" className="bg-white py-[88px] lg:py-32">
+    <section aria-labelledby="cost-title" className="bg-white py-[88px] lg:py-section-lg">
       <div className="wrap">
-        <div className="grid items-end gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
+        <div className="grid items-end gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
           <div className="flex flex-col items-start gap-3 lg:gap-4">
             <p className="eyebrow">09 — Cost</p>
             <h2 id="cost-title" className="h2">

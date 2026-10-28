@@ -148,7 +148,7 @@ export function FaqSearch() {
           onSubmit={(e) => e.preventDefault()}
           className="flex flex-col gap-2.5 rounded-[20px] border border-line bg-white p-[22px] lg:p-8"
         >
-          <label htmlFor={`${uid}-q`} className="ff text-[1.5rem] text-plum-800 lg:text-[1.625rem]">
+          <label htmlFor={`${uid}-q`} className="ff text-[1.5rem] text-plum-800">
             Search questions
           </label>
           <p id={`${uid}-help`} className="sm muted">
@@ -238,10 +238,10 @@ export function FaqSearch() {
           key={g.id}
           id={`topic-${g.id}`}
           aria-labelledby={`${uid}-${g.id}`}
-          className="grid scroll-mt-[calc(var(--header-h)+24px)] gap-4 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-16"
+          className="grid scroll-mt-[calc(var(--header-h)+24px)] gap-4 lg:grid-cols-[320px_minmax(0,1fr)] lg:gap-12"
         >
           <div className="flex flex-col gap-2">
-            <h2 id={`${uid}-${g.id}`} className="h2 !text-[2.25rem] lg:!text-[2.75rem]">
+            <h2 id={`${uid}-${g.id}`} className="h2 !text-[2.25rem] lg:!text-[2.375rem]">
               {g.title}
             </h2>
             <p className="sm muted">{g.intro}</p>

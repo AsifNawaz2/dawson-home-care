@@ -24,7 +24,7 @@ function GoogleCard() {
       <p className="eyebrow">On Google Maps</p>
       <h3 className="h3">Dawson and Dawson Home Care</h3>
       <p className="flex flex-wrap items-center gap-2 font-semibold text-plum-800 lg:gap-2.5">
-        <span className="ff text-[1.875rem] leading-none lg:text-[2rem]" aria-hidden="true">
+        <span className="ff text-[1.875rem] leading-none" aria-hidden="true">
           {rating.rating}
         </span>
         <span aria-hidden="true" className="inline-flex gap-0.5">
@@ -104,7 +104,11 @@ function GoogleCard() {
 export function WhereWeCare() {
   const [hits, setHits] = useState<string[]>([]);
   return (
-    <section id="where-we-care" aria-labelledby="where-title" className="py-[88px] lg:py-32">
+    <section
+      id="where-we-care"
+      aria-labelledby="where-title"
+      className="py-[88px] lg:py-section-lg"
+    >
       <div className="wrap">
         <div className="flex max-w-[880px] flex-col gap-3 lg:gap-4">
           <p className="eyebrow">10 — Where we care</p>
@@ -115,7 +119,7 @@ export function WhereWeCare() {
             Our office is in Beaufort, and we care for families in towns nearby.
           </p>
         </div>
-        <div className="mt-6 grid items-start gap-5 lg:mt-14 lg:grid-cols-[minmax(0,720px)_minmax(0,1fr)] lg:gap-16">
+        <div className="mt-6 grid items-start gap-5 lg:mt-14 lg:grid-cols-[minmax(0,720px)_minmax(0,1fr)] lg:gap-12">
           <figure className="flex flex-col gap-2 lg:gap-2.5">
             <AreaMap highlight={hits} />
             <figcaption className="sm muted">
@@ -127,7 +131,7 @@ export function WhereWeCare() {
             <GoogleCard />
             <TownSearch onMatch={setHits} />
             <div className="flex flex-col gap-3 lg:gap-4">
-              <h3 className="h3 lg:!text-[1.625rem]">Towns we serve</h3>
+              <h3 className="h3">Towns we serve</h3>
               <ul className="flex list-none flex-wrap gap-2.5 p-0 lg:gap-3">
                 {towns.map((t) => (
                   <li key={t.slug}>

@@ -25,7 +25,7 @@ const rating = reputation.google.value;
 
 function Card({ r, i }: { r: Review; i: number }) {
   return (
-    <figure className="mr-4 flex w-[300px] flex-none flex-col gap-3 rounded-[20px] border border-line bg-white p-[22px] lg:mr-8 lg:w-[420px] lg:gap-4 lg:px-8 lg:py-7">
+    <figure className="mr-4 flex w-[300px] flex-none flex-col gap-3 rounded-[20px] border border-line bg-white p-[22px] lg:mr-8 lg:w-[360px] lg:gap-4 lg:px-8 lg:py-7">
       <div className="flex items-center gap-3 lg:gap-3.5">
         <span
           aria-hidden="true"
@@ -72,8 +72,8 @@ export function Reviews() {
   );
 
   return (
-    <section id="reviews" aria-labelledby="reviews-title" className="py-[88px] lg:py-32">
-      <div className="wrap grid items-end gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
+    <section id="reviews" aria-labelledby="reviews-title" className="py-[88px] lg:py-section-lg">
+      <div className="wrap grid items-end gap-3 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
         <div className="flex flex-col items-start gap-3 lg:gap-4">
           <p className="eyebrow">08 — What families say</p>
           <h2 id="reviews-title" className="h2">

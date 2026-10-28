@@ -8,7 +8,7 @@ import { ServiceIcon } from "./ServiceIcons";
 export function IncludedGrid({ page }: { page: ServicePage }) {
   const inc = page.included;
   return (
-    <section aria-labelledby="inc-title" className="py-[72px] lg:py-24">
+    <section aria-labelledby="inc-title" className="py-[72px] lg:py-section-sm">
       <div className="wrap">
         <div className="flex max-w-[760px] flex-col gap-4">
           <p className="eyebrow">02 — What&apos;s included</p>
@@ -63,7 +63,7 @@ export function IncludedGrid({ page }: { page: ServicePage }) {
             <Info size={28} strokeWidth={1.75} />
           </span>
           <div className="flex flex-col gap-1.5">
-            <h3 id="not-inc" className="h3 !text-[1.5rem]">
+            <h3 id="not-inc" className="h3 !text-h4">
               {inc.notIncluded.title}
             </h3>
             <p>{inc.notIncluded.text}</p>

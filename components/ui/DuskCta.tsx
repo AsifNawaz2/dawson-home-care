@@ -51,7 +51,7 @@ export function DuskCta({
           vectorEffect="non-scaling-stroke"
         />
       </svg>
-      <div className="relative wrap pt-[88px] pb-[152px] lg:pt-24">
+      <div className="relative wrap pt-[88px] pb-[152px] lg:pt-section-sm">
         <div className="flex max-w-[780px] flex-col gap-6">
           <h2 id={id} className="dl max-w-[600px] text-white">
             {title[0]}

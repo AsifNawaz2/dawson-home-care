@@ -15,10 +15,13 @@ const TRUST_ICONS = [Calendar, UserRound, Clock];
 export function Hero() {
   const familyRun = business.familyRun.confirmed && business.familyRun.value === true;
   return (
-    <section aria-labelledby="hero-title" className="home-hero pt-8 pb-[72px] lg:pt-20 lg:pb-28">
+    <section
+      aria-labelledby="hero-title"
+      className="home-hero pt-8 pb-[72px] lg:pt-8 lg:pb-section"
+    >
       <div className="wrap">
-        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-stretch lg:gap-16">
-          <div className="flex flex-col items-start gap-5 lg:justify-center lg:gap-7">
+        <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-stretch lg:gap-12">
+          <div className="flex flex-col items-start gap-5 lg:justify-center lg:gap-4">
             <OfficeStatusChip />
             <div className="flex flex-col gap-3">
               <p className="eyebrow">{hero.eyebrow}</p>
@@ -33,19 +36,19 @@ export function Hero() {
             </div>
             <p className="lead max-lg:-mt-1">{hero.lead}</p>
           </div>
-          <figure className="relative mt-7 h-[280px] lg:mt-0 lg:h-auto lg:min-h-[460px]">
+          <figure className="relative mt-7 h-[280px] lg:mt-0 lg:h-auto lg:max-h-[var(--fit-h)] lg:min-h-[340px]">
             <Image
               src={hero.image.src}
               alt={hero.image.alt}
               fill
               priority
-              sizes="(min-width: 90rem) 760px, (min-width: 64rem) 55vw, 100vw"
+              sizes="(min-width: 80rem) 640px, (min-width: 64rem) 55vw, 100vw"
               className="rounded-[20px] object-cover object-[50%_30%] lg:rounded-3xl"
             />
           </figure>
         </div>
 
-        <div className="mt-7 flex flex-col gap-3 lg:mt-14 lg:items-center lg:gap-4 lg:text-center">
+        <div className="mt-7 flex flex-col gap-3 lg:mt-6 lg:items-center lg:gap-3 lg:text-center">
           <div className="flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-4 lg:justify-center">
             <Link href={hero.primary.href} className="btn btn-primary max-md:w-full">
               <CtaLabel open={hero.primary.open} closed={hero.primary.closed} />

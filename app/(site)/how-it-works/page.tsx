@@ -103,9 +103,9 @@ export default function HowItWorksPage() {
         <section
           id="steps"
           aria-labelledby="steps-title"
-          className={`py-[72px] lg:py-28 ${SECTION}`}
+          className={`py-[72px] lg:py-section ${SECTION}`}
         >
-          <div className="wrap grid items-start gap-10 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-24">
+          <div className="wrap grid items-start gap-10 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-18">
             <div className="lg:sticky lg:top-[calc(var(--header-h)+112px)]">
               <SectionHead
                 id="steps-title"
@@ -122,7 +122,7 @@ export default function HowItWorksPage() {
       <section
         id="free-assessment"
         aria-labelledby="visit-title"
-        className={`bg-white py-[72px] lg:py-28 ${SECTION}`}
+        className={`bg-white py-[72px] lg:py-section ${SECTION}`}
       >
         <div className="wrap flex flex-col gap-10 lg:gap-14">
           <SectionHead
@@ -151,7 +151,7 @@ export default function HowItWorksPage() {
               </div>
             ))}
           </dl>
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
             <div className="flex flex-col gap-4">
               <h3 className="h3">What we&apos;ll cover together</h3>
               <ul className="flex flex-col gap-3">
@@ -191,7 +191,7 @@ export default function HowItWorksPage() {
       <section
         id="have-ready"
         aria-labelledby="ready-title"
-        className={`py-[72px] lg:py-28 ${SECTION}`}
+        className={`py-[72px] lg:py-section ${SECTION}`}
       >
         <div className="wrap flex flex-col gap-8 lg:gap-10">
           <SectionHead
@@ -221,9 +221,9 @@ export default function HowItWorksPage() {
       <section
         id="start-time"
         aria-labelledby="start-title"
-        className={`bg-white py-[72px] lg:py-28 ${SECTION}`}
+        className={`bg-white py-[72px] lg:py-section ${SECTION}`}
       >
-        <div className="wrap grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:gap-16">
+        <div className="wrap grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:gap-12">
           <div className="flex flex-col gap-4">
             <SectionHead id="start-title" eyebrow="04 — Timing" title="How fast can care start?" />
             <p className="max-w-[60ch]">

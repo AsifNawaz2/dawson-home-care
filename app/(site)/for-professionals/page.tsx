@@ -307,7 +307,7 @@ export default function ForProfessionalsPage() {
       <section
         id="who-we-help"
         aria-labelledby="who-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-section"
       >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead id="who-title" eyebrow="01 — Who we help" title="Who we help." />
@@ -336,7 +336,7 @@ export default function ForProfessionalsPage() {
                 >
                   <Icon size={24} strokeWidth={1.75} />
                 </span>
-                <h3 className="h3 !text-[1.5rem]">{title}</h3>
+                <h3 className="h3 !text-h4">{title}</h3>
                 <p>
                   {chip && ph && <>{tbc(chip)} </>}
                   {text}
@@ -351,7 +351,7 @@ export default function ForProfessionalsPage() {
       <section
         id="scope"
         aria-labelledby="scope-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-section"
       >
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead
@@ -469,9 +469,9 @@ export default function ForProfessionalsPage() {
       <section
         id="refer"
         aria-labelledby="refer-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-section"
       >
-        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:gap-16">
+        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,380px)] lg:gap-12">
           <div className="flex min-w-0 flex-col gap-8">
             <SectionHead
               id="refer-title"
@@ -546,9 +546,9 @@ export default function ForProfessionalsPage() {
       <section
         id="response"
         aria-labelledby="response-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] py-[72px] lg:py-section"
       >
-        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
+        <div className="wrap grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
           <div className="flex flex-col gap-6">
             <SectionHead
               id="response-title"
@@ -581,7 +581,7 @@ export default function ForProfessionalsPage() {
       <section
         id="referral-sheet"
         aria-labelledby="sheet-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-24"
+        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-section-sm"
       >
         <div className="wrap">
           <div className="flex flex-col gap-5 rounded-[28px] bg-orchid-100 p-6 sm:flex-row sm:items-center sm:gap-8 lg:p-10">
@@ -623,7 +623,7 @@ export default function ForProfessionalsPage() {
         aria-labelledby="coord-title"
         data-surface="dark"
         data-cursor-theme="dark"
-        className="relative scroll-mt-[calc(var(--header-h)+24px)] overflow-hidden bg-plum-950 pt-[88px] pb-[72px] lg:pt-[104px] lg:pb-24"
+        className="relative scroll-mt-[calc(var(--header-h)+24px)] overflow-hidden bg-plum-950 pt-[88px] pb-[72px] lg:pt-section lg:pb-section-sm"
       >
         <svg
           aria-hidden="true"
@@ -655,7 +655,7 @@ export default function ForProfessionalsPage() {
               <li key={p.title} className="flex flex-col gap-3.5 border-t-2 border-plum-600 pt-7">
                 <span
                   aria-hidden="true"
-                  className="ff text-[3rem] leading-none text-orchid-500 lg:text-[4rem]"
+                  className="ff text-[3rem] leading-none text-orchid-500 lg:text-[3.25rem]"
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -689,9 +689,9 @@ export default function ForProfessionalsPage() {
       <section
         id="pro-faq"
         aria-labelledby="pfaq-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-section"
       >
-        <div className="wrap grid items-start gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+        <div className="wrap grid items-start gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
           <SectionHead
             id="pfaq-title"
             eyebrow="08 — Questions"

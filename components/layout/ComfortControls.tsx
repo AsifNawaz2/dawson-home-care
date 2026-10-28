@@ -29,6 +29,9 @@ const SIZES: { value: Prefs["textScale"]; label: string; sample: string }[] = [
 function apply(p: Prefs) {
   const d = document.documentElement;
   d.style.setProperty("--text-scale", String(p.textScale));
+  // Larger text: the desktop header drops its Free Assessment button so the bar still fits.
+  if (p.textScale !== 1) d.dataset.textScale = String(p.textScale);
+  else delete d.dataset.textScale;
   if (p.contrast === "high") d.dataset.contrast = "high";
   else delete d.dataset.contrast;
   if (p.motion === "reduce") d.dataset.motion = "reduce";

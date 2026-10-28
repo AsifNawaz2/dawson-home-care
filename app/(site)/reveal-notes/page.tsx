@@ -205,7 +205,7 @@ export default function RevealNotesPage() {
         </a>
       </PageHero>
 
-      <section aria-labelledby="new-h" className="bg-white py-[72px] lg:py-24">
+      <section aria-labelledby="new-h" className="bg-white py-[72px] lg:py-section-sm">
         <div className="wrap flex flex-col gap-10">
           <SectionHead
             id="new-h"
@@ -235,7 +235,7 @@ export default function RevealNotesPage() {
         aria-labelledby="fixes-h"
         data-surface="dark"
         data-cursor-theme="dark"
-        className="bg-plum-950 py-[72px] text-white lg:py-24"
+        className="bg-plum-950 py-[72px] text-white lg:py-section-sm"
       >
         <div className="wrap flex flex-col gap-10">
           <SectionHead
@@ -272,7 +272,7 @@ export default function RevealNotesPage() {
         </div>
       </section>
 
-      <section id="logo" aria-labelledby="logo-h" className="py-[72px] lg:py-24">
+      <section id="logo" aria-labelledby="logo-h" className="py-[72px] lg:py-section-sm">
         <div className="wrap flex flex-col gap-10">
           <SectionHead
             id="logo-h"
@@ -312,7 +312,7 @@ export default function RevealNotesPage() {
         </div>
       </section>
 
-      <section aria-labelledby="try-h" className="bg-white py-[72px] lg:py-24">
+      <section aria-labelledby="try-h" className="bg-white py-[72px] lg:py-section-sm">
         <div className="wrap flex flex-col gap-8">
           <SectionHead
             id="try-h"
@@ -331,7 +331,7 @@ export default function RevealNotesPage() {
         </div>
       </section>
 
-      <section id="need" aria-labelledby="need-h" className="py-[72px] lg:py-24">
+      <section id="need" aria-labelledby="need-h" className="py-[72px] lg:py-section-sm">
         <div className="wrap flex flex-col gap-10">
           <SectionHead
             id="need-h"

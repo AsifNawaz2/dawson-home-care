@@ -65,8 +65,8 @@ export default async function TownPage({ params }: PageProps<"/areas-we-serve/[t
         </a>
       </PageHero>
 
-      <section aria-labelledby="intro-title" className="bg-white py-[72px] lg:py-24">
-        <div className="wrap grid gap-6 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-20">
+      <section aria-labelledby="intro-title" className="bg-white py-[72px] lg:py-section-sm">
+        <div className="wrap grid gap-6 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-16">
           <SectionHead id="intro-title" title={t.intro.title} />
           <div className="flex max-w-[65ch] flex-col gap-4">
             {t.intro.paras.map((p, i) => (
@@ -78,17 +78,15 @@ export default async function TownPage({ params }: PageProps<"/areas-we-serve/[t
         </div>
       </section>
 
-      <section aria-labelledby="drive-title" className="py-[72px] lg:py-24">
-        <div className="wrap grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-16">
+      <section aria-labelledby="drive-title" className="py-[72px] lg:py-section-sm">
+        <div className="wrap grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] lg:gap-12">
           <div className="flex flex-col gap-4">
             <SectionHead id="drive-title" title="Getting to you" />
             <div
               className="flex flex-col gap-2 rounded-[20px] bg-plum-950 p-6 text-cream lg:p-8"
               data-surface="dark"
             >
-              <p className="ff text-[3.5rem] leading-none text-white lg:text-[4.5rem]">
-                About {drive} minutes
-              </p>
+              <p className="ff text-[3.5rem] leading-none text-white">About {drive} minutes</p>
               {!a.driveConfirmed && flags.showPlaceholders && (
                 <p>
                   <span className="tbc">[drive time]</span>
@@ -103,7 +101,7 @@ export default async function TownPage({ params }: PageProps<"/areas-we-serve/[t
         </div>
       </section>
 
-      <section aria-labelledby="who-title" className="bg-white py-[72px] lg:py-24">
+      <section aria-labelledby="who-title" className="bg-white py-[72px] lg:py-section-sm">
         <div className="wrap flex flex-col gap-8 lg:gap-12">
           <SectionHead id="who-title" title={`Who we help ${where}`} />
           <ul className="grid gap-4 md:grid-cols-3">
@@ -112,7 +110,7 @@ export default async function TownPage({ params }: PageProps<"/areas-we-serve/[t
                 key={w.title}
                 className="flex flex-col gap-3 rounded-[20px] border border-line bg-cream p-6"
               >
-                <h3 className="h3 !text-[1.5rem]">{w.title}</h3>
+                <h3 className="h3 !text-h4">{w.title}</h3>
                 <p>
                   <Segs segs={w.text} />
                 </p>
@@ -122,8 +120,8 @@ export default async function TownPage({ params }: PageProps<"/areas-we-serve/[t
         </div>
       </section>
 
-      <section aria-labelledby="care-title" className="py-[72px] lg:py-24">
-        <div className="wrap grid items-start gap-8 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-20">
+      <section aria-labelledby="care-title" className="py-[72px] lg:py-section-sm">
+        <div className="wrap grid items-start gap-8 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-16">
           <SectionHead
             id="care-title"
             title={`Care ${where}`}
@@ -133,7 +131,7 @@ export default async function TownPage({ params }: PageProps<"/areas-we-serve/[t
             <ul className="flex flex-col border-t border-line">
               {t.care.map((c) => (
                 <li key={c.name} className="flex flex-col gap-1 border-b border-line py-5">
-                  <h3 className="h3 !text-[1.5rem]">
+                  <h3 className="h3 !text-h4">
                     <Link
                       href={careHref(c.name)}
                       className="inline-flex items-center gap-2 text-plum-800 underline-offset-4 hover:underline"
@@ -163,8 +161,8 @@ export default async function TownPage({ params }: PageProps<"/areas-we-serve/[t
         </div>
       </section>
 
-      <section aria-labelledby="tfaq-title" className="bg-white py-[72px] lg:py-24">
-        <div className="wrap grid items-start gap-8 lg:grid-cols-[420px_minmax(0,1fr)] lg:gap-20">
+      <section aria-labelledby="tfaq-title" className="bg-white py-[72px] lg:py-section-sm">
+        <div className="wrap grid items-start gap-8 lg:grid-cols-[380px_minmax(0,1fr)] lg:gap-16">
           <div className="flex flex-col gap-4 lg:sticky lg:top-[calc(var(--header-h)+24px)]">
             <SectionHead id="tfaq-title" title={`Questions from ${a.name} families`} />
             <Link className="link self-start" href="/faq">

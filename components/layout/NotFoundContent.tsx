@@ -9,7 +9,7 @@ const phone = contact.phone.value;
 export function NotFoundContent() {
   return (
     <section aria-labelledby="nf-title" className="wrap py-20 xl:py-28">
-      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-16">
+      <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.8fr)] lg:gap-12">
         <div className="flex flex-col items-start gap-6">
           <p className="eyebrow">404</p>
           <h1 id="nf-title" className="h1-hero">

@@ -16,13 +16,13 @@ export function Portrait({ c }: { c: Caregiver }) {
     <div
       role="img"
       aria-label={`${c.firstName}, a Dawson caregiver.`}
-      className="flex h-[350px] flex-none items-center justify-center bg-plum-100 lg:h-[370px]"
+      className="flex h-[350px] flex-none items-center justify-center bg-plum-100 lg:h-[320px]"
     >
       <svg
         aria-hidden="true"
         focusable="false"
         viewBox="0 0 200 220"
-        className="h-[200px] w-[180px] lg:h-[220px] lg:w-[200px]"
+        className="h-[200px] w-[180px] lg:h-[200px] lg:w-[180px]"
       >
         <g
           fill="none"

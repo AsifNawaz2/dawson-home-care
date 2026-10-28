@@ -61,7 +61,7 @@ export default function ReviewsPage() {
               <span className="sr-only">
                 Rated {rating.value.rating} out of 5 on Google, from {rating.value.count} reviews.
               </span>
-              <span aria-hidden="true" className="ff text-[5rem] leading-none lg:text-[6.5rem]">
+              <span aria-hidden="true" className="ff text-[5rem] leading-none lg:text-[5.25rem]">
                 {rating.value.rating}
               </span>
               <span aria-hidden="true" className="flex flex-col gap-1">
@@ -83,7 +83,7 @@ export default function ReviewsPage() {
       )}
 
       {enough && (
-        <section id="reviews" aria-labelledby="grid-title" className="py-[72px] lg:py-28">
+        <section id="reviews" aria-labelledby="grid-title" className="py-[72px] lg:py-section">
           <div className="wrap flex flex-col gap-8 lg:gap-10">
             <SectionHead
               id="grid-title"
@@ -115,7 +115,7 @@ export default function ReviewsPage() {
       <section
         id="leave-a-review"
         aria-labelledby="leave-title"
-        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-28"
+        className="scroll-mt-[calc(var(--header-h)+24px)] bg-white py-[72px] lg:py-section"
       >
         <div className="wrap grid items-start gap-6 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col gap-4 rounded-[20px] bg-orchid-100 p-6 lg:p-10">

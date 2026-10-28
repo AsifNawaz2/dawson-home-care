@@ -81,7 +81,7 @@ export function HowWeHelp() {
   return (
     <section id="how-we-help" aria-labelledby="house-title">
       {/* Heading above the scene — phones (live) and every size in reduced motion */}
-      <div className="wrap pt-[88px] lg:pt-32 lg:live:hidden">
+      <div className="wrap pt-[88px] lg:pt-section-lg lg:live:hidden">
         <div className="flex max-w-[720px] flex-col gap-3 lg:gap-4">
           <a className="skip" href="#find-care">
             {howWeHelp.skip}
@@ -90,7 +90,7 @@ export function HowWeHelp() {
           <h2 id="house-title" className="h2">
             {howWeHelp.title}
           </h2>
-          <p className="lg:text-[1.25rem] lg:leading-[1.55]">{howWeHelp.subline}</p>
+          <p className="lead">{howWeHelp.subline}</p>
         </div>
       </div>
 
@@ -100,7 +100,7 @@ export function HowWeHelp() {
           ref={pin}
           className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden pt-[84px] pb-[92px] lg:flex-row lg:items-center lg:p-0"
         >
-          <div className="wrap grid gap-[18px] lg:grid-cols-[400px_minmax(0,1fr)] lg:items-center lg:gap-16 lg:pt-24">
+          <div className="wrap grid gap-[18px] lg:grid-cols-[360px_minmax(0,1fr)] lg:items-center lg:gap-12 lg:pt-[var(--header-h)]">
             <div className="flex flex-col gap-[18px] lg:gap-4">
               {/* Same heading, inside the pinned scene on desktop (design) */}
               <div className="hidden flex-col gap-4 lg:flex">
@@ -109,9 +109,9 @@ export function HowWeHelp() {
                 </a>
                 <p className="eyebrow">{howWeHelp.eyebrow}</p>
                 <h2 className="h2">{howWeHelp.title}</h2>
-                <p className="text-[1.25rem] leading-[1.55]">{howWeHelp.subline}</p>
+                <p className="lead">{howWeHelp.subline}</p>
               </div>
-              <div className="grid min-h-[232px] lg:mt-4 lg:min-h-[300px]">
+              <div className="grid min-h-[232px] lg:mt-2 lg:min-h-[248px]">
                 {services.map((s, i) => (
                   <div
                     key={s.slug}
@@ -164,7 +164,7 @@ export function HowWeHelp() {
         {services.map((s, i) => (
           <div
             key={s.slug}
-            className="grid items-center gap-6 lg:grid-cols-[400px_minmax(0,1fr)] lg:gap-16"
+            className="grid items-center gap-6 lg:grid-cols-[360px_minmax(0,1fr)] lg:gap-12"
           >
             <ServiceCard service={s} position={`${i + 1} of ${N}`} />
             <div aria-hidden="true" className="hw-static @container">
@@ -174,8 +174,8 @@ export function HowWeHelp() {
         ))}
       </div>
 
-      <div className="wrap pt-6 pb-[88px] lg:pt-16 lg:pb-32">
-        <div className="flex flex-col items-start gap-3 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-16">
+      <div className="wrap pt-6 pb-[88px] lg:pt-16 lg:pb-section-lg">
+        <div className="flex flex-col items-start gap-3 lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end lg:gap-12">
           <div className="flex max-w-[760px] flex-col gap-3">
             <p className="lead text-plum-800">{howWeHelp.after}</p>
             <p className="sm muted">{howWeHelp.nonMedical}</p>
@@ -207,7 +207,7 @@ function ServiceCard({
   position?: string;
 }) {
   return (
-    <div className="flex flex-col gap-2 rounded-[20px] border border-line bg-white p-[22px] lg:gap-3 lg:p-8">
+    <div className="flex flex-col gap-2 rounded-[20px] border border-line bg-white p-[22px] lg:gap-2.5 lg:p-7">
       {position && (
         <p className="eyebrow" aria-hidden="true">
           {position}

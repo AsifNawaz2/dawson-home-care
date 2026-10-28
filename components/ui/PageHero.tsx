@@ -36,7 +36,7 @@ export function PageHero({
       <div
         className={cn(
           "grid gap-10 pt-6 pb-12 lg:pt-10 lg:pb-20",
-          aside && "lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:items-center lg:gap-16",
+          aside && "lg:grid-cols-[minmax(0,1fr)_minmax(0,460px)] lg:items-center lg:gap-12",
         )}
       >
         <section
@@ -44,11 +44,7 @@ export function PageHero({
           className="flex max-w-[900px] flex-col items-start gap-3.5 lg:gap-4"
         >
           <p className="eyebrow">{eyebrow}</p>
-          <h1
-            id={id}
-            tabIndex={-1}
-            className="ff text-[2.875rem] leading-[1.03] text-plum-800 outline-none lg:text-[5.25rem] lg:leading-none"
-          >
+          <h1 id={id} tabIndex={-1} className="h1-page outline-none">
             {a}
             {a && accent ? " " : ""}
             {accent && <span className="accent">{accent}</span>}

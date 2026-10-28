@@ -74,7 +74,7 @@ export default function EmailPlan({
   if (state === "sent") {
     return (
       <div className="flex flex-col gap-3 rounded-[20px] border border-line p-5 lg:p-6">
-        <H4 className="h3 !text-[1.5rem]">{t.heading}</H4>
+        <H4 className="h3 !text-h4">{t.heading}</H4>
         <p role="status" className="flex items-center gap-3 font-semibold text-plum-800">
           <span aria-hidden="true" className="bdot">
             <Check size={16} strokeWidth={3} />
@@ -93,7 +93,7 @@ export default function EmailPlan({
       data-hides-mobile-bar=""
       aria-labelledby={`${uid}-h`}
     >
-      <H4 id={`${uid}-h`} className="h3 !text-[1.5rem]">
+      <H4 id={`${uid}-h`} className="h3 !text-h4">
         {t.heading}
       </H4>
       <p>{t.text}</p>

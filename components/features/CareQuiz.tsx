@@ -500,11 +500,7 @@ function QuizResultView({
         <div className="h-2 flex-1 rounded-full bg-plum-800" />
       </div>
       <div className="flex flex-col gap-2.5">
-        <H
-          ref={headRef}
-          tabIndex={-1}
-          className="h3 !text-[1.875rem] outline-none lg:!text-[2.125rem]"
-        >
+        <H ref={headRef} tabIndex={-1} className="h3 !text-[1.875rem] outline-none">
           {r.headline}
         </H>
         <p>{r.intro}</p>
@@ -547,7 +543,7 @@ function QuizResultView({
       )}
       {r.also.length > 0 && (
         <>
-          <H4 className="h3 !text-[1.5rem]">{resultUi.alsoHeading}</H4>
+          <H4 className="h3 !text-h4">{resultUi.alsoHeading}</H4>
           <div className="grid gap-4 sm:grid-cols-2">
             {r.also.map((a) => (
               <div
@@ -566,7 +562,7 @@ function QuizResultView({
       )}
       {r.kind === "not-sure" && (
         <>
-          <H4 className="h3 !text-[1.5rem]">{resultUi.notSure.listHeading}</H4>
+          <H4 className="h3 !text-h4">{resultUi.notSure.listHeading}</H4>
           <div className="flex flex-col gap-3">
             {siteServices.map((sv) => (
               <div
@@ -591,14 +587,14 @@ function QuizResultView({
       <p className="sm muted">{resultUi.nonMedical}</p>
 
       <div className="flex flex-col gap-1.5">
-        <H4 className="h3 !text-[1.5rem]">{resultUi.hoursHeading}</H4>
+        <H4 className="h3 !text-h4">{resultUi.hoursHeading}</H4>
         <p>{r.hours.text}</p>
         <p className="sm muted">{resultUi.hoursNote}</p>
       </div>
 
       {preset && (
         <div className="flex flex-col gap-3">
-          <H4 className="h3 !text-[1.5rem]">{resultUi.costHeading}</H4>
+          <H4 className="h3 !text-h4">{resultUi.costHeading}</H4>
           <CostEstimator
             variant="compact"
             source="quiz"
@@ -625,7 +621,7 @@ function QuizResultView({
 
       {r.urgency && (
         <div className="flex flex-col gap-1.5">
-          <H4 className="h3 !text-[1.5rem]">{r.urgency.heading}</H4>
+          <H4 className="h3 !text-h4">{r.urgency.heading}</H4>
           {answers.urgency === "asap" && isClosed ? (
             <p>
               Our office is closed right now. Request a callback and we&apos;ll reach you first
@@ -646,7 +642,7 @@ function QuizResultView({
       {exploring && email}
 
       <div className="flex flex-col gap-3 border-t border-line pt-5">
-        <H4 className="h3 !text-[1.5rem]">{resultUi.cta.heading}</H4>
+        <H4 className="h3 !text-h4">{resultUi.cta.heading}</H4>
         <p>{fill(resultUi.cta.text, r.subject)}</p>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
           <AssessmentButton
