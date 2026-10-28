@@ -1,6 +1,9 @@
 /**
  * Hero (design 01/02-home "1. HERO", COPY_HOME §1). Desktop: two columns + centred buttons and
  * trust row. Phone: one column, full-width buttons, trust row as a list.
+ *
+ * From 1280px the buttons are the header's pair, a little larger; on scroll they travel into the
+ * header (CtaTravel, BUILD_DECISIONS §I.4). Their space here stays reserved, so nothing shifts.
  */
 import Image from "next/image";
 import Link from "next/link";
@@ -8,6 +11,8 @@ import { Calendar, Clock, Phone, UserRound } from "lucide-react";
 import { business, contact } from "@/content/site.config";
 import { hero } from "@/content/copy/home";
 import { CtaLabel, OfficeStatusChip } from "@/components/layout/OfficeStatus";
+import { HeaderCtas } from "@/components/layout/HeaderCtas";
+import { CtaTravel } from "./CtaTravel";
 
 const phone = contact.phone.value;
 const TRUST_ICONS = [Calendar, UserRound, Clock];
@@ -49,7 +54,7 @@ export function Hero() {
         </div>
 
         <div className="mt-7 flex flex-col gap-3 lg:mt-6 lg:items-center lg:gap-3 lg:text-center">
-          <div className="flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-4 lg:justify-center">
+          <div className="flex flex-col gap-3 md:flex-row md:flex-wrap md:gap-4 lg:justify-center xl:hidden">
             <Link href={hero.primary.href} className="btn btn-primary max-md:w-full">
               <CtaLabel open={hero.primary.open} closed={hero.primary.closed} />
             </Link>
@@ -62,6 +67,10 @@ export function Hero() {
               Call {phone.display}
             </a>
           </div>
+          <div className="hidden justify-center xl:flex" data-cta-slot="">
+            <HeaderCtas where="hero" />
+          </div>
+          <CtaTravel />
           <p className="sm muted text-center md:text-left lg:text-center">{hero.microcopy}</p>
           <p className="sr-only">{hero.trustSr}</p>
           <ul

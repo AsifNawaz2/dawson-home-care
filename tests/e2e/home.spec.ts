@@ -154,3 +154,88 @@ test.describe("Home chapters", () => {
     }
   });
 });
+
+test.describe("Home header buttons (BUILD_DECISIONS §I.4)", () => {
+  test.beforeEach(({ page }) => returning(page));
+
+  /** Which pair is visible, where the header pair is, and any overlap with the logo or links. */
+  const snapshot = (page: Page) =>
+    page.evaluate(() => {
+      const header = document.querySelector("[data-site-header]")!;
+      const pair = header.querySelector<HTMLElement>('[data-cta-pair="header"]')!;
+      const hero = document.querySelector<HTMLElement>('[data-cta-pair="hero"]')!;
+      const shown = (el: Element) =>
+        getComputedStyle(el).visibility === "visible" && el.getClientRects().length > 0;
+      const hit = (a: DOMRect, b: DOMRect) =>
+        a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+      const others = [
+        header.querySelector(".logo-link")!,
+        ...header.querySelectorAll("[data-cta-nav] > *"),
+      ];
+      const btns = shown(pair)
+        ? [...pair.querySelectorAll(".btn")].filter(shown).map((b) => b.getBoundingClientRect())
+        : [];
+      const box = pair.getBoundingClientRect();
+      return {
+        visible: [shown(pair) && "header", shown(hero) && "hero"].filter(Boolean),
+        overlaps: btns.some((b) => others.some((o) => hit(b, o.getBoundingClientRect()))),
+        top: Math.round(box.top),
+        start: Number(document.documentElement.dataset.ctaStart),
+      };
+    });
+
+  test("one pair travels from under the hero into the header and back", async ({
+    page,
+    isMobile,
+  }, info) => {
+    test.skip(isMobile, "desktop only");
+    await page.goto("/");
+    await expect(page.locator("html")).toHaveAttribute("data-cta-start", /\d+/);
+    const top = await snapshot(page);
+    expect(top.visible).toEqual(["hero"]);
+
+    for (let y = top.start - 20; y <= top.start + 320; y += 20) {
+      await page.evaluate((y) => window.scrollTo(0, y), y);
+      await page.waitForTimeout(50);
+      const s = await snapshot(page);
+      expect(s.visible, `scroll ${y}`).toHaveLength(1);
+      expect(s.overlaps, `scroll ${y}`).toBe(false);
+      if (info.project.name === "desktop-reduced") {
+        // No journey: in the hero, or already in the bar.
+        expect(s.visible[0] === "hero" || s.top === 16, `scroll ${y}`).toBe(true);
+      }
+    }
+    const docked = await snapshot(page);
+    expect(docked.visible).toEqual(["header"]);
+    expect(docked.top).toBe(16);
+
+    // Keyboard: the docked pair follows the last link in the bar. (Chrome scrolls up ~400px when
+    // a link in the sticky bar takes focus, so do this well past the journey.)
+    await page.evaluate(() => window.scrollTo(0, 4000));
+    await page.locator("[data-cta-nav]").getByRole("link", { name: "Our story" }).focus();
+    await page.keyboard.press("Tab");
+    await expect(page.locator('[data-cta-pair="header"] a').first()).toBeFocused();
+
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect.poll(async () => (await snapshot(page)).visible).toEqual(["hero"]);
+  });
+
+  test("loaded part-way down: the buttons are already in the header", async ({
+    page,
+    isMobile,
+  }) => {
+    test.skip(isMobile, "desktop only");
+    await page.goto("/");
+    await page.evaluate(() => window.scrollTo(0, 3000));
+    await page.reload();
+    await expect.poll(async () => (await snapshot(page)).visible).toEqual(["header"]);
+    expect((await snapshot(page)).top).toBe(16);
+  });
+
+  test("other pages keep the header buttons in place", async ({ page, isMobile }) => {
+    test.skip(isMobile, "desktop only");
+    await page.goto("/about");
+    await expect(page.locator('[data-cta-pair="header"]')).toBeVisible();
+    await expect(page.locator("[data-cta-slot]")).toHaveCount(0);
+  });
+});

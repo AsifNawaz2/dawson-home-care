@@ -1480,6 +1480,51 @@ html[data-home-intro="play"]:not([data-hi-chrome="on"])
 }
 
 /* ===================================================================
+   Home header buttons (BUILD_DECISIONS §I.4, desktop from 1280px). At the top the bar has no
+   buttons and the links spread out; the hero's pair travels up into the dock on scroll.
+   components/home/CtaTravel.tsx sets data-cta-docked / data-cta-away and the transforms;
+   data-cta-measure lays the bar out as it looks docked, for one synchronous measurement.
+   Only one pair is ever visible: the other one is visibility: hidden (not focusable).
+   =================================================================== */
+:root {
+  --cta-hero-scale: 1.14; /* the pair under the hero, ≈ the hero's old button width */
+}
+html[data-text-scale] [data-site-header]:not([data-home-cta]) [data-cta-assess] {
+  display: none; /* larger Comfort text: the bar keeps Call only (§I.3) */
+}
+@media (min-width: 80rem) {
+  [data-home-cta] [data-cta-bar] {
+    position: relative;
+  }
+  [data-home-cta]:not([data-cta-measure]) [data-cta-nav] {
+    flex: 1;
+    justify-content: space-evenly;
+  }
+  [data-home-cta]:not([data-cta-measure]) [data-cta-dock] {
+    position: absolute;
+    inset-block: 0;
+    right: var(--gutter);
+  }
+  html[data-text-scale] [data-home-cta][data-cta-measure] [data-cta-assess] {
+    display: none;
+  }
+  [data-home-cta]:not([data-cta-docked]) [data-cta-dock],
+  [data-cta-slot][data-cta-away] [data-cta-pair] {
+    visibility: hidden;
+  }
+  [data-cta-pair="header"] {
+    transform-origin: 50% 50%;
+  }
+  [data-cta-slot] {
+    /* room for the scaled pair, so the hero never shifts */
+    padding-block: calc((var(--cta-hero-scale) - 1) * 24px);
+  }
+  [data-cta-pair="hero"] {
+    transform: scale(var(--cta-hero-scale));
+  }
+}
+
+/* ===================================================================
    Video collage (design "How we help" + service heroes): 700 × 620 canvas in container units.
    Width comes from --cw on an ancestor (default: the full container).
    =================================================================== */

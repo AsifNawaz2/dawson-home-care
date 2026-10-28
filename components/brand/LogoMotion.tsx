@@ -156,7 +156,11 @@ function runHeader(root: HTMLElement) {
         const y = window.scrollY;
         const d = y - lastY;
         // Home intro: the logo flies into the header over the first 70% of a screen — stay full size.
-        const floor = html.dataset.homeIntro === "play" ? window.innerHeight * 0.75 : 80;
+        // Home desktop: compact as the header buttons start their journey (CtaTravel), as one move.
+        const floor = Math.max(
+          html.dataset.homeIntro === "play" ? window.innerHeight * 0.75 : 80,
+          Number(html.dataset.ctaStart) || 0,
+        );
         if (y <= floor) apply(false);
         else if (d > 8) apply(true);
         else if (d < -8) apply(false);
