@@ -176,7 +176,17 @@ test.describe("Home header buttons (BUILD_DECISIONS §I.4)", () => {
         ? [...pair.querySelectorAll(".btn")].filter(shown).map((b) => b.getBoundingClientRect())
         : [];
       const box = pair.getBoundingClientRect();
+      const bar = header.querySelector("[data-cta-bar]")!.getBoundingClientRect();
+      const links = [...header.querySelectorAll("[data-cta-nav] > *")].map((el) =>
+        el.getBoundingClientRect(),
+      );
+      const logo = header.querySelector(".logo-link")!.getBoundingClientRect();
       return {
+        /** Link group centre relative to the bar centre, and its gap after the logo. */
+        navOffset: Math.round(
+          (links[0].left + links.at(-1)!.right) / 2 - (bar.left + bar.width / 2),
+        ),
+        navGap: Math.round(links[0].left - logo.right),
         visible: [shown(pair) && "header", shown(hero) && "hero"].filter(Boolean),
         overlaps: btns.some((b) => others.some((o) => hit(b, o.getBoundingClientRect()))),
         top: Math.round(box.top),
@@ -193,6 +203,7 @@ test.describe("Home header buttons (BUILD_DECISIONS §I.4)", () => {
     await expect(page.locator("html")).toHaveAttribute("data-cta-start", /\d+/);
     const top = await snapshot(page);
     expect(top.visible).toEqual(["hero"]);
+    expect(Math.abs(top.navOffset), "links centred in the bar").toBeLessThanOrEqual(2);
 
     for (let y = top.start - 20; y <= top.start + 320; y += 20) {
       await page.evaluate((y) => window.scrollTo(0, y), y);
@@ -208,6 +219,8 @@ test.describe("Home header buttons (BUILD_DECISIONS §I.4)", () => {
     const docked = await snapshot(page);
     expect(docked.visible).toEqual(["header"]);
     expect(docked.top).toBe(16);
+    expect(docked.navGap, "links just right of the logo").toBeGreaterThanOrEqual(16);
+    expect(docked.navGap).toBeLessThanOrEqual(64);
 
     // Keyboard: the docked pair follows the last link in the bar (and the page doesn't move).
     const y = await page.evaluate(() => window.scrollY);

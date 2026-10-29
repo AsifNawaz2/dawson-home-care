@@ -7,8 +7,9 @@
  * 1440px the Call button shows "Call" only (the number stays in its accessible name), and with
  * Comfort Controls larger text (html[data-text-scale]) the Free Assessment button steps aside.
  *
- * Home (desktop): the bar starts without buttons and the links spread out; the hero's buttons
- * travel up into the dock as the page scrolls (components/home/CtaTravel.tsx, data-cta-* hooks).
+ * The links sit as one group just right of the logo. Home (desktop): the bar starts without
+ * buttons and the group centred; the hero's buttons travel up into the dock as the page scrolls
+ * while the group slides left (components/home/CtaTravel.tsx, data-cta-* hooks).
  */
 import Link from "next/link";
 import { usePathname } from "next/navigation";
