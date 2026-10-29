@@ -1485,14 +1485,24 @@ html[data-home-intro="play"]:not([data-hi-chrome="on"])
 }
 
 /* ===================================================================
-   Home header buttons (BUILD_DECISIONS §I.4, desktop from 1280px). At the top the bar has no
-   buttons and the links spread out; the hero's pair travels up into the dock on scroll.
+   Home header buttons (BUILD_DECISIONS §I.4–5, desktop from 1280px). Docked (every page, and
+   Home once scrolled): logo · links as one group just right of it · buttons on the far right.
+   Top of Home: no buttons and the links sit as the same compact group centred in the bar; the
+   hero's pair travels up into the dock on scroll while the group slides left as one block.
    components/home/CtaTravel.tsx sets data-cta-docked / data-cta-away and the transforms;
    data-cta-measure lays the bar out as it looks docked, for one synchronous measurement.
    Only one pair is ever visible: the other one is visibility: hidden (not focusable).
    =================================================================== */
 :root {
   --cta-hero-scale: 1.14; /* the pair under the hero, ≈ the hero's old button width */
+  /* Extra logo → links room when docked, on top of the bar's gap. At 1280 and from 1440 (Call
+     shows its number) the bar has only ~48px to spare, so it opens up in between only. */
+  --nav-logo-gap: clamp(0px, (100vw - 1280px) / 4, 40px);
+}
+@media (min-width: 90rem) {
+  :root {
+    --nav-logo-gap: 0px;
+  }
 }
 html[data-text-scale] [data-site-header]:not([data-home-cta]) [data-cta-assess] {
   display: none; /* larger Comfort text: the bar keeps Call only (§I.3) */
@@ -1501,9 +1511,20 @@ html[data-text-scale] [data-site-header]:not([data-home-cta]) [data-cta-assess] 
   [data-home-cta] [data-cta-bar] {
     position: relative;
   }
+  [data-cta-nav] {
+    margin-inline: var(--nav-logo-gap) auto;
+  }
+  /* Centred in the bar (1fr · links · 1fr); a wide group (larger Comfort text) is pushed
+     right of the logo by the grid instead of overlapping it. */
+  [data-home-cta]:not([data-cta-measure]) [data-cta-bar] {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+  [data-home-cta]:not([data-cta-measure]) .logo-link {
+    justify-self: start;
+  }
   [data-home-cta]:not([data-cta-measure]) [data-cta-nav] {
-    flex: 1;
-    justify-content: space-evenly;
+    margin-inline: 0;
   }
   [data-home-cta]:not([data-cta-measure]) [data-cta-dock] {
     position: absolute;

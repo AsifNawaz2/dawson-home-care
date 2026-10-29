@@ -4,10 +4,11 @@
  * Home header buttons travel (BUILD_DECISIONS §I.4, desktop from 1280px).
  *
  * Top of Home: the "Get a Free Assessment" + Call pair sits under the hero image and the header
- * links spread across the bar. Over the last 300px of scroll before the pair would reach the
- * header, the same pair travels up and right into the header's dock, shrinking to header size,
- * while the links slide left into their usual places. Scrolling up plays it back. GSAP
- * ScrollTrigger with `scrub: true`, so the journey follows the scrollbar exactly.
+ * links sit as one compact group centred in the bar. Over the last 300px of scroll before the
+ * pair would reach the header, the same pair travels up and right into the header's dock,
+ * shrinking to header size, while the link group slides left as one block to its docked place
+ * beside the logo (§I.5); both finish together. Scrolling up plays it back. GSAP ScrollTrigger
+ * with `scrub: true`, so the journey follows the scrollbar exactly.
  *
  * Two copies of the pair exist (hero + header, components/layout/HeaderCtas.tsx) but only one is
  * visible or focusable at a time: the hero copy until the journey starts, then the header copy,
@@ -22,8 +23,7 @@ import { clamp, ease, lerp } from "./scroll";
 
 /** Scroll distance of the journey (px). It ends when the pair's hero spot reaches the header. */
 const TRAVEL = 300;
-/** Links finish sliding, and the pair finishes moving right, before the pair rises into the bar. */
-const NAV_END = 0.5;
+/** The pair finishes moving right before it rises into the bar; the links slide all the way. */
 const X_END = 0.6;
 
 type Metrics = {
@@ -34,7 +34,7 @@ type Metrics = {
   slotCyDoc: number;
   dockCx: number;
   dockCy: number;
-  shifts: number[];
+  shift: number;
 };
 
 export function CtaTravel() {
@@ -51,7 +51,6 @@ export function CtaTravel() {
     const heroPair = slot?.querySelector<HTMLElement>('[data-cta-pair="hero"]');
     const assess = pair?.querySelector<HTMLElement>("[data-cta-assess] a");
     if (!header || !slot || !bar || !nav || !dock || !pair || !heroPair || !assess) return;
-    const items = Array.from(nav.children) as HTMLElement[];
     const reduced = motion === "reduced";
 
     let disposed = false;
@@ -72,7 +71,7 @@ export function CtaTravel() {
             slotCyDoc: 0,
             dockCx: 0,
             dockCy: 0,
-            shifts: items.map(() => 0),
+            shift: 0,
           };
           let sig = "";
 
@@ -90,9 +89,9 @@ export function CtaTravel() {
             m.dockCy = dockBox.top - headTop + pair.offsetTop + pair.offsetHeight / 2;
             m.end = Math.max(1, hero.top + y - header.offsetHeight);
             m.start = Math.max(0, m.end - TRAVEL);
-            const spread = items.map((el) => el.offsetLeft);
+            const centred = nav.offsetLeft;
             header.setAttribute("data-cta-measure", "");
-            m.shifts = items.map((el, i) => el.offsetLeft - spread[i]);
+            m.shift = nav.offsetLeft - centred;
             header.removeAttribute("data-cta-measure");
             // The logo compacts as the journey starts (LogoMotion reads this floor).
             html.dataset.ctaStart = String(Math.round(m.start));
@@ -110,7 +109,7 @@ export function CtaTravel() {
           };
 
           const setPair = gsap.quickSetter(pair, "css");
-          const setItem = items.map((el) => gsap.quickSetter(el, "x", "px"));
+          const setNav = gsap.quickSetter(nav, "x", "px");
           let docked: boolean | null = null;
           let assessAlpha = -1;
 
@@ -130,12 +129,13 @@ export function CtaTravel() {
             const q = reduced ? (p >= 0.5 ? 1 : 0) : p;
             const eY = ease(q);
             const eX = ease(clamp(q / X_END));
-            const eN = ease(clamp(q / NAV_END));
             // From the hero spot (which keeps scrolling with the page) to the dock.
             const cx = lerp(m.slotCx, m.dockCx, eX);
             const cy = lerp(m.slotCyDoc - window.scrollY, m.dockCy, eY);
             setPair({ x: cx - m.dockCx, y: cy - m.dockCy, scale: lerp(m.scale, 1, eY) });
-            items.forEach((_, i) => setItem[i](m.shifts[i] * eN)); // spread → usual places
+            // Centred → beside the logo, landing with the pair; eased out so the links are
+            // already clear of the dock when the pair rises into the bar.
+            setNav(m.shift * (1 - Math.pow(1 - q, 3)));
             const a = html.dataset.textScale ? 1 - clamp(q / 0.5) : 1;
             if (a !== assessAlpha) {
               assessAlpha = a;
@@ -188,7 +188,7 @@ export function CtaTravel() {
             window.removeEventListener("dd:transition", schedule);
             st.kill();
             journey.kill();
-            gsap.set([pair, ...items], { clearProps: "transform" });
+            gsap.set([pair, nav], { clearProps: "transform" });
             gsap.set(assess, { clearProps: "opacity,visibility" });
             header.removeAttribute("data-cta-docked");
             slot.removeAttribute("data-cta-away");
